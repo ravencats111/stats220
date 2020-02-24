@@ -1,0 +1,28 @@
+baseurl = "/"
+languageCode = "en-us"
+title = "STATS 220 Data Technology"
+theme = "hugo-cards"
+paginate = 6
+
+[params]
+  builtBy = "netlify"
+  defaultImage = "gopher.jpg"
+
+  facebook = ""
+  quora = ""
+  twitter = ""
+  github = "http://github.com/earowang/stats220"
+  email = ""
+
+  fbLikeBox = ""
+  fbAppId = ""
+  fbPageUrl = ""
+  fbPageTitle = ""
+
+  analytics = ""
+  disqus = ""
+
+  [params.copyright]
+     name = "Earo Wang"
+     link = "https://earo.me"
+
