@@ -1,5 +1,5 @@
 ---
-title: "Visualising data with `ggplot2`"
+title: "Visualising data"
 week: 9
 img: ""
 rmd:

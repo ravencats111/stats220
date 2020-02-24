@@ -1,6 +1,5 @@
 ---
-title: "Introduction to R & RStudio"
-date: 2019-04-22 10:51:47 +0530
+title: "Introducing R and RStudio"
 week: 7
 img: ""
 rmd:

@@ -1,5 +1,5 @@
 ---
-title: "Tidy data and reshape"
+title: "Tidying data"
 week: 10
 img: ""
 rmd:
