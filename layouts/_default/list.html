@@ -5,7 +5,9 @@
   
     <div class="row pack">
 
-        {{ $paginator := .Paginate (where .Site.RegularPages "Section" "posts") }}
+        {{ $pages := where .Site.RegularPages "Section" "posts" }}
+        {{ $sorted := $pages.ByParam "week" }}
+        {{ $paginator := .Paginate ($sorted) }}
         {{ range $paginator.Pages }}   
             <div class="col-md-4 card">
               <span class="post-meta"><small>Week {{ .Params.week }}</small></span>
@@ -18,12 +20,12 @@
                   <img width="100%" src="{{ .Site.BaseURL }}images/{{ .Site.Params.defaultImage }}" alt="{{ .Site.Title }}">
                   {{ end }}
                   
-                  <div class="panel-body">
+                  <div class="panel-body text-center">
                     <h3 class="panel-title">{{ .Title }}</h3>
                     <!-- <span class="post&#45;meta"><small>Week {{ .Params.week }}</small></span> -->
                   </div>
                   
-                  <div class="panel-body">
+                  <div class="panel-body text-center">
                     <a class="btn btn-info btn-sm list-group-item-text" href="{{ . }}" target="_blank" rel="noopener" role="button"> Rmd </a>
                     <a class="btn btn-info btn-sm list-group-item-text" href="{{ . }}" target="_blank" rel="noopener" role="button"> Lab </a>
                     <a class="btn btn-info btn-sm list-group-item-text" href="{{ . }}" target="_blank" rel="noopener" role="button"> Solution </a>

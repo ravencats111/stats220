@@ -1,7 +1,7 @@
 ---
-title: "Introduction to R & RStudio"
-date: 2019-04-22 10:51:47 +0530
-week: 7
+title: "Accessing and wrangling data"
+date: 2019-04-23 10:51:47 +0530
+week: 8
 img: ""
 rmd:
 lab:
