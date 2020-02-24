@@ -2,8 +2,8 @@
 title: "Visualising data"
 week: 9
 img: ""
+slides:
 rmd:
 lab:
-data:
-author: "Earo Wang"
+sol:
 ---

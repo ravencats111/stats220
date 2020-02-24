@@ -2,8 +2,8 @@
 title: "Review"
 week: 12
 img: ""
+slides:
 rmd:
 lab:
-data:
-author: "Earo Wang"
+sol:
 ---
