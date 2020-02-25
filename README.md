@@ -1,6 +1,6 @@
-# STATS 220 Data Technology
+# STATS 220 Data Technology <img src="static/images/uoa-crest.jpg" height="58px" align="right" />
 
-## Week 7: Introduction to R and RStudio
+## Week 7: Introducing to R and RStudio
 
 * R basics: calculator
 * `.Rproj` + `here::here()`
@@ -18,10 +18,13 @@
 * web scraping
 * shape files
 
-## Week 9: Visualising data with `ggplot2`
+## Week 9: Visualising data
 
-## Week 10: Tidy data and reshape
+## Week 10: Tidying data
 
-## Week 11: Don't repeat yourself and functional programming
+## Week 11: Don't repeat yourself
+
+* for-loop
+* functional programming with `purrr`
 
 ## Week 12: Review
