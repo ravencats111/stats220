@@ -5,6 +5,8 @@ theme = "hugo-cards"
 paginate = 6
 
 [params]
+  custom_css = ["css/wang.css"]
+
   builtBy = "netlify"
   defaultImage = "gopher.jpg"
 
@@ -25,4 +27,3 @@ paginate = 6
   [params.copyright]
      name = "Earo Wang"
      link = "https://earo.me"
-
