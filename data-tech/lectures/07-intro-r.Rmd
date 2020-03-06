@@ -18,53 +18,108 @@ output:
 library(knitr)
 options(htmltools.dir.version = FALSE, tibble.width = 60, tibble.print_min = 6)
 opts_chunk$set(
-  echo = FALSE, warning = FALSE, message = FALSE, comment = "#>",
+  echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
   fig.path = 'figure/', cache.path = 'cache/', fig.align = 'center', 
   fig.width = 12, fig.height = 8.5, fig.show = 'hold',
   cache = TRUE, dev = "svglite"
 )
+opts_knit$set(root.dir = here::here())
+```
+
+```{r external, include = FALSE, cache = FALSE}
+read_chunk('R/07-intro-r.R')
 ```
 
 ## About me
 
-* `r emo::ji("mortar_board")` PhD (Stats) & B.Comm (Hons) @ Monash University `r emo::ji("kangaroo")`
-* Developed `#rstats` `r emo::ji("package")`: **tsibble**, **sugrrants**, **hts**, etc. (logos embedding)
-* web: earo.me
-* github:
-* twitter:
+* `r emo::ji("mortar_board")` I earned PhD (Stats) @ Monash University, Australia
+* `r emo::ji("heart")` My research interests lie in exploratory data analysis, data visualisation, software design, ...
+* `r emo::ji("woman_technologist")` That said, I turn `r emo::ji("coffee")` into `#rstats` `r emo::ji("package")`
+* When I'm not working, I play `r emo::ji("tennis")` & `r emo::ji("ping_pong")`
+<br>
+<br>
+<br>
+<br>
+* `r emo::ji("mag")` Where to find me
+  + <i class="fas fa-globe"></i> [earo.me](https://earo.me)
+  + <i class="fab fa-github"></i> [@earowang](https://github.com/earowang)
+  + <i class="fab fa-twitter"></i> [@earowang](https://twitter.com/earowang)
+
+???
+
+Embed my packages logos
 
 ---
+
+class: inverse middle center
 
 ## Data + Technology
 
-.pull-left[
-![](../img/iris-mtcars-meme.jpg)
-]
-.pull-right[
-* Get your hands dirty
-* Google in the right way
-]
+---
+
+## What do I mean by "data"?
+
+--
+
+.center[![](../img/iris-mtcars-meme.jpg)]
+
+???
+
+How many of you have seen and worked with datasets, such as *iris*, *mtcars*, *wages*?
 
 ---
 
-## Why R
+## How do I learn about XX "technology"?
+
+* Documentation! Documentation! Documentation!
+* Get your hands dirty
+* Google is your best friend
+
+Where XX is not limited to R, but python, javascript, etc.
+
+---
+
+class: inverse middle
+
+## .center[Why <i class='fab fa-r-project'></i>]
 
 * A general-purpose of programming language
-* ?? packages
+* Originated by statisticians, a language for statistical computing and graphics
+* [15,395 + packages on CRAN](https://cran.r-project.org/web/packages/), Github, and others
+* The tidyverse, a domain specific language in R for data scientists
 
 ---
 
-## What R can do? (showcase)
-
-### For fun
-
-* meme
+.left-column[
+## What R can do?
+### - for fun
+]
+.right-column[
+### `r emo::ji("package")` `memer` for creating memes
+```{r memer}
+```
+]
 
 ---
 
-## What R can do? (showcase)
+.left-column[
+## What R can do?
+### - for fun
+### - for analysis
+]
+.right-column[
+]
 
-### For data science
+---
+
+.left-column[
+## What R can do?
+### - for fun
+### - for analysis
+### - for reports
+]
+.right-column[
+]
 
 ---
 
@@ -78,6 +133,12 @@ opts_chunk$set(
 
 default settings
 1 minutes to choose your favourite theme
+
+---
+
+## Outline: data science workflow
+
+* add the image of hadley's ds workflow
 
 ---
 

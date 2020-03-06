@@ -20,46 +20,105 @@ class: center, middle, inverse, title-slide
 
 
 
+
+
 ## About me
 
-* 🎓 PhD (Stats) &amp; B.Comm (Hons) @ Monash University 🦘
-* Developed `#rstats` 📦: **tsibble**, **sugrrants**, **hts**, etc. (logos embedding)
-* web: earo.me
-* github:
-* twitter:
+* 🎓 I earned PhD (Stats) @ Monash University, Australia
+* ❤️ My research interests lie in exploratory data analysis, data visualisation, software design, ...
+* 👩‍💻 That said, I turn ☕ into `#rstats` 📦
+* When I'm not working, I play 🎾 &amp; 🏓
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+* 🔍 Where to find me
+  + &lt;i class="fas fa-globe"&gt;&lt;/i&gt; [earo.me](https://earo.me)
+  + &lt;i class="fab fa-github"&gt;&lt;/i&gt; [@earowang](https://github.com/earowang)
+  + &lt;i class="fab fa-twitter"&gt;&lt;/i&gt; [@earowang](https://twitter.com/earowang)
+
+???
+
+Embed my packages logos
 
 ---
+
+class: inverse middle center
 
 ## Data + Technology
 
-.pull-left[
-![](../img/iris-mtcars-meme.jpg)
-]
-.pull-right[
-* Get your hands dirty
-* Google in the right way
-]
+---
+
+## What do I mean by "data"?
+
+--
+
+.center[![](../img/iris-mtcars-meme.jpg)]
+
+???
+
+How many of you have seen and worked with datasets, such as *iris*, *mtcars*, *wages*?
 
 ---
 
-## Why R
+## How do I learn about XX "technology"?
+
+* Documentation! Documentation! Documentation!
+* Get your hands dirty
+* Google is your best friend
+
+Where XX is not limited to R, but python, javascript, etc.
+
+---
+
+class: inverse middle
+
+## .center[Why &lt;i class='fab fa-r-project'&gt;&lt;/i&gt;]
 
 * A general-purpose of programming language
-* ?? packages
+* Originated by statisticians, a language for statistical computing and graphics
+* [15,395 + packages on CRAN](https://cran.r-project.org/web/packages/), Github, and others
+* The tidyverse, a domain specific language in R for data scientists
 
 ---
 
-## What R can do? (showcase)
+.left-column[
+## What R can do?
+### - for fun
+]
+.right-column[
+### 📦 `memer` for creating memes
 
-### For fun
+```r
+library(memer)
+meme_get("DistractedBf") %&gt;% 
+  meme_text_distbf("tidyverse", "new R users",
+    "base R")
+```
 
-* meme
+&lt;img src="figure/memer-1.png" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 
-## What R can do? (showcase)
+.left-column[
+## What R can do?
+### - for fun
+### - for analysis
+]
+.right-column[
+]
 
-### For data science
+---
+
+.left-column[
+## What R can do?
+### - for fun
+### - for analysis
+### - for reports
+]
+.right-column[
+]
 
 ---
 
@@ -76,8 +135,15 @@ default settings
 
 ---
 
-##
+## Outline: data science workflow
 
+* add the image of hadley's ds workflow
+
+---
+
+* Variables
+* Arithmetics
+* functions
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

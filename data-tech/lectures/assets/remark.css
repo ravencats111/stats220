@@ -52,14 +52,14 @@ ul li {
   list-style-type: none;
 }
 ul li:before {
-  content: "\f201";
+  content: "\f105";
   font-family: "Font Awesome\ 5 Free";
   margin-right: 10px;
   color: #4ba946;
   font-weight: 900;
 }
 ul li li:before {
-  content: "\f1fe";
+  content: "\f101";
   font-family: "Font Awesome\ 5 Free";
   margin-right: 10px;
   font-weight: 900;
