@@ -1,4 +1,5 @@
 ## ---- memer
+# remotes::install_github("sctyner/memer")
 library(memer)
 meme_get("DistractedBf") %>% 
   meme_text_distbf("tidyverse", "new R users",
