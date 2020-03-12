@@ -21,12 +21,16 @@ opts_chunk$set(
   echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
   fig.path = 'figure/', cache.path = 'cache/', cache = TRUE,
   fig.align = 'center', fig.width = 12, fig.height = 8.5, fig.show = 'hold',
-  dev = "svglite"
+  dpi = 120
 )
 ```
 
+```{r xaringan-panelset, echo = FALSE}
+xaringanExtra::use_panelset()
+```
+
 ```{r external, include = FALSE, cache = FALSE}
-read_chunk('../R/07-intro-r.R')
+read_chunk('R/07-intro-r.R')
 ```
 
 ## About me
@@ -34,7 +38,7 @@ read_chunk('../R/07-intro-r.R')
 * `r emo::ji("mortar_board")` I earned PhD (Stats) @ Monash University, Australia
 * `r emo::ji("heart")` My research interests lie in exploratory data analysis, data visualisation, software design, ...
 * `r emo::ji("woman_technologist")` That said, I turn `r emo::ji("coffee")` into `#rstats` `r emo::ji("package")`
-* When I'm not working, I play `r emo::ji("tennis")` & `r emo::ji("ping_pong")`
+* Outside of work, I play `r emo::ji("tennis")` & `r emo::ji("ping_pong")`
 <br>
 <br>
 <br>
@@ -60,7 +64,9 @@ class: inverse middle center
 
 --
 
-.center[![](../img/iris-mtcars-meme.jpg)]
+```{r iris-mtcars-meme, echo = FALSE, out.width = "65%"}
+include_graphics("../img/iris-mtcars-meme.jpg")
+```
 
 ???
 
@@ -72,7 +78,9 @@ How many of you have seen and worked with datasets, such as *iris*, *mtcars*, *w
 
 * Documentation! Documentation! Documentation!
 * Get your hands dirty
-* Google is your best friend
+* Find the community, #rstats on twitter
+* Ask questions on stack overflow and rstudio community
+* Google is your best friend: error message
 
 Where XX is not limited to R, but python, javascript, etc.
 
@@ -104,9 +112,10 @@ class: inverse middle
 .left-column[
 ## What R can do?
 ### - for fun
-### - for analysis
+### - for data
 ]
 .right-column[
+* add the image of hadley's ds workflow
 ]
 
 ---
@@ -114,33 +123,204 @@ class: inverse middle
 .left-column[
 ## What R can do?
 ### - for fun
-### - for analysis
-### - for reports
+### - for data
+### - for writing
 ]
 .right-column[
+* `rmarkdown` for assignments/reports/paper in `.html` and `.pdf`
+* `blogdown` for blogs
+* `bookdown` for books
+* `xaringan` for slides, for example the lecture slides you're reading now
+
+leverage what you learned with HTML and CSS to make the presenation in your own style.
 ]
+
+---
+
+class: inverse middle
+
+## .center[Why RStudio]
+
+* An IDE
+* Working environment for R
+* Project workflow
 
 ---
 
 ## RStudio IDE
 
----
-
-## Project workflow `.Rproj`
+* image about panes
 
 ???
 
 default settings
 1 minutes to choose your favourite theme
+---
+
+## R Project `.Rproj`
+
+* Easy to share and collaborate
+* No `setwd()`, Jenny Bryan will set fire on your computer [a link]
 
 ---
 
-## Outline: data science workflow
+## Directory structure
 
-* add the image of hadley's ds workflow
+Under `stats220`
+
+* `data/`:
+  * `data1.csv`
+  * `data2.xsl`
+* `assignments/`:
+  * 
 
 ---
 
-* Variables
-* Arithmetics
-* functions
+class: inverse middle
+
+## <i class='fab fa-r-project'></i> as general-purpose programming language
+
+---
+
+.left-column[
+## R basics
+### - access to RAM
+]
+.right-column[
+Store values temporarily in computer memory
+
+```{r store-values}
+```
+`r emo::ji("arrow_up")` They are .red[assignments].
+
+* left-hand side: .red[variable names] or .red[symbols] starts with a letter.
+  .checked[+ `akl_lon` (good practice)]
+  .x[+ `akl.lon` & `aklLon` (not recommended)]
+* assignment operator:
+  .checked[+ `<-`]
+  .x[+ `=` & `->`: `174.76 -> akl_lon`]
+* right-hand side: .red[values]
+]
+
+---
+
+.left-column[
+## R basics
+### - access to RAM
+]
+.right-column[
+Retrieve values from computer memory
+
+```{r retrieve-values}
+```
+]
+
+---
+
+.left-column[
+## R basics
+### - access to RAM
+### - access to CPU
+]
+.right-column[
+Perform operations or calculations like arithmetic and comparisons
+
+```{r arithmetic}
+```
+]
+
+---
+
+.left-column[
+## R basics
+### - access to RAM
+### - access to CPU
+### - access to mass storage
+]
+.right-column[
+Read data files from hard distks, USB sticks, etc into RAM
+
+```{r mass-storage}
+```
+]
+
+
+---
+
+.left-column[
+## R basics
+### - access to RAM
+### - access to CPU
+### - access to mass storage
+### - access to screen
+]
+.right-column[
+Print out results
+```{r mass-storage-print}
+```
+]
+
+---
+
+.left-column[
+## R basics
+### - access to RAM
+### - access to CPU
+### - access to mass storage
+### - access to screen
+]
+.right-column[
+Produce visual displays
+
+```{r screen, out.width = "100%"}
+```
+]
+
+---
+
+.left-column[
+## R basics
+### - access to RAM
+### - access to CPU
+### - access to mass storage
+### - access to screen
+### - access to network
+]
+.right-column[
+Access data from remote computers, including web servers on the internet
+
+.panelset[
+.panel[.panel-name[R Code]
+
+```{r network, results = "hide"}
+```
+
+A sequence of function calls
+]
+
+.panel[.panel-name[Map]
+
+```{r network2, echo = FALSE, ref.label = "network", out.width = "100%", fig.height = 6}
+```
+]
+]
+]
+
+---
+
+class: inverse middle
+
+## Like other languages you learned, R has its own syntax and semantics.
+
+---
+
+## functions
+
+A function call consists of the function name followed by one or more argument within parentheses.
+
+```r
+st_read("data/Bus_Route/Bus_Route.shp")
+```
+
+* function name: `st_read()` from the **sf** package to read geo-spatial data
+* function argument: `"data/Bus_Route/Bus_Route.shp"` its first argument to specify the data source in characters

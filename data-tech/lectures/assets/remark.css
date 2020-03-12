@@ -13,14 +13,14 @@ h1, h2, h3 {
   margin-top: 5px;
   margin-bottom: 0;
 }
-.remark-slide-content h1 { font-size: 64px; }
-.remark-slide-content h2 { font-size: 54px; }
-.remark-slide-content h3 { font-size: 38px; }
+.remark-slide-content h1 { font-size: 58px; }
+.remark-slide-content h2 { font-size: 42px; }
+.remark-slide-content h3 { font-size: 34px; }
 .remark-slide-content {
   background-position: center;
   background-repeat: no-repeat;
   display: table-cell;
-  font-size: 32px;
+  font-size: 28px;
   padding: 0px 30px;
 }
 .footnote {
