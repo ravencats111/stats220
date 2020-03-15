@@ -521,16 +521,37 @@ A function call consists of the function name followed by one or more argument w
 st_read("data/Bus_Route/Bus_Route.shp")
 ```
 
-* function name: `st_read()` from the **sf** package to read geo-spatial data
-* argument/input: `"data/Bus_Route/Bus_Route.shp"` its first argument to specify the data source in characters
+* function name: `st_read()` from the **sf** package to read geo-spatial data into RAM
+* argument/input: `"data/Bus_Route/Bus_Route.shp"` its first argument to specify the data source in *characters*
 
-<hr>
+---
+
+## Functions
 
 Consult the function's help page with `?mean`
 
 ```r
 mean(x, trim = 0, na.rm = FALSE, ...)
 ```
+
+* Read **Usage** section
+  + What arguments have default values?
+* Read **Arguments** section
+  + What does `trim` do?
+* Run **Example** code
+
+<hr>
+
+.pull-left[
+.center[Arguments by **positions**]
+```{r function-args-pos}
+```
+]
+.pull-right[
+.center[Arguments by **names**]
+```{r function-args-names}
+```
+]
 
 ---
 

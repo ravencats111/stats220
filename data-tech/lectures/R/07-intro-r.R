@@ -69,3 +69,9 @@ x[x > 0]
 x[]
 x[1:4]
 x[0]
+
+## ---- function-args-pos
+mean(x, 0.1, TRUE)
+
+## ---- function-args-names
+mean(x, na.rm = TRUE, trim = 0.1)
