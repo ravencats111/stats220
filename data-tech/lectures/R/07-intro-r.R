@@ -2,7 +2,7 @@
 # remotes::install_github("sctyner/memer")
 library(memer)
 meme_get("DistractedBf") %>% 
-  meme_text_distbf("data science", "new students",
+  meme_text_distbf("data science", "new\nstudents",
     "statistics")
 
 ## ---- store-values
@@ -12,6 +12,10 @@ akl_lat <- -36.85
 ## ---- retrieve-values
 akl_lon
 akl_lat
+
+## ---- retrieve-error
+akl_Lon
+akl.lat
 
 ## ---- arithmetic
 akl_lon_region <- akl_lon + c(-1, 1)

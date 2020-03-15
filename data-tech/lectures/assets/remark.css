@@ -234,14 +234,14 @@ blockquote {
   padding: 10px 30px;
   quotes: "\201C""\201D""\2018""\2019";
   font-style: italic;
-  font-size: 42px;
+  font-size: 36px;
 }
 
 blockquote:before {
   color: #ccc;
   content: open-quote;
-  font-size: 4em;
-  line-height: 0.1em;
+  font-size: 3em;
+  line-height: 0.05em;
   margin-right: 0.25em;
   vertical-align: -0.4em;
 }

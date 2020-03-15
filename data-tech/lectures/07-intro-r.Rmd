@@ -33,24 +33,19 @@ xaringanExtra::use_panelset()
 read_chunk('R/07-intro-r.R')
 ```
 
-## About me
+## Kia Ora!
 
-* `r emo::ji("mortar_board")` I earned PhD (Stats) @ Monash University, Australia
+.large[
+* `r emo::ji("mortar_board")` I earned my PhD (Stats) @ Monash University, Australia.
 * `r emo::ji("heart")` My research interests lie in exploratory data analysis, data visualisation, software design, ...
-* `r emo::ji("woman_technologist")` That said, I turn `r emo::ji("coffee")` into `#rstats` `r emo::ji("package")`
-* Outside of work, I play `r emo::ji("tennis")` & `r emo::ji("ping_pong")`
-<br>
-<br>
-<br>
-<br>
-* `r emo::ji("mag")` Where to find me
-  + <i class="fas fa-globe"></i> [earo.me](https://earo.me)
-  + <i class="fab fa-github"></i> [@earowang](https://github.com/earowang)
-  + <i class="fab fa-twitter"></i> [@earowang](https://twitter.com/earowang)
+* `r emo::ji("woman_technologist")` I turn `r emo::ji("coffee")` into 10 `#rstats` `r emo::ji("package")`.
+* Outside of work, I play `r emo::ji("tennis")` & `r emo::ji("ping_pong")`, and make `r emo::ji("coffee")`.
+]
 
-???
-
-Embed my packages logos
+.center[
+[<img src="https://earo.me/project/tsibble/featured_hu044bd7c137ea7e25de3181d692c058df_33908_220x0_resize_q90_lanczos_2.png" width="20%">](https://tsibble.tidyverts.org)
+[<img src="https://earo.me/project/hts/featured_hu6b191f67145c5cd885891edf05f5a056_44308_220x0_resize_q90_lanczos_2.png" width="20%">](https://pkg.earo.me/hts)
+]
 
 ---
 
@@ -60,7 +55,7 @@ class: inverse middle center
 
 ---
 
-## What do I mean by "data"?
+## What I mean by "data"
 
 --
 
@@ -74,15 +69,16 @@ How many of you have seen and worked with datasets, such as *iris*, *mtcars*, *w
 
 ---
 
-## How do I learn about XX "technology"?
+## How I learn about XX "technology"
 
+.center[
+<iframe src="https://giphy.com/embed/xonOzxf2M8hNu" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/xonOzxf2M8hNu"></a></p>
+]
+* `r emo::ji("speaking_head")` **Get hands dirty**`r emo::ji("bangbang")`
 * Documentation! Documentation! Documentation!
-* Get your hands dirty
-* Find the community, #rstats on twitter
-* Ask questions on stack overflow and rstudio community
-* Google is your best friend: error message
-
-Where XX is not limited to R, but python, javascript, etc.
+* Search or ask questions on [Stack Overflow](http://stackoverflow.com) and [RStudio Community](http://community.rstudio.com)
+* Follow the community, [#rstats](https://twitter.com/search?q=%23rstats&src=typeahead_click) on Twitter
+* (Not surprisingly) Learn to google: what that error message means (I google a lot `r emo::ji("hand_over_mouth")`)
 
 ---
 
@@ -92,7 +88,7 @@ class: inverse middle
 
 * A general-purpose of programming language
 * Originated by statisticians, a language for statistical computing and graphics
-* [15,395 + packages on CRAN](https://cran.r-project.org/web/packages/), Github, and others
+* 15,000 + packages on [CRAN](https://cran.r-project.org/web/packages/) (Comprehensive R Archive Network, the official repository), Github, and others
 * The tidyverse, a domain specific language in R for data scientists
 
 ---
@@ -115,7 +111,18 @@ class: inverse middle
 ### - for data
 ]
 .right-column[
-* add the image of hadley's ds workflow
+### The data science workflow
+
+.center[
+<img src="https://rstudio-education.github.io/tidyverse-cookbook/images/data-science-workflow.png" width="100%">
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/readr.png" width="18%">](https://readr.tidyverse.org)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="18%">](https://tidyr.tidyverse.org)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="18%">](https://dplyr.tidyverse.org)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/ggplot2.png" width="18%">](https://ggplot2.tidyverse.org)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="18%">](https://purrr.tidyverse.org)
+]
+
+.footnote[image credit: [The Tidyverse Cookbook](https://rstudio-education.github.io/tidyverse-cookbook/how-to-use-this-book.html)]
 ]
 
 ---
@@ -127,52 +134,142 @@ class: inverse middle
 ### - for writing
 ]
 .right-column[
+### R Markdown
+
+.center[
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/rmarkdown.png" width="18%">](https://rmarkdown.rstudio.com)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/blogdown.png" width="18%">](https://bookdown.org/yihui/blogdown/)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/bookdown.png" width="18%">](http://bookdown.org)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/xaringan.png" width="18%">](http://slides.yihui.org/xaringan/)
+]
+
 * `rmarkdown` for assignments/reports/paper in `.html` and `.pdf`
 * `blogdown` for blogs
 * `bookdown` for books
-* `xaringan` for slides, for example the lecture slides you're reading now
+* `xaringan` for slides
 
-leverage what you learned with HTML and CSS to make the presenation in your own style.
+<hr>
+
+.checked[
+* R Markdown documents are fully reproducible: weaving narrative text and code together.
+* You can leverage them with the HTML and CSS you learned to make your own style.
+]
 ]
 
 ---
 
-class: inverse middle
+class: middle
 
-## .center[Why RStudio]
+## Why RStudio
 
-* An IDE
-* Working environment for R
-* Project workflow
+> If R were an airplane, RStudio would be the airport, providing many, many supporting services that make it easier for you, the pilot, to take off and go to awesome places. Sure, you can fly an airplane without an airport, but having those runways and supporting infrastructure is a game-changer. <br> -- [Julie Lowndes](http://jules32.github.io/resources/RStudio_intro/)
+
 
 ---
 
-## RStudio IDE
+## RStudio interface
 
-* image about panes
+<img src="../img/rstudio-interface.png" width="100%">
+
+.footnote[image credit: [Stuart Lee's handout on **Setting up R and RStudio**](https://mida-monash.netlify.com/slides/setup.html)]
+
+---
+
+## Setting up RStudio
+
+Go to **Tools** > **Global Options**:
+
+.center[<img src="../img/rstudio-setup.png" width="48%">]
+
+This helps to keep R working environment fresh and clean every time you switch between projects.
+
+---
+
+## Your turn
+
+Change the RStudio appearance up to your taste
+
+.center[<img src="../img/rstudio-appearance.png" width = "90%">]
+
+`r countdown::countdown(minutes = 1, font_size = "48px", top = 0)`
 
 ???
 
-default settings
 1 minutes to choose your favourite theme
----
-
-## R Project `.Rproj`
-
-* Easy to share and collaborate
-* No `setwd()`, Jenny Bryan will set fire on your computer [a link]
 
 ---
 
-## Directory structure
+## Project-oriented workflow
 
-Under `stats220`
+* Each data analysis/university course is a project, and get your work organised.
+* A self-contained project is a folder `r emo::ji("folder")` that contains all relevant files.
+* All working files are relative to the project root.
+* The project should just work on a different computer.
+* Jenny Bryan will [set your computer on fire `r emo::ji("fire")`](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
+  + if the first line of your R script is
+    ```r
+      setwd("C:\Users\jenny\path\that\only\I\have")
+    ```
+  + if the first line of your R script is
+    ```r
+      rm(list = ls())
+    ```
 
+---
+
+## RStudio project `.Rproj`
+
+.pull-left[
+1. Click the **Project** icon on the top right corner 
+<br>
+<br>
+<br>
+<br>
+<br>
+2. **New Directory**/**Existing Directory** > **New Project** > **Create Project**
+<br>
+<br>
+<br>
+3. Open the project
+]
+.pull-right[
+.center[
+<img src="../img/rstudio-proj.png" width = "60%">
+<img src="../img/rstudio-proj2.png" width = "60%">
+<img src="../img/rstudio-proj3.png" width = "60%">
+]
+]
+
+---
+
+## Project structure
+
+Under the `stats220` directory:
+
+.pull-left[
+.x[
+* `01-clean-data.R`
+* `02-analyse-data.R`
+* `assignment1.Rmd`
+* `assignment2.Rmd`
+* `bus_route.xlsx`
+* `lab1.Rmd`
+* `titanic.csv`
+]
+]
+.pull-right[
 * `data/`:
-  * `data1.csv`
-  * `data2.xsl`
+  * `titanic.csv`
+  * `bus_route.xlsx`
 * `assignments/`:
-  * 
+  * `assignment1.Rmd`
+  * `assignment2.Rmd`
+* `labs/`:
+  * `lab1.Rmd`
+* `R/`
+  * `01-clean-data.R`
+  * `02-analyse-data.R`
+]
 
 ---
 
@@ -191,10 +288,11 @@ Store values temporarily in computer memory
 
 ```{r store-values}
 ```
-`r emo::ji("arrow_up")` They are .red[assignments].
+`r emo::ji("arrow_up")` read as `akl_lon` gets (`<-`) the value of `174.76`.
 
+An .red[assignment] consists of:
 * left-hand side: .red[variable names] or .red[symbols] starts with a letter.
-  .checked[+ `akl_lon` (good practice)]
+  .checked[+ `akl_lon` (`snake_case` convention)]
   .x[+ `akl.lon` & `aklLon` (not recommended)]
 * assignment operator:
   .checked[+ `<-`]
@@ -212,6 +310,10 @@ Store values temporarily in computer memory
 Retrieve values from computer memory
 
 ```{r retrieve-values}
+```
+
+Names are case senstive
+```{r retrieve-error, error = TRUE}
 ```
 ]
 
@@ -292,7 +394,7 @@ Access data from remote computers, including web servers on the internet
 .panelset[
 .panel[.panel-name[R Code]
 
-```{r network, results = "hide"}
+```{r network, eval = FALSE}
 ```
 
 A sequence of function calls
@@ -300,7 +402,8 @@ A sequence of function calls
 
 .panel[.panel-name[Map]
 
-```{r network2, echo = FALSE, ref.label = "network", out.width = "100%", fig.height = 6}
+```{r network2, echo = FALSE, out.width = "60%"}
+include_graphics("../img/akl-bus-route-map.png")
 ```
 ]
 ]
@@ -310,7 +413,7 @@ A sequence of function calls
 
 class: inverse middle
 
-## Like other languages you learned, R has its own syntax and semantics.
+## R has its own syntax and semantics, like other languages.
 
 ---
 
@@ -323,4 +426,8 @@ st_read("data/Bus_Route/Bus_Route.shp")
 ```
 
 * function name: `st_read()` from the **sf** package to read geo-spatial data
-* function argument: `"data/Bus_Route/Bus_Route.shp"` its first argument to specify the data source in characters
+* argument/input: `"data/Bus_Route/Bus_Route.shp"` its first argument to specify the data source in characters
+
+<hr>
+
+Consult the function's help page with `?st_read`
