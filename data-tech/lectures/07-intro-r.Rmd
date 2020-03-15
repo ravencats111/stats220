@@ -358,6 +358,8 @@ Read data files from hard distks, USB sticks, etc into RAM
 
 ```{r mass-storage}
 ```
+
+.footnote[AT bus route data sourced from [**Auckland Transport Open GIS Data**](https://data-atgis.opendata.arcgis.com/datasets/bus-route/data?geometry=169.841%2C-37.610%2C179.685%2C-36.072)]
 ]
 
 
