@@ -37,7 +37,6 @@ ggplot() +
   geom_sf(data = akl_bus, aes(colour = AGENCYNAME))
 
 ## ---- network
-# https://data-atgis.opendata.arcgis.com/datasets/bus-route/data?geometry=169.841%2C-37.610%2C179.685%2C-36.072
 library(leaflet)
 leaflet(data = st_transform(akl_bus, crs = 4326)) %>% 
   addTiles() %>% 
