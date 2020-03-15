@@ -417,7 +417,15 @@ class: inverse middle
 
 ---
 
-## functions
+## Syntactic names
+
+---
+
+## Atomic vectors
+
+---
+
+## Functions
 
 A function call consists of the function name followed by one or more argument within parentheses.
 
