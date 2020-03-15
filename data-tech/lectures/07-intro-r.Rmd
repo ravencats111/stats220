@@ -427,7 +427,7 @@ include_graphics("../img/akl-bus-route-map.png")
 
 class: inverse middle
 
-## R has its own syntax and semantics, like other languages.
+## <i class='fab fa-r-project'></i> has its own syntax and semantics, like other languages.
 
 ---
 

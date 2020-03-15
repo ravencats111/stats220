@@ -4,6 +4,8 @@ title = "STATS 220 Data Technology"
 theme = "hugo-cards"
 paginate = 6
 
+staticDir = ["static", "data-tech"]
+
 [params]
   custom_css = ["css/wang.css"]
 

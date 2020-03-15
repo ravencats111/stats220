@@ -15,9 +15,9 @@
                 <div class="panel panel-default">
                   
                   {{ if .Params.img }}
-                  <img width="100%" src="{{ .Site.BaseURL }}images/{{ .Params.img }}" alt="{{ .Title }}">
+                  <img width="400" height="223" src="{{ .Params.img }}" alt="{{ .Title }}">
                   {{ else }}
-                  <img width="100%" src="{{ .Site.BaseURL }}images/{{ .Site.Params.defaultImage }}" alt="{{ .Site.Title }}">
+                  <img width="400" height="223" src="{{ .Site.BaseURL }}images/{{ .Site.Params.defaultImage }}" alt="{{ .Title }}">
                   {{ end }}
                   
                   <div class="panel-body text-center">
@@ -26,7 +26,8 @@
                   </div>
                   
                   <div class="panel-body text-center">
-                    <a class="btn btn-info btn-sm list-group-item-text" href="{{ . }}" target="_blank" rel="noopener" role="button"> Rmd </a>
+                    <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}lectures/R/{{ .Params.r }}" target="_blank" rel="noopener" role="button" download> R </a>
+                    <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}lectures/{{ .Params.rmd }}" target="_blank" rel="noopener" role="button" download> Rmd </a>
                     <a class="btn btn-info btn-sm list-group-item-text" href="{{ . }}" target="_blank" rel="noopener" role="button"> Lab </a>
                     <a class="btn btn-info btn-sm list-group-item-text" href="{{ . }}" target="_blank" rel="noopener" role="button"> Solution </a>
                   </div>
