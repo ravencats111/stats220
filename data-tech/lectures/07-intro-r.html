@@ -4,7 +4,6 @@
     <title>STATS 220</title>
     <meta charset="utf-8" />
     <meta name="author" content="Earo Wang" />
-    <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
     <link href="libs/countdown/countdown.css" rel="stylesheet" />
@@ -48,6 +47,8 @@ class: inverse middle center
 
 ## Data + Technology
 
+### &lt;i class="fas fa-arrow-circle-right"&gt;&lt;/i&gt; &lt;https://stats220.earo.me&gt;
+
 ---
 
 ## What I mean by "data"
@@ -71,7 +72,19 @@ How many of you have seen and worked with datasets, such as *iris*, *mtcars*, *w
 * Documentation! Documentation! Documentation!
 * Search or ask questions on [Stack Overflow](http://stackoverflow.com) and [RStudio Community](http://community.rstudio.com)
 * Follow the community, [#rstats](https://twitter.com/search?q=%23rstats&amp;src=typeahead_click) on Twitter
+* Don't let the error message scare you off
 * (Not surprisingly) Learn to google: what that error message means (I google a lot 🤭)
+
+---
+
+## Textbooks 📚
+
+.pull-left[
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px"&gt;](https://r4ds.had.co.nz)]
+]
+.pull-right[
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/565916198b0be51bf88b36f94b80c7ea67cafe7c/7f70b/cover.png" height="520px"&gt;](https://adv-r.hadley.nz)]
+]
 
 ---
 
@@ -192,7 +205,7 @@ Change the RStudio appearance up to your taste
 
 .center[&lt;img src="../img/rstudio-appearance.png" width = "90%"&gt;]
 
-<div class="countdown" id="timer_5e6afb20" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<div class="countdown" id="timer_5e6d9ec1" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -205,7 +218,7 @@ Change the RStudio appearance up to your taste
 ## Project-oriented workflow
 
 * Each data analysis/university course is a project, and get your work organised.
-* A self-contained project is a folder 📂 that contains all relevant files.
+* A self-contained project is a folder 📁 that contains all relevant files.
 * All working files are relative to the project root.
 * The project should just work on a different computer.
 * Jenny Bryan will [set your computer on fire 🔥](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
@@ -294,10 +307,10 @@ Store values temporarily in computer memory
 akl_lon &lt;- 174.76
 akl_lat &lt;- -36.85
 ```
-⬆️ read as `akl_lon` gets (`&lt;-`) the value of `174.76`.
+⬆️ read as "create an object named `akl_lon`, that gets (`&lt;-`) the value of `174.76`".
 
 An .red[assignment] consists of:
-* left-hand side: .red[variable names] or .red[symbols] starts with a letter.
+* left-hand side: .red[variable names] or .red[symbols]
   .checked[+ `akl_lon` (`snake_case` convention)]
   .x[+ `akl.lon` &amp; `aklLon` (not recommended)]
 * assignment operator:
@@ -400,7 +413,7 @@ akl_bus &lt;- st_read("data/Bus_Route/Bus_Route.shp")
 ```
 
 ```
-#&gt; Reading layer `Bus_Route' from data source `/Users/wany568/Teaching/stats220/data-tech/lectures/data/Bus_Route/Bus_Route.shp' using driver `ESRI Shapefile'
+#&gt; Reading layer `Bus_Route' from data source `/Users/earo/Teaching/stats220/data-tech/lectures/data/Bus_Route/Bus_Route.shp' using driver `ESRI Shapefile'
 #&gt; Simple feature collection with 496 features and 7 fields
 #&gt; geometry type:  MULTILINESTRING
 #&gt; dimension:      XY
@@ -435,10 +448,10 @@ akl_bus[1:4, ]
 #&gt; epsg (SRID):    2193
 #&gt; proj4string:    +proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
 #&gt;   OBJECTID ROUTEPATTE AGENCYNAME                                 ROUTENAME
-#&gt; 1   304675      02005        NZB St Lukes To Wynyard Quarter Via Kingsland
-#&gt; 2   304676      02006        NZB Wynyard Quarter To St Lukes Via Kingsland
-#&gt; 3   304677      02209        NZB  Avondale To City Centre Via New North Rd
-#&gt; 4   304678      02208        NZB  City Centre To Avondale Via New North Rd
+#&gt; 1   305612      02005        NZB St Lukes To Wynyard Quarter Via Kingsland
+#&gt; 2   305613      02006        NZB Wynyard Quarter To St Lukes Via Kingsland
+#&gt; 3   305614      02209        NZB  Avondale To City Centre Via New North Rd
+#&gt; 4   305615      02208        NZB  City Centre To Avondale Via New North Rd
 #&gt;   ROUTENUMBE MODE Shape__Len                       geometry
 #&gt; 1         20  Bus   8042.190 MULTILINESTRING ((1755487 5...
 #&gt; 2         20  Bus   7919.198 MULTILINESTRING ((1756321 5...
@@ -487,7 +500,6 @@ Access data from remote computers, including web servers on the internet
 
 
 ```r
-# https://data-atgis.opendata.arcgis.com/datasets/bus-route/data?geometry=169.841%2C-37.610%2C179.685%2C-36.072
 library(leaflet)
 leaflet(data = st_transform(akl_bus, crs = 4326)) %&gt;% 
   addTiles() %&gt;% 
@@ -497,7 +509,7 @@ leaflet(data = st_transform(akl_bus, crs = 4326)) %&gt;%
   )
 ```
 
-A sequence of function calls
+Composing multiple functions
 ]
 
 .panel[.panel-name[Map]
@@ -515,7 +527,136 @@ class: inverse middle
 
 ---
 
-## functions
+## Syntactic names
+
+A **syntactic** name consists of letters, digits, `.` and `_`, but can't begin with `_` or a digit.
+
+
+```r
+akl_lon &lt;- 174.76
+akl_lat &lt;- -36.85
+```
+
+**Non-syntactic** examples:
+
+
+```r
+_akl_lon &lt;- 174.76
+#&gt; Error: unexpected input in "_"
+
+1akl_lat &lt;- 174.76
+#&gt; Error: unexpected symbol in "1akl_lat"
+
+TRUE &lt;- 174.76
+#&gt; Error in TRUE &lt;- 174.76: invalid (do_set) left-hand side to assignment
+```
+
+---
+
+## Atomic vectors
+
+.pull-left[
+.center[&lt;img src="https://d33wubrfki0l68.cloudfront.net/eb6730b841e32292d9ff36b33a590e24b6221f43/57192/diagrams/vectors/summary-tree-atomic.png" width="90%"&gt;]
+
+### Missing values
+
+```r
+NA # Not Applicable
+c(174.76, NA, -36.85)
+```
+
+.footnote[image credit: [Hadley Wickham's **Advanced R**](https://adv-r.hadley.nz/vectors-chap.html#atomic-vectors)]
+]
+.pull-right[
+### Scalars
+
+* Logicals: `TRUE` or `FALSE`
+* Doubles: `174.76`, `1.7476e2`, `Inf`, `-Inf`, `NaN` (Not a Number)
+* Integers: `174L`
+* Strings: `"hello"`, `'world'`
+
+### Vectors
+
+
+```r
+lgl_vec &lt;- c(TRUE, FALSE)
+int_vec &lt;- c(174L, -36L)
+dbl_vec &lt;- c(174.76, -36.85)
+chr_vec &lt;- c("long", "lat")
+```
+
+]
+
+---
+
+## Atomic vectors
+
+.center[&lt;img src="https://d33wubrfki0l68.cloudfront.net/baa19d0ebf9b97949a7ad259b29a1c4ae031c8e2/8e9b8/diagrams/vectors/summary-tree-s3-1.png" width="60%"&gt;]
+
+---
+
+## Subsetting vectors with `[`
+
+
+```r
+(x &lt;- c(akl_lon_region, akl_lat_region))
+```
+
+```
+#&gt; [1] 173.76 175.76 -37.35 -36.35
+```
+
+.pull-left[
+**Positive indices**
+
+```r
+x[c(1, 3)]
+```
+
+```
+#&gt; [1] 173.76 -37.35
+```
+**Negative indices**
+
+```r
+x[-c(3, 1)]
+```
+
+```
+#&gt; [1] 175.76 -36.35
+```
+]
+.pull-right[
+**Logical indices**
+
+```r
+x[c(TRUE, FALSE, TRUE, FALSE)]
+```
+
+```
+#&gt; [1] 173.76 -37.35
+```
+
+```r
+x[c(TRUE, FALSE)] # recycling
+```
+
+```
+#&gt; [1] 173.76 -37.35
+```
+
+```r
+x[x &gt; 0]
+```
+
+```
+#&gt; [1] 173.76 175.76
+```
+]
+
+---
+
+## Functions
 
 A function call consists of the function name followed by one or more argument within parentheses.
 
@@ -528,7 +669,24 @@ st_read("data/Bus_Route/Bus_Route.shp")
 
 &lt;hr&gt;
 
-Consult the function's help page with `?st_read`
+Consult the function's help page with `?mean`
+
+```r
+mean(x, trim = 0, na.rm = FALSE, ...)
+```
+
+---
+
+## Reading
+
+.pull-left[
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/565916198b0be51bf88b36f94b80c7ea67cafe7c/7f70b/cover.png" height="520px"&gt;](https://adv-r.hadley.nz)]
+]
+.pull-right[
+* [Chapter 2: Names and values](https://adv-r.hadley.nz/names-values.html)
+* [Chapter 3: Vectors](https://adv-r.hadley.nz/vectors-chap.html)
+* [Chapter 4: Subsetting](https://adv-r.hadley.nz/subsetting.html)
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

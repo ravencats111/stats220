@@ -44,3 +44,28 @@ leaflet(data = st_transform(akl_bus, crs = 4326)) %>%
     weight = 2,
     popup = ~ paste("Routenumber:", ROUTENUMBE)
   )
+
+## ---- vectors
+lgl_vec <- c(TRUE, FALSE)
+int_vec <- c(174L, -36L)
+dbl_vec <- c(174.76, -36.85)
+chr_vec <- c("long", "lat")
+
+## ---- subsetting
+(x <- c(akl_lon_region, akl_lat_region))
+
+## ---- positive-indices
+x[c(1, 3)]
+
+## ---- negative-indices
+x[-c(3, 1)]
+
+## ---- logical-indices
+x[c(TRUE, FALSE, TRUE, FALSE)]
+x[c(TRUE, FALSE)] # recycling
+x[x > 0]
+
+## ---- special-subsetting
+x[]
+x[1:4]
+x[0]

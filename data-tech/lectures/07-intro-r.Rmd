@@ -53,6 +53,8 @@ class: inverse middle center
 
 ## Data + Technology
 
+### <i class="fas fa-arrow-circle-right"></i> <https://stats220.earo.me>
+
 ---
 
 ## What I mean by "data"
@@ -78,7 +80,19 @@ How many of you have seen and worked with datasets, such as *iris*, *mtcars*, *w
 * Documentation! Documentation! Documentation!
 * Search or ask questions on [Stack Overflow](http://stackoverflow.com) and [RStudio Community](http://community.rstudio.com)
 * Follow the community, [#rstats](https://twitter.com/search?q=%23rstats&src=typeahead_click) on Twitter
+* Don't let the error message scare you off
 * (Not surprisingly) Learn to google: what that error message means (I google a lot `r emo::ji("hand_over_mouth")`)
+
+---
+
+## Textbooks `r emo::ji("books")`
+
+.pull-left[
+.center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
+]
+.pull-right[
+.center[[<img src="https://d33wubrfki0l68.cloudfront.net/565916198b0be51bf88b36f94b80c7ea67cafe7c/7f70b/cover.png" height="520px">](https://adv-r.hadley.nz)]
+]
 
 ---
 
@@ -288,10 +302,10 @@ Store values temporarily in computer memory
 
 ```{r store-values}
 ```
-`r emo::ji("arrow_up")` read as `akl_lon` gets (`<-`) the value of `174.76`.
+`r emo::ji("arrow_up")` read as "create an object named `akl_lon`, that gets (`<-`) the value of `174.76`".
 
 An .red[assignment] consists of:
-* left-hand side: .red[variable names] or .red[symbols] starts with a letter.
+* left-hand side: .red[variable names] or .red[symbols]
   .checked[+ `akl_lon` (`snake_case` convention)]
   .x[+ `akl.lon` & `aklLon` (not recommended)]
 * assignment operator:
@@ -397,7 +411,7 @@ Access data from remote computers, including web servers on the internet
 ```{r network, eval = FALSE}
 ```
 
-A sequence of function calls
+Composing multiple functions
 ]
 
 .panel[.panel-name[Map]
@@ -419,9 +433,81 @@ class: inverse middle
 
 ## Syntactic names
 
+A **syntactic** name consists of letters, digits, `.` and `_`, but can't begin with `_` or a digit.
+
+```{r syntactic, ref.label = "store-values"}
+```
+
+**Non-syntactic** examples:
+
+```{r non-syntactic, eval = FALSE}
+_akl_lon <- 174.76
+#> Error: unexpected input in "_"
+
+1akl_lat <- 174.76
+#> Error: unexpected symbol in "1akl_lat"
+
+TRUE <- 174.76
+#> Error in TRUE <- 174.76: invalid (do_set) left-hand side to assignment
+```
+
 ---
 
 ## Atomic vectors
+
+.pull-left[
+.center[<img src="https://d33wubrfki0l68.cloudfront.net/eb6730b841e32292d9ff36b33a590e24b6221f43/57192/diagrams/vectors/summary-tree-atomic.png" width="90%">]
+
+### Missing values
+
+```r
+NA # Not Applicable
+c(174.76, NA, -36.85)
+```
+
+.footnote[image credit: [Hadley Wickham's **Advanced R**](https://adv-r.hadley.nz/vectors-chap.html#atomic-vectors)]
+]
+.pull-right[
+### Scalars
+
+* Logicals: `TRUE` or `FALSE`
+* Doubles: `174.76`, `1.7476e2`, `Inf`, `-Inf`, `NaN` (Not a Number)
+* Integers: `174L`
+* Strings: `"hello"`, `'world'`
+
+### Vectors
+
+```{r vectors}
+```
+
+]
+
+---
+
+## Atomic vectors
+
+.center[<img src="https://d33wubrfki0l68.cloudfront.net/baa19d0ebf9b97949a7ad259b29a1c4ae031c8e2/8e9b8/diagrams/vectors/summary-tree-s3-1.png" width="60%">]
+
+---
+
+## Subsetting vectors with `[`
+
+```{r subsetting}
+```
+
+.pull-left[
+**Positive indices**
+```{r positive-indices}
+```
+**Negative indices**
+```{r negative-indices}
+```
+]
+.pull-right[
+**Logical indices**
+```{r logical-indices}
+```
+]
 
 ---
 
@@ -438,4 +524,21 @@ st_read("data/Bus_Route/Bus_Route.shp")
 
 <hr>
 
-Consult the function's help page with `?st_read`
+Consult the function's help page with `?mean`
+
+```r
+mean(x, trim = 0, na.rm = FALSE, ...)
+```
+
+---
+
+## Reading
+
+.pull-left[
+.center[[<img src="https://d33wubrfki0l68.cloudfront.net/565916198b0be51bf88b36f94b80c7ea67cafe7c/7f70b/cover.png" height="520px">](https://adv-r.hadley.nz)]
+]
+.pull-right[
+* [Chapter 2: Names and values](https://adv-r.hadley.nz/names-values.html)
+* [Chapter 3: Vectors](https://adv-r.hadley.nz/vectors-chap.html)
+* [Chapter 4: Subsetting](https://adv-r.hadley.nz/subsetting.html)
+]
