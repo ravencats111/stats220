@@ -59,11 +59,28 @@ class: inverse middle center
 
 ## What I mean by "data"
 
---
+<!--
+.center[<img src="../img/canned-fruit-vs-fresh-fruit.jpg" width="50%">]
+-->
 
-```{r iris-mtcars-meme, echo = FALSE, out.width = "65%"}
-include_graphics("../img/iris-mtcars-meme.jpg")
-```
+.pull-left[
+<br>
+## .center[.large[.large[.large[`r emo::ji("canned_food")`]]]]
+.x[
+* Stale, uninteresting, convenient 
+* Highly processed and archived
+* Example: `iris`, `titanic`, `wages`
+]
+]
+.pull-right[
+<br>
+## .center[.large[.large[.large[`r emo::ji("tomato")`]]]]
+.checked[
+* Fresh, interesting, challenging 
+* Locally collected and impactful
+* Example: [Auckland realtime transport](https://dev-portal.at.govt.nz)
+]
+]
 
 ???
 
@@ -112,8 +129,8 @@ class: inverse middle
 ### - for fun
 ]
 .right-column[
-### `r emo::ji("package")` `memer` for creating memes
-```{r memer, out.width = "80%"}
+### `r emo::ji("package")` `cowsay` for generating ASCII picture
+```{r cowsay}
 ```
 ]
 
@@ -358,7 +375,7 @@ Perform operations or calculations like arithmetic and comparisons
 ### - access to mass storage
 ]
 .right-column[
-Read data files from hard distks, USB sticks, etc into RAM
+Read data files from hard disks, USB sticks, etc into RAM
 
 ```{r mass-storage}
 ```

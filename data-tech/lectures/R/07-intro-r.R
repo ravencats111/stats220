@@ -1,9 +1,6 @@
-## ---- memer
-# remotes::install_github("sctyner/memer")
-library(memer)
-meme_get("DistractedBf") %>% 
-  meme_text_distbf("data science", "new\nstudents",
-    "statistics")
+## ---- cowsay
+library(cowsay)
+say("Kia Ora!")
 
 ## ---- store-values
 akl_lon <- 174.76
