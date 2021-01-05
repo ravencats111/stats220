@@ -1,6 +1,6 @@
 ---
-title: "Review"
-week: 12
+title: "Tidy data"
+week: 6
 img: ""
 slides: ""
 r: ""

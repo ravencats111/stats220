@@ -2,7 +2,7 @@ baseurl = "/"
 languageCode = "en-us"
 title = "STATS 220 Data Technology"
 theme = "hugo-cards"
-paginate = 6
+paginate = 12
 
 staticDir = ["static", "data-tech"]
 
@@ -15,7 +15,7 @@ staticDir = ["static", "data-tech"]
   facebook = ""
   quora = ""
   twitter = ""
-  github = "http://github.com/earowang/stats220"
+  github = "https://github.com/STATS-UOA/stats220"
   email = ""
 
   fbLikeBox = ""
@@ -27,5 +27,5 @@ staticDir = ["static", "data-tech"]
   disqus = ""
 
   [params.copyright]
-     name = "Earo Wang"
-     link = "https://earo.me"
+     name = "The University of Auckland"
+     link = "http://auckland.ac.nz"

@@ -1,6 +1,6 @@
 ---
-title: "Review"
-week: 12
+title: "Model fitting"
+week: 10
 img: ""
 slides: ""
 r: ""
