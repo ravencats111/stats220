@@ -23,7 +23,7 @@ akl_lat_region
 
 ## ---- mass-storage
 library(sf)
-akl_bus <- st_read("data/Bus_Route/Bus_Route.shp")
+akl_bus <- st_read("data/BusService/BusService.shp")
 
 ## ---- mass-storage-print
 akl_bus[1:4, ]

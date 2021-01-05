@@ -9,6 +9,7 @@ output:
     css: ["assets/remark.css"]
     lib_dir: libs
     nature:
+      ratio: 16:9
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -30,7 +31,7 @@ xaringanExtra::use_panelset()
 ```
 
 ```{r external, include = FALSE, cache = FALSE}
-read_chunk('R/07-intro-r.R')
+read_chunk('R/01-intro.R')
 ```
 
 ## Kia Ora!
