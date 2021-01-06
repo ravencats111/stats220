@@ -10,7 +10,7 @@
         {{ $paginator := .Paginate ($sorted) }}
         {{ range $paginator.Pages }}   
             <div class="col-md-4 card">
-              <span class="post-meta"><small>Week {{ .Params.week }}</small></span>
+              <span class="post-meta"><strong>Week {{ .Params.week }}</strong></span>
               <a href="{{ .Site.BaseURL }}lectures/{{ .Params.slides }}" target="_blank">    
                 <div class="panel panel-default">
                   
@@ -28,8 +28,12 @@
                   <div class="panel-body text-center">
                     <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}lectures/R/{{ .Params.r }}" target="_blank" rel="noopener" role="button" download> R </a>
                     <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}lectures/{{ .Params.rmd }}" target="_blank" rel="noopener" role="button" download> Rmd </a>
-                    <a class="btn btn-info btn-sm list-group-item-text" href="{{ . }}" target="_blank" rel="noopener" role="button"> Lab </a>
-                    <a class="btn btn-info btn-sm list-group-item-text" href="{{ . }}" target="_blank" rel="noopener" role="button"> Solution </a>
+                    {{ if .Params.lab }}
+                      <a class="btn btn-info btn-sm list-group-item-text" href="{{ . }}" target="_blank" rel="noopener" role="button"> Lab </a>
+                    {{ end }}
+                    {{ if .Params.lab }}
+                      <a class="btn btn-info btn-sm list-group-item-text" href="{{ . }}" target="_blank" rel="noopener" role="button"> Solution </a>
+                    {{ end }}
                   </div>
                   <!-- <div class="panel&#45;body"><small> -->
                   <!--   {{ .Summary | plainify | truncate 180 }}</small> -->

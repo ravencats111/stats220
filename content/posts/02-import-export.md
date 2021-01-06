@@ -1,5 +1,5 @@
 ---
-title: "Data Import/Export"
+title: "Data import/export"
 week: 2
 img: ""
 slides: ""

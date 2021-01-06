@@ -1,5 +1,5 @@
 ---
-title: "R Markdown"
+title: "R markdown"
 week: 8
 img: ""
 slides: ""
