@@ -1,0 +1,221 @@
+---
+title: "STATS 220"
+subtitle: "Data import/export"
+type: "lecture"
+date: ""
+output:
+  xaringan::moon_reader:
+    css: ["assets/remark.css"]
+    lib_dir: libs
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r initial, echo = FALSE, cache = FALSE, results = 'hide'}
+library(knitr)
+options(htmltools.dir.version = FALSE, tibble.width = 60, tibble.print_min = 6)
+opts_chunk$set(
+  echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
+  fig.path = 'figure/', cache.path = 'cache/', cache = TRUE,
+  fig.align = 'center', fig.width = 12, fig.height = 8.5, fig.show = 'hold',
+  dpi = 120
+)
+```
+
+```{r xaringan-panelset, echo = FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r external, include = FALSE, cache = FALSE}
+read_chunk('R/02-import-export.R')
+```
+
+## Learning objectives
+
+* Fundamental data structures
+  1. tibbles/data frames
+  2. matrix
+  3. list
+* Reading data files into R
+* Writing to a file into disk
+
+---
+
+class: inverse middle
+
+## Fundamental data structures in R
+
+### 1. Lists
+
+### 2. Matrices and arrays
+
+### 3. Data frames and tibbles
+
+---
+
+.left-column[
+## data strs
+### - lists
+]
+.right-column[
+An object contains elements of different data types.
+```{r lists}
+```
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+]
+.right-column[
+<img src="https://d33wubrfki0l68.cloudfront.net/9628eed602df6fd55d9bced4fba0a5a85d93db8a/36c16/diagrams/vectors/list.png" width="100%">
+.pull-left[
+## data type
+```{r lists-type}
+```
+## data class
+```{r lists-cls}
+```
+]
+.pull-right[
+## data structure
+```{r lists-str}
+```
+]
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+]
+.right-column[
+A list can contain other lists, i.e. **recursive**
+```{r lists-rec}
+```
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+]
+.right-column[
+.pull-left[
+Test for a list
+```{r is-list}
+```
+]
+.pull-right[
+Coerece to a list
+```{r as-list}
+```
+]
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+### - matrices
+]
+.right-column[
+2D structure of homogeneous data types
+* `matrix()` to construct a matrix
+```{r matrix}
+```
+* `as.matrix()` to coerce to a matrix
+* `is.matrix()` to test for a matrix
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+### - matrices
+]
+.right-column[
+**array**: more than 2D matrix
+```{r array}
+```
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+### - matrices
+### - tibbles
+]
+.right-column[
+A data frame is a named **list** of vectors of the same length.
+```{r data-frame}
+```
+.pull-left[
+```{r df-type}
+```
+]
+.pull-right[
+```{r df-cls}
+```
+]
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+### - matrices
+### - tibbles
+]
+.right-column[
+A tibble is a modern reimagining of the data frame.
+```{r tibbles, highlight.output = c(1, 3)}
+```
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+### - matrices
+### - tibbles
+]
+.right-column[
+.center[
+<img src="https://d33wubrfki0l68.cloudfront.net/9ec5e1f8982238a413847eb5c9bbc5dcf44c9893/bc590/diagrams/vectors/summary-tree-s3-2.png" height="100%">
+]
+]
+
+---
+
+## Reading files into R
+
+---
+
+## Writing to a file
+
+---
+
+## Reading
+
+.pull-left[
+.center[[<img src="https://d33wubrfki0l68.cloudfront.net/565916198b0be51bf88b36f94b80c7ea67cafe7c/7f70b/cover.png" height="520px">](https://adv-r.hadley.nz)]
+]
+.pull-right[
+* [Chapter 10: Tibbles](https://r4ds.had.co.nz/tibbles.html)
+* [Chapter 3: Vectors](https://adv-r.hadley.nz/vectors-chap.html)
+* [Chapter 4: Subsetting](https://adv-r.hadley.nz/subsetting.html)
+]

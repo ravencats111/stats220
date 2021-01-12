@@ -2,7 +2,6 @@
 title: "STATS 220"
 subtitle: "Introduction to <i class='fab fa-r-project'></i> <br> .small[the language of data analysis]"
 type: "lecture"
-author: "Earo Wang"
 date: ""
 output:
   xaringan::moon_reader:

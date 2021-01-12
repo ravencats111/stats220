@@ -1,10 +1,51 @@
-# data structures
-## tibble/data.frame
+## ---- lists
+lst <- list( # list constructor/creator
+  1:3, 
+  "a", 
+  c(TRUE, FALSE, TRUE), 
+  c(2.3, 5.9)
+)
+lst
 
-dept <- c("Physics", "Mathematics", "Statistics", "Computer Science")
+## ---- lists-type
+typeof(lst)
+
+## ---- lists-cls
+class(lst)
+
+## ---- lists-str
+# el can be of diff lengths
+str(lst)
+
+## ---- lists-rec
+str(list(first_el = lst, second_el = mtcars))
+
+## ---- is-list
+is.list(lst)
+
+## ---- as-list
+as.list(1:3)
+
+## ---- matrix
+matrix(1:9, nrow = 3)
+
+## ---- array
+array(1:9, dim = c(1, 3, 3))
+
+## ---- data-frame
+dept <- c("Physics", "Mathematics", "Statistics",
+  "Computer Science")
 nstaff <- c(12L, 8L, 20L, 23L)
+sci_df <- data.frame(department = dept, count = nstaff)
+sci_df
 
-# create a tibble
+## ---- df-type
+typeof(sci_df)
+
+## ---- df-cls
+class(sci_df)
+
+## ---- tibbles
 library(tibble)
 sci_tbl <- tibble(
   department = dept, 
@@ -12,6 +53,7 @@ sci_tbl <- tibble(
   percentage = count / sum(count))
 sci_tbl
 
+## ---- subsetting
 sci_tbl$count
 sci_tbl[["count"]]
 

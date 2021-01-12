@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STATS 220</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="assets/remark.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STATS 220
+## Data import/export
+
+---
+
+
+
+
+
+
+
+
+## Learning objectives
+
+* Fundamental data structures
+  1. tibbles/data frames
+  2. matrix
+  3. list
+* Reading data files into R
+* Writing to a file into disk
+
+---
+
+class: inverse middle
+
+## Fundamental data structures in R
+
+### 1. Lists
+
+### 2. Matrices and arrays
+
+### 3. Data frames and tibbles
+
+---
+
+.left-column[
+## data strs
+### - lists
+]
+.right-column[
+An object contains elements of different data types.
+
+```r
+lst &lt;- list( # list constructor/creator
+  1:3, 
+  "a", 
+  c(TRUE, FALSE, TRUE), 
+  c(2.3, 5.9)
+)
+lst
+```
+
+```
+#&gt; [[1]]
+#&gt; [1] 1 2 3
+#&gt; 
+#&gt; [[2]]
+#&gt; [1] "a"
+#&gt; 
+#&gt; [[3]]
+#&gt; [1]  TRUE FALSE  TRUE
+#&gt; 
+#&gt; [[4]]
+#&gt; [1] 2.3 5.9
+```
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+]
+.right-column[
+&lt;img src="https://d33wubrfki0l68.cloudfront.net/9628eed602df6fd55d9bced4fba0a5a85d93db8a/36c16/diagrams/vectors/list.png" width="100%"&gt;
+.pull-left[
+## data type
+
+```r
+typeof(lst)
+```
+
+```
+#&gt; [1] "list"
+```
+## data class
+
+```r
+class(lst)
+```
+
+```
+#&gt; [1] "list"
+```
+]
+.pull-right[
+## data structure
+
+```r
+# el can be of diff lengths
+str(lst)
+```
+
+```
+#&gt; List of 4
+#&gt;  $ : int [1:3] 1 2 3
+#&gt;  $ : chr "a"
+#&gt;  $ : logi [1:3] TRUE FALSE TRUE
+#&gt;  $ : num [1:2] 2.3 5.9
+```
+]
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+]
+.right-column[
+A list can contain other lists, i.e. **recursive**
+
+```r
+str(list(first_el = lst, second_el = mtcars))
+```
+
+```
+#&gt; List of 2
+#&gt;  $ first_el :List of 4
+#&gt;   ..$ : int [1:3] 1 2 3
+#&gt;   ..$ : chr "a"
+#&gt;   ..$ : logi [1:3] TRUE FALSE TRUE
+#&gt;   ..$ : num [1:2] 2.3 5.9
+#&gt;  $ second_el:'data.frame':	32 obs. of  11 variables:
+#&gt;   ..$ mpg : num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+#&gt;   ..$ cyl : num [1:32] 6 6 4 6 8 6 8 4 4 6 ...
+#&gt;   ..$ disp: num [1:32] 160 160 108 258 360 ...
+#&gt;   ..$ hp  : num [1:32] 110 110 93 110 175 105 245 62 95 123 ...
+#&gt;   ..$ drat: num [1:32] 3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+#&gt;   ..$ wt  : num [1:32] 2.62 2.88 2.32 3.21 3.44 ...
+#&gt;   ..$ qsec: num [1:32] 16.5 17 18.6 19.4 17 ...
+#&gt;   ..$ vs  : num [1:32] 0 0 1 1 0 1 0 1 1 1 ...
+#&gt;   ..$ am  : num [1:32] 1 1 1 0 0 0 0 0 0 0 ...
+#&gt;   ..$ gear: num [1:32] 4 4 4 3 3 3 3 4 4 4 ...
+#&gt;   ..$ carb: num [1:32] 4 4 1 1 2 1 4 2 2 4 ...
+```
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+]
+.right-column[
+.pull-left[
+Test for a list
+
+```r
+is.list(lst)
+```
+
+```
+#&gt; [1] TRUE
+```
+]
+.pull-right[
+Coerece to a list
+
+```r
+as.list(1:3)
+```
+
+```
+#&gt; [[1]]
+#&gt; [1] 1
+#&gt; 
+#&gt; [[2]]
+#&gt; [1] 2
+#&gt; 
+#&gt; [[3]]
+#&gt; [1] 3
+```
+]
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+### - matrices
+]
+.right-column[
+2D structure of homogeneous data types
+* `matrix()` to construct a matrix
+
+```r
+matrix(1:9, nrow = 3)
+```
+
+```
+#&gt;      [,1] [,2] [,3]
+#&gt; [1,]    1    4    7
+#&gt; [2,]    2    5    8
+#&gt; [3,]    3    6    9
+```
+* `as.matrix()` to coerce to a matrix
+* `is.matrix()` to test for a matrix
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+### - matrices
+]
+.right-column[
+**array**: more than 2D matrix
+
+```r
+array(1:9, dim = c(1, 3, 3))
+```
+
+```
+#&gt; , , 1
+#&gt; 
+#&gt;      [,1] [,2] [,3]
+#&gt; [1,]    1    2    3
+#&gt; 
+#&gt; , , 2
+#&gt; 
+#&gt;      [,1] [,2] [,3]
+#&gt; [1,]    4    5    6
+#&gt; 
+#&gt; , , 3
+#&gt; 
+#&gt;      [,1] [,2] [,3]
+#&gt; [1,]    7    8    9
+```
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+### - matrices
+### - tibbles
+]
+.right-column[
+A data frame is a named **list** of vectors of the same length.
+
+```r
+dept &lt;- c("Physics", "Mathematics", "Statistics",
+  "Computer Science")
+nstaff &lt;- c(12L, 8L, 20L, 23L)
+sci_df &lt;- data.frame(department = dept, count = nstaff)
+sci_df
+```
+
+```
+#&gt;         department count
+#&gt; 1          Physics    12
+#&gt; 2      Mathematics     8
+#&gt; 3       Statistics    20
+#&gt; 4 Computer Science    23
+```
+.pull-left[
+
+```r
+typeof(sci_df)
+```
+
+```
+#&gt; [1] "list"
+```
+]
+.pull-right[
+
+```r
+class(sci_df)
+```
+
+```
+#&gt; [1] "data.frame"
+```
+]
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+### - matrices
+### - tibbles
+]
+.right-column[
+A tibble is a modern reimagining of the data frame.
+
+```r
+library(tibble)
+sci_tbl &lt;- tibble(
+  department = dept, 
+  count = nstaff, 
+  percentage = count / sum(count))
+sci_tbl
+```
+
+```
+*#&gt; # A tibble: 4 x 3
+#&gt;   department       count percentage
+*#&gt;   &lt;chr&gt;            &lt;int&gt;      &lt;dbl&gt;
+#&gt; 1 Physics             12      0.190
+#&gt; 2 Mathematics          8      0.127
+#&gt; 3 Statistics          20      0.317
+#&gt; 4 Computer Science    23      0.365
+```
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+### - matrices
+### - tibbles
+]
+.right-column[
+.center[
+&lt;img src="https://d33wubrfki0l68.cloudfront.net/9ec5e1f8982238a413847eb5c9bbc5dcf44c9893/bc590/diagrams/vectors/summary-tree-s3-2.png" height="100%"&gt;
+]
+]
+
+---
+
+## Reading files into R
+
+---
+
+## Writing to a file
+
+---
+
+## Reading
+
+.pull-left[
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/565916198b0be51bf88b36f94b80c7ea67cafe7c/7f70b/cover.png" height="520px"&gt;](https://adv-r.hadley.nz)]
+]
+.pull-right[
+* [Chapter 10: Tibbles](https://r4ds.had.co.nz/tibbles.html)
+* [Chapter 3: Vectors](https://adv-r.hadley.nz/vectors-chap.html)
+* [Chapter 4: Subsetting](https://adv-r.hadley.nz/subsetting.html)
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
