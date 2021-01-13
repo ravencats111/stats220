@@ -13,7 +13,7 @@
 class: center, middle, inverse, title-slide
 
 # STATS 220
-## Data import/export
+## Data import⬇️/export⬆️
 
 ---
 
@@ -91,7 +91,7 @@ lst
 ## data type
 
 ```r
-typeof(lst)
+typeof(lst) # primitive type
 ```
 
 ```
@@ -100,7 +100,7 @@ typeof(lst)
 ## data class
 
 ```r
-class(lst)
+class(lst) # type + attributes
 ```
 
 ```
@@ -179,7 +179,7 @@ is.list(lst)
 ```
 ]
 .pull-right[
-Coerece to a list
+Coerce to a list
 
 ```r
 as.list(1:3)
@@ -332,6 +332,8 @@ sci_tbl
 #&gt; 3 Statistics          20      0.317
 #&gt; 4 Computer Science    23      0.365
 ```
+* `as_tibble()` to coerce to a tibble
+* `is_tibble()` to test for a tibble
 ]
 
 ---
@@ -344,13 +346,352 @@ sci_tbl
 ]
 .right-column[
 .center[
-&lt;img src="https://d33wubrfki0l68.cloudfront.net/9ec5e1f8982238a413847eb5c9bbc5dcf44c9893/bc590/diagrams/vectors/summary-tree-s3-2.png" height="100%"&gt;
+&lt;img src="https://d33wubrfki0l68.cloudfront.net/9ec5e1f8982238a413847eb5c9bbc5dcf44c9893/bc590/diagrams/vectors/summary-tree-s3-2.png" width="250"&gt;
+]
+
+```r
+typeof(sci_tbl) # list in essence
+```
+
+```
+#&gt; [1] "list"
+```
+
+```r
+class(sci_tbl) # tibble is a special class of data.frame
+```
+
+```
+#&gt; [1] "tbl_df"     "tbl"        "data.frame"
+```
+]
+
+---
+
+class: inverse middle
+
+# Data import ⬇️
+
+---
+
+.left-column[
+readr logo
+]
+.right-column[
+## Reading plain-text rectangular files
+### .small[(a.k.a. flat or spreadsheet-like files)]
+* delimited text files with `read_delim()`
+  + `.csv`: comma separated values with `read_csv()`
+  + `.tsv`: tab separated values `read_tsv()`
+* `.fwf`: fixed width files with `read_fwf()`
+&lt;hr&gt;
+
+```bash
+head -4 data/pisa/pisa-student.csv # shell command, not R
+```
+
+```
+#&gt; year,country,school_id,student_id,mother_educ,father_educ,gender,computer,internet,math,read,science,stu_wgt,desk,room,dishwasher,television,computer_n,car,book,wealth,escs
+#&gt; 2000,ALB,1001,1,NA,NA,female,NA,no,324.35,397.87,345.66,2.16,yes,no,no,1,3+,1,11-50,-0.6,0.10575582991490981
+#&gt; 2000,ALB,1001,3,NA,NA,female,NA,no,NA,368.41,385.83,2.16,yes,yes,no,2,0,0,1-10,-1.84,-1.424044581128788
+#&gt; 2000,ALB,1001,6,NA,NA,male,NA,no,NA,294.17,327.94,2.16,yes,yes,no,2,0,0,1-10,-1.46,-1.306683855365612
+```
+]
+
+---
+
+.left-column[
+readr logo
+]
+.right-column[
+## Reading comma delimited files
+
+```r
+library(readr) # or library(tidyverse)
+pisa &lt;- read_csv("data/pisa/pisa-student.csv", n_max = 2929621)
+pisa
+```
+
+```
+#&gt; # A tibble: 2,929,621 x 22
+#&gt;    year country school_id student_id mother_educ father_educ
+#&gt;   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt; &lt;lgl&gt;       &lt;lgl&gt;      
+#&gt; 1  2000 ALB          1001          1 NA          NA         
+#&gt; 2  2000 ALB          1001          3 NA          NA         
+#&gt; 3  2000 ALB          1001          6 NA          NA         
+#&gt; 4  2000 ALB          1001          8 NA          NA         
+#&gt; 5  2000 ALB          1001         11 NA          NA         
+#&gt; 6  2000 ALB          1001         12 NA          NA         
+#&gt; # … with 2,929,615 more rows, and 16 more variables:
+#&gt; #   gender &lt;chr&gt;, computer &lt;lgl&gt;, internet &lt;chr&gt;,
+#&gt; #   math &lt;dbl&gt;, read &lt;dbl&gt;, science &lt;dbl&gt;, stu_wgt &lt;dbl&gt;,
+#&gt; #   desk &lt;chr&gt;, room &lt;chr&gt;, dishwasher &lt;chr&gt;,
+#&gt; #   television &lt;chr&gt;, computer_n &lt;chr&gt;, car &lt;chr&gt;,
+#&gt; #   book &lt;chr&gt;, wealth &lt;dbl&gt;, escs &lt;dbl&gt;
+```
+]
+
+---
+
+.left-column[
+vroom logo
+]
+.right-column[
+## Faster delimited reader at **1.4GB/sec**
+
+.center[![](https://github.com/r-lib/vroom/raw/gh-pages/taylor.gif)]
+
+
+```r
+library(vroom)
+pisa &lt;- vroom("data/pisa/pisa-student.csv", n_max = 2929621)
+```
+]
+
+---
+
+.left-column[
+readxl logo
+]
+.right-column[
+## Reading proprietary binary files
+* Microsoft Excel
+  + `.xls`: MSFT Excel 2003 and earlier
+  + `.xlsx`: MSFT Excel 2007 and later
+
+```r
+library(readxl)
+time_use &lt;- read_xlsx("data/time-use-oced.xlsx")
+time_use
+```
+
+```
+#&gt; # A tibble: 461 x 3
+#&gt;   Country   Category  `Time (minutes)`
+#&gt;   &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt;
+#&gt; 1 Australia Paid work             211.
+#&gt; 2 Austria   Paid work             280.
+#&gt; 3 Belgium   Paid work             194.
+#&gt; 4 Canada    Paid work             269.
+#&gt; 5 Denmark   Paid work             200.
+#&gt; 6 Estonia   Paid work             231.
+#&gt; # … with 455 more rows
+```
+]
+
+---
+
+.left-column[
+haven logo
+]
+.right-column[
+## Reading proprietary binary files
+* SAS
+  + `.sas7bdat` with `read_sas()`
+* Stata
+  + `.dta` with `read_dta()`
+* SPSS
+  + `.sav` with `read_sav()`
+
+```r
+library(haven)
+pisa2018 &lt;- read_spss("data/pisa/CY07_MSU_STU_QQQ.sav")
+```
+&lt;hr&gt;
+Raw PISA data is made available in SAS and SPSS data formats.
+.footnote[
+data source: [https://www.oecd.org/pisa/data/2018database/](https://www.oecd.org/pisa/data/2018database/)
 ]
 ]
 
 ---
 
-## Reading files into R
+## Database
+
+## Database management systems
+
+---
+
+.left-column[
+## {DBI}
+]
+.right-column[
+## Connecting R to database
+
+```r
+library(RSQLite)
+con &lt;- dbConnect(SQLite(), dbname = "data/pisa/pisa-student.db")
+dbListTables(con)
+```
+
+```
+#&gt; [1] "pisa"
+```
+
+```r
+dbListFields(con, "pisa")
+```
+
+```
+#&gt;  [1] "year"        "country"     "school_id"   "student_id"  "mother_educ"
+#&gt;  [6] "father_educ" "gender"      "computer"    "internet"    "math"       
+#&gt; [11] "read"        "science"     "stu_wgt"     "desk"        "room"       
+#&gt; [16] "dishwasher"  "television"  "computer_n"  "car"         "book"       
+#&gt; [21] "wealth"      "escs"
+```
+]
+
+---
+
+.left-column[
+## {DBI}
+]
+.right-column[
+## Connecting R to database
+* reading data from database
+
+```r
+pisa &lt;- dbReadTable(con, "pisa")
+```
+
+* writing SQL queries to read chunks
+
+```r
+res &lt;- dbSendQuery(con, "SELECT * FROM pisa WHERE year = 2018")
+pisa2018 &lt;- dbFetch(res)
+```
+
+* closing connection
+
+```r
+dbDisconnect(con)
+```
+]
+
+---
+
+.left-column[
+## {readr}
+]
+.right-column[
+## Reading chunks for larger than memory data
+
+```r
+chunked &lt;- function(x, pos) {
+  dplyr::filter(x, year == 2018)
+}
+pisa2018 &lt;- read_csv_chunked("data/pisa/pisa-student.csv",
+  callback = DataFrameCallback$new(chunked))
+```
+]
+
+---
+
+.left-column[
+## {jsonlite}
+]
+.right-column[
+## JSON: JavaScript Object Notation
+.pull-left[
+### `.json`
+```json
+{
+  "firstName": "Earo",
+  "lastName": "Wang",
+  "address": {
+    "city": "Auckland",
+    "postalCode": 1010
+  }
+}
+```
+]
+.pull-right[
+### R list
+```r
+list(
+  firstName = "Earo",
+  lastName = "Wang",
+  address = list(
+    city = "Auckland",
+    postalCode = 1010
+  )
+)
+```
+]
+]
+
+---
+
+.left-column[
+## {jsonlite}
+]
+.right-column[
+## JSON: JavaScript Object Notation
+
+```r
+library(jsonlite)
+movies &lt;- read_json("data/movies.json")
+length(movies)
+```
+
+```
+#&gt; [1] 3201
+```
+
+```r
+movies[[1]]
+```
+
+```
+#&gt; $Title
+#&gt; [1] "The Land Girls"
+#&gt; 
+#&gt; $US_Gross
+#&gt; [1] 146083
+#&gt; 
+#&gt; $Worldwide_Gross
+#&gt; [1] 146083
+#&gt; 
+#&gt; $US_DVD_Sales
+#&gt; NULL
+#&gt; 
+#&gt; $Production_Budget
+#&gt; [1] 8000000
+#&gt; 
+#&gt; $Release_Date
+#&gt; [1] "12-Jun-98"
+#&gt; 
+#&gt; $MPAA_Rating
+#&gt; [1] "R"
+#&gt; 
+#&gt; $Running_Time_min
+#&gt; NULL
+#&gt; 
+#&gt; $Distributor
+#&gt; [1] "Gramercy"
+#&gt; 
+#&gt; $Source
+#&gt; NULL
+#&gt; 
+#&gt; $Major_Genre
+#&gt; NULL
+#&gt; 
+#&gt; $Creative_Type
+#&gt; NULL
+#&gt; 
+#&gt; $Director
+#&gt; NULL
+#&gt; 
+#&gt; $Rotten_Tomatoes_Rating
+#&gt; NULL
+#&gt; 
+#&gt; $IMDB_Rating
+#&gt; [1] 6.1
+#&gt; 
+#&gt; $IMDB_Votes
+#&gt; [1] 1071
+```
+]
 
 ---
 
