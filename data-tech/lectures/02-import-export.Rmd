@@ -158,15 +158,31 @@ Coerce to a list
 ### - tibbles
 ]
 .right-column[
-A data frame is a named **list** of vectors of the same length.
+A data frame is a named **list** of vectors of the **same length**.
 ```{r data-frame}
 ```
-.pull-left[
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+### - matrices
+### - tibbles
+]
+.right-column[
+The underlying data type is a list.
 ```{r df-type}
+```
+.pull-left[
+.center[data class]
+```{r df-cls}
 ```
 ]
 .pull-right[
-```{r df-cls}
+.center[data attribute]
+```{r df-attrs}
 ```
 ]
 ]
@@ -208,6 +224,10 @@ A tibble is a modern reimagining of the data frame.
 class: inverse middle
 
 # Data import `r emo::ji('arrow_down')`
+
+---
+
+A diagram for local disk/remote cloud to RAM
 
 ---
 
@@ -384,7 +404,7 @@ list(
 
 ---
 
-
+## spatial maps, audio, images, etc
 
 ---
 
@@ -395,10 +415,9 @@ list(
 ## Reading
 
 .pull-left[
-.center[[<img src="https://d33wubrfki0l68.cloudfront.net/565916198b0be51bf88b36f94b80c7ea67cafe7c/7f70b/cover.png" height="520px">](https://adv-r.hadley.nz)]
+.center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
 ]
 .pull-right[
 * [Chapter 10: Tibbles](https://r4ds.had.co.nz/tibbles.html)
-* [Chapter 3: Vectors](https://adv-r.hadley.nz/vectors-chap.html)
-* [Chapter 4: Subsetting](https://adv-r.hadley.nz/subsetting.html)
+* [Chapter 11: Data import](https://r4ds.had.co.nz/data-import.html)
 ]

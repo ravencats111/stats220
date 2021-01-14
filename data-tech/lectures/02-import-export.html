@@ -264,7 +264,7 @@ array(1:9, dim = c(1, 3, 3))
 ### - tibbles
 ]
 .right-column[
-A data frame is a named **list** of vectors of the same length.
+A data frame is a named **list** of vectors of the **same length**.
 
 ```r
 dept &lt;- c("Physics", "Mathematics", "Statistics",
@@ -281,7 +281,18 @@ sci_df
 #&gt; 3       Statistics    20
 #&gt; 4 Computer Science    23
 ```
-.pull-left[
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+### - matrices
+### - tibbles
+]
+.right-column[
+The underlying data type is a list.
 
 ```r
 typeof(sci_df)
@@ -290,8 +301,8 @@ typeof(sci_df)
 ```
 #&gt; [1] "list"
 ```
-]
-.pull-right[
+.pull-left[
+.center[data class]
 
 ```r
 class(sci_df)
@@ -299,6 +310,24 @@ class(sci_df)
 
 ```
 #&gt; [1] "data.frame"
+```
+]
+.pull-right[
+.center[data attribute]
+
+```r
+attributes(sci_df)
+```
+
+```
+#&gt; $names
+#&gt; [1] "department" "count"     
+#&gt; 
+#&gt; $class
+#&gt; [1] "data.frame"
+#&gt; 
+#&gt; $row.names
+#&gt; [1] 1 2 3 4
 ```
 ]
 ]
@@ -371,6 +400,10 @@ class(sci_tbl) # tibble is a special class of data.frame
 class: inverse middle
 
 # Data import ⬇️
+
+---
+
+A diagram for local disk/remote cloud to RAM
 
 ---
 
@@ -695,6 +728,10 @@ movies[[1]]
 
 ---
 
+## spatial maps, audio, images, etc
+
+---
+
 ## Writing to a file
 
 ---
@@ -702,12 +739,11 @@ movies[[1]]
 ## Reading
 
 .pull-left[
-.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/565916198b0be51bf88b36f94b80c7ea67cafe7c/7f70b/cover.png" height="520px"&gt;](https://adv-r.hadley.nz)]
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px"&gt;](https://r4ds.had.co.nz)]
 ]
 .pull-right[
 * [Chapter 10: Tibbles](https://r4ds.had.co.nz/tibbles.html)
-* [Chapter 3: Vectors](https://adv-r.hadley.nz/vectors-chap.html)
-* [Chapter 4: Subsetting](https://adv-r.hadley.nz/subsetting.html)
+* [Chapter 11: Data import](https://r4ds.had.co.nz/data-import.html)
 ]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

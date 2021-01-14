@@ -45,6 +45,9 @@ typeof(sci_df)
 ## ---- df-cls
 class(sci_df)
 
+## ---- df-attrs
+attributes(sci_df)
+
 ## ---- tibbles
 library(tibble)
 sci_tbl <- tibble(
