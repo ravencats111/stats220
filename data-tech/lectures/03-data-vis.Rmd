@@ -1,0 +1,102 @@
+---
+title: "STATS 220"
+subtitle: "Data visualisation`r emo::ji('bar_chart')`"
+type: "lecture"
+date: ""
+output:
+  xaringan::moon_reader:
+    css: ["assets/remark.css"]
+    lib_dir: libs
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r initial, echo = FALSE, cache = FALSE, results = 'hide'}
+library(knitr)
+options(htmltools.dir.version = FALSE, tibble.width = 60, tibble.print_min = 6)
+opts_chunk$set(
+  echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
+  fig.path = 'figure/', cache.path = 'cache/', cache = TRUE,
+  fig.align = 'center', fig.width = 12, fig.height = 8.5, fig.show = 'hold',
+  dpi = 120
+)
+```
+
+```{r xaringan-panelset, echo = FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r external, include = FALSE, cache = FALSE}
+read_chunk('R/03-data-vis.R')
+```
+
+# Tukey's quote: see what not expected.
+
+---
+
+# Named plots
+
+```{r toy-df, echo = 5}
+```
+
+---
+
+# Named plots
+
+.pull-left[
+* single purpose functions
+```{r base-barplot, fig.width = 4, fig.height = 4}
+```
+]
+.pull-right[
+* inconsistent inputs
+```{r base-pieplot, fig.width = 4, fig.height = 4}
+```
+]
+
+---
+
+class: inverse middle
+
+# Grammar of Graphics
+
+---
+
+.pull-left[
+```{r gg-col, fig.width = 4, fig.height = 3.5}
+```
+]
+.pull-right[
+```{r gg-pie, fig.width = 4, fig.height = 4}
+```
+]
+
+---
+
+# ggplot skeleton
+
+```r
+ggplot(data = <data>, mapping = aes(<mapping>)) +
+  geom_*(stat = <stat>) +
+  geom_*()
+```
+
+1. `data`: `tibble` or `data.frame`.
+2. `mapping`: aesthetic mappings between data variables and visual elements.
+3. `geom_*()`: geometric elements to render each data observation.
+4. `stat`: statistical transformations applied to the data.
+
+---
+
+## Reading
+
+.pull-left[
+.center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
+]
+.pull-right[
+* [Chapter 10: Tibbles](https://r4ds.had.co.nz/tibbles.html)
+* [Chapter 11: Data import](https://r4ds.had.co.nz/data-import.html)
+]
