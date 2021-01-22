@@ -116,7 +116,7 @@ pisa2018 <- read_csv_chunked("data/pisa/pisa-student.csv",
 
 ## ---- json
 library(jsonlite)
-movies <- read_json("data/movies.json")
+movies <- read_json("https://vega.github.io/vega-editor/app/data/movies.json")
 length(movies)
 movies[[1]]
 

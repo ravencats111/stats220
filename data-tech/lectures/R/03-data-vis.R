@@ -32,3 +32,40 @@ ggplot(data = sci_tbl) +
     stat = "identity"
   ) +
   coord_polar(theta = "y") #<<
+
+movies <- as_tibble(jsonlite::read_json(
+  "https://vega.github.io/vega-editor/app/data/movies.json",
+  simplifyVector = TRUE))
+
+ggplot(movies, aes(x = IMDB_Rating, y = Rotten_Tomatoes_Rating)) +
+  geom_point()
+
+ggplot(movies, aes(x = IMDB_Rating, y = Rotten_Tomatoes_Rating)) +
+  geom_point() +
+  geom_smooth(method = "gam")
+
+ggplot(movies, aes(x = IMDB_Rating, y = Rotten_Tomatoes_Rating)) +
+  geom_point(colour = "#3182bd")
+
+ggplot(movies, aes(x = IMDB_Rating, y = Rotten_Tomatoes_Rating)) +
+  geom_point(aes(colour = Major_Genre))
+
+ggplot(movies, aes(x = IMDB_Rating, y = Rotten_Tomatoes_Rating)) +
+  geom_hex()
+
+ggplot(movies) +
+  geom_boxplot(aes(x = Major_Genre, y = IMDB_Rating))
+
+ggplot(movies) +
+  geom_density(aes(x = IMDB_Rating, fill = Major_Genre))
+
+library(ggridges)
+ggplot(movies, aes(x = IMDB_Rating, y = Major_Genre)) +
+  geom_density_ridges(aes(fill = Major_Genre))
+
+ggplot(movies, aes(x = IMDB_Rating, y = Major_Genre)) +
+  geom_density_ridges(aes(colour = Major_Genre, fill = Major_Genre))
+
+ggplot(movies) +
+  geom_density(aes(x = IMDB_Rating, fill = Major_Genre)) +
+  facet_wrap(vars(Major_Genre))
