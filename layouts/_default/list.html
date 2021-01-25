@@ -11,7 +11,7 @@
         {{ range $paginator.Pages }}   
             <div class="col-md-4 card">
               <span class="post-meta"><strong>Week {{ .Params.week }}</strong></span>
-              <a href="{{ .Site.BaseURL }}lectures/{{ .Params.slides }}" target="_blank">    
+              <a href="{{ .Site.BaseURL }}{{ .Params.slides }}" target="_blank">    
                 <div class="panel panel-default">
                   
                   {{ if .Params.img }}
@@ -26,8 +26,8 @@
                   </div>
                   
                   <div class="panel-body text-center">
-                    <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}lectures/R/{{ .Params.r }}" target="_blank" rel="noopener" role="button" download><i class="fa fa-download"></i> R </a>
-                    <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}lectures/{{ .Params.rmd }}" target="_blank" rel="noopener" role="button" download><i class="fa fa-download"></i> Rmd </a>
+                    <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}R/{{ .Params.r }}" target="_blank" rel="noopener" role="button" download><i class="fa fa-download"></i> R </a>
+                    <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.rmd }}" target="_blank" rel="noopener" role="button" download><i class="fa fa-download"></i> Rmd </a>
                     {{ if .Params.lab }}
                       <a class="btn btn-info btn-sm list-group-item-text" href="{{ . }}" target="_blank" rel="noopener" role="button"> Lab </a>
                     {{ end }}
