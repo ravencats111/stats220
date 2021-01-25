@@ -24,11 +24,11 @@ class: center, middle, inverse, title-slide
 
 
 
-# Tukey's quote: see what not expected.
+## Tukey's quote: see what not expected.
 
 ---
 
-# Named plots
+## Named plots
 
 
 ```r
@@ -36,18 +36,18 @@ sci_tbl
 ```
 
 ```
-#&gt; # A tibble: 4 x 3
-#&gt;   dept             count percentage
-#&gt;   &lt;chr&gt;            &lt;int&gt;      &lt;dbl&gt;
-#&gt; 1 Physics             12      0.190
-#&gt; 2 Mathematics          8      0.127
-#&gt; 3 Statistics          20      0.317
-#&gt; 4 Computer Science    23      0.365
+#&gt; # A tibble: 4 x 2
+#&gt;   dept             count
+#&gt;   &lt;chr&gt;            &lt;int&gt;
+#&gt; 1 Physics             12
+#&gt; 2 Mathematics          8
+#&gt; 3 Statistics          20
+#&gt; 4 Computer Science    23
 ```
 
 ---
 
-# Named plots
+## Named plots
 
 .pull-left[
 * single purpose functions
@@ -74,7 +74,7 @@ pie(sci_tbl$count,
 
 class: inverse middle
 
-# Grammar of Graphics
+# Layered grammar of graphics
 
 ---
 
@@ -107,16 +107,183 @@ ggplot(data = sci_tbl) +
 
 ---
 
-# ggplot skeleton
+## ggplot skeleton
 
 ```r
 ggplot(data = &lt;data&gt;, mapping = aes(&lt;mapping&gt;)) +
-  geom_*(stat = &lt;stat&gt;)
+  layer(geom = &lt;geom&gt;, stat = &lt;stat&gt;, position = &lt;position&gt;) +
+  layer(geom = &lt;geom&gt;, stat = &lt;stat&gt;, position = &lt;position&gt;)
 ```
 
 1. `data`: `tibble` or `data.frame`.
 2. `mapping`: aesthetic mappings between data variables and visual elements.
-3. `geom_*()`: geometric elements to render each data observation.
+3. `layer()`: a layer is a combination of data, stat and geom with a potential position adjustment.
+  * `geom`: geometric elements to render each data observation.
+  * `stat`: statistical transformations applied to the data.
+  * `position`: position adjustment, such as "identity", "stack", "dodge" etc.
+
+---
+
+## Layer
+
+
+```r
+ggplot(data = sci_tbl, mapping = aes(x = dept, y = count)) +
+  layer(geom = "bar", stat = "identity", position = "identity")
+```
+
+&lt;img src="figure/gg-layer-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Aesthetic mapping
+
+### Positional mapping
+
+
+```r
+ggplot(sci_tbl, aes(x = dept, y = count))
+```
+
+&lt;img src="figure/aes-map-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Geom .small[(a shorthand to layer)]
+
+.pull-left[
+
+```r
+ggplot(sci_tbl, aes(x = dept, y = count)) +
+  geom_bar(stat = "identity")
+```
+
+&lt;img src="figure/gg-bar-1.png" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```r
+ggplot(sci_tbl, aes(x = dept, y = count)) +
+  geom_col()
+```
+* `stat = "identity"` leaves data as is.
+* `geom_col()` is a shortcut to `geom_bar(stat = "identity")`.
+]
+
+---
+
+A list of geoms
+
+---
+
+## Stat
+
+.pull-left[
+### Aggregated (pre-computed)
+
+```r
+sci_tbl
+```
+
+```
+#&gt; # A tibble: 4 x 2
+#&gt;   dept             count
+#&gt;   &lt;chr&gt;            &lt;int&gt;
+#&gt; 1 Physics             12
+#&gt; 2 Mathematics          8
+#&gt; 3 Statistics          20
+#&gt; 4 Computer Science    23
+```
+]
+.pull-right[
+### Disaggregated
+
+```r
+sci_tbl0
+```
+
+```
+#&gt; # A tibble: 63 x 1
+#&gt;   dept   
+#&gt;   &lt;chr&gt;  
+#&gt; 1 Physics
+#&gt; 2 Physics
+#&gt; 3 Physics
+#&gt; 4 Physics
+#&gt; 5 Physics
+#&gt; 6 Physics
+#&gt; # … with 57 more rows
+```
+]
+
+---
+
+## Stat
+
+.pull-left[
+
+```r
+ggplot(sci_tbl, aes(x = dept, y = count)) +
+  geom_bar(stat = "identity")
+```
+
+&lt;img src="figure/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```r
+ggplot(sci_tbl0, aes(x = dept)) +
+  geom_bar(stat = "count")
+```
+
+&lt;img src="figure/gg-bar-c-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+A list of stats
+
+---
+
+## Aesthetic mapping (cont'd)
+
+.pull-left[
+
+```r
+ggplot(sci_tbl, aes(x = dept, y = count)) +
+  geom_col(aes(colour = dept))
+```
+
+&lt;img src="figure/gg-bar-col-1.png" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```r
+ggplot(sci_tbl, aes(x = dept, y = count)) +
+  geom_col(aes(fill = dept))
+```
+
+&lt;img src="figure/gg-bar-fill-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Coords
+
+
+```r
+ggplot(sci_tbl, aes(x = dept, y = count)) +
+  geom_col(aes(fill = dept)) +
+  coord_polar(theta = "y")
+```
+
+&lt;img src="figure/gg-arc-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Revisiting our starter
+
+---
 
 ---
 

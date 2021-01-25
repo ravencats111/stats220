@@ -33,18 +33,18 @@ xaringanExtra::use_panelset()
 read_chunk('R/03-data-vis.R')
 ```
 
-# Tukey's quote: see what not expected.
+## Tukey's quote: see what not expected.
 
 ---
 
-# Named plots
+## Named plots
 
 ```{r toy-df, echo = 5}
 ```
 
 ---
 
-# Named plots
+## Named plots
 
 .pull-left[
 * single purpose functions
@@ -61,7 +61,7 @@ read_chunk('R/03-data-vis.R')
 
 class: inverse middle
 
-# Grammar of Graphics
+# Layered grammar of graphics
 
 ---
 
@@ -76,18 +76,113 @@ class: inverse middle
 
 ---
 
-# ggplot skeleton
+## ggplot skeleton
 
 ```r
 ggplot(data = <data>, mapping = aes(<mapping>)) +
-  geom_*(stat = <stat>) +
-  geom_*()
+  layer(geom = <geom>, stat = <stat>, position = <position>) +
+  layer(geom = <geom>, stat = <stat>, position = <position>)
 ```
 
 1. `data`: `tibble` or `data.frame`.
 2. `mapping`: aesthetic mappings between data variables and visual elements.
-3. `geom_*()`: geometric elements to render each data observation.
-4. `stat`: statistical transformations applied to the data.
+3. `layer()`: a layer is a combination of data, stat and geom with a potential position adjustment.
+  * `geom`: geometric elements to render each data observation.
+  * `stat`: statistical transformations applied to the data.
+  * `position`: position adjustment, such as "identity", "stack", "dodge" etc.
+
+---
+
+## Layer
+
+```{r gg-layer, fig.height = 4, fig.width = 4}
+```
+
+---
+
+## Aesthetic mapping
+
+### Positional mapping
+
+```{r aes-map, fig.height = 4, fig.width = 4}
+```
+
+---
+
+## Geom .small[(a shorthand to layer)]
+
+.pull-left[
+```{r gg-bar, fig.height = 4, fig.width = 4}
+```
+]
+.pull-right[
+```{r gg-col2, eval = FALSE}
+```
+* `stat = "identity"` leaves data as is.
+* `geom_col()` is a shortcut to `geom_bar(stat = "identity")`.
+]
+
+---
+
+A list of geoms
+
+---
+
+## Stat
+
+.pull-left[
+### Aggregated (pre-computed)
+```{r ref.label = "toy-df", echo = 5}
+```
+]
+.pull-right[
+### Disaggregated
+```{r sci-disaggregated, echo = 2}
+```
+]
+
+---
+
+## Stat
+
+.pull-left[
+```{r ref.label = "gg-bar", fig.height = 4, fig.width = 4}
+```
+]
+.pull-right[
+```{r gg-bar-c, fig.height = 4, fig.width = 4}
+```
+]
+
+---
+
+A list of stats
+
+---
+
+## Aesthetic mapping (cont'd)
+
+.pull-left[
+```{r gg-bar-col, fig.height = 4, fig.width = 4}
+```
+]
+.pull-right[
+```{r gg-bar-fill, fig.height = 4, fig.width = 4}
+```
+]
+
+---
+
+## Coords
+
+```{r gg-arc}
+```
+
+---
+
+## Revisiting our starter
+
+---
 
 ---
 
