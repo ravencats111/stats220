@@ -184,6 +184,12 @@ A list of stats
 
 ---
 
+## Your turn
+
+compare line and radar plot
+
+---
+
 ---
 
 ## Reading
