@@ -18,12 +18,13 @@ pisa_nz_select <- pisa_nz_reorder %>%
 pisa_nz_mutate <- pisa_nz_select %>% 
   mutate(
     average_score = (math + read + science) / 3,
+    internet = if_else(internet == "yes", TRUE, FALSE),
     year = as.integer(year)
   )
 
 pisa_nz_mutate %>% 
   summarise(
-    internet_n = sum(internet == "yes", na.rm = TRUE),
+    internet_n = sum(internet, na.rm = TRUE),
     avg_math = mean(math, na.rm = TRUE),
     avg_read = mean(read),
     avg_science = mean(science)
@@ -69,6 +70,66 @@ pisa_nz_byyear %>%
   geom_line(aes(y = med_science)) +
   geom_point(aes(y = med_science))
 
+# rename
+pisa_nz %>% 
+  rename(
+    school = school_id,
+    student = student_id
+  )
+
+pisa_nz %>% 
+  transmute(
+    average_score = (math + read + science) / 3,
+    year = as.integer(year)
+  )
+
+# slice
+pisa_nz %>% 
+  slice(1:10, 21:30)
+
+# shortcuts
+pisa_nz %>% 
+  count(gender)
+
+pisa_nz %>% 
+  group_by(gender) %>% 
+  summarise(n = n())
+
+pisa_nz %>% 
+  group_by(gender) %>% 
+  tally()
+
 # join
+pisa_nzau <- pisa %>% 
+  filter(country %in% c("NZL", "AUS")) %>% 
+  select(year, country, science)
+
+countrycode <- read_csv("data/pisa/countrycode.csv")
+countrycode
+
+pisa_nzau %>% 
+  left_join(countrycode, by = "country")
+
+pisa_nzau %>% 
+  right_join(countrycode, by = "country") %>% 
+  slice_tail(n = 5)
+
+pisa_nzau %>% 
+  anti_join(countrycode, by = "country")
 
 # dbplyr
+library(RSQLite)
+con <- dbConnect(SQLite(), dbname = "data/pisa/pisa-student.db")
+pisa_db <- tbl(con, "pisa")
+
+pisa_sql <- pisa_db %>% 
+  filter(country %in% c("NZL", "AUS")) %>% 
+  group_by(country) %>% 
+  summarise(avg_math = mean(math, na.rm = TRUE)) %>% 
+  arrange(desc(math))
+
+pisa_sql %>% 
+  show_query()
+
+pisa_sql %>% 
+  collect()
