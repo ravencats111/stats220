@@ -67,3 +67,39 @@ movies %>%
   count(Major_Genre) %>% 
   ggplot(aes(Major_Genre, n)) +
   geom_col()
+
+library(lubridate)
+
+(td <- today())
+class(td)
+typeof(td)
+
+(current <- now())
+class(current)
+typeof(current)
+
+dt_chr <- c("2021/03/11", "2021-April-21")
+(dt <- ymd(dt_chr))
+
+ymd_h("2021-03-21 14")
+ymd_h("2021-03-21 14", tz = "Pacific/Auckland")
+
+make_date(2021, 3, 21)
+make_datetime(2021, 3, 21, 14)
+
+year(dt)
+month(dt)
+month(dt, label = TRUE)
+day(dt) # mday(dt)
+yday(dt)
+wday(dt)
+wday(dt, label = TRUE)
+wday(dt, label = TRUE, week_start = 1)
+
+floor_date(dt, "1 month")
+ceiling_date(dt, "1 month")
+round_date(dt, "1 month")
+
+# data example
+
+# scale_x_date()
