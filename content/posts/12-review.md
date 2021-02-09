@@ -1,7 +1,7 @@
 ---
 title: "Review"
 week: 12
-img: ""
+img: "https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/heartyr.gif"
 slides: ""
 r: ""
 rmd: ""

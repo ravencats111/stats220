@@ -1,7 +1,7 @@
 ---
 title: "Factors and date-times"
 week: 5
-img: ""
+img: "https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/lubridate.png"
 slides: ""
 r: ""
 rmd: ""

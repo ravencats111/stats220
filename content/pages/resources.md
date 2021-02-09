@@ -14,3 +14,4 @@ Upcoming!
 ### Other good references
 
 * [Introduction to Data Science](https://rafalab.github.io/dsbook/) by Rafael A. Irizarry
+* [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) by Claus O. Wilke
