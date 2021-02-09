@@ -59,13 +59,22 @@ x[-c(3, 1)]
 
 ## ---- logical-indices
 x[c(TRUE, FALSE, TRUE, FALSE)]
-x[c(TRUE, FALSE)] # recycling
+x[lgl_vec] # recycling
 x[x > 0]
 
 ## ---- special-subsetting
 x[]
 x[1:4]
+1:4
+x[-2]
 x[0]
+
+## ---- calculator
+y <- 1:4
+x + y
+x - y
+x * y
+x / y
 
 ## ---- function-args-pos
 mean(x, 0.1, TRUE)
