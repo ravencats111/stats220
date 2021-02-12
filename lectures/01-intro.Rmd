@@ -1,6 +1,6 @@
 ---
 title: "STATS 220"
-subtitle: "Introduction to <i class='fab fa-r-project'></i> <br> .small[the language of data analysis]"
+subtitle: "Data technology"
 type: "lecture"
 date: ""
 output:
@@ -13,6 +13,8 @@ output:
       highlightLines: true
       countIncrementalSlides: false
 ---
+
+class: middle
 
 ```{r initial, echo = FALSE, cache = FALSE, results = 'hide'}
 library(knitr)
@@ -38,13 +40,21 @@ read_chunk('R/01-intro.R')
 .large[
 * `r emo::ji("mortar_board")` I earned my PhD (Stats) @ Monash University, Australia.
 * `r emo::ji("heart")` My research interests lie in exploratory data analysis, data visualisation, software design, ...
-* `r emo::ji("woman_technologist")` I turn `r emo::ji("coffee")` into 10 `#rstats` `r emo::ji("package")`.
-* Outside of work, I play `r emo::ji("tennis")` & `r emo::ji("ping_pong")`, and make `r emo::ji("coffee")`.
+* `r emo::ji("woman_technologist")` I turn `r emo::ji("coffee")` into > 10 `#rstats` `r emo::ji("package")`.
+* Outside of work, I play `r emo::ji("tennis")` and make `r emo::ji("coffee")`.
 ]
 
-.center[
-[<img src="https://earo.me/project/tsibble/featured_hu044bd7c137ea7e25de3181d692c058df_33908_220x0_resize_q90_lanczos_2.png" width="20%">](https://tsibble.tidyverts.org)
-[<img src="https://earo.me/project/hts/featured_hu6b191f67145c5cd885891edf05f5a056_44308_220x0_resize_q90_lanczos_2.png" width="20%">](https://pkg.earo.me/hts)
+---
+
+class: middle
+
+.pull-left[
+]
+.pull-right[
+## Contact
+* `r emo::ji("email")` <earo.wang@auckland.ac.nz>
+* `r emo::ji("pushpin")` Office 303.323
+* `r emo::ji("clock12")` Thursday 2-3pm
 ]
 
 ---
@@ -54,6 +64,13 @@ class: inverse middle center
 ## Data + Technology
 
 ### <i class="fas fa-arrow-circle-right"></i> <https://stats220.earo.me>
+
+???
+
+* revamped
+* all course materials available on this website
+* except for some big datasets
+* turn your labs/assignments on canvas
 
 ---
 
@@ -69,7 +86,7 @@ class: inverse middle center
 .x[
 * Stale, uninteresting, convenient 
 * Highly processed and archived
-* Example: `iris`, `titanic`, `wages`
+* Example: `student tests`, `titanic`, `wages`
 ]
 ]
 .pull-right[
@@ -94,22 +111,41 @@ How many of you have seen and worked with datasets, such as *iris*, *mtcars*, *w
 <iframe src="https://giphy.com/embed/xonOzxf2M8hNu" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/xonOzxf2M8hNu"></a></p>
 ]
 * `r emo::ji("speaking_head")` **Get hands dirty**`r emo::ji("bangbang")`
-* Documentation! Documentation! Documentation!
+* `r emo::ji("open_book")` Documentation! Documentation! Documentation!
+* `r emo::ji("search")` (Not surprisingly) Learn to google: what that error message means (I google a lot `r emo::ji("hand_over_mouth")`)
+
+???
+
 * Search or ask questions on [Stack Overflow](http://stackoverflow.com) and [RStudio Community](http://community.rstudio.com)
 * Follow the community, [#rstats](https://twitter.com/search?q=%23rstats&src=typeahead_click) on Twitter
-* Don't let the error message scare you off
-* (Not surprisingly) Learn to google: what that error message means (I google a lot `r emo::ji("hand_over_mouth")`)
 
 ---
 
-## Textbooks `r emo::ji("books")`
+class: inverse middle center
 
-.pull-left[
-.center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
-]
-.pull-right[
-.center[[<img src="https://d33wubrfki0l68.cloudfront.net/565916198b0be51bf88b36f94b80c7ea67cafe7c/7f70b/cover.png" height="520px">](https://adv-r.hadley.nz)]
-]
+# You can't do data science in a GUI
+
+<img src="img/excel-gui.png" height="420px">
+
+.footnote[reference: [You can't do data science in a GUI](https://speakerdeck.com/hadley/you-cant-do-data-science-in-a-gui)]
+
+---
+
+## Why programme for data science?
+
+* Programming languages are **languages**.
+```{r eval = FALSE}
+starwars %>%
+  group_by(species) %>%
+  summarise(
+    n = n(),
+    mass = mean(mass, na.rm = TRUE)
+  ) %>%
+  filter(n > 1, mass > 50)
+```
+* It's just .red[**text**]!
+  + reproducible, readable, sharable
+  + expressive
 
 ---
 
@@ -146,11 +182,11 @@ class: inverse middle
 
 .center[
 <img src="https://rstudio-education.github.io/tidyverse-cookbook/images/data-science-workflow.png" width="100%">
-[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/readr.png" width="18%">](https://readr.tidyverse.org)
-[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="18%">](https://tidyr.tidyverse.org)
-[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="18%">](https://dplyr.tidyverse.org)
-[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/ggplot2.png" width="18%">](https://ggplot2.tidyverse.org)
-[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="18%">](https://purrr.tidyverse.org)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/readr.png" width="15%">](https://readr.tidyverse.org)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="15%">](https://tidyr.tidyverse.org)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="15%">](https://dplyr.tidyverse.org)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/ggplot2.png" width="15%">](https://ggplot2.tidyverse.org)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="15%">](https://purrr.tidyverse.org)
 ]
 
 .footnote[image credit: [The Tidyverse Cookbook](https://rstudio-education.github.io/tidyverse-cookbook/how-to-use-this-book.html)]
@@ -168,23 +204,20 @@ class: inverse middle
 ### R Markdown
 
 .center[
-[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/rmarkdown.png" width="18%">](https://rmarkdown.rstudio.com)
-[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/blogdown.png" width="18%">](https://bookdown.org/yihui/blogdown/)
-[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/bookdown.png" width="18%">](http://bookdown.org)
-[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/xaringan.png" width="18%">](http://slides.yihui.org/xaringan/)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/rmarkdown.png" width="15%">](https://rmarkdown.rstudio.com)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/blogdown.png" width="15%">](https://bookdown.org/yihui/blogdown/)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/bookdown.png" width="15%">](http://bookdown.org)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/xaringan.png" width="15%">](http://slides.yihui.org/xaringan/)
 ]
 
-* `rmarkdown` for assignments/reports/papers in `.html` and `.pdf`
-* `blogdown` for blogs
-* `bookdown` for books
-* `xaringan` for slides
+* [{rmarkdown}](https://rmarkdown.rstudio.com) for assignments/reports/papers in `.html` and `.pdf`
+* [{blogdown}](https://bookdown.org/yihui/blogdown/) for blogs
+* [{bookdown}](http://bookdown.org) for books
+* [{xaringan}](http://slides.yihui.org/xaringan/) for slides (220 slides!)
 
 <hr>
 
-.checked[
-* R Markdown documents are fully reproducible: weaving narrative text and code together.
-* You can leverage them with the HTML and CSS you learned to make your own style.
-]
+**R Markdown documents are fully reproducible: weaving narrative text and code together.**
 ]
 
 ???
@@ -193,9 +226,52 @@ How many of you have used RMarkdown before?
 
 ---
 
+## Textbook `r emo::ji("books")`
+
+.pull-left[
+.center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
+]
+.pull-right[
+.center[[<img src="https://d33wubrfki0l68.cloudfront.net/565916198b0be51bf88b36f94b80c7ea67cafe7c/7f70b/cover.png" height="520px">](https://adv-r.hadley.nz)]
+]
+
+???
+
+* Available online
+* clicking images will take you to the book
+
+---
+
 class: middle
 
-## Why RStudio
+.pull-left[
+## At first, you may be like this...
+
+![](https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/stormyr.gif)
+]
+
+--
+
+.pull-right[
+## But you can do it!
+![](https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/heartyr.gif)
+]
+
+---
+
+## Assessments
+
+---
+
+class: inverse center middle
+
+# Project-oriented workflow
+
+---
+
+class: middle
+
+<img src="https://rstudio.com/wp-content/uploads/2018/10/RStudio-Logo-flat.svg" width="20%">
 
 > If R were an airplane, RStudio would be the airport, providing many, many supporting services that make it easier for you, the pilot, to take off and go to awesome places. Sure, you can fly an airplane without an airport, but having those runways and supporting infrastructure is a game-changer. <br> -- [Julie Lowndes](http://jules32.github.io/resources/RStudio_intro/)
 
@@ -204,19 +280,26 @@ class: middle
 
 ## RStudio interface
 
-<img src="../img/rstudio-interface.png" width="100%">
+.center[<img src="img/rstudio-interface.png" width="80%">]
 
 .footnote[image credit: [Stuart Lee's handout on **Setting up R and RStudio**](https://mida-monash.netlify.com/slides/setup.html)]
 
 ---
 
-## Setting up RStudio
+## Setting up RStudio (do this once)
 
+.pull-left[
 Go to **Tools** > **Global Options**:
-
-.center[<img src="../img/rstudio-setup.png" width="48%">]
-
+.center[<img src="img/rstudio-setup.png" width="100%">]
+]
+.pull-right[
+<br>
+<br>
+<br>
+<br>
+<br>
 This helps to keep R working environment fresh and clean every time you switch between projects.
+]
 
 ---
 
@@ -440,7 +523,7 @@ Composing multiple functions
 .panel[.panel-name[Map]
 
 ```{r network2, echo = FALSE, out.width = "60%"}
-include_graphics("../img/akl-bus-route-map.png")
+include_graphics("img/akl-bus-route-map.png")
 ```
 ]
 ]
