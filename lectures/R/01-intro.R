@@ -12,7 +12,6 @@ akl_lat
 
 ## ---- retrieve-error
 akl_Lon
-akl.lat
 
 ## ---- arithmetic
 akl_lon_region <- akl_lon + c(-1, 1)
@@ -49,7 +48,8 @@ dbl_vec <- c(174.76, -36.85)
 chr_vec <- c("long", "lat")
 
 ## ---- subsetting
-(x <- c(akl_lon_region, akl_lat_region))
+x <- c(akl_lon_region, akl_lat_region)
+x
 
 ## ---- positive-indices
 x[c(1, 3)]
@@ -63,21 +63,33 @@ x[lgl_vec] # recycling
 x[x > 0]
 
 ## ---- special-subsetting
-x[]
-x[1:4]
-1:4
-x[-2]
 x[0]
+x[]
 
-## ---- calculator
-y <- 1:4
-x + y
-x - y
-x * y
-x / y
+## ---- function-mean
+mean(x = x)
 
 ## ---- function-args-pos
 mean(x, 0.1, TRUE)
 
 ## ---- function-args-names
 mean(x, na.rm = TRUE, trim = 0.1)
+
+## ---- cummean
+# install.packages("dplyr")
+library(dplyr)
+cummean(x)
+first(x)
+last(x)
+
+## ---- custom-mean
+# function_name <- function(arguments) {
+#   function_body
+# }
+
+my_mean <- function(x, na.rm = FALSE) {
+  summation <- sum(x, na.rm = na.rm)
+  summation / length(x)
+}
+
+my_mean(x)

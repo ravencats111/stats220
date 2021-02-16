@@ -152,6 +152,10 @@ class: inverse middle
 * 15,000 + packages on [CRAN](https://cran.r-project.org/web/packages/) (Comprehensive R Archive Network, the official repository), Github, etc.
 * The [tidyverse](http://tidyverse.org), a domain specific language in R for data scientists
 
+???
+
+3rd party packages thriving
+
 ---
 
 .left-column[
@@ -159,7 +163,7 @@ class: inverse middle
 ### - for fun
 ]
 .right-column[
-### 📦 `cowsay` for generating ASCII picture
+### 📦 {cowsay} for generating ASCII picture
 
 ```r
 library(cowsay)
@@ -200,14 +204,15 @@ say("Kia Ora!")
 
 .center[
 &lt;img src="https://rstudio-education.github.io/tidyverse-cookbook/images/data-science-workflow.png" width="100%"&gt;
-[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/readr.png" width="15%"&gt;](https://readr.tidyverse.org)
-[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="15%"&gt;](https://tidyr.tidyverse.org)
-[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="15%"&gt;](https://dplyr.tidyverse.org)
-[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/ggplot2.png" width="15%"&gt;](https://ggplot2.tidyverse.org)
-[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="15%"&gt;](https://purrr.tidyverse.org)
+[&lt;img src="https://github.com/rstudio/hex-stickers/raw/master/SVG/tidyverse.svg" width="12%"&gt;](https://tidyverse.org)
+&lt;i class="fas fa-equals"&gt;&lt;/i&gt;
+[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/readr.png" width="12%"&gt;](https://readr.tidyverse.org)
+[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="12%"&gt;](https://tidyr.tidyverse.org)
+[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="12%"&gt;](https://dplyr.tidyverse.org)
+[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/ggplot2.png" width="12%"&gt;](https://ggplot2.tidyverse.org)
+[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="12%"&gt;](https://purrr.tidyverse.org)
 ]
 
-.footnote[image credit: [The Tidyverse Cookbook](https://rstudio-education.github.io/tidyverse-cookbook/how-to-use-this-book.html)]
 ]
 
 ---
@@ -216,7 +221,7 @@ say("Kia Ora!")
 ## What R can do?
 ### - for fun
 ### - for data
-### - for writing
+### - for communication
 ]
 .right-column[
 ### R Markdown
@@ -241,6 +246,25 @@ say("Kia Ora!")
 ???
 
 How many of you have used RMarkdown before?
+
+---
+
+.left-column[
+## What R can do?
+### - for fun
+### - for data
+### - for communication
+]
+.right-column[
+### R shiny dashboard
+
+* [Shiny](https://shiny.rstudio.com) is an R package that makes it easy to build interactive web apps straight from R.
+
+.center[
+[&lt;img src="img/shiny-demo.png" width="70%"&gt;](https://gallery.shinyapps.io/nz-trade-dash/?_ga=2.23065394.843607630.1613358581-1567280293.1613186793)
+]
+.small[👆 click the image above will take you to the web app, and try to interact with the app.]
+]
 
 ---
 
@@ -315,8 +339,7 @@ Go to **Tools** &gt; **Global Options**:
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
-&lt;br&gt;
-This helps to keep R working environment fresh and clean every time you switch between projects.
+Uncheck `Workspace` and `History`, which helps to keep R working environment fresh and clean every time you switch between projects.
 ]
 
 ---
@@ -325,15 +348,11 @@ This helps to keep R working environment fresh and clean every time you switch b
 
 Change the RStudio appearance up to your taste
 
-.center[&lt;img src="../img/rstudio-appearance.png" width = "90%"&gt;]
+.center[&lt;img src="img/rstudio-appearance.png" width = "80%"&gt;]
 
-
-```{=html}
-&lt;div class="countdown" id="timer_6025f9bd" style="top:0;right:0;font-size:48px;" data-warnwhen="0"&gt;
-&lt;code class="countdown-time"&gt;&lt;span class="countdown-digits minutes"&gt;01&lt;/span&gt;&lt;span class="countdown-digits colon"&gt;:&lt;/span&gt;&lt;span class="countdown-digits seconds"&gt;00&lt;/span&gt;&lt;/code&gt;
-&lt;/div&gt;
-```
-
+<div class="countdown" id="timer_602b4bef" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
 
 ???
 
@@ -341,29 +360,39 @@ Change the RStudio appearance up to your taste
 
 ---
 
-## Project-oriented workflow
+## What is a project?
 
-* Each data analysis/university course is a project, and get your work organised.
-* A self-contained project is a folder 📂 that contains all relevant files.
-* All working files are relative to the project root.
+* Each university course is a project, and get your work organised.
+* A self-contained project is a folder that contains all relevant files, for example my `stats220/` 📁 includes:
+   + `data/`
+     + `*.csv`, `*.xlsx`
+   + `lectures/`
+     + `01-intro.Rmd`, `02-import-export.Rmd`
+   + `labs/`
+     + `lab01.R`, `lab02.R`
+* All working files are relative to the **project root** (i.e. `stats220/`).
 * The project should just work on a different computer.
-* Jenny Bryan will [set your computer on fire 🔥](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
-  + if the first line of your R script is
-    ```r
-      setwd("C:\Users\jenny\path\that\only\I\have")
-    ```
-  + if the first line of your R script is
-    ```r
-      rm(list = ls())
-    ```
 
 ---
 
-## RStudio project `.Rproj`
+## 🛑 STOP DOING THIS!
+
+[Jenny Bryan](https://jennybryan.org) will [set your computer on fire 🔥](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
+1. if the first line of your R script is
+  ```r
+    setwd("C:\Users\jenny\path\that\only\I\have")
+  ```
+2. if the first line of your R script is
+  ```r
+    rm(list = ls())
+  ```
+
+---
+
+## Create an RStudio project `.Rproj`
 
 .pull-left[
 1. Click the **Project** icon on the top right corner 
-&lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
@@ -375,85 +404,45 @@ Change the RStudio appearance up to your taste
 3. Open the project
 ]
 .pull-right[
-.center[
-&lt;img src="../img/rstudio-proj.png" width = "60%"&gt;
-&lt;img src="../img/rstudio-proj2.png" width = "60%"&gt;
-&lt;img src="../img/rstudio-proj3.png" width = "60%"&gt;
-]
-]
-
----
-
-## Project structure
-
-Under the `stats220` directory:
-
-.pull-left[
-.x[
-* `01-clean-data.R`
-* `02-analyse-data.R`
-* `assignment1.Rmd`
-* `assignment2.Rmd`
-* `bus_route.xlsx`
-* `lab1.Rmd`
-* `titanic.csv`
-]
-]
-.pull-right[
-* `data/`:
-  * `titanic.csv`
-  * `bus_route.xlsx`
-* `assignments/`:
-  * `assignment1.Rmd`
-  * `assignment2.Rmd`
-* `labs/`:
-  * `lab1.Rmd`
-* `R/`
-  * `01-clean-data.R`
-  * `02-analyse-data.R`
+.center[&lt;img src="img/rstudio-proj.png" width = "45%"&gt;]
+.center[&lt;img src="img/rstudio-proj2.png" width = "45%"&gt;]
+.center[&lt;img src="img/rstudio-proj3.png" width = "45%"&gt;]
 ]
 
 ---
 
 class: inverse middle
 
-## &lt;i class='fab fa-r-project'&gt;&lt;/i&gt; as general-purpose programming language
+## &lt;i class='fab fa-r-project'&gt;&lt;/i&gt; 101: syntax and semantics
 
 ---
 
 .left-column[
-## R basics
-### - access to RAM
+## Get started
+### - assignment
 ]
 .right-column[
-Store values temporarily in computer memory
-
 
 ```r
 akl_lon &lt;- 174.76
 akl_lat &lt;- -36.85
 ```
-⬆️ read as "create an object named `akl_lon`, that gets (`&lt;-`) the value of `174.76`".
+⬆️ read as "assign the value of `174.76` to an object called `akl_lon`".
 
 An .red[assignment] consists of:
-* left-hand side: .red[variable names] or .red[symbols]
-  .checked[+ `akl_lon` (`snake_case` convention)]
-  .x[+ `akl.lon` &amp; `aklLon` (not recommended)]
-* assignment operator:
-  .checked[+ `&lt;-`]
-  .x[+ `=` &amp; `-&gt;`: `174.76 -&gt; akl_lon`]
-* right-hand side: .red[values]
+* left-hand side: .red[variable names] or .red[symbols] (`akl_lon`)
+* assignment operator: .red[`&lt;-`] (RStudio shortcut: `Alt` + `-`)
+* right-hand side: .red[values] (`174.76`)
 ]
 
 ---
 
 .left-column[
-## R basics
-### - access to RAM
+## Get started
+### - assignment
+### - retrieval
 ]
 .right-column[
-Retrieve values from computer memory
-
 
 ```r
 akl_lon
@@ -471,7 +460,7 @@ akl_lat
 #&gt; [1] -36.85
 ```
 
-Names are case senstive
+* Names are case sensitive.
 
 ```r
 akl_Lon
@@ -480,25 +469,23 @@ akl_Lon
 ```
 #&gt; Error in eval(expr, envir, enclos): object 'akl_Lon' not found
 ```
-
-```r
-akl.lat
-```
-
-```
-#&gt; Error in eval(expr, envir, enclos): object 'akl.lat' not found
-```
 ]
 
 ---
 
 .left-column[
-## R basics
-### - access to RAM
-### - access to CPU
+## Get started
+### - assignment
+### - retrieval
+### - operation
 ]
 .right-column[
-Perform operations or calculations like arithmetic and comparisons
+### Perform calculations like arithmetic
+
+* Infix operators:
+  * `+`, `-`, `*`, `/`, `^`
+  * `%%`: modulo
+  * `%/%`: integer division
 
 
 ```r
@@ -523,125 +510,22 @@ akl_lat_region
 
 ---
 
-.left-column[
-## R basics
-### - access to RAM
-### - access to CPU
-### - access to mass storage
+## Coding style
+
+&gt; Good coding style is like correct punctuation: you can manage without it, butitsuremakesthingseasiertoread.
+&gt; &lt;br&gt; -- [The tidyverse style guide](https://style.tidyverse.org)
+
+### R style guide
+
+.pull-left[
+.checked[
+* `snake_case`
 ]
-.right-column[
-Read data files from hard disks, USB sticks, etc into RAM
-
-
-```r
-library(sf)
-akl_bus &lt;- st_read("data/BusService/BusService.shp")
-```
-
-```
-#&gt; Reading layer `BusService' from data source `/Users/wany568/Teaching/stats220/lectures/data/BusService/BusService.shp' using driver `ESRI Shapefile'
-#&gt; Simple feature collection with 509 features and 7 fields
-#&gt; geometry type:  MULTILINESTRING
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: 1727652 ymin: 5859539 xmax: 1787138 ymax: 5982575
-#&gt; projected CRS:  NZGD2000_New_Zealand_Transverse_Mercator_2000
-```
-
-.footnote[AT bus route data sourced from [**Auckland Transport Open GIS Data**](https://data-atgis.opendata.arcgis.com/datasets/bus-route/data?geometry=169.841%2C-37.610%2C179.685%2C-36.072)]
 ]
-
-
----
-
-.left-column[
-## R basics
-### - access to RAM
-### - access to CPU
-### - access to mass storage
-### - access to screen
-]
-.right-column[
-Print out results
-
-```r
-akl_bus[1:4, ]
-```
-
-```
-#&gt; Simple feature collection with 4 features and 7 fields
-#&gt; geometry type:  MULTILINESTRING
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: 1751253 ymin: 5915245 xmax: 1758019 ymax: 5921383
-#&gt; projected CRS:  NZGD2000_New_Zealand_Transverse_Mercator_2000
-#&gt;   OBJECTID ROUTEPATTE AGENCYNAME                                 ROUTENAME
-#&gt; 1   343077      02005        NZB St Lukes To Wynyard Quarter Via Kingsland
-#&gt; 2   343078      02006        NZB Wynyard Quarter To St Lukes Via Kingsland
-#&gt; 3   343079      02209        NZB  Avondale To City Centre Via New North Rd
-#&gt; 4   343080      02208        NZB  City Centre To Avondale Via New North Rd
-#&gt;   ROUTENUMBE MODE Shape__Len                       geometry
-#&gt; 1         20  Bus   7948.418 MULTILINESTRING ((1755487 5...
-#&gt; 2         20  Bus   7919.198 MULTILINESTRING ((1756321 5...
-#&gt; 3        22A  Bus  11419.588 MULTILINESTRING ((1757613 5...
-#&gt; 4        22A  Bus  11607.711 MULTILINESTRING ((1757346 5...
-```
-]
-
----
-
-.left-column[
-## R basics
-### - access to RAM
-### - access to CPU
-### - access to mass storage
-### - access to screen
-]
-.right-column[
-Produce visual displays
-
-
-```r
-library(ggplot2)
-ggplot() +
-  geom_sf(data = akl_bus, aes(colour = AGENCYNAME))
-```
-
-&lt;img src="figure/screen-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
----
-
-.left-column[
-## R basics
-### - access to RAM
-### - access to CPU
-### - access to mass storage
-### - access to screen
-### - access to network
-]
-.right-column[
-Access data from remote computers, including web servers on the internet
-
-.panelset[
-.panel[.panel-name[R Code]
-
-
-```r
-library(leaflet)
-leaflet(data = st_transform(akl_bus, crs = 4326)) %&gt;% 
-  addTiles() %&gt;% 
-  addPolylines(
-    weight = 2,
-    popup = ~ paste("Routenumber:", ROUTENUMBE)
-  )
-```
-
-Composing multiple functions
-]
-
-.panel[.panel-name[Map]
-
-&lt;img src="img/akl-bus-route-map.png" width="60%" style="display: block; margin: auto;" /&gt;
-]
+.pull-right[
+.x[
+* `camelCase` (Javascript)
+* `PascalCase` (Python)
 ]
 ]
 
@@ -649,40 +533,14 @@ Composing multiple functions
 
 class: inverse middle
 
-## &lt;i class='fab fa-r-project'&gt;&lt;/i&gt; has its own syntax and semantics, like other languages.
-
----
-
-## Syntactic names
-
-A **syntactic** name consists of letters, digits, `.` and `_`, but can't begin with `_` or a digit.
-
-
-```r
-akl_lon &lt;- 174.76
-akl_lat &lt;- -36.85
-```
-
-**Non-syntactic** examples:
-
-
-```r
-_akl_lon &lt;- 174.76
-#&gt; Error: unexpected input in "_"
-
-1akl_lat &lt;- 174.76
-#&gt; Error: unexpected symbol in "1akl_lat"
-
-TRUE &lt;- 174.76
-#&gt; Error in TRUE &lt;- 174.76: invalid (do_set) left-hand side to assignment
-```
+## &lt;i class='fab fa-r-project'&gt;&lt;/i&gt; 101: data structures
 
 ---
 
 ## Atomic vectors
 
 .pull-left[
-.center[&lt;img src="https://d33wubrfki0l68.cloudfront.net/eb6730b841e32292d9ff36b33a590e24b6221f43/57192/diagrams/vectors/summary-tree-atomic.png" width="90%"&gt;]
+.center[&lt;img src="https://d33wubrfki0l68.cloudfront.net/eb6730b841e32292d9ff36b33a590e24b6221f43/57192/diagrams/vectors/summary-tree-atomic.png" width="65%"&gt;]
 
 ### Missing values
 
@@ -717,15 +575,15 @@ chr_vec &lt;- c("long", "lat")
 
 ## Atomic vectors
 
-.center[&lt;img src="https://d33wubrfki0l68.cloudfront.net/baa19d0ebf9b97949a7ad259b29a1c4ae031c8e2/8e9b8/diagrams/vectors/summary-tree-s3-1.png" width="60%"&gt;]
+.center[&lt;img src="https://d33wubrfki0l68.cloudfront.net/baa19d0ebf9b97949a7ad259b29a1c4ae031c8e2/8e9b8/diagrams/vectors/summary-tree-s3-1.png" width="45%"&gt;]
 
 ---
 
-## Subsetting vectors with `[`
-
+## Subsetting vectors with `[]`
 
 ```r
-(x &lt;- c(akl_lon_region, akl_lat_region))
+x &lt;- c(akl_lon_region, akl_lat_region)
+x
 ```
 
 ```
@@ -733,7 +591,7 @@ chr_vec &lt;- c("long", "lat")
 ```
 
 .pull-left[
-**Positive indices**
+### Positive indices
 
 ```r
 x[c(1, 3)]
@@ -742,7 +600,9 @@ x[c(1, 3)]
 ```
 #&gt; [1] 173.76 -37.35
 ```
-**Negative indices**
+]
+.pull-right[
+### Negative indices
 
 ```r
 x[-c(3, 1)]
@@ -752,8 +612,13 @@ x[-c(3, 1)]
 #&gt; [1] 175.76 -36.35
 ```
 ]
-.pull-right[
-**Logical indices**
+
+---
+
+## Subsetting vectors with `[]`
+
+.pull-left[
+### Logical indices
 
 ```r
 x[c(TRUE, FALSE, TRUE, FALSE)]
@@ -779,25 +644,56 @@ x[x &gt; 0]
 #&gt; [1] 173.76 175.76
 ```
 ]
-
----
-
-## Functions
-
-A function call consists of the function name followed by one or more argument within parentheses.
+.pull-right[
+### Special subsetting
 
 ```r
-st_read("data/Bus_Route/Bus_Route.shp")
+x[0]
 ```
 
-* function name: `st_read()` from the **sf** package to read geo-spatial data into RAM
-* argument/input: `"data/Bus_Route/Bus_Route.shp"` its first argument to specify the data source in *characters*
+```
+#&gt; numeric(0)
+```
+
+```r
+x[]
+```
+
+```
+#&gt; [1] 173.76 175.76 -37.35 -36.35
+```
+]
 
 ---
 
-## Functions
+class: inverse middle
 
-Consult the function's help page with `?mean`
+## &lt;i class='fab fa-r-project'&gt;&lt;/i&gt; 101: functions
+
+---
+
+## Function
+
+A function call consists of the .red[function name] followed by one or more .red[argument] within parentheses.
+
+
+```r
+mean(x = x)
+```
+
+```
+#&gt; [1] 68.955
+```
+
+
+* function name: `mean()`, a built-in R function to compute mean of a vector
+* argument: the first argument (LHS `x`) to specify the data (RHS `x`)
+
+---
+
+## Function help page
+
+Check the function's help page with `?mean`
 
 ```r
 mean(x, trim = 0, na.rm = FALSE, ...)
@@ -809,10 +705,19 @@ mean(x, trim = 0, na.rm = FALSE, ...)
   + What does `trim` do?
 * Run **Example** code
 
-&lt;hr&gt;
+<div class="countdown" id="timer_602b4d0f" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
+## Function arguments
 
 .pull-left[
-.center[Arguments by **positions**]
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.center[Match by **positions**]
 
 ```r
 mean(x, 0.1, TRUE)
@@ -823,7 +728,10 @@ mean(x, 0.1, TRUE)
 ```
 ]
 .pull-right[
-.center[Arguments by **names**]
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.center[Match by **names**]
 
 ```r
 mean(x, na.rm = TRUE, trim = 0.1)
@@ -836,15 +744,82 @@ mean(x, na.rm = TRUE, trim = 0.1)
 
 ---
 
+## Use functions from packages
+
+.pull-left[
+
+```r
+# install.packages("dplyr")
+library(dplyr)
+cummean(x)
+```
+
+```
+#&gt; [1] 173.7600 174.7600 104.0567  68.9550
+```
+
+```r
+first(x)
+```
+
+```
+#&gt; [1] 173.76
+```
+
+```r
+last(x)
+```
+
+```
+#&gt; [1] -36.35
+```
+]
+.pull-right[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.center[
+&lt;img src="img/install-library.JPG" height="250px"&gt;
+]
+]
+
+---
+
+## Write your own functions
+
+
+```r
+# function_name &lt;- function(arguments) {
+#   function_body
+# }
+
+my_mean &lt;- function(x, na.rm = FALSE) {
+  summation &lt;- sum(x, na.rm = na.rm)
+  summation / length(x)
+}
+
+my_mean(x)
+```
+
+```
+#&gt; [1] 68.955
+```
+
+---
+
 ## Reading
 
 .pull-left[
-.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/565916198b0be51bf88b36f94b80c7ea67cafe7c/7f70b/cover.png" height="520px"&gt;](https://adv-r.hadley.nz)]
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="320px"&gt;](https://r4ds.had.co.nz)]
+* [Workflow: basics](https://r4ds.had.co.nz/workflow-basics.html)
+* [Workflow: scripts](https://r4ds.had.co.nz/workflow-scripts.html)
+* [Workflow: project](https://r4ds.had.co.nz/workflow-projects.html)
 ]
 .pull-right[
-* [Chapter 2: Names and values](https://adv-r.hadley.nz/names-values.html)
-* [Chapter 3: Vectors](https://adv-r.hadley.nz/vectors-chap.html)
-* [Chapter 4: Subsetting](https://adv-r.hadley.nz/subsetting.html)
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/565916198b0be51bf88b36f94b80c7ea67cafe7c/7f70b/cover.png" height="320px"&gt;](https://adv-r.hadley.nz)]
+* [Names and values](https://adv-r.hadley.nz/names-values.html)
+* [Vectors](https://adv-r.hadley.nz/vectors-chap.html)
+* [Subsetting](https://adv-r.hadley.nz/subsetting.html)
 ]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

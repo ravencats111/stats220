@@ -408,6 +408,86 @@ list(
 
 ---
 
+.left-column[
+## R basics
+### - access to RAM
+### - access to CPU
+### - access to mass storage
+]
+.right-column[
+Read data files from hard disks, USB sticks, etc into RAM
+
+```{r mass-storage}
+```
+
+.footnote[AT bus route data sourced from [**Auckland Transport Open GIS Data**](https://data-atgis.opendata.arcgis.com/datasets/bus-route/data?geometry=169.841%2C-37.610%2C179.685%2C-36.072)]
+]
+
+
+---
+
+.left-column[
+## R basics
+### - access to RAM
+### - access to CPU
+### - access to mass storage
+### - access to screen
+]
+.right-column[
+Print out results
+```{r mass-storage-print}
+```
+]
+
+---
+
+.left-column[
+## R basics
+### - access to RAM
+### - access to CPU
+### - access to mass storage
+### - access to screen
+]
+.right-column[
+Produce visual displays
+
+```{r screen, out.width = "100%"}
+```
+]
+
+---
+
+.left-column[
+## R basics
+### - access to RAM
+### - access to CPU
+### - access to mass storage
+### - access to screen
+### - access to network
+]
+.right-column[
+Access data from remote computers, including web servers on the internet
+
+.panelset[
+.panel[.panel-name[R Code]
+
+```{r network, eval = FALSE}
+```
+
+Composing multiple functions
+]
+
+.panel[.panel-name[Map]
+
+```{r network2, echo = FALSE, out.width = "60%"}
+include_graphics("img/akl-bus-route-map.png")
+```
+]
+]
+]
+
+---
+
 ## Writing to a file
 
 ---
