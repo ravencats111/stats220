@@ -286,6 +286,11 @@ class: middle
 
 ## Assessments
 
+* Weekly labs 10%
+* 3 assignments 30%
+* Mid-term test 10% (TBD, possibly week 8)
+* Final exam 50%
+
 ---
 
 class: inverse center middle
@@ -367,6 +372,11 @@ Change the RStudio appearance up to your taste
   ```r
     rm(list = ls())
   ```
+
+---
+
+background-image: url(https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/cracked_setwd.png) 
+background-size: cover
 
 ---
 
