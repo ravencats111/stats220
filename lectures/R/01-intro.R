@@ -47,6 +47,16 @@ int_vec <- c(174L, -36L)
 dbl_vec <- c(174.76, -36.85)
 chr_vec <- c("long", "lat")
 
+## ---- na
+NA # Not Applicable
+c(174.76, NA, -36.85)
+length(NA)
+
+## ---- null
+NULL
+c(174.76, NULL, -36.85)
+length(NULL)
+
 ## ---- subsetting
 x <- c(akl_lon_region, akl_lat_region)
 x

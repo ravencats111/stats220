@@ -491,30 +491,41 @@ class: inverse middle
 ## Atomic vectors
 
 .pull-left[
-.center[<img src="https://d33wubrfki0l68.cloudfront.net/eb6730b841e32292d9ff36b33a590e24b6221f43/57192/diagrams/vectors/summary-tree-atomic.png" width="65%">]
-
-### Missing values
-
-```r
-NA # Not Applicable
-c(174.76, NA, -36.85)
-```
+.center[<img src="https://d33wubrfki0l68.cloudfront.net/eb6730b841e32292d9ff36b33a590e24b6221f43/57192/diagrams/vectors/summary-tree-atomic.png" width="95%">]
 
 .footnote[image credit: [Hadley Wickham's **Advanced R**](https://adv-r.hadley.nz/vectors-chap.html#atomic-vectors)]
 ]
 .pull-right[
-### Scalars
+### Scalars: .small[*length of 1*]
 
 * Logicals: `TRUE` or `FALSE`
 * Doubles: `174.76`, `1.7476e2`, `Inf`, `-Inf`, `NaN` (Not a Number)
 * Integers: `174L`
 * Strings: `"hello"`, `'world'`
 
-### Vectors
+### Vectors: .small[*values must all be the same type*]
 
 ```{r vectors}
 ```
 
+]
+
+---
+
+## Special values
+
+.pull-left[
+### Missing values
+
+```{r na}
+```
+
+]
+.pull-right[
+### `NULL`
+
+```{r null}
+```
 ]
 
 ---

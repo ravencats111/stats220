@@ -355,7 +355,7 @@ Change the RStudio appearance up to your taste
 
 .center[&lt;img src="img/rstudio-appearance.png" width = "80%"&gt;]
 
-<div class="countdown" id="timer_602c566f" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<div class="countdown" id="timer_603369ba" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -550,26 +550,19 @@ class: inverse middle
 ## Atomic vectors
 
 .pull-left[
-.center[&lt;img src="https://d33wubrfki0l68.cloudfront.net/eb6730b841e32292d9ff36b33a590e24b6221f43/57192/diagrams/vectors/summary-tree-atomic.png" width="65%"&gt;]
-
-### Missing values
-
-```r
-NA # Not Applicable
-c(174.76, NA, -36.85)
-```
+.center[&lt;img src="https://d33wubrfki0l68.cloudfront.net/eb6730b841e32292d9ff36b33a590e24b6221f43/57192/diagrams/vectors/summary-tree-atomic.png" width="95%"&gt;]
 
 .footnote[image credit: [Hadley Wickham's **Advanced R**](https://adv-r.hadley.nz/vectors-chap.html#atomic-vectors)]
 ]
 .pull-right[
-### Scalars
+### Scalars: .small[*length of 1*]
 
 * Logicals: `TRUE` or `FALSE`
 * Doubles: `174.76`, `1.7476e2`, `Inf`, `-Inf`, `NaN` (Not a Number)
 * Integers: `174L`
 * Strings: `"hello"`, `'world'`
 
-### Vectors
+### Vectors: .small[*values must all be the same type*]
 
 
 ```r
@@ -579,6 +572,68 @@ dbl_vec &lt;- c(174.76, -36.85)
 chr_vec &lt;- c("long", "lat")
 ```
 
+]
+
+---
+
+## Special values
+
+.pull-left[
+### Missing values
+
+
+```r
+NA # Not Applicable
+```
+
+```
+#&gt; [1] NA
+```
+
+```r
+c(174.76, NA, -36.85)
+```
+
+```
+#&gt; [1] 174.76     NA -36.85
+```
+
+```r
+length(NA)
+```
+
+```
+#&gt; [1] 1
+```
+
+]
+.pull-right[
+### `NULL`
+
+
+```r
+NULL
+```
+
+```
+#&gt; NULL
+```
+
+```r
+c(174.76, NULL, -36.85)
+```
+
+```
+#&gt; [1] 174.76 -36.85
+```
+
+```r
+length(NULL)
+```
+
+```
+#&gt; [1] 0
+```
 ]
 
 ---
@@ -715,7 +770,7 @@ mean(x, trim = 0, na.rm = FALSE, ...)
   + What does `trim` do?
 * Run **Example** code
 
-<div class="countdown" id="timer_602c5971" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<div class="countdown" id="timer_60336afa" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 

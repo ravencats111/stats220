@@ -240,7 +240,7 @@ class: inverse middle
 
 ---
 
-A diagram for local disk/remote cloud to RAM
+file path
 
 ---
 
