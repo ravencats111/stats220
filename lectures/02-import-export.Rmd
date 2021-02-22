@@ -33,14 +33,21 @@ xaringanExtra::use_panelset()
 read_chunk('R/02-import-export.R')
 ```
 
-## Learning objectives
+## Atomic vector (1d)
 
-* Fundamental data structures
-  1. tibbles/data frames
-  2. matrix
-  3. list
-* Reading data files into R
-* Writing to a file into disk
+<img src="img/lego-vector" width="100%">
+
+# code example
+
+.footnote[image credit: Jenny Bryan]
+
+---
+
+## From 1d to 2d data frame
+
+<img src="img/lego-df" width="100%">
+
+# code example
 
 ---
 
@@ -221,6 +228,12 @@ A tibble is a modern reimagining of the data frame.
 
 ---
 
+# The tidyverse
+
+A suite for data science
+
+---
+
 class: inverse middle
 
 # Data import `r emo::ji('arrow_down')`
@@ -257,6 +270,12 @@ readr logo
 ```{r read-csv}
 ```
 ]
+
+---
+
+## `read_csv()` arguments
+
+https://readr.tidyverse.org/reference/read_delim.html
 
 ---
 
