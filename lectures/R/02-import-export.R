@@ -1,3 +1,8 @@
+## ---- vector
+dept <- c("Physics", "Mathematics", "Statistics",
+  "Computer Science")
+nstaff <- c(12L, 8L, 20L, 23L)
+
 ## ---- lists
 lst <- list( # list constructor/creator
   1:3, 
@@ -33,10 +38,9 @@ matrix(1:9, nrow = 3)
 array(1:9, dim = c(1, 3, 3))
 
 ## ---- data-frame
-dept <- c("Physics", "Mathematics", "Statistics",
-  "Computer Science")
-nstaff <- c(12L, 8L, 20L, 23L)
-sci_df <- data.frame(department = dept, count = nstaff)
+sci_df <- data.frame(
+  department = dept, 
+  count = nstaff)
 sci_df
 
 ## ---- df-type
@@ -59,6 +63,9 @@ sci_tbl
 ## ---- tbl-type
 typeof(sci_tbl) # list in essence
 class(sci_tbl) # tibble is a special class of data.frame
+
+## ---- glimpse
+glimpse(sci_tbl)
 
 ## ---- subsetting
 sci_tbl$count

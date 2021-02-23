@@ -24,20 +24,58 @@ class: center, middle, inverse, title-slide
 
 
 
-## Learning objectives
+## Atomic vector (1d)
 
-* Fundamental data structures
-  1. tibbles/data frames
-  2. matrix
-  3. list
-* Reading data files into R
-* Writing to a file into disk
+.center[&lt;img src="img/lego-vector.png" width="50%"&gt;]
+
+
+```r
+dept &lt;- c("Physics", "Mathematics", "Statistics",
+  "Computer Science")
+nstaff &lt;- c(12L, 8L, 20L, 23L)
+```
+
+.footnote[image credit: Jenny Bryan]
+
+---
+
+## 1d ➡️ 2d 
+
+.pull-left[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.center[&lt;img src="img/lego-df.png" width="100%"&gt;]
+]
+.pull-right[
+
+```r
+library(tibble)
+sci_tbl &lt;- tibble(
+  department = dept, 
+  count = nstaff, 
+  percentage = count / sum(count))
+sci_tbl
+```
+
+```
+#&gt; # A tibble: 4 x 3
+#&gt;   department       count percentage
+#&gt;   &lt;chr&gt;            &lt;int&gt;      &lt;dbl&gt;
+#&gt; 1 Physics             12      0.190
+#&gt; 2 Mathematics          8      0.127
+#&gt; 3 Statistics          20      0.317
+#&gt; 4 Computer Science    23      0.365
+```
+]
+
+.footnote[image credit: Jenny Bryan]
 
 ---
 
 class: inverse middle
 
-## Fundamental data structures in R
+## Beyond 1d vectors
 
 ### 1. Lists
 
@@ -267,10 +305,9 @@ array(1:9, dim = c(1, 3, 3))
 A data frame is a named **list** of vectors of the **same length**.
 
 ```r
-dept &lt;- c("Physics", "Mathematics", "Statistics",
-  "Computer Science")
-nstaff &lt;- c(12L, 8L, 20L, 23L)
-sci_df &lt;- data.frame(department = dept, count = nstaff)
+sci_df &lt;- data.frame(
+  department = dept, 
+  count = nstaff)
 sci_df
 ```
 
@@ -353,9 +390,9 @@ sci_tbl
 ```
 
 ```
-*#&gt; # A tibble: 4 x 3
+#&gt; # A tibble: 4 x 3
 #&gt;   department       count percentage
-*#&gt;   &lt;chr&gt;            &lt;int&gt;      &lt;dbl&gt;
+#&gt;   &lt;chr&gt;            &lt;int&gt;      &lt;dbl&gt;
 #&gt; 1 Physics             12      0.190
 #&gt; 2 Mathematics          8      0.127
 #&gt; 3 Statistics          20      0.317
@@ -397,13 +434,103 @@ class(sci_tbl) # tibble is a special class of data.frame
 
 ---
 
+## Why tibble not data frame?
+
+.pull-left[
+
+```r
+sci_df &lt;- data.frame(
+  department = dept, 
+  count = nstaff)
+sci_df
+```
+
+```
+#&gt;         department count
+#&gt; 1          Physics    12
+#&gt; 2      Mathematics     8
+#&gt; 3       Statistics    20
+#&gt; 4 Computer Science    23
+```
+]
+.pull-right[
+
+```r
+sci_tbl &lt;- tibble(
+  department = dept, 
+  count = nstaff, 
+* percentage = count / sum(count))
+sci_tbl
+```
+
+
+```
+*#&gt; # A tibble: 4 x 3
+#&gt;   department       count percentage
+*#&gt;   &lt;chr&gt;            &lt;int&gt;      &lt;dbl&gt;
+#&gt; 1 Physics             12      0.190
+#&gt; 2 Mathematics          8      0.127
+#&gt; 3 Statistics          20      0.317
+#&gt; 4 Computer Science    23      0.365
+```
+]
+
+---
+
+## Glimpse
+
+
+```r
+glimpse(sci_tbl)
+```
+
+```
+#&gt; Rows: 4
+#&gt; Columns: 3
+#&gt; $ department &lt;chr&gt; "Physics", "Mathematics", "Statistics"…
+#&gt; $ count      &lt;int&gt; 12, 8, 20, 23
+#&gt; $ percentage &lt;dbl&gt; 0.1904762, 0.1269841, 0.3174603, 0.365…
+```
+
+Data types and their abbreviations
+
+.pull-left[
+* `chr`: character
+* `dbl`: double
+* `int`: integer
+* `lgl`: logical
+]
+.pull-right[
+* `fct`: factor
+* `date`: date
+* `dttm`: date-time
+* more [column data types](https://tibble.tidyverse.org/articles/types.html)
+]
+
+---
+
+class: middle inverse
+
+## The [tidyverse](https://www.tidyverse.org) is an opinionated [collection of R packages](https://www.tidyverse.org/packages/) designed for data science. *All packages share an underlying design philosophy, grammar, and data structures.*
+
+---
+
+## Use {tidyverse}
+
+
+```r
+library(tidyverse)
+```
+
+---
+
 class: inverse middle
 
 # Data import ⬇️
 
 ---
 
-A diagram for local disk/remote cloud to RAM
+file path
 
 ---
 
@@ -463,6 +590,12 @@ pisa
 #&gt; #   book &lt;chr&gt;, wealth &lt;dbl&gt;, escs &lt;dbl&gt;
 ```
 ]
+
+---
+
+## `read_csv()` arguments
+
+https://readr.tidyverse.org/reference/read_delim.html
 
 ---
 
@@ -663,7 +796,7 @@ list(
 
 ```r
 library(jsonlite)
-movies &lt;- read_json("data/movies.json")
+movies &lt;- read_json("https://vega.github.io/vega-editor/app/data/movies.json")
 length(movies)
 ```
 
@@ -729,6 +862,80 @@ movies[[1]]
 ---
 
 ## spatial maps, audio, images, etc
+
+---
+
+.left-column[
+## R basics
+### - access to RAM
+### - access to CPU
+### - access to mass storage
+]
+.right-column[
+Read data files from hard disks, USB sticks, etc into RAM
+
+
+
+.footnote[AT bus route data sourced from [**Auckland Transport Open GIS Data**](https://data-atgis.opendata.arcgis.com/datasets/bus-route/data?geometry=169.841%2C-37.610%2C179.685%2C-36.072)]
+]
+
+
+---
+
+.left-column[
+## R basics
+### - access to RAM
+### - access to CPU
+### - access to mass storage
+### - access to screen
+]
+.right-column[
+Print out results
+
+]
+
+---
+
+.left-column[
+## R basics
+### - access to RAM
+### - access to CPU
+### - access to mass storage
+### - access to screen
+]
+.right-column[
+Produce visual displays
+
+
+]
+
+---
+
+.left-column[
+## R basics
+### - access to RAM
+### - access to CPU
+### - access to mass storage
+### - access to screen
+### - access to network
+]
+.right-column[
+Access data from remote computers, including web servers on the internet
+
+.panelset[
+.panel[.panel-name[R Code]
+
+
+
+Composing multiple functions
+]
+
+.panel[.panel-name[Map]
+
+&lt;img src="img/akl-bus-route-map.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+]
+]
 
 ---
 
