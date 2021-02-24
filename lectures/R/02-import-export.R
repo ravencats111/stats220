@@ -1,6 +1,5 @@
 ## ---- vector
-dept <- c("Physics", "Mathematics", "Statistics",
-  "Computer Science")
+dept <- c("Physics", "Mathematics", "Statistics", "Computer Science")
 nstaff <- c(12L, 8L, 20L, 23L)
 
 ## ---- lists
@@ -65,12 +64,32 @@ typeof(sci_tbl) # list in essence
 class(sci_tbl) # tibble is a special class of data.frame
 
 ## ---- glimpse
-glimpse(sci_tbl)
+glimpse(sci_tbl) # to replace str()
 
-## ---- subsetting
-sci_tbl$count
-sci_tbl[["count"]]
+## ---- subset-vct
+sci_tbl[["count"]] # col name
+sci_tbl[[2]] # col pos
+sci_tbl$count # col name
 
+## ---- subset-col1
+sci_tbl["count"]
+
+## ---- subset-col2
+sci_tbl[2] # sci_tbl[, 2]
+
+## ---- subset-row1
+sci_tbl[c(1, 3), ]
+
+## ---- subset-row2
+sci_tbl[-c(2, 4), ]
+
+## ---- subset-cr
+sci_tbl[1:3, 2]
+sci_tbl[-4, 2]
+sci_tbl[1:3, "count"]
+sci_tbl[c(rep(TRUE, 3), FALSE), 2]
+
+## ---- tmp
 # spreadsheet-like data
 # data src: https://stats.oecd.org/Index.aspx?DataSetCode=TIME_USE#
 # how individuals spend their time

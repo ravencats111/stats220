@@ -350,6 +350,7 @@ Change the RStudio appearance up to your taste
 
 * Each university course is a project, and get your work organised.
 * A self-contained project is a folder that contains all relevant files, for example my `stats220/` `r emo::ji("folder")` includes:
+   + `stats220.Rproj`
    + `data/`
      + `*.csv`, `*.xlsx`
    + `lectures/`

@@ -26,12 +26,11 @@ class: center, middle, inverse, title-slide
 
 ## Atomic vector (1d)
 
-.center[&lt;img src="img/lego-vector.png" width="50%"&gt;]
+.center[&lt;img src="img/lego-vector.png" width="55%"&gt;]
 
 
 ```r
-dept &lt;- c("Physics", "Mathematics", "Statistics",
-  "Computer Science")
+dept &lt;- c("Physics", "Mathematics", "Statistics", "Computer Science")
 nstaff &lt;- c(12L, 8L, 20L, 23L)
 ```
 
@@ -477,11 +476,11 @@ sci_tbl
 
 ---
 
-## Glimpse
+## Glimpse data
 
 
 ```r
-glimpse(sci_tbl)
+glimpse(sci_tbl) # to replace str()
 ```
 
 ```
@@ -509,6 +508,177 @@ Data types and their abbreviations
 
 ---
 
+## Subsetting tibble
+
+.left-column[
+### - to vectors
+]
+.right-column[
+* with `[[]]` or `$`
+
+```r
+sci_tbl[["count"]] # col name
+```
+
+```
+#&gt; [1] 12  8 20 23
+```
+
+```r
+sci_tbl[[2]] # col pos
+```
+
+```
+#&gt; [1] 12  8 20 23
+```
+
+```r
+sci_tbl$count # col name
+```
+
+```
+#&gt; [1] 12  8 20 23
+```
+]
+
+---
+
+## Subsetting tibble
+
+.left-column[
+### - to vectors
+### - by columns
+]
+.right-column[
+* with `[]` or `[, col]`
+
+.pull-left[
+
+```r
+sci_tbl["count"]
+```
+
+```
+#&gt; # A tibble: 4 x 1
+#&gt;   count
+#&gt;   &lt;int&gt;
+#&gt; 1    12
+#&gt; 2     8
+#&gt; 3    20
+#&gt; 4    23
+```
+]
+.pull-right[
+
+```r
+sci_tbl[2] # sci_tbl[, 2]
+```
+
+```
+#&gt; # A tibble: 4 x 1
+#&gt;   count
+#&gt;   &lt;int&gt;
+#&gt; 1    12
+#&gt; 2     8
+#&gt; 3    20
+#&gt; 4    23
+```
+]
+]
+
+---
+
+## Subsetting tibble
+
+.left-column[
+### - to vectors
+### - by columns
+### - by rows
+]
+.right-column[
+* with `[row, ]`
+
+.pull-left[
+
+```r
+sci_tbl[c(1, 3), ]
+```
+
+```
+#&gt; # A tibble: 2 x 3
+#&gt;   department count percentage
+#&gt;   &lt;chr&gt;      &lt;int&gt;      &lt;dbl&gt;
+#&gt; 1 Physics       12      0.190
+#&gt; 2 Statistics    20      0.317
+```
+]
+.pull-right[
+
+```r
+sci_tbl[-c(2, 4), ]
+```
+
+```
+#&gt; # A tibble: 2 x 3
+#&gt;   department count percentage
+#&gt;   &lt;chr&gt;      &lt;int&gt;      &lt;dbl&gt;
+#&gt; 1 Physics       12      0.190
+#&gt; 2 Statistics    20      0.317
+```
+]
+]
+
+---
+
+## Subsetting tibble
+
+.left-column[
+### - to vectors
+### - by columns
+### - by rows
+### - by cols &amp; rows
+]
+.right-column[
+* with `[row, col]`
+
+
+```r
+sci_tbl[1:3, 2]
+## sci_tbl[-4, 2]
+## sci_tbl[1:3, "count"]
+## sci_tbl[c(rep(TRUE, 3), FALSE), 2]
+```
+
+```
+#&gt; # A tibble: 3 x 1
+#&gt;   count
+#&gt;   &lt;int&gt;
+#&gt; 1    12
+#&gt; 2     8
+#&gt; 3    20
+```
+]
+
+---
+
+## Subsetting tibble
+
+* Use `[[` to extract 1d vectors from 2d tibbles
+* Use `[` to subset tibbles to a new tibble
+  + numbers (positive/negative) as indices
+  + characters (column names) as indices
+  + logicals as indices
+
+
+```r
+sci_tbl[1:3, 2]
+sci_tbl[-4, 2]
+sci_tbl[1:3, "count"]
+sci_tbl[c(rep(TRUE, 3), FALSE), 2]
+```
+
+---
+
 class: middle inverse
 
 ## The [tidyverse](https://www.tidyverse.org) is an opinionated [collection of R packages](https://www.tidyverse.org/packages/) designed for data science. *All packages share an underlying design philosophy, grammar, and data structures.*
@@ -530,12 +700,14 @@ class: inverse middle
 
 ---
 
-file path
+background-image: url(img/pisa.png)
+
+.footnote[&lt;https://www.oecd.org/pisa/&gt;]
 
 ---
 
 .left-column[
-readr logo
+.center[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/readr.png" width="60%"&gt;]
 ]
 .right-column[
 ## Reading plain-text rectangular files
@@ -561,7 +733,7 @@ head -4 data/pisa/pisa-student.csv # shell command, not R
 ---
 
 .left-column[
-readr logo
+.center[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/readr.png" width="60%"&gt;]
 ]
 .right-column[
 ## Reading comma delimited files
@@ -593,14 +765,60 @@ pisa
 
 ---
 
-## `read_csv()` arguments
+## Let's talk about the file path first!
 
-https://readr.tidyverse.org/reference/read_delim.html
+
+```r
+pisa &lt;- read_csv("data/pisa/pisa-student.csv", n_max = 2929621)
+```
+
+`data/pisa/pisa-student.csv` relative to the top-level (or root) directory:
+
+* `stats220.Rproj`
+* `data/`
+  * `pisa/pisa-student.csv`
+
+If you don't like `/`, you can use `here::here()` instead.
+
+
+```r
+read_csv(here::here("data", "pisa", "pisa-student.csv"))
+```
+
+.footnote[NOTE: I use the `here()` function from the {here} package using `pkg::fun()`, without calling `library(here)` the ususal way.]
 
 ---
 
 .left-column[
-vroom logo
+.center[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/readr.png" width="60%"&gt;]
+]
+.right-column[
+## `read_csv()` arguments with [`?read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)
+
+```r
+read_csv(
+  file,
+  col_names = TRUE,
+  col_types = NULL,
+  locale = default_locale(),
+  na = c("", "NA"),
+  quoted_na = TRUE,
+  quote = "\"",
+  comment = "",
+  trim_ws = TRUE,
+  skip = 0,
+  n_max = Inf,
+  guess_max = min(1000, n_max),
+  progress = show_progress(),
+  skip_empty_rows = TRUE
+)
+```
+]
+
+---
+
+.left-column[
+.center[&lt;img src="https://github.com/r-lib/vroom/blob/master/man/figures/logo.png?raw=true" width="75%"&gt;]
 ]
 .right-column[
 ## Faster delimited reader at **1.4GB/sec**
@@ -617,7 +835,7 @@ pisa &lt;- vroom("data/pisa/pisa-student.csv", n_max = 2929621)
 ---
 
 .left-column[
-readxl logo
+.center[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/readxl.png" width="60%"&gt;]
 ]
 .right-column[
 ## Reading proprietary binary files
@@ -648,7 +866,7 @@ time_use
 ---
 
 .left-column[
-haven logo
+.center[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/haven.png" width="60%"&gt;]
 ]
 .right-column[
 ## Reading proprietary binary files
@@ -672,9 +890,18 @@ data source: [https://www.oecd.org/pisa/data/2018database/](https://www.oecd.org
 
 ---
 
-## Database
+class: middle
 
-## Database management systems
+## Well, SQL!
+
+* **Structured Query Language** for accessing and manipulating databases.
+* Relational database management systems
+  + [MySQL](https://www.mysql.com)
+  + [SQLite](https://www.sqlite.org/index.html)
+  + BigQuery
+  + PostgresSQL
+
+### However, 220 is all about R!
 
 ---
 
@@ -682,7 +909,7 @@ data source: [https://www.oecd.org/pisa/data/2018database/](https://www.oecd.org
 ## {DBI}
 ]
 .right-column[
-## Connecting R to database
+## Connecting R to database*
 
 ```r
 library(RSQLite)
@@ -705,6 +932,7 @@ dbListFields(con, "pisa")
 #&gt; [16] "dishwasher"  "television"  "computer_n"  "car"         "book"       
 #&gt; [21] "wealth"      "escs"
 ```
+.footnote[NOTE: slides marked with `*` are not examinable.]
 ]
 
 ---
@@ -713,7 +941,7 @@ dbListFields(con, "pisa")
 ## {DBI}
 ]
 .right-column[
-## Connecting R to database
+## Connecting R to database*
 * reading data from database
 
 ```r
@@ -737,10 +965,10 @@ dbDisconnect(con)
 ---
 
 .left-column[
-## {readr}
+.center[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/readr.png" width="60%"&gt;]
 ]
 .right-column[
-## Reading chunks for larger than memory data
+## Reading chunks for larger than memory data*
 
 ```r
 chunked &lt;- function(x, pos) {
