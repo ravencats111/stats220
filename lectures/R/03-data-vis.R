@@ -1,3 +1,16 @@
+## ---- numbers
+library(datasauRus)
+library(tidyverse)
+dino <- datasaurus_dozen %>% 
+  filter(dataset == "dino") %>% 
+  select(-dataset)
+dino
+
+## ---- plots
+dino %>% 
+  ggplot(aes(x, y)) +
+  geom_point()
+
 ## ---- toy-df
 library(tidyverse)
 dept <- c("Physics", "Mathematics", "Statistics",

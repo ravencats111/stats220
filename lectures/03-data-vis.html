@@ -24,12 +24,66 @@ class: center, middle, inverse, title-slide
 
 
 
-## Tukey's quote: see what not expected.
+.pull-left[
+&lt;br&gt;
+&gt; The greatest value of a picture is when it forces us to notice what we never expected to see.
+&gt; &lt;br&gt; -- [John W. Tukey](https://en.wikipedia.org/wiki/John_Tukey)
+]
+.pull-right[
+&lt;br&gt;
+.center[&lt;img src="img/eda.jpg" height="100%"&gt;]
+]
 
 ---
 
-## Named plots
+## numbers vs plots
 
+.pull-left[
+
+```r
+dino
+```
+
+```
+#&gt; # A tibble: 142 x 2
+#&gt;       x     y
+#&gt;   &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1  55.4  97.2
+#&gt; 2  51.5  96.0
+#&gt; 3  46.2  94.5
+#&gt; 4  42.8  91.4
+#&gt; 5  40.8  88.3
+#&gt; 6  38.7  84.9
+#&gt; # … with 136 more rows
+```
+]
+
+--
+
+.pull-right[
+&lt;img src="figure/plots-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## numbers vs plots
+
+&lt;img src="https://github.com/stephlocke/lazyCDN/blob/master/DinoSequential.gif?raw=true" width="100%"&gt;
+
+.footnote[image credit: Steph Locke]
+
+---
+
+class: middle inverse
+
+## Charts 🥊 Graphics
+
+---
+
+## A toy example
+
+&lt;br&gt;
+.pull-left[
 
 ```r
 sci_tbl
@@ -44,13 +98,22 @@ sci_tbl
 #&gt; 3 Statistics          20
 #&gt; 4 Computer Science    23
 ```
+]
+.pull-right[
+* `dept`: categorical
+* `count`: quantitative
+&lt;hr&gt;
+What types of plots can we make?
+1. bar plot for counts
+2. pie chart for proportions
+]
 
 ---
 
-## Named plots
+## Named charts
 
 .pull-left[
-* single purpose functions
+* Bar plot
 
 ```r
 barplot(as.matrix(sci_tbl$count), 
@@ -60,7 +123,7 @@ barplot(as.matrix(sci_tbl$count),
 &lt;img src="figure/base-barplot-1.png" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
-* inconsistent inputs
+* Pie chart
 
 ```r
 pie(sci_tbl$count, 
@@ -72,9 +135,47 @@ pie(sci_tbl$count,
 
 ---
 
+## Seems convenient, but ...
+
+&lt;br&gt;
+.pull-left[
+.x[
+* a limited set of named charts
+* single purpose functions
+* inconsistent inputs
+]
+]
+.pull-right[
+
+```r
+barplot(as.matrix(sci_tbl$count), 
+  legend = sci_tbl$dept)
+```
+
+```r
+pie(sci_tbl$count, 
+  labels = sci_tbl$dept)
+```
+]
+
+---
+
+.pull-left[
+&lt;br&gt;
+&lt;br&gt;
+.center[&lt;img src="img/gg.jpg" width="300px"&gt;]
+]
+.pull-right[
+&gt; Grammar makes language expressive. A language consisting of words and no grammar (statement = word) expresses only as many ideas as there are words. By specifying how words are combined in statements, a grammar expands a language’s scope.
+]
+
+---
+
 class: inverse middle
 
-# Layered grammar of graphics
+### The *grammar of graphics* takes us beyond a limited set of .blue[charts (words)] to an almost unlimited world of .blue[graphical forms (statements)]. 
+&lt;hr&gt;
+### *{ggplot2}* is a system for declaratively creating graphics, based on The Grammar of Graphics.
 
 ---
 
@@ -227,7 +328,7 @@ ggplot(sci_tbl, aes(x = dept, y = count)) +
   geom_bar(stat = "identity")
 ```
 
-&lt;img src="figure/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -282,6 +383,12 @@ ggplot(sci_tbl, aes(x = dept, y = count)) +
 ---
 
 ## Revisiting our starter
+
+---
+
+## Your turn
+
+compare line and radar plot
 
 ---
 

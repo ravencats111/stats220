@@ -33,35 +33,116 @@ xaringanExtra::use_panelset()
 read_chunk('R/03-data-vis.R')
 ```
 
-## Tukey's quote: see what not expected.
+.pull-left[
+<br>
+> The greatest value of a picture is when it forces us to notice what we never expected to see.
+> <br> -- [John W. Tukey](https://en.wikipedia.org/wiki/John_Tukey)
+]
+.pull-right[
+<br>
+.center[<img src="img/eda.jpg" height="100%">]
+]
 
 ---
 
-## Named plots
-
-```{r toy-df, echo = 5}
-```
-
----
-
-## Named plots
+## numbers vs plots
 
 .pull-left[
-* single purpose functions
+```{r numbers, echo = 4}
+```
+]
+
+--
+
+.pull-right[
+```{r plots, fig.width = 4, fig.height = 4, echo = FALSE}
+```
+]
+
+---
+
+## numbers vs plots
+
+<img src="https://github.com/stephlocke/lazyCDN/blob/master/DinoSequential.gif?raw=true" width="100%">
+
+.footnote[image credit: Steph Locke]
+
+---
+
+class: middle inverse
+
+## Charts `r emo::ji("boxing_glove")` Graphics
+
+---
+
+## A toy example
+
+<br>
+.pull-left[
+```{r toy-df, echo = 5}
+```
+]
+.pull-right[
+* `dept`: categorical
+* `count`: quantitative
+<hr>
+What types of plots can we make?
+1. bar plot for counts
+2. pie chart for proportions
+]
+
+---
+
+## Named charts
+
+.pull-left[
+* Bar plot
 ```{r base-barplot, fig.width = 4, fig.height = 4}
 ```
 ]
 .pull-right[
-* inconsistent inputs
+* Pie chart
 ```{r base-pieplot, fig.width = 4, fig.height = 4}
 ```
 ]
 
 ---
 
+## Seems convenient, but ...
+
+<br>
+.pull-left[
+.x[
+* a limited set of named charts
+* single purpose functions
+* inconsistent inputs
+]
+]
+.pull-right[
+```{r ref.label = "base-barplot", eval = FALSE}
+```
+```{r ref.label = "base-pieplot", eval = FALSE}
+```
+]
+
+---
+
+.pull-left[
+<br>
+<br>
+.center[<img src="img/gg.jpg" width="300px">]
+]
+.pull-right[
+> Grammar makes language expressive. A language consisting of words and no grammar (statement = word) expresses only as many ideas as there are words. By specifying how words are combined in statements, a grammar expands a language’s scope.
+]
+
+---
+
 class: inverse middle
 
-# Layered grammar of graphics
+### The *grammar of graphics* takes us beyond a limited set of .blue[charts (words)] to an almost unlimited world of .blue[graphical forms (statements)]. 
+<hr>
+### *{ggplot2}* is a system for declaratively creating graphics, based on The Grammar of Graphics.
 
 ---
 
