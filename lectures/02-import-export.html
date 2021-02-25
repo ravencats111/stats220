@@ -692,6 +692,23 @@ class: middle inverse
 library(tidyverse)
 ```
 
+```
+#&gt; ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
+```
+
+```
+#&gt; ✔ ggplot2 3.3.3     ✔ dplyr   1.0.4
+#&gt; ✔ tidyr   1.1.2     ✔ stringr 1.4.0
+#&gt; ✔ readr   1.4.0     ✔ forcats 0.5.0
+#&gt; ✔ purrr   0.3.4
+```
+
+```
+#&gt; ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+#&gt; ✖ dplyr::filter() masks stats::filter()
+#&gt; ✖ dplyr::lag()    masks stats::lag()
+```
+
 ---
 
 class: inverse middle
@@ -986,8 +1003,13 @@ pisa2018 &lt;- read_csv_chunked("data/pisa/pisa-student.csv",
 ]
 .right-column[
 ## JSON: JavaScript Object Notation
+
+* object: `{}`
+* array: `[]`
+* value: string/character, number, object, array, logical, `null`
+
 .pull-left[
-### `.json`
+### JSON
 ```json
 {
   "firstName": "Earo",
@@ -996,6 +1018,7 @@ pisa2018 &lt;- read_csv_chunked("data/pisa/pisa-student.csv",
     "city": "Auckland",
     "postalCode": 1010
   }
+  "logical": [true, false]
 }
 ```
 ]
@@ -1008,11 +1031,18 @@ list(
   address = list(
     city = "Auckland",
     postalCode = 1010
-  )
+  ),
+  logical = c(TRUE, FALSE)
 )
 ```
 ]
 ]
+
+???
+
+* a lightweight text format
+* easy for humans to read and write
+* easy for machines to parse and generate
 
 ---
 
@@ -1020,11 +1050,12 @@ list(
 ## {jsonlite}
 ]
 .right-column[
-## JSON: JavaScript Object Notation
+## Reading json files
 
 ```r
 library(jsonlite)
-movies &lt;- read_json("https://vega.github.io/vega-editor/app/data/movies.json")
+url &lt;- "https://vega.github.io/vega-editor/app/data/movies.json"
+movies &lt;- read_json(url)
 length(movies)
 ```
 
@@ -1084,6 +1115,39 @@ movies[[1]]
 #&gt; 
 #&gt; $IMDB_Votes
 #&gt; [1] 1071
+```
+]
+
+---
+
+.left-column[
+## {jsonlite}
+]
+.right-column[
+## Reading json files as tibbles
+
+```r
+movies_tbl &lt;- as_tibble(read_json(url, simplify = TRUE))
+movies_tbl
+```
+
+```
+#&gt; # A tibble: 3,201 x 16
+#&gt;   Title US_Gross Worldwide_Gross US_DVD_Sales
+#&gt;   &lt;chr&gt;    &lt;int&gt;           &lt;dbl&gt;        &lt;int&gt;
+#&gt; 1 The …   146083          146083           NA
+#&gt; 2 Firs…    10876           10876           NA
+#&gt; 3 I Ma…   203134          203134           NA
+#&gt; 4 Let'…   373615          373615           NA
+#&gt; 5 Slam   1009819         1087521           NA
+#&gt; 6 Miss…    24551         2624551           NA
+#&gt; # … with 3,195 more rows, and 12 more variables:
+#&gt; #   Production_Budget &lt;int&gt;, Release_Date &lt;chr&gt;,
+#&gt; #   MPAA_Rating &lt;chr&gt;, Running_Time_min &lt;int&gt;,
+#&gt; #   Distributor &lt;chr&gt;, Source &lt;chr&gt;, Major_Genre &lt;chr&gt;,
+#&gt; #   Creative_Type &lt;chr&gt;, Director &lt;chr&gt;,
+#&gt; #   Rotten_Tomatoes_Rating &lt;int&gt;, IMDB_Rating &lt;dbl&gt;,
+#&gt; #   IMDB_Votes &lt;int&gt;
 ```
 ]
 

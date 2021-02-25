@@ -142,9 +142,14 @@ pisa2018 <- read_csv_chunked("data/pisa/pisa-student.csv",
 
 ## ---- json
 library(jsonlite)
-movies <- read_json("https://vega.github.io/vega-editor/app/data/movies.json")
+url <- "https://vega.github.io/vega-editor/app/data/movies.json"
+movies <- read_json(url)
 length(movies)
 movies[[1]]
+
+## ---- json-df
+movies_tbl <- as_tibble(read_json(url, simplify = TRUE))
+movies_tbl
 
 ## ---- sf
 ## spatial data

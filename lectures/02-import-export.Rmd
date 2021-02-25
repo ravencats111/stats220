@@ -584,8 +584,13 @@ class: middle
 ]
 .right-column[
 ## JSON: JavaScript Object Notation
+
+* object: `{}`
+* array: `[]`
+* value: string/character, number, object, array, logical, `null`
+
 .pull-left[
-### `.json`
+### JSON
 ```json
 {
   "firstName": "Earo",
@@ -594,6 +599,7 @@ class: middle
     "city": "Auckland",
     "postalCode": 1010
   }
+  "logical": [true, false]
 }
 ```
 ]
@@ -606,10 +612,28 @@ list(
   address = list(
     city = "Auckland",
     postalCode = 1010
-  )
+  ),
+  logical = c(TRUE, FALSE)
 )
 ```
 ]
+]
+
+???
+
+* a lightweight text format
+* easy for humans to read and write
+* easy for machines to parse and generate
+
+---
+
+.left-column[
+## {jsonlite}
+]
+.right-column[
+## Reading json files
+```{r json}
+```
 ]
 
 ---
@@ -618,8 +642,8 @@ list(
 ## {jsonlite}
 ]
 .right-column[
-## JSON: JavaScript Object Notation
-```{r json}
+## Reading json files as tibbles
+```{r json-df}
 ```
 ]
 
