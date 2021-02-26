@@ -18,8 +18,8 @@ typeof(lst) # primitive type
 class(lst) # type + attributes
 
 ## ---- lists-str
-# el can be of diff lengths
 str(lst)
+# el can be of diff lengths
 
 ## ---- lists-rec
 str(list(first_el = lst, second_el = mtcars))
@@ -29,6 +29,12 @@ is.list(lst)
 
 ## ---- as-list
 as.list(1:3)
+
+## ---- lst-sub
+lst[1]
+
+## ---- lst-sub2
+lst[[1]]
 
 ## ---- matrix
 matrix(1:9, nrow = 3)
@@ -152,9 +158,27 @@ movies_tbl <- as_tibble(read_json(url, simplify = TRUE))
 movies_tbl
 
 ## ---- sf
-## spatial data
 library(sf)
 akl_bus <- st_read("data/BusService/BusService.shp")
 
-## audio
-## midi
+## ---- sf-print
+akl_bus[1:4, ]
+
+## ---- sf-plot
+library(ggplot2)
+ggplot() +
+  geom_sf(data = akl_bus, aes(colour = AGENCYNAME))
+
+## ---- network
+library(leaflet)
+leaflet(data = st_transform(akl_bus, crs = 4326)) %>% 
+  addTiles() %>% 
+  addPolylines(
+    weight = 2,
+    popup = ~ paste("Routenumber:", ROUTENUMBE)
+  )
+
+## ---- write-movies
+write_csv(movies_tbl, file = "data/movies.csv")
+write_sas(movies_tbl, path = "data/movies.sas7bdat")
+write_json(movies_tbl, path = "data/movies.json")

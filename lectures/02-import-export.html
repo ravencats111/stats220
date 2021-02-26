@@ -148,7 +148,6 @@ class(lst) # type + attributes
 ## data structure
 
 ```r
-# el can be of diff lengths
 str(lst)
 ```
 
@@ -158,6 +157,10 @@ str(lst)
 #&gt;  $ : chr "a"
 #&gt;  $ : logi [1:3] TRUE FALSE TRUE
 #&gt;  $ : num [1:2] 2.3 5.9
+```
+
+```r
+# el can be of diff lengths
 ```
 ]
 ]
@@ -233,6 +236,42 @@ as.list(1:3)
 #&gt; [1] 3
 ```
 ]
+]
+
+---
+
+.left-column[
+## data strs
+### - lists
+]
+.right-column[
+.pull-left[
+Subset by `[[]]`
+
+```r
+lst[1]
+```
+
+```
+#&gt; [[1]]
+#&gt; [1] 1 2 3
+```
+]
+.pull-right[
+Subset by `[]`
+
+```r
+lst[[1]]
+```
+
+```
+#&gt; [1] 1 2 3
+```
+]
+
+.center[![](img/pepper.png)]
+
+.footnote[image credit: Hadley Wickham]
 ]
 
 ---
@@ -1153,96 +1192,147 @@ movies_tbl
 
 ---
 
-## spatial maps, audio, images, etc
+.left-column[
+.center[&lt;img src="https://github.com/r-spatial/sf/raw/master/man/figures/logo.png" width="80%"&gt;]
+]
+.right-column[
+## Reading spatial data*
+
+```r
+library(sf)
+akl_bus &lt;- st_read("data/BusService/BusService.shp")
+```
+
+```
+#&gt; Reading layer `BusService' from data source `/Users/wany568/Teaching/stats220/lectures/data/BusService/BusService.shp' using driver `ESRI Shapefile'
+#&gt; Simple feature collection with 509 features and 7 fields
+#&gt; geometry type:  MULTILINESTRING
+#&gt; dimension:      XY
+#&gt; bbox:           xmin: 1727652 ymin: 5859539 xmax: 1787138 ymax: 5982575
+#&gt; projected CRS:  NZGD2000_New_Zealand_Transverse_Mercator_2000
+```
+
+.footnote[data source: [**Auckland Transport Open GIS Data**](https://data-atgis.opendata.arcgis.com/datasets/bus-route/data?geometry=169.841%2C-37.610%2C179.685%2C-36.072)]
+]
+
+???
+
+audio, images, etc
 
 ---
 
 .left-column[
-## R basics
-### - access to RAM
-### - access to CPU
-### - access to mass storage
+.center[&lt;img src="https://github.com/r-spatial/sf/raw/master/man/figures/logo.png" width="80%"&gt;]
 ]
 .right-column[
-Read data files from hard disks, USB sticks, etc into RAM
+## Reading spatial data*
 
+```r
+library(sf)
+akl_bus &lt;- st_read("data/BusService/BusService.shp")
+```
 
+```
+#&gt; Reading layer `BusService' from data source `/Users/wany568/Teaching/stats220/lectures/data/BusService/BusService.shp' using driver `ESRI Shapefile'
+#&gt; Simple feature collection with 509 features and 7 fields
+#&gt; geometry type:  MULTILINESTRING
+#&gt; dimension:      XY
+#&gt; bbox:           xmin: 1727652 ymin: 5859539 xmax: 1787138 ymax: 5982575
+#&gt; projected CRS:  NZGD2000_New_Zealand_Transverse_Mercator_2000
+```
 
-.footnote[AT bus route data sourced from [**Auckland Transport Open GIS Data**](https://data-atgis.opendata.arcgis.com/datasets/bus-route/data?geometry=169.841%2C-37.610%2C179.685%2C-36.072)]
-]
-
-
----
-
-.left-column[
-## R basics
-### - access to RAM
-### - access to CPU
-### - access to mass storage
-### - access to screen
-]
-.right-column[
-Print out results
-
+.footnote[data source: [**Auckland Transport Open GIS Data**](https://data-atgis.opendata.arcgis.com/datasets/bus-route/data?geometry=169.841%2C-37.610%2C179.685%2C-36.072)]
 ]
 
 ---
 
 .left-column[
-## R basics
-### - access to RAM
-### - access to CPU
-### - access to mass storage
-### - access to screen
+.center[&lt;img src="https://github.com/r-spatial/sf/raw/master/man/figures/logo.png" width="80%"&gt;]
 ]
 .right-column[
-Produce visual displays
+## Reading spatial data*
 
+```r
+akl_bus[1:4, ]
+```
 
+```
+#&gt; Simple feature collection with 4 features and 7 fields
+#&gt; geometry type:  MULTILINESTRING
+#&gt; dimension:      XY
+#&gt; bbox:           xmin: 1751253 ymin: 5915245 xmax: 1758019 ymax: 5921383
+#&gt; projected CRS:  NZGD2000_New_Zealand_Transverse_Mercator_2000
+#&gt;   OBJECTID ROUTEPATTE AGENCYNAME                                 ROUTENAME
+#&gt; 1   343077      02005        NZB St Lukes To Wynyard Quarter Via Kingsland
+#&gt; 2   343078      02006        NZB Wynyard Quarter To St Lukes Via Kingsland
+#&gt; 3   343079      02209        NZB  Avondale To City Centre Via New North Rd
+#&gt; 4   343080      02208        NZB  City Centre To Avondale Via New North Rd
+#&gt;   ROUTENUMBE MODE Shape__Len                       geometry
+#&gt; 1         20  Bus   7948.418 MULTILINESTRING ((1755487 5...
+#&gt; 2         20  Bus   7919.198 MULTILINESTRING ((1756321 5...
+#&gt; 3        22A  Bus  11419.588 MULTILINESTRING ((1757613 5...
+#&gt; 4        22A  Bus  11607.711 MULTILINESTRING ((1757346 5...
+```
 ]
 
 ---
 
 .left-column[
-## R basics
-### - access to RAM
-### - access to CPU
-### - access to mass storage
-### - access to screen
-### - access to network
+.center[&lt;img src="https://github.com/r-spatial/sf/raw/master/man/figures/logo.png" width="80%"&gt;]
 ]
 .right-column[
-Access data from remote computers, including web servers on the internet
+## Spatial visualisation*
 
 .panelset[
-.panel[.panel-name[R Code]
-
-
-
-Composing multiple functions
-]
 
 .panel[.panel-name[Map]
 
-&lt;img src="img/akl-bus-route-map.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/sf-plot-1.png" width="78%" style="display: block; margin: auto;" /&gt;
+
+.panel[.panel-name[R Code]
+
+
+```r
+library(ggplot2)
+ggplot() +
+  geom_sf(data = akl_bus, aes(colour = AGENCYNAME))
+```
+]
 ]
 ]
 ]
 
 ---
 
-## Writing to a file
+class: inverse middle
+
+# Data export ⬆️
+
+---
+
+class: middle
+
+## From `read_*()` to `write_*()`
+
+
+```r
+write_csv(movies_tbl, file = "data/movies.csv")
+write_sas(movies_tbl, path = "data/movies.sas7bdat")
+write_json(movies_tbl, path = "data/movies.json")
+```
 
 ---
 
 ## Reading
 
 .pull-left[
-.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px"&gt;](https://r4ds.had.co.nz)]
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="320px"&gt;](https://r4ds.had.co.nz)]
+* [Tibbles](https://r4ds.had.co.nz/tibbles.html)
+* [Data import](https://r4ds.had.co.nz/data-import.html)
 ]
 .pull-right[
-* [Chapter 10: Tibbles](https://r4ds.had.co.nz/tibbles.html)
-* [Chapter 11: Data import](https://r4ds.had.co.nz/data-import.html)
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/565916198b0be51bf88b36f94b80c7ea67cafe7c/7f70b/cover.png" height="320px"&gt;](https://adv-r.hadley.nz)]
+* [Subsetting](https://adv-r.hadley.nz/subsetting.html#subset-single)
 ]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
