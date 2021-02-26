@@ -84,7 +84,7 @@ class: middle inverse
 ]
 .pull-right[
 * `dept`: categorical
-* `count`: quantitative
+* `count`: numeric
 <hr>
 What types of plots can we make?
 1. bar plot for counts
@@ -165,7 +165,7 @@ ggplot(data = <data>, mapping = aes(<mapping>)) +
   layer(geom = <geom>, stat = <stat>, position = <position>)
 ```
 
-1. `data`: `tibble` or `data.frame`.
+1. `data`: tibble.
 2. `mapping`: aesthetic mappings between data variables and visual elements.
 3. `layer()`: a layer is a combination of data, stat and geom with a potential position adjustment.
   * `geom`: geometric elements to render each data observation.
@@ -176,31 +176,35 @@ ggplot(data = <data>, mapping = aes(<mapping>)) +
 
 ## Layer
 
-```{r gg-layer, fig.height = 4, fig.width = 4}
+```{r gg-layer, fig.height = 3.8, fig.width = 4}
 ```
 
 ---
 
-## Aesthetic mapping
+## Aesthetic mapping: positional
 
-### Positional mapping
-
-```{r aes-map, fig.height = 4, fig.width = 4}
+```{r aes-map, fig.height = 3.8, fig.width = 4}
 ```
 
 ---
 
-## Geom .small[(a shorthand to layer)]
+## Geom .small[(a shorthand to `layer()`)]
 
 .pull-left[
-```{r gg-bar, fig.height = 4, fig.width = 4}
+.small[
+```{r gg-bar, fig.height = 3.8, fig.width = 4}
 ```
 ]
+]
 .pull-right[
+.small[
 ```{r gg-col2, eval = FALSE}
 ```
+]
 * `stat = "identity"` leaves data as is.
 * `geom_col()` is a shortcut to `geom_bar(stat = "identity")`.
+
+Generally, we use `geom_*()` instead of `layer()` in practice.
 ]
 
 ---
@@ -212,12 +216,12 @@ A list of geoms
 ## Stat
 
 .pull-left[
-### Aggregated (pre-computed)
+* Aggregated (pre-computed)
 ```{r ref.label = "toy-df", echo = 5}
 ```
 ]
 .pull-right[
-### Disaggregated
+* Disaggregated
 ```{r sci-disaggregated, echo = 2}
 ```
 ]
@@ -227,12 +231,16 @@ A list of geoms
 ## Stat
 
 .pull-left[
+.small[
 ```{r ref.label = "gg-bar", fig.height = 4, fig.width = 4}
 ```
 ]
+]
 .pull-right[
+.small[
 ```{r gg-bar-c, fig.height = 4, fig.width = 4}
 ```
+]
 ]
 
 ---
@@ -241,22 +249,26 @@ A list of stats
 
 ---
 
-## Aesthetic mapping (cont'd)
+## Aesthetic mapping: visual
 
 .pull-left[
+.small[
 ```{r gg-bar-col, fig.height = 4, fig.width = 4}
 ```
 ]
+]
 .pull-right[
+.small[
 ```{r gg-bar-fill, fig.height = 4, fig.width = 4}
 ```
+]
 ]
 
 ---
 
 ## Coords
 
-```{r gg-arc}
+```{r gg-arc, fig.height = 5, fig.width = 5}
 ```
 
 ---

@@ -101,7 +101,7 @@ sci_tbl
 ]
 .pull-right[
 * `dept`: categorical
-* `count`: quantitative
+* `count`: numeric
 &lt;hr&gt;
 What types of plots can we make?
 1. bar plot for counts
@@ -216,7 +216,7 @@ ggplot(data = &lt;data&gt;, mapping = aes(&lt;mapping&gt;)) +
   layer(geom = &lt;geom&gt;, stat = &lt;stat&gt;, position = &lt;position&gt;)
 ```
 
-1. `data`: `tibble` or `data.frame`.
+1. `data`: tibble.
 2. `mapping`: aesthetic mappings between data variables and visual elements.
 3. `layer()`: a layer is a combination of data, stat and geom with a potential position adjustment.
   * `geom`: geometric elements to render each data observation.
@@ -237,9 +237,7 @@ ggplot(data = sci_tbl, mapping = aes(x = dept, y = count)) +
 
 ---
 
-## Aesthetic mapping
-
-### Positional mapping
+## Aesthetic mapping: positional
 
 
 ```r
@@ -250,9 +248,10 @@ ggplot(sci_tbl, aes(x = dept, y = count))
 
 ---
 
-## Geom .small[(a shorthand to layer)]
+## Geom .small[(a shorthand to `layer()`)]
 
 .pull-left[
+.small[
 
 ```r
 ggplot(sci_tbl, aes(x = dept, y = count)) +
@@ -261,14 +260,19 @@ ggplot(sci_tbl, aes(x = dept, y = count)) +
 
 &lt;img src="figure/gg-bar-1.png" style="display: block; margin: auto;" /&gt;
 ]
+]
 .pull-right[
+.small[
 
 ```r
 ggplot(sci_tbl, aes(x = dept, y = count)) +
   geom_col()
 ```
+]
 * `stat = "identity"` leaves data as is.
 * `geom_col()` is a shortcut to `geom_bar(stat = "identity")`.
+
+Generally, we use `geom_*()` instead of `layer()` in practice.
 ]
 
 ---
@@ -280,7 +284,7 @@ A list of geoms
 ## Stat
 
 .pull-left[
-### Aggregated (pre-computed)
+* Aggregated (pre-computed)
 
 ```r
 sci_tbl
@@ -297,7 +301,7 @@ sci_tbl
 ```
 ]
 .pull-right[
-### Disaggregated
+* Disaggregated
 
 ```r
 sci_tbl0
@@ -322,6 +326,7 @@ sci_tbl0
 ## Stat
 
 .pull-left[
+.small[
 
 ```r
 ggplot(sci_tbl, aes(x = dept, y = count)) +
@@ -330,7 +335,9 @@ ggplot(sci_tbl, aes(x = dept, y = count)) +
 
 &lt;img src="figure/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
 ]
+]
 .pull-right[
+.small[
 
 ```r
 ggplot(sci_tbl0, aes(x = dept)) +
@@ -339,6 +346,7 @@ ggplot(sci_tbl0, aes(x = dept)) +
 
 &lt;img src="figure/gg-bar-c-1.png" style="display: block; margin: auto;" /&gt;
 ]
+]
 
 ---
 
@@ -346,9 +354,10 @@ A list of stats
 
 ---
 
-## Aesthetic mapping (cont'd)
+## Aesthetic mapping: visual
 
 .pull-left[
+.small[
 
 ```r
 ggplot(sci_tbl, aes(x = dept, y = count)) +
@@ -357,7 +366,9 @@ ggplot(sci_tbl, aes(x = dept, y = count)) +
 
 &lt;img src="figure/gg-bar-col-1.png" style="display: block; margin: auto;" /&gt;
 ]
+]
 .pull-right[
+.small[
 
 ```r
 ggplot(sci_tbl, aes(x = dept, y = count)) +
@@ -365,6 +376,7 @@ ggplot(sci_tbl, aes(x = dept, y = count)) +
 ```
 
 &lt;img src="figure/gg-bar-fill-1.png" style="display: block; margin: auto;" /&gt;
+]
 ]
 
 ---

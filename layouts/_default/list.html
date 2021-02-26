@@ -11,7 +11,11 @@
         {{ range $paginator.Pages }}   
             <div class="col-md-4 card">
               <span class="post-meta"><strong>Week {{ .Params.week }}</strong></span>
-              <a href="{{ .Site.BaseURL }}{{ .Params.slides }}" target="_blank">    
+              {{ if .Params.slides }}
+                <a href="{{ .Site.BaseURL }}{{ .Params.slides }}" target="_blank">
+              {{ else }}
+                <a href="{{ .Site.BaseURL }}404.html" target="_blank">
+              {{ end }}
                 <div class="panel panel-default">
                   
                   {{ if .Params.img }}
