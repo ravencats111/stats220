@@ -5,6 +5,6 @@ img: "https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artw
 slides: ""
 r: ""
 rmd: ""
-lab:
+lab: ""
 sol:
 ---

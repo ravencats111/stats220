@@ -33,10 +33,10 @@
                     <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}R/{{ .Params.r }}" target="_blank" rel="noopener" role="button" download><i class="fa fa-download"></i> R </a>
                     <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.rmd }}" target="_blank" rel="noopener" role="button" download><i class="fa fa-download"></i> Rmd </a>
                     {{ if .Params.lab }}
-                      <a class="btn btn-info btn-sm list-group-item-text" href="{{ . }}" target="_blank" rel="noopener" role="button"> Lab </a>
+                      <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.lab }}" target="_blank" rel="noopener" role="button"> Lab </a>
                     {{ end }}
-                    {{ if .Params.lab }}
-                      <a class="btn btn-info btn-sm list-group-item-text" href="{{ . }}" target="_blank" rel="noopener" role="button"> Solution </a>
+                    {{ if .Params.sol }}
+                      <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.sol }}" target="_blank" rel="noopener" role="button"> Solution </a>
                     {{ end }}
                   </div>
                   <!-- <div class="panel&#45;body"><small> -->
