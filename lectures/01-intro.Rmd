@@ -161,7 +161,7 @@ class: inverse middle
 
 * A general-purpose of programming language
 * Originated by statisticians, a language for statistical computing and graphics
-* 15,000 + packages on [CRAN](https://cran.r-project.org/web/packages/) (Comprehensive R Archive Network, the official repository), Github, etc.
+* `r length(available.packages())` + packages on [CRAN](https://cran.r-project.org/web/packages/) (Comprehensive R Archive Network, the official repository), Github, etc.
 * The [tidyverse](http://tidyverse.org), a domain specific language in R for data scientists
 
 ???
