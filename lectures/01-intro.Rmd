@@ -60,6 +60,11 @@ class: middle
 
 ---
 
+background-image: url(img/class-rep.png)
+background-size: cover
+
+---
+
 class: inverse middle center
 
 ## Data + Technology
@@ -455,7 +460,7 @@ An .red[assignment] consists of:
 
 * Infix operators:
   * `+`, `-`, `*`, `/`, `^`, `%%` (modulo), `%/%` (integer division)
-  * `==`, `!=`, `>`, `<`, `>=`, `<=`
+  * `==`, `!=`, `>`, `<`, `>=`, `<=`, `%in%`
 
 ```{r arithmetic}
 ```
