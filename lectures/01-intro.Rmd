@@ -284,12 +284,14 @@ class: middle
 
 ---
 
+class: middle
+
 ## Assessments
 
-* Weekly labs 10%
-* 3 assignments 30%
-* Mid-term test 10% (TBD, possibly week 8)
-* Final exam 50%
+* 11 weekly labs 10% (best 10 out of 11)
+* 3 assignments 30% (each 10%)
+* 1 mid-term test 10% (TBD, possibly week 8)
+* 1 final exam 50%
 
 ---
 
@@ -312,7 +314,7 @@ class: middle
 
 .center[<img src="img/rstudio-interface.png" width="80%">]
 
-.footnote[image credit: [Stuart Lee's handout on **Setting up R and RStudio**](https://mida-monash.netlify.com/slides/setup.html)]
+.footnote[image credit: Stuart Lee]
 
 ---
 
@@ -449,12 +451,11 @@ An .red[assignment] consists of:
 ### - operation
 ]
 .right-column[
-### Perform calculations like arithmetic
+### Perform calculations and comparisons
 
 * Infix operators:
-  * `+`, `-`, `*`, `/`, `^`
-  * `%%`: modulo
-  * `%/%`: integer division
+  * `+`, `-`, `*`, `/`, `^`, `%%` (modulo), `%/%` (integer division)
+  * `==`, `!=`, `>`, `<`, `>=`, `<=`
 
 ```{r arithmetic}
 ```
