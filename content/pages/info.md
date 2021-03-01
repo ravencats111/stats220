@@ -8,7 +8,7 @@ permalink: /info/
 
 You first need to download and install:
 
-* Latest [R](https://cran.r-project.org) (`v4.0.3`)
+* Latest [R](https://cran.r-project.org) (`v4.0.4`)
 * Latest [RStudio](https://rstudio.com/products/rstudio/download/)
 
 Open RStudio, and type the following command in the R console:

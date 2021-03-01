@@ -6,6 +6,15 @@
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
     <link rel="stylesheet" href="assets/remark.css" type="text/css" />
   </head>
   <body>
@@ -175,7 +184,7 @@ class: inverse middle
 
 ### The *grammar of graphics* takes us beyond a limited set of .blue[charts (words)] to an almost unlimited world of .blue[graphical forms (statements)]. 
 &lt;hr&gt;
-### *{ggplot2}* is a system for declaratively creating graphics, based on The Grammar of Graphics.
+### *{ggplot2}* provides a cohesive system for declaratively creating graphics, based on The Grammar of Graphics.
 
 ---
 
@@ -218,7 +227,7 @@ ggplot(data = &lt;data&gt;, mapping = aes(&lt;mapping&gt;)) +
 
 1. `data`: tibble.
 2. `mapping`: aesthetic mappings between data variables and visual elements.
-3. `layer()`: a layer is a combination of data, stat and geom with a potential position adjustment.
+3. `layer()`: a graphical layer is a combination of data, stat and geom with a potential position adjustment.
   * `geom`: geometric elements to render each data observation.
   * `stat`: statistical transformations applied to the data.
   * `position`: position adjustment, such as "identity", "stack", "dodge" etc.
@@ -241,7 +250,8 @@ ggplot(data = sci_tbl, mapping = aes(x = dept, y = count)) +
 
 
 ```r
-ggplot(sci_tbl, aes(x = dept, y = count))
+p &lt;- ggplot(sci_tbl, aes(x = dept, y = count))
+p
 ```
 
 &lt;img src="figure/aes-map-1.png" style="display: block; margin: auto;" /&gt;
@@ -251,24 +261,20 @@ ggplot(sci_tbl, aes(x = dept, y = count))
 ## Geom .small[(a shorthand to `layer()`)]
 
 .pull-left[
-.small[
 
 ```r
-ggplot(sci_tbl, aes(x = dept, y = count)) +
+p + 
   geom_bar(stat = "identity")
 ```
 
 &lt;img src="figure/gg-bar-1.png" style="display: block; margin: auto;" /&gt;
 ]
-]
 .pull-right[
-.small[
 
 ```r
-ggplot(sci_tbl, aes(x = dept, y = count)) +
+p + 
   geom_col()
 ```
-]
 * `stat = "identity"` leaves data as is.
 * `geom_col()` is a shortcut to `geom_bar(stat = "identity")`.
 
@@ -277,7 +283,50 @@ Generally, we use `geom_*()` instead of `layer()` in practice.
 
 ---
 
-A list of geoms
+## Geom
+
+.pull-left[
+.small[
+
+```r
+p +
+  geom_point()
+```
+
+&lt;img src="figure/gg-point-1.png" style="display: block; margin: auto;" /&gt;
+]
+]
+.pull-right[
+.small[
+
+```r
+p +
+  geom_segment(aes(xend = dept, y = 0, yend = count))
+```
+
+&lt;img src="figure/gg-seg-1.png" style="display: block; margin: auto;" /&gt;
+]
+]
+
+---
+
+## Composite geoms: lollipop 🍭 = points + segments
+
+
+```r
+p +
+  geom_point() +
+  geom_segment(aes(xend = dept, y = 0, yend = count))
+```
+
+&lt;img src="figure/gg-pop-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Geom catalogue
+
+<div id="htmlwidget-4ebbe408d7be18650ae1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4ebbe408d7be18650ae1">{"x":{"filter":"none","data":[["geom_abline, geom_hline, geom_vline","geom_bar, geom_col","geom_bin2d","geom_blank","geom_boxplot","geom_contour, geom_contour_filled","geom_count","geom_density","geom_density_2d, geom_density2d, geom_density_2d_filled, geom_density2d_filled","geom_dotplot","geom_errorbarh","geom_function","geom_hex","geom_freqpoly, geom_histogram","geom_jitter","geom_crossbar, geom_errorbar, geom_linerange, geom_pointrange","geom_map","geom_path, geom_line, geom_step","geom_point","geom_polygon","geom_qq_line, geom_qq","geom_quantile","geom_ribbon, geom_area","geom_rug","geom_segment, geom_curve","geom_smooth","geom_spoke","geom_label, geom_text","geom_raster, geom_rect, geom_tile","geom_violin","geom_sf, geom_sf_label, geom_sf_text"],["Reference lines: horizontal, vertical, and diagonal","Bar charts","Heatmap of 2d bin counts","Draw nothing","A box and whiskers plot (in the style of Tukey)","2D contours of a 3D surface","Count overlapping points","Smoothed density estimates","Contours of a 2D density estimate","Dot plot","Horizontal error bars","Draw a function as a continuous curve","Hexagonal heatmap of 2d bin counts","Histograms and frequency polygons","Jittered points","Vertical intervals: lines, crossbars &amp; errorbars","Polygons from a reference map","Connect observations","Points","Polygons","A quantile-quantile plot","Quantile regression","Ribbons and area plots","Rug plots in the margins","Line segments and curves","Smoothed conditional means","Line segments parameterised by location, direction and distance","Text","Rectangles","Violin plot","Visualise sf objects"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>geom<\/th>\n      <th>Description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tp","ordering":false,"pageLength":5,"width":"80%","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
@@ -326,18 +375,15 @@ sci_tbl0
 ## Stat
 
 .pull-left[
-.small[
 
 ```r
-ggplot(sci_tbl, aes(x = dept, y = count)) +
+p + 
   geom_bar(stat = "identity")
 ```
 
 &lt;img src="figure/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
 ]
-]
 .pull-right[
-.small[
 
 ```r
 ggplot(sci_tbl0, aes(x = dept)) +
@@ -346,46 +392,72 @@ ggplot(sci_tbl0, aes(x = dept)) +
 
 &lt;img src="figure/gg-bar-c-1.png" style="display: block; margin: auto;" /&gt;
 ]
-]
-
----
-
-A list of stats
 
 ---
 
 ## Aesthetic mapping: visual
 
 .pull-left[
-.small[
 
 ```r
-ggplot(sci_tbl, aes(x = dept, y = count)) +
+p +
   geom_col(aes(colour = dept))
 ```
 
 &lt;img src="figure/gg-bar-col-1.png" style="display: block; margin: auto;" /&gt;
 ]
-]
 .pull-right[
-.small[
 
 ```r
-ggplot(sci_tbl, aes(x = dept, y = count)) +
+p +
   geom_col(aes(fill = dept))
 ```
 
 &lt;img src="figure/gg-bar-fill-1.png" style="display: block; margin: auto;" /&gt;
 ]
+
+---
+
+## Variables vs Constants
+
+.pull-left[
+
+```r
+p +
+  geom_col(aes(fill = dept))
+```
+
+&lt;img src="figure/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```r
+p +
+  geom_col(fill = "#756bb1")
+```
+
+&lt;img src="figure/gg-bar-fill-str-1.png" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-## Coords
+## Visual elements
+
+* colour
+* fill
+* alpha
+* shape
+* size
+* radius
+* linetype
+
+---
+
+## Coord
 
 
 ```r
-ggplot(sci_tbl, aes(x = dept, y = count)) +
+p +
   geom_col(aes(fill = dept)) +
   coord_polar(theta = "y")
 ```
@@ -394,15 +466,22 @@ ggplot(sci_tbl, aes(x = dept, y = count)) +
 
 ---
 
-## Revisiting our starter
+## Theme: modify the look
+
+
+```r
+p +
+  geom_col(aes(fill = dept)) +
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+&lt;img src="figure/gg-theme-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Your turn
+class: middle inverse
 
-compare line and radar plot
-
----
+## Case study
 
 ---
 

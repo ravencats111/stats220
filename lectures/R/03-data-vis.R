@@ -48,15 +48,29 @@ ggplot(data = sci_tbl, mapping = aes(x = dept, y = count)) +
   layer(geom = "bar", stat = "identity", position = "identity")
 
 ## ---- aes-map
-ggplot(sci_tbl, aes(x = dept, y = count))
+p <- ggplot(sci_tbl, aes(x = dept, y = count))
+p
 
 ## ---- gg-bar
-ggplot(sci_tbl, aes(x = dept, y = count)) +
+p + 
   geom_bar(stat = "identity")
 
 ## ---- gg-col2
-ggplot(sci_tbl, aes(x = dept, y = count)) +
+p + 
   geom_col()
+
+## ---- gg-point
+p +
+  geom_point()
+
+## ---- gg-seg
+p +
+  geom_segment(aes(xend = dept, y = 0, yend = count))
+
+## ---- gg-pop
+p +
+  geom_point() +
+  geom_segment(aes(xend = dept, y = 0, yend = count))
 
 ## ---- sci-disaggregated
 sci_tbl0 <- uncount(sci_tbl, count)
@@ -67,17 +81,26 @@ ggplot(sci_tbl0, aes(x = dept)) +
   geom_bar(stat = "count")
 
 ## ---- gg-bar-col
-ggplot(sci_tbl, aes(x = dept, y = count)) +
+p +
   geom_col(aes(colour = dept))
 
 ## ---- gg-bar-fill
-ggplot(sci_tbl, aes(x = dept, y = count)) +
+p +
   geom_col(aes(fill = dept))
 
+## ---- gg-bar-fill-str
+p +
+  geom_col(fill = "#756bb1")
+
 ## ---- gg-arc
-ggplot(sci_tbl, aes(x = dept, y = count)) +
+p +
   geom_col(aes(fill = dept)) +
   coord_polar(theta = "y")
+
+## ---- gg-theme
+p +
+  geom_col(aes(fill = dept)) +
+  theme(axis.text.x = element_text(angle = 90))
 
 ## ---- gg-movies
 movies <- as_tibble(jsonlite::read_json(

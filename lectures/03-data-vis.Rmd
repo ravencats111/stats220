@@ -16,7 +16,8 @@ output:
 
 ```{r initial, echo = FALSE, cache = FALSE, results = 'hide'}
 library(knitr)
-options(htmltools.dir.version = FALSE, tibble.width = 60, tibble.print_min = 6)
+options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE,
+  tibble.width = 60, tibble.print_min = 6)
 opts_chunk$set(
   echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
   fig.path = 'figure/', cache.path = 'cache/', cache = TRUE,
@@ -83,8 +84,8 @@ class: middle inverse
 ```
 ]
 .pull-right[
-* `dept`: categorical
-* `count`: numeric
+* `dept`: discrete/categorical
+* `count`: quantitative/numeric
 <hr>
 What types of plots can we make?
 1. bar plot for counts
@@ -142,7 +143,7 @@ class: inverse middle
 
 ### The *grammar of graphics* takes us beyond a limited set of .blue[charts (words)] to an almost unlimited world of .blue[graphical forms (statements)]. 
 <hr>
-### *{ggplot2}* is a system for declaratively creating graphics, based on The Grammar of Graphics.
+### *{ggplot2}* provides a cohesive system for declaratively creating graphics, based on The Grammar of Graphics.
 
 ---
 
@@ -167,7 +168,7 @@ ggplot(data = <data>, mapping = aes(<mapping>)) +
 
 1. `data`: tibble.
 2. `mapping`: aesthetic mappings between data variables and visual elements.
-3. `layer()`: a layer is a combination of data, stat and geom with a potential position adjustment.
+3. `layer()`: a graphical layer is a combination of data, stat and geom with a potential position adjustment.
   * `geom`: geometric elements to render each data observation.
   * `stat`: statistical transformations applied to the data.
   * `position`: position adjustment, such as "identity", "stack", "dodge" etc.
@@ -191,16 +192,12 @@ ggplot(data = <data>, mapping = aes(<mapping>)) +
 ## Geom .small[(a shorthand to `layer()`)]
 
 .pull-left[
-.small[
 ```{r gg-bar, fig.height = 3.8, fig.width = 4}
 ```
 ]
-]
 .pull-right[
-.small[
 ```{r gg-col2, eval = FALSE}
 ```
-]
 * `stat = "identity"` leaves data as is.
 * `geom_col()` is a shortcut to `geom_bar(stat = "identity")`.
 
@@ -209,7 +206,48 @@ Generally, we use `geom_*()` instead of `layer()` in practice.
 
 ---
 
-A list of geoms
+## Geom
+
+.pull-left[
+.small[
+```{r gg-point, fig.height = 3.8, fig.width = 4}
+```
+]
+]
+.pull-right[
+.small[
+```{r gg-seg, fig.height = 3.8, fig.width = 4}
+```
+]
+]
+
+---
+
+## Composite geoms: lollipop `r emo::ji("lollipop")` = points + segments
+
+```{r gg-pop, fig.height = 3.5, fig.width = 4}
+```
+
+---
+
+## Geom catalogue
+
+```{r geom, echo = FALSE}
+geoms <- help.search("^geom_", package = "ggplot2")
+geoms$matches %>% 
+  select(Entry, Title) %>% 
+  group_by(Title) %>% 
+  mutate(col = paste0("C", 1:n())) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = col, values_from = Entry) %>% 
+  mutate(geom = paste(C1, C2, C3, C4, sep = ", "),
+         geom = gsub(", NA", "", geom)) %>% 
+  select(geom, Title) %>% 
+  DT::datatable(colnames = c("geom", "Description"),
+                rownames = FALSE,
+                options = list(dom = 'tp', ordering=FALSE, pageLength = 5,
+                               width = "80%")) 
+```
 
 ---
 
@@ -231,57 +269,71 @@ A list of geoms
 ## Stat
 
 .pull-left[
-.small[
 ```{r ref.label = "gg-bar", fig.height = 4, fig.width = 4}
 ```
 ]
-]
 .pull-right[
-.small[
 ```{r gg-bar-c, fig.height = 4, fig.width = 4}
 ```
 ]
-]
-
----
-
-A list of stats
 
 ---
 
 ## Aesthetic mapping: visual
 
 .pull-left[
-.small[
 ```{r gg-bar-col, fig.height = 4, fig.width = 4}
 ```
 ]
-]
 .pull-right[
-.small[
 ```{r gg-bar-fill, fig.height = 4, fig.width = 4}
 ```
-]
 ]
 
 ---
 
-## Coords
+## Variables vs Constants
+
+.pull-left[
+```{r ref.label = "gg-bar-fill", fig.height = 4, fig.width = 4}
+```
+]
+.pull-right[
+```{r gg-bar-fill-str, fig.height = 4, fig.width = 4}
+```
+]
+
+---
+
+## Visual elements
+
+* colour
+* fill
+* alpha
+* shape
+* size
+* radius
+* linetype
+
+---
+
+## Coord
 
 ```{r gg-arc, fig.height = 5, fig.width = 5}
 ```
 
 ---
 
-## Revisiting our starter
+## Theme: modify the look
+
+```{r gg-theme, fig.height = 3.5, fig.width = 6}
+```
 
 ---
 
-## Your turn
+class: middle inverse
 
-compare line and radar plot
-
----
+## Case study
 
 ---
 
