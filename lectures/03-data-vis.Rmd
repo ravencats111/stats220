@@ -143,7 +143,7 @@ class: inverse middle
 
 ### The *grammar of graphics* takes us beyond a limited set of .blue[charts (words)] to an almost unlimited world of .blue[graphical forms (statements)]. 
 <hr>
-### *{ggplot2}* provides a cohesive system for declaratively creating graphics, based on The Grammar of Graphics.
+### *{ggplot2}* provides a cohesive system for declaratively creating elegant graphics, based on The Grammar of Graphics.
 
 ---
 
@@ -158,12 +158,12 @@ class: inverse middle
 
 ---
 
-## ggplot skeleton
+## A graphing template
 
 ```r
-ggplot(data = <data>, mapping = aes(<mapping>)) +
-  layer(geom = <geom>, stat = <stat>, position = <position>) +
-  layer(geom = <geom>, stat = <stat>, position = <position>)
+ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
+  layer(geom = <GEOM>, stat = <STAT>, position = <POSITION>) +
+  layer(geom = <GEOM>, stat = <STAT>, position = <POSITION>)
 ```
 
 1. `data`: tibble.
@@ -249,6 +249,8 @@ geoms$matches %>%
                                width = "80%")) 
 ```
 
+.footnote[<https://ggplot2.tidyverse.org/reference/index.html#section-layers>]
+
 ---
 
 ## Stat
@@ -292,7 +294,7 @@ geoms$matches %>%
 
 ---
 
-## Variables vs Constants
+## variables vs constants
 
 .pull-left[
 ```{r ref.label = "gg-bar-fill", fig.height = 4, fig.width = 4}
@@ -305,15 +307,26 @@ geoms$matches %>%
 
 ---
 
-## Visual elements
+## Visual aesthetics
 
-* colour
-* fill
-* alpha
-* shape
-* size
-* radius
-* linetype
+.pull-left[
+* `colour`/`color`, `fill`:
+  + named colours, e.g. `"red"`
+  + RGB specification, e.g. `"#756bb1"`
+* `alpha`: opacity between 0 and 1
+* `shape`:
+  * an integer between 0 and 25
+  * a single string, e.g. `"triangle open"`
+* `linetype`: 
+  * an integer between 0 and 6
+  * a single string, e.g. `"dashed"`
+* `size`, `radius`: a numerical value (in millimetres)
+]
+.pull-right[
+<br>
+<br>
+<img src="https://ggplot2.tidyverse.org/reference/scale_shape-6.png" width="100%">
+]
 
 ---
 
@@ -331,9 +344,240 @@ geoms$matches %>%
 
 ---
 
+## Modify the look of *texts* with `element_text()`
+
+<img src="img/ggplot-theme-text-annotation.png" width="100%">
+
+---
+
+## Modify the look of
+
+.pull-left[
+.center[**lines** with `element_line()`]
+
+<img src="img/ggplot-annotated-line-marks.png" width="100%">
+]
+.pull-right[
+.center[**regions** with `element_rect()`]
+
+<img src="img/ggplot-annotated-rect-marks.png" width="100%">
+]
+
+---
+
 class: middle inverse
 
-## Case study
+## Small multiples .small[(or trellis/faceting plots)]
+
+### `r emo::ji("star2")` the idea of conditioning on the values taken on by one or more of the variables in a data set
+
+---
+
+.left-column[
+## Facet
+]
+.right-column[
+`mpg` data available from {ggplot2}
+```{r mpg}
+```
+]
+
+---
+
+.left-column[
+## Facet
+]
+.right-column[
+```{r gg-mpg, fig.width = 5, fig.height = 4}
+```
+]
+
+---
+
+.left-column[
+## Facet
+### - `facet_grid()`
+]
+.right-column[
+```{r gg-facet-rows, fig.width = 5, fig.height = 4}
+```
+]
+
+---
+
+.left-column[
+## Facet
+### - `facet_grid()`
+]
+.right-column[
+```{r gg-facet-cols, fig.width = 6, fig.height = 4}
+```
+]
+
+---
+
+.left-column[
+## Facet
+### - `facet_grid()`
+]
+.right-column[
+```{r gg-facet-grid, fig.width = 7, fig.height = 4}
+```
+]
+
+---
+
+.left-column[
+## Facet
+### - `facet_grid()`
+### - `facet_wrap()`
+]
+.right-column[
+```{r gg-facet-wrap, fig.width = 6, fig.height = 4}
+```
+]
+
+---
+
+class: middle inverse
+
+## Exploratory data visualisation
+
+---
+
+background-image: url(img/data-vis-log.png)
+background-size: contain
+
+.footnote[image credit: Emi Tanaka]
+
+---
+
+.left-column[
+## case study
+### - import
+]
+.right-column[
+```{r movies}
+```
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - glimpse
+]
+.right-column[
+.small[
+```{r skim-movies, render = knitr::normal_print}
+```
+]
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - glimpse
+### - vis
+]
+.right-column[
+Q: are movies ratings consistent b/t IMDB & Rotten Tomatoes?
+.small[
+```{r movies-gam, fig.height = 3.5, fig.width = 3.5}
+```
+]
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - glimpse
+### - vis
+]
+.right-column[
+Q: are movies ratings consistent b/t IMDB & Rotten Tomatoes?
+.small[
+```{r movies-hex, fig.height = 3.5, fig.width = 3.5}
+```
+]
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - glimpse
+### - vis
+]
+.right-column[
+Q: the popularity of major genre.
+.small[
+```{r movies-bar, fig.height = 3.5, fig.width = 5}
+```
+]
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - glimpse
+### - vis
+]
+.right-column[
+Q: the likeness of major genre.
+.small[
+```{r movies-boxplot, fig.height = 3.5, fig.width = 5}
+```
+]
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - glimpse
+### - vis
+]
+.right-column[
+Q: the likeness of major genre.
+.small[
+```{r movies-density, fig.height = 3.5, fig.width = 6}
+```
+]
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - glimpse
+### - vis
+]
+.right-column[
+Q: the likeness of major genre.
+.small[
+```{r movies-ridges, fig.height = 3.5, fig.width = 7}
+```
+]
+]
+
+---
+
+## {ggplot2} extensions
+
+> {ggplot2} now has an official extension mechanism. This means that others can now easily create their own stats, geoms and positions, and provide them in other packages. This should allow the ggplot2 community to flourish, even as less development work happens in ggplot2 itself. 
+
+`r emo::ji("arrow_right")` <https://exts.ggplot2.tidyverse.org/gallery/>
 
 ---
 
@@ -343,6 +587,5 @@ class: middle inverse
 .center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
 ]
 .pull-right[
-* [Chapter 10: Tibbles](https://r4ds.had.co.nz/tibbles.html)
-* [Chapter 11: Data import](https://r4ds.had.co.nz/data-import.html)
+* [Data visualisation](https://r4ds.had.co.nz/data-visualisation.html)
 ]

@@ -109,8 +109,8 @@ sci_tbl
 ```
 ]
 .pull-right[
-* `dept`: categorical
-* `count`: numeric
+* `dept`: discrete/categorical
+* `count`: quantitative/numeric
 &lt;hr&gt;
 What types of plots can we make?
 1. bar plot for counts
@@ -184,7 +184,7 @@ class: inverse middle
 
 ### The *grammar of graphics* takes us beyond a limited set of .blue[charts (words)] to an almost unlimited world of .blue[graphical forms (statements)]. 
 &lt;hr&gt;
-### *{ggplot2}* provides a cohesive system for declaratively creating graphics, based on The Grammar of Graphics.
+### *{ggplot2}* provides a cohesive system for declaratively creating elegant graphics, based on The Grammar of Graphics.
 
 ---
 
@@ -217,12 +217,12 @@ ggplot(data = sci_tbl) +
 
 ---
 
-## ggplot skeleton
+## A graphing template
 
 ```r
-ggplot(data = &lt;data&gt;, mapping = aes(&lt;mapping&gt;)) +
-  layer(geom = &lt;geom&gt;, stat = &lt;stat&gt;, position = &lt;position&gt;) +
-  layer(geom = &lt;geom&gt;, stat = &lt;stat&gt;, position = &lt;position&gt;)
+ggplot(data = &lt;DATA&gt;, mapping = aes(&lt;MAPPINGS&gt;)) +
+  layer(geom = &lt;GEOM&gt;, stat = &lt;STAT&gt;, position = &lt;POSITION&gt;) +
+  layer(geom = &lt;GEOM&gt;, stat = &lt;STAT&gt;, position = &lt;POSITION&gt;)
 ```
 
 1. `data`: tibble.
@@ -328,6 +328,8 @@ p +
 <div id="htmlwidget-4ebbe408d7be18650ae1" style="width:100%;height:auto;" class="datatables html-widget"></div>
 <script type="application/json" data-for="htmlwidget-4ebbe408d7be18650ae1">{"x":{"filter":"none","data":[["geom_abline, geom_hline, geom_vline","geom_bar, geom_col","geom_bin2d","geom_blank","geom_boxplot","geom_contour, geom_contour_filled","geom_count","geom_density","geom_density_2d, geom_density2d, geom_density_2d_filled, geom_density2d_filled","geom_dotplot","geom_errorbarh","geom_function","geom_hex","geom_freqpoly, geom_histogram","geom_jitter","geom_crossbar, geom_errorbar, geom_linerange, geom_pointrange","geom_map","geom_path, geom_line, geom_step","geom_point","geom_polygon","geom_qq_line, geom_qq","geom_quantile","geom_ribbon, geom_area","geom_rug","geom_segment, geom_curve","geom_smooth","geom_spoke","geom_label, geom_text","geom_raster, geom_rect, geom_tile","geom_violin","geom_sf, geom_sf_label, geom_sf_text"],["Reference lines: horizontal, vertical, and diagonal","Bar charts","Heatmap of 2d bin counts","Draw nothing","A box and whiskers plot (in the style of Tukey)","2D contours of a 3D surface","Count overlapping points","Smoothed density estimates","Contours of a 2D density estimate","Dot plot","Horizontal error bars","Draw a function as a continuous curve","Hexagonal heatmap of 2d bin counts","Histograms and frequency polygons","Jittered points","Vertical intervals: lines, crossbars &amp; errorbars","Polygons from a reference map","Connect observations","Points","Polygons","A quantile-quantile plot","Quantile regression","Ribbons and area plots","Rug plots in the margins","Line segments and curves","Smoothed conditional means","Line segments parameterised by location, direction and distance","Text","Rectangles","Violin plot","Visualise sf objects"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>geom<\/th>\n      <th>Description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tp","ordering":false,"pageLength":5,"width":"80%","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
+.footnote[&lt;https://ggplot2.tidyverse.org/reference/index.html#section-layers&gt;]
+
 ---
 
 ## Stat
@@ -418,7 +420,7 @@ p +
 
 ---
 
-## Variables vs Constants
+## variables vs constants
 
 .pull-left[
 
@@ -441,15 +443,26 @@ p +
 
 ---
 
-## Visual elements
+## Visual aesthetics
 
-* colour
-* fill
-* alpha
-* shape
-* size
-* radius
-* linetype
+.pull-left[
+* `colour`/`color`, `fill`:
+  + named colours, e.g. `"red"`
+  + RGB specification, e.g. `"#756bb1"`
+* `alpha`: opacity between 0 and 1
+* `shape`:
+  * an integer between 0 and 25
+  * a single string, e.g. `"triangle open"`
+* `linetype`: 
+  * an integer between 0 and 6
+  * a single string, e.g. `"dashed"`
+* `size`, `radius`: a numerical value (in millimetres)
+]
+.pull-right[
+&lt;br&gt;
+&lt;br&gt;
+&lt;img src="https://ggplot2.tidyverse.org/reference/scale_shape-6.png" width="100%"&gt;
+]
 
 ---
 
@@ -479,9 +492,387 @@ p +
 
 ---
 
+## Modify the look of *texts* with `element_text()`
+
+&lt;img src="img/ggplot-theme-text-annotation.png" width="100%"&gt;
+
+---
+
+## Modify the look of
+
+.pull-left[
+.center[**lines** with `element_line()`]
+
+&lt;img src="img/ggplot-annotated-line-marks.png" width="100%"&gt;
+]
+.pull-right[
+.center[**regions** with `element_rect()`]
+
+&lt;img src="img/ggplot-annotated-rect-marks.png" width="100%"&gt;
+]
+
+---
+
 class: middle inverse
 
-## Case study
+## Small multiples .small[(or trellis/faceting plots)]
+
+### 🌟 the idea of conditioning on the values taken on by one or more of the variables in a data set
+
+---
+
+.left-column[
+## Facet
+]
+.right-column[
+`mpg` data available from {ggplot2}
+
+```r
+mpg
+```
+
+```
+#&gt; # A tibble: 234 x 11
+#&gt;   manufacturer model displ  year   cyl trans     drv     cty
+#&gt;   &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;
+#&gt; 1 audi         a4      1.8  1999     4 auto(l5)  f        18
+#&gt; 2 audi         a4      1.8  1999     4 manual(m… f        21
+#&gt; 3 audi         a4      2    2008     4 manual(m… f        20
+#&gt; 4 audi         a4      2    2008     4 auto(av)  f        21
+#&gt; 5 audi         a4      2.8  1999     6 auto(l5)  f        16
+#&gt; 6 audi         a4      2.8  1999     6 manual(m… f        18
+#&gt; # … with 228 more rows, and 3 more variables: hwy &lt;int&gt;,
+#&gt; #   fl &lt;chr&gt;, class &lt;chr&gt;
+```
+]
+
+---
+
+.left-column[
+## Facet
+]
+.right-column[
+
+```r
+p_mpg &lt;- ggplot(mpg, aes(displ, cty)) + 
+  geom_point(aes(colour = drv))
+p_mpg
+```
+
+&lt;img src="figure/gg-mpg-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+.left-column[
+## Facet
+### - `facet_grid()`
+]
+.right-column[
+
+```r
+p_mpg +
+  facet_grid(rows = vars(drv))
+```
+
+&lt;img src="figure/gg-facet-rows-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+.left-column[
+## Facet
+### - `facet_grid()`
+]
+.right-column[
+
+```r
+p_mpg +
+  facet_grid(cols = vars(drv))
+```
+
+&lt;img src="figure/gg-facet-cols-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+.left-column[
+## Facet
+### - `facet_grid()`
+]
+.right-column[
+
+```r
+p_mpg +
+  facet_grid(rows = vars(drv), cols = vars(cyl))
+```
+
+&lt;img src="figure/gg-facet-grid-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+.left-column[
+## Facet
+### - `facet_grid()`
+### - `facet_wrap()`
+]
+.right-column[
+
+```r
+p_mpg +
+  facet_wrap(vars(drv), ncol = 2)
+```
+
+&lt;img src="figure/gg-facet-wrap-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+class: middle inverse
+
+## Exploratory data visualisation
+
+---
+
+background-image: url(img/data-vis-log.png)
+background-size: contain
+
+.footnote[image credit: Emi Tanaka]
+
+---
+
+.left-column[
+## case study
+### - import
+]
+.right-column[
+
+```r
+movies &lt;- as_tibble(jsonlite::read_json(
+  "https://vega.github.io/vega-editor/app/data/movies.json",
+  simplifyVector = TRUE))
+movies
+```
+
+```
+#&gt; # A tibble: 3,201 x 16
+#&gt;   Title US_Gross Worldwide_Gross US_DVD_Sales
+#&gt;   &lt;chr&gt;    &lt;int&gt;           &lt;dbl&gt;        &lt;int&gt;
+#&gt; 1 The …   146083          146083           NA
+#&gt; 2 Firs…    10876           10876           NA
+#&gt; 3 I Ma…   203134          203134           NA
+#&gt; 4 Let'…   373615          373615           NA
+#&gt; 5 Slam   1009819         1087521           NA
+#&gt; 6 Miss…    24551         2624551           NA
+#&gt; # … with 3,195 more rows, and 12 more variables:
+#&gt; #   Production_Budget &lt;int&gt;, Release_Date &lt;chr&gt;,
+#&gt; #   MPAA_Rating &lt;chr&gt;, Running_Time_min &lt;int&gt;,
+#&gt; #   Distributor &lt;chr&gt;, Source &lt;chr&gt;, Major_Genre &lt;chr&gt;,
+#&gt; #   Creative_Type &lt;chr&gt;, Director &lt;chr&gt;,
+#&gt; #   Rotten_Tomatoes_Rating &lt;int&gt;, IMDB_Rating &lt;dbl&gt;,
+#&gt; #   IMDB_Votes &lt;int&gt;
+```
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - glimpse
+]
+.right-column[
+.small[
+
+```r
+skimr::skim(movies)
+```
+
+```
+#&gt; ── Data Summary ────────────────────────
+#&gt;                            Values
+#&gt; Name                       movies
+#&gt; Number of rows             3201  
+#&gt; Number of columns          16    
+#&gt; _______________________          
+#&gt; Column type frequency:           
+#&gt;   character                8     
+#&gt;   numeric                  8     
+#&gt; ________________________         
+#&gt; Group variables            None  
+#&gt; 
+#&gt; ── Variable type: character ────────────────────────────────────────────────────
+#&gt;   skim_variable n_missing complete_rate   min   max empty n_unique whitespace
+#&gt; 1 Title                 1         1.00      1    66     0     3176          0
+#&gt; 2 Release_Date          7         0.998     8    11     0     1603          0
+#&gt; 3 MPAA_Rating         605         0.811     1     9     0        7          0
+#&gt; 4 Distributor         232         0.928     3    33     0      174          0
+#&gt; 5 Source              365         0.886     6    29     0       18          0
+#&gt; 6 Major_Genre         275         0.914     5    19     0       12          0
+#&gt; 7 Creative_Type       446         0.861     7    23     0        9          0
+#&gt; 8 Director           1331         0.584     7    27     0      550          0
+#&gt; 
+#&gt; ── Variable type: numeric ──────────────────────────────────────────────────────
+#&gt;   skim_variable          n_missing complete_rate        mean           sd
+#&gt; 1 US_Gross                       7         0.998 44002085.    62555311.  
+#&gt; 2 Worldwide_Gross                7         0.998 85343400.   149947343.  
+#&gt; 3 US_DVD_Sales                2637         0.176 34901547.    45895122.  
+#&gt; 4 Production_Budget              1         1.00  31069171.    35585913.  
+#&gt; 5 Running_Time_min            1992         0.378      110.          20.2 
+#&gt; 6 Rotten_Tomatoes_Rating       880         0.725       54.3         28.1 
+#&gt; 7 IMDB_Rating                  213         0.933        6.28         1.25
+#&gt; 8 IMDB_Votes                   213         0.933    29909.       44938.  
+#&gt;         p0       p25        p50        p75         p100 hist 
+#&gt; 1      0   5493221.  22019466.  56091762.   760167650   ▇▁▁▁▁
+#&gt; 2      0   8031285.  31168926.  97283797   2767891499   ▇▁▁▁▁
+#&gt; 3 618454   9906211.  20331558.  37794216.   352582053   ▇▁▁▁▁
+#&gt; 4    218   6575000   20000000   42000000    300000000   ▇▁▁▁▁
+#&gt; 5     46        95        107        121          222   ▁▇▃▁▁
+#&gt; 6      1        30         55         80          100   ▅▆▆▇▇
+#&gt; 7      1.4       5.6        6.4        7.2          9.2 ▁▁▅▇▂
+#&gt; 8     18      4828.     15106      35810.      519541   ▇▁▁▁▁
+```
+]
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - glimpse
+### - vis
+]
+.right-column[
+Q: are movies ratings consistent b/t IMDB &amp; Rotten Tomatoes?
+.small[
+
+```r
+ggplot(movies, aes(x = IMDB_Rating, y = Rotten_Tomatoes_Rating)) +
+  geom_point(size = 0.5, alpha = 0.5) +
+  geom_smooth(method = "gam") +
+  theme(aspect.ratio = 1)
+```
+
+&lt;img src="figure/movies-gam-1.png" style="display: block; margin: auto;" /&gt;
+]
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - glimpse
+### - vis
+]
+.right-column[
+Q: are movies ratings consistent b/t IMDB &amp; Rotten Tomatoes?
+.small[
+
+```r
+ggplot(movies, aes(x = IMDB_Rating, y = Rotten_Tomatoes_Rating)) +
+  geom_hex() +
+  theme(aspect.ratio = 1)
+```
+
+&lt;img src="figure/movies-hex-1.png" style="display: block; margin: auto;" /&gt;
+]
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - glimpse
+### - vis
+]
+.right-column[
+Q: the popularity of major genre.
+.small[
+
+```r
+ggplot(movies, aes(y = Major_Genre)) +
+  geom_bar()
+```
+
+&lt;img src="figure/movies-bar-1.png" style="display: block; margin: auto;" /&gt;
+]
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - glimpse
+### - vis
+]
+.right-column[
+Q: the likeness of major genre.
+.small[
+
+```r
+ggplot(movies) +
+  geom_boxplot(aes(x = IMDB_Rating, y = Major_Genre))
+```
+
+&lt;img src="figure/movies-boxplot-1.png" style="display: block; margin: auto;" /&gt;
+]
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - glimpse
+### - vis
+]
+.right-column[
+Q: the likeness of major genre.
+.small[
+
+```r
+ggplot(movies) +
+  geom_density(aes(x = IMDB_Rating, fill = Major_Genre))
+```
+
+&lt;img src="figure/movies-density-1.png" style="display: block; margin: auto;" /&gt;
+]
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - glimpse
+### - vis
+]
+.right-column[
+Q: the likeness of major genre.
+.small[
+
+```r
+library(ggridges)
+ggplot(movies, aes(x = IMDB_Rating, y = Major_Genre)) +
+  geom_density_ridges(aes(fill = Major_Genre))
+```
+
+&lt;img src="figure/movies-ridges-1.png" style="display: block; margin: auto;" /&gt;
+]
+]
+
+---
+
+## {ggplot2} extensions
+
+&gt; {ggplot2} now has an official extension mechanism. This means that others can now easily create their own stats, geoms and positions, and provide them in other packages. This should allow the ggplot2 community to flourish, even as less development work happens in ggplot2 itself. 
+
+➡️ &lt;https://exts.ggplot2.tidyverse.org/gallery/&gt;
 
 ---
 
@@ -491,8 +882,7 @@ class: middle inverse
 .center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px"&gt;](https://r4ds.had.co.nz)]
 ]
 .pull-right[
-* [Chapter 10: Tibbles](https://r4ds.had.co.nz/tibbles.html)
-* [Chapter 11: Data import](https://r4ds.had.co.nz/data-import.html)
+* [Data visualisation](https://r4ds.had.co.nz/data-visualisation.html)
 ]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

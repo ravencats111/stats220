@@ -102,38 +102,68 @@ p +
   geom_col(aes(fill = dept)) +
   theme(axis.text.x = element_text(angle = 90))
 
-## ---- gg-movies
+## ---- mpg
+mpg
+
+## ---- gg-mpg
+p_mpg <- ggplot(mpg, aes(displ, cty)) + 
+  geom_point(aes(colour = drv))
+p_mpg
+
+## ---- gg-facet-rows
+p_mpg +
+  facet_grid(rows = vars(drv))
+
+## ---- gg-facet-cols
+p_mpg +
+  facet_grid(cols = vars(drv))
+
+## ---- gg-facet-grid
+p_mpg +
+  facet_grid(rows = vars(drv), cols = vars(cyl))
+
+## ---- gg-facet-wrap
+p_mpg +
+  facet_wrap(vars(drv), ncol = 2)
+
+## ---- movies
 movies <- as_tibble(jsonlite::read_json(
   "https://vega.github.io/vega-editor/app/data/movies.json",
   simplifyVector = TRUE))
+movies
 
+## ---- skim-movies
+skimr::skim(movies)
+
+## ---- movies-gam
 ggplot(movies, aes(x = IMDB_Rating, y = Rotten_Tomatoes_Rating)) +
-  geom_point()
+  geom_point(size = 0.5, alpha = 0.5) +
+  geom_smooth(method = "gam") +
+  theme(aspect.ratio = 1)
 
+## ---- movies-hex
 ggplot(movies, aes(x = IMDB_Rating, y = Rotten_Tomatoes_Rating)) +
-  geom_point() +
-  geom_smooth(method = "gam")
+  geom_hex() +
+  theme(aspect.ratio = 1)
 
-ggplot(movies, aes(x = IMDB_Rating, y = Rotten_Tomatoes_Rating)) +
-  geom_hex()
+## ---- movies-bar
+ggplot(movies, aes(y = Major_Genre)) +
+  geom_bar()
 
-ggplot(movies, aes(x = Major_Genre)) +
-  geom_bar() +
-  coord_flip()
-
+## ---- movies-boxplot
 ggplot(movies) +
-  geom_boxplot(aes(x = Major_Genre, y = IMDB_Rating))
+  geom_boxplot(aes(x = IMDB_Rating, y = Major_Genre))
 
+## ---- movies-density
 ggplot(movies) +
   geom_density(aes(x = IMDB_Rating, fill = Major_Genre))
 
+## ---- movies-ridges
 library(ggridges)
 ggplot(movies, aes(x = IMDB_Rating, y = Major_Genre)) +
   geom_density_ridges(aes(fill = Major_Genre))
 
-ggplot(movies, aes(x = IMDB_Rating, y = Major_Genre)) +
-  geom_density_ridges(aes(colour = Major_Genre, fill = Major_Genre))
-
+## ---- movies-facet
 ggplot(movies) +
   geom_density(aes(x = IMDB_Rating, fill = Major_Genre)) +
   facet_wrap(vars(Major_Genre))
