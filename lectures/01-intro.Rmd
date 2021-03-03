@@ -194,7 +194,7 @@ class: inverse middle
 
 ## .center[Why <i class='fab fa-r-project'></i>]
 
-* A general-purpose of programming language
+* A general-purpose programming language
 * Originated by statisticians, a language for statistical analysis
 * `r length(available.packages())` + packages on [CRAN](https://cran.r-project.org/web/packages/) (Comprehensive R Archive Network, the official repository), Github, etc.
 * The [tidyverse](http://tidyverse.org), a domain specific language in R for data scientists
