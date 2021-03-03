@@ -28,10 +28,6 @@ opts_chunk$set(
 )
 ```
 
-```{r xaringan-panelset, echo = FALSE}
-xaringanExtra::use_panelset()
-```
-
 ```{r external, include = FALSE, cache = FALSE}
 read_chunk('R/01-intro.R')
 ```
@@ -644,6 +640,16 @@ class: inverse middle
 
 ---
 
+## Modifying vectors with `[]` on the LHS
+
+```{r modify}
+```
+
+* RHS `[]` subsets vector `y`
+* LHS `[]` modifies vector `y`
+
+---
+
 class: inverse middle
 
 ## <i class='fab fa-r-project'></i> 101: functions
@@ -730,6 +736,12 @@ mean(x, trim = 0, na.rm = FALSE, ...)
 
 .center[<img src="https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-blanks/rtwitter_blank.png" width="50%">]
 
+???
+
+* keep up to date on twitter
+* rladies 
+* follow hadley and jenny
+
 ---
 
 ## Reading
@@ -746,3 +758,8 @@ mean(x, trim = 0, na.rm = FALSE, ...)
 * [Vectors](https://adv-r.hadley.nz/vectors-chap.html)
 * [Subsetting](https://adv-r.hadley.nz/subsetting.html)
 ]
+
+???
+
+* resources: r4ds
+* r evolves rapidly in the past 5 yrs, out-of-date resources

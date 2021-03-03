@@ -55,6 +55,12 @@ x[x > 0]
 x[0]
 x[]
 
+## ---- modify
+y <- x
+y
+y[1:3] <- y[1:3] %/% 2
+y
+
 ## ---- function-mean
 mean(x = x)
 
