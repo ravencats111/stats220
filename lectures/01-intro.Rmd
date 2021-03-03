@@ -45,6 +45,13 @@ read_chunk('R/01-intro.R')
 * Outside of work, I play `r emo::ji("tennis")` and make `r emo::ji("coffee")`.
 ]
 
+???
+
+* phd at the end of 2019, moved to Auckland last Feb
+* I do research in stats computing and graphics. develop new graphical methods, interactive graphics, software for data scientists.
+* a regular contributor and dev to R. One of my most pop packages has been dl millions time last year
+* Amateur tennis player, and make my own flat white.
+
 ---
 
 class: middle
@@ -58,10 +65,20 @@ class: middle
 * `r emo::ji("clock12")` Thursday 2-3pm
 ]
 
+???
+
+* Any r-related questions post on piazza, so others can benefit
+* I'll run my office hours every thursday from this week onwards, same zoom link.
+* If you've got any downloading and installing issues, please drop by my office hours.
+
 ---
 
 background-image: url(img/class-rep.png)
 background-size: cover
+
+???
+
+I'm looking for 2 class rep. Please nominate yourself over the chat.
 
 ---
 
@@ -73,10 +90,9 @@ class: inverse middle center
 
 ???
 
-* revamped
-* all course materials available on this website
-* except for some big datasets
-* turn your labs/assignments on canvas
+* 2nd time to teach. revamped for modern data and modern tech. It's not an easy A+ course.
+* I've made all course materials available on this website instead of canvas
+* give a tour about the website
 
 ---
 
@@ -101,17 +117,20 @@ class: inverse middle center
 .checked[
 * Fresh, interesting, challenging 
 * Locally collected and impactful
-* Example: [Auckland realtime transport](https://dev-portal.at.govt.nz)
+* Example: [Modelling the travel time of transit vehicles in real‐time](https://tomelliott.co.nz/publications/anzjs2020/)
 ]
 ]
 
 ???
 
-How many of you have seen and worked with datasets, such as *iris*, *mtcars*, *wages*?
+* If you studied 20X, you def know and work with `student test` dataset?
+* smallish with a couple of data obs, highly processed for modelling purpose, like a veggie can
+* real datasets are much interesting to work with, rel to our lifes, we can make useful & meaningful decision from the data
+* predicting arrival time for akl bus in real-time
 
 ---
 
-## How I learn about XX "technology"
+## How I learn new technology
 
 .center[
 <iframe src="https://giphy.com/embed/xonOzxf2M8hNu" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/xonOzxf2M8hNu"></a></p>
@@ -122,8 +141,10 @@ How many of you have seen and worked with datasets, such as *iris*, *mtcars*, *w
 
 ???
 
+* run the code and see what's happening, and tweak yourself for a small project
+* read documentation!
+* learn to google
 * Search or ask questions on [Stack Overflow](http://stackoverflow.com) and [RStudio Community](http://community.rstudio.com)
-* Follow the community, [#rstats](https://twitter.com/search?q=%23rstats&src=typeahead_click) on Twitter
 
 ---
 
@@ -135,12 +156,20 @@ class: inverse middle center
 
 .footnote[reference: [You can't do data science in a GUI](https://speakerdeck.com/hadley/you-cant-do-data-science-in-a-gui)]
 
+???
+
+* The first software you worked with data is probably excel. It's a GUI application. GUI stands for ...
+* If I wanna sort a column in excel, a window pops out to ask if sort a dataset or that column only.
+* What's wrong with this kind of point and click application.
+* You don't work on ur own on a ds proj. If your fellow students or future colleagues, or even the future of you wanna know how you process with your data, do you repeat your steps and share them with some recordings. It's not feasible to share and replicate your process.
+
 ---
 
 ## Why programme for data science?
 
 * Programming languages are **languages**.
 ```{r eval = FALSE}
+library(dplyr)
 starwars %>%
   group_by(species) %>%
   summarise(
@@ -153,6 +182,12 @@ starwars %>%
   + reproducible, readable, sharable
   + expressive
 
+???
+
+* If cann't, can we do ds by programming
+* This is an R snippet. Even you don't know R now, we can still read the scripts and probably have a vague sense of what this code block is doing here.
+* Plain text, we can copy and paste.
+
 ---
 
 class: inverse middle
@@ -160,13 +195,18 @@ class: inverse middle
 ## .center[Why <i class='fab fa-r-project'></i>]
 
 * A general-purpose of programming language
-* Originated by statisticians, a language for statistical computing and graphics
+* Originated by statisticians, a language for statistical analysis
 * `r length(available.packages())` + packages on [CRAN](https://cran.r-project.org/web/packages/) (Comprehensive R Archive Network, the official repository), Github, etc.
 * The [tidyverse](http://tidyverse.org), a domain specific language in R for data scientists
 
 ???
 
-3rd party packages thriving
+* we learnt R for statistical modelling, but it's general-purpose.
+* on the other hand, specific-purpose language, e.g. SQL for manipulating database.
+* R was first originated from UoA in 1993, with a goal of doing statistical analysis
+* Why R has been thriving in past decades, bc a growing community with so many third-party packages/add-ons
+* CRAN
+* Hadley W is an Auckland Uni alumnus.
 
 ---
 
@@ -203,6 +243,10 @@ class: inverse middle
 
 ]
 
+???
+
+We'll learn each of these modules through the semester.
+
 ---
 
 .left-column[
@@ -233,7 +277,8 @@ class: inverse middle
 
 ???
 
-How many of you have used RMarkdown before?
+* Rmd ecosystem
+* will boost your productivity
 
 ---
 
@@ -254,6 +299,10 @@ How many of you have used RMarkdown before?
 .small[`r emo::ji("point_up_2")` click the image above will take you to the web app, and try to interact with the app.]
 ]
 
+???
+
+* A shiny dashboard dev by ministry of business, innovation & employment
+
 ---
 
 ## Textbook `r emo::ji("books")`
@@ -268,6 +317,8 @@ How many of you have used RMarkdown before?
 ???
 
 * Available online
+* One reason I like the R community, they like sharing, make works open.
+* open education
 * clicking images will take you to the book
 
 ---
@@ -287,16 +338,27 @@ class: middle
 ![](https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/heartyr.gif)
 ]
 
+???
+
+* From my own experience, or other beginners, frustrating, like cloud over head
+* I can teach you bits and pieces, but it's you to compose these bits and pieces to solve real-world probs.
+* like lego
+* in the first two week, may look easy, I teach basics.
+
 ---
 
 class: middle
 
 ## Assessments
 
-* 11 weekly labs 10% (best 10 out of 11)
-* 3 assignments 30% (each 10%)
-* 1 mid-term test 10% (TBD, possibly week 8)
-* 1 final exam 50%
+* .brown[11] weekly labs 10% (best 10 out of 11)
+* .brown[3] assignments 30% (each 10%)
+* .brown[1] mid-term test 10% (TBD, possibly week 8)
+* .brown[1] final exam 50%
+
+???
+
+* > 300, automatically grade your labs
 
 ---
 
@@ -312,6 +374,9 @@ class: middle
 
 > If R were an airplane, RStudio would be the airport, providing many, many supporting services that make it easier for you, the pilot, to take off and go to awesome places. Sure, you can fly an airplane without an airport, but having those runways and supporting infrastructure is a game-changer. <br> -- [Julie Lowndes](http://jules32.github.io/resources/RStudio_intro/)
 
+???
+
+Hope you've downloaded r and rstudio
 
 ---
 
@@ -320,6 +385,10 @@ class: middle
 .center[<img src="img/rstudio-interface.png" width="80%">]
 
 .footnote[image credit: Stuart Lee]
+
+???
+
+live
 
 ---
 
@@ -364,7 +433,7 @@ Change the RStudio appearance up to your taste
      + `01-intro.Rmd`, `02-import-export.Rmd`
    + `labs/`
      + `lab01.R`, `lab02.R`
-* All working files are relative to the **project root** (i.e. `stats220/`).
+* All working files are .red[relative] to the **project root** (i.e. `stats220/`).
 * The project should just work on a different computer.
 
 ---
@@ -529,7 +598,7 @@ class: inverse middle
 
 ]
 .pull-right[
-### `NULL`
+### The `NULL` object
 
 ```{r null}
 ```
@@ -654,6 +723,12 @@ mean(x, trim = 0, na.rm = FALSE, ...)
 
 ```{r custom-mean}
 ```
+
+---
+
+## Follow the `#rstats` community
+
+.center[<img src="https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-blanks/rtwitter_blank.png" width="50%">]
 
 ---
 
