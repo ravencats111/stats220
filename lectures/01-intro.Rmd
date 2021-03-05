@@ -667,6 +667,11 @@ A function call consists of the .red[function name] followed by one or more .red
 * function name: `mean()`, a built-in R function to compute mean of a vector
 * argument: the first argument (LHS `x`) to specify the data (RHS `x`)
 
+???
+
+* A function is a tool to do what you ask for. `+`
+* a pipe that takes some input and send back some output
+
 ---
 
 ## Function help page
@@ -705,6 +710,10 @@ mean(x, trim = 0, na.rm = FALSE, ...)
 ```{r function-args-names}
 ```
 ]
+
+???
+
+* body implements the algorithm
 
 ---
 
