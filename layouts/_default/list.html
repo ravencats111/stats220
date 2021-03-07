@@ -32,6 +32,9 @@
                   <div class="panel-body text-center">
                     <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}R/{{ .Params.r }}" target="_blank" rel="noopener" role="button" download><i class="fa fa-download"></i> R </a>
                     <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.rmd }}" target="_blank" rel="noopener" role="button" download><i class="fa fa-download"></i> Rmd </a>
+                    {{ if .Params.pdf }}
+                      <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.pdf }}" target="_blank" rel="noopener" role="button"><i class="fa fa-file"></i> PDF </a>
+                    {{ end }}
                     {{ if .Params.lab }}
                       <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.lab }}" target="_blank" rel="noopener" role="button"><i class="fa fa-external-link-square-alt"></i> Lab </a>
                     {{ end }}
