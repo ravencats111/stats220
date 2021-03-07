@@ -3,7 +3,7 @@ layout: page
 title: Lab 01
 ---
 
-This lab exercise is **due 23:59 Monday 12 March (NZDT)**.
+This lab exercise is **due 23:59 Monday 15 March (NZDT)**.
 
 -   You should submit an R file (i.e. file extension `.R`) containing R
     code that assigns values to **the appropriate symbols**.
