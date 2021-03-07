@@ -6,6 +6,6 @@ slides: "01-intro.html"
 r: "01-intro.R"
 rmd: "01-intro.Rmd"
 pdf: "01-intro.pdf"
-lab:
+lab: "labs/lab01"
 sol:
 ---
