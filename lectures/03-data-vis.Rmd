@@ -139,6 +139,15 @@ What types of plots can we make?
 
 ---
 
+class: inverse
+
+background-image: url(img/named-gg.png)
+background-size: cover
+
+.footnote[image credit: Thomas Lin Pederson]
+
+---
+
 class: inverse middle
 
 ### The *grammar of graphics* takes us beyond a limited set of .blue[charts (words)] to an almost unlimited world of .blue[graphical forms (statements)]. 
@@ -201,7 +210,7 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
 * `stat = "identity"` leaves data as is.
 * `geom_col()` is a shortcut to `geom_bar(stat = "identity")`.
 
-Generally, we use `geom_*()` instead of `layer()` in practice.
+**Generally, we use `geom_*()` instead of `layer()` in practice.**
 ]
 
 ---
@@ -294,7 +303,7 @@ geoms$matches %>%
 
 ---
 
-## variables vs constants
+## Mapping variables vs Setting constants
 
 .pull-left[
 ```{r ref.label = "gg-bar-fill", fig.height = 4, fig.width = 4}
@@ -573,7 +582,7 @@ Q: the likeness of major genre.
 
 ---
 
-## {ggplot2} extensions
+## Beyond {ggplot2}
 
 > {ggplot2} now has an official extension mechanism. This means that others can now easily create their own stats, geoms and positions, and provide them in other packages. This should allow the ggplot2 community to flourish, even as less development work happens in ggplot2 itself. 
 

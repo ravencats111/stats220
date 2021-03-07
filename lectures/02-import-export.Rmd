@@ -145,12 +145,12 @@ Coerce to a list
 ]
 .right-column[
 .pull-left[
-Subset by `[[]]`
+Subset by `[]`
 ```{r lst-sub}
 ```
 ]
 .pull-right[
-Subset by `[]`
+Subset by `[[]]`
 ```{r lst-sub2}
 ```
 ]

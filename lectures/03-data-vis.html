@@ -180,6 +180,15 @@ pie(sci_tbl$count,
 
 ---
 
+class: inverse
+
+background-image: url(img/named-gg.png)
+background-size: cover
+
+.footnote[image credit: Thomas Lin Pederson]
+
+---
+
 class: inverse middle
 
 ### The *grammar of graphics* takes us beyond a limited set of .blue[charts (words)] to an almost unlimited world of .blue[graphical forms (statements)]. 
@@ -278,7 +287,7 @@ p +
 * `stat = "identity"` leaves data as is.
 * `geom_col()` is a shortcut to `geom_bar(stat = "identity")`.
 
-Generally, we use `geom_*()` instead of `layer()` in practice.
+**Generally, we use `geom_*()` instead of `layer()` in practice.**
 ]
 
 ---
@@ -420,7 +429,7 @@ p +
 
 ---
 
-## variables vs constants
+## Mapping variables vs Setting constants
 
 .pull-left[
 
@@ -868,7 +877,7 @@ ggplot(movies, aes(x = IMDB_Rating, y = Major_Genre)) +
 
 ---
 
-## {ggplot2} extensions
+## Beyond {ggplot2}
 
 &gt; {ggplot2} now has an official extension mechanism. This means that others can now easily create their own stats, geoms and positions, and provide them in other packages. This should allow the ggplot2 community to flourish, even as less development work happens in ggplot2 itself. 
 

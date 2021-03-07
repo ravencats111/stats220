@@ -3,14 +3,18 @@ layout: page
 title: Lab 01
 ---
 
-This lab exercise is **due 5:00pm Monday 12 March (NZDT)**.
+This lab exercise is **due 23:59 Monday 12 March (NZDT)**.
 
 -   You should submit an R file (i.e. file extension `.R`) containing R
-    code that assigns values to **the appropriate symbols**. Your R file
-    will be automatically executed in order and checked against the
-    values that have been assigned to the symbols on the cloud.
+    code that assigns values to **the appropriate symbols**.
+-   Your R file will be executed in order and checked against the values
+    that have been assigned to the symbols using an automatic grading
+    system. Marks will be fully deducted for **non-identical** results.
+-   Intermediate steps to achieve the final results will NOT be checked.
 -   Each question is worth 0.2 points.
--   You should submit your answers on Canvas.
+-   You should submit your R file on Canvas.
+-   Late assignments are NOT accepted unless prior arrangement for
+    medical/compassionate reasons.
 
 ### Question 1
 

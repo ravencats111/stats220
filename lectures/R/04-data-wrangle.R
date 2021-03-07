@@ -35,6 +35,8 @@ time_use %>%
 time_use %>% 
   filter(country %in% c("Australia", "New Zealand"))
 
+time_use[time_use$country %in% c("Australia", "New Zealand"), ]
+
 time_use %>% 
   filter(country %in% c("Australia", "New Zealand"), minutes > 30)
 
@@ -68,6 +70,15 @@ time_use_oz %>%
 
 time_use_oz %>% 
   select(country:category)
+
+time_use_oz %>% 
+  relocate(minutes)
+
+time_use_oz %>% 
+  relocate(minutes)
+
+time_use_oz %>% 
+  relocate(minutes, .after = country)
 
 time_use_oz2 <- time_use_oz %>%
   mutate(
