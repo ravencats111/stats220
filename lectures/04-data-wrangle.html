@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STATS 220</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="assets/remark.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STATS 220
+## Data wrangling🛠
+
+---
+
+
+
+
+
+
+
+
+## Let's talk about code readability again!
+
+* looooooooooooooooong!
+
+```r
+show_up_to_work(have_breakfast(glam_up(dress(shower(wake_up("I"))))))
+```
+
+* infinite nesting......
+
+```r
+show_up_to_work(
+  have_breakfast(
+    glam_up(
+      dress(
+        shower(
+          wake_up("I")
+        )
+      )
+    )
+  )
+)
+```
+
+---
+
+## Does this one look better?
+
+```r
+morning1 &lt;- wake_up("I")
+morning2 &lt;- shower(morning1)
+morning3 &lt;- dress(morning2)
+morning4 &lt;- glam_up(morning3)
+morning5 &lt;- have_breakfast(morning4)
+morning6 &lt;- show_up_to_work(morning5)
+```
+
+* many intermediate steps
+* not meaningful variable names
+
+---
+
+## How about this one?
+
+```r
+morning_routine &lt;- "I" %&gt;% 
+  wake_up() %&gt;% 
+  shower() %&gt;% 
+  dress() %&gt;% 
+  glam_up() %&gt;% 
+  have_breakfast() %&gt;% 
+  show_up_to_work()
+```
+
+---
+
+class: inverse middle center
+
+&lt;img src="https://github.com/rstudio/hex-stickers/raw/master/SVG/pipe.svg" height="420px"&gt;
+
+---
+
+## Time use in OECD
+
+
+```r
+library(readxl)
+library(tidyverse)
+time_use_raw &lt;- read_xlsx("data/time-use-oced.xlsx")
+time_use_raw
+```
+
+```
+#&gt; # A tibble: 461 x 3
+#&gt;   Country   Category  `Time (minutes)`
+#&gt;   &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt;
+#&gt; 1 Australia Paid work             211.
+#&gt; 2 Austria   Paid work             280.
+#&gt; 3 Belgium   Paid work             194.
+#&gt; 4 Canada    Paid work             269.
+#&gt; 5 Denmark   Paid work             200.
+#&gt; 6 Estonia   Paid work             231.
+#&gt; # … with 455 more rows
+```
+
+---
+
+## Pipe the input into the first argument in the function
+
+&lt;img src="figure/gg-time-use-1.png" style="display: block; margin: auto;" /&gt;
+
+.pull-left[
+
+```r
+*ggplot(time_use_raw) +
+  geom_col(aes(
+    Country, `Time (minutes)`, 
+    fill = Category))
+```
+]
+.pull-right[
+
+```r
+*time_use_raw %&gt;%
+  ggplot() +
+  geom_col(aes(
+    Country, `Time (minutes)`, 
+    fill = Category))
+```
+]
+
+---
+
+.left-column[
+.center[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="60%"&gt;]
+]
+.right-column[
+{dplyr} is a grammar of data manipulation, providing a consistent set of **verbs** that help you solve the most common data manipulation challenges:
+
+1. `mutate()` adds new variables that are functions of existing variables
+2. `select()` picks variables based on their names.
+3. `filter()` picks cases based on their values.
+4. `summarise()` reduces multiple values down to a single summary.
+5. `arrange()` changes the ordering of the rows.
+
+These all combine naturally with `group_by()` which allows you to perform any operation “by group”.
+]
+
+---
+
+
+```r
+time_use &lt;- time_use_raw %&gt;% 
+  rename(
+    country = Country, 
+    category = Category, 
+    minutes = `Time (minutes)`)
+time_use
+```
+
+```
+#&gt; # A tibble: 461 x 3
+#&gt;   country   category  minutes
+#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt;
+#&gt; 1 Australia Paid work    211.
+#&gt; 2 Austria   Paid work    280.
+#&gt; 3 Belgium   Paid work    194.
+#&gt; 4 Canada    Paid work    269.
+#&gt; 5 Denmark   Paid work    200.
+#&gt; 6 Estonia   Paid work    231.
+#&gt; # … with 455 more rows
+```
+
+---
+
+.pull-left[
+
+```r
+time_use %&gt;% 
+  distinct(category)
+```
+
+```
+#&gt; # A tibble: 14 x 1
+#&gt;    category                        
+#&gt;    &lt;chr&gt;                           
+#&gt;  1 Paid work                       
+#&gt;  2 Education                       
+#&gt;  3 Care for household members      
+#&gt;  4 Housework                       
+#&gt;  5 Shopping                        
+#&gt;  6 Other unpaid work &amp; volunteering
+#&gt;  7 Sleep                           
+#&gt;  8 Eating and drinking             
+#&gt;  9 Personal care                   
+#&gt; 10 Sports                          
+#&gt; 11 Attending events                
+#&gt; 12 Seeing friends                  
+#&gt; 13 TV and Radio                    
+#&gt; 14 Other leisure activities
+```
+]
+.pull-right[
+
+```r
+time_use %&gt;% 
+  distinct(country, category)
+```
+
+```
+#&gt; # A tibble: 461 x 2
+#&gt;   country   category 
+#&gt;   &lt;chr&gt;     &lt;chr&gt;    
+#&gt; 1 Australia Paid work
+#&gt; 2 Austria   Paid work
+#&gt; 3 Belgium   Paid work
+#&gt; 4 Canada    Paid work
+#&gt; 5 Denmark   Paid work
+#&gt; 6 Estonia   Paid work
+#&gt; # … with 455 more rows
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `slice()`: subsets rows using their positions
+
+```r
+time_use %&gt;% 
+  slice(1:5)
+```
+
+```
+#&gt; # A tibble: 5 x 3
+#&gt;   country   category  minutes
+#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt;
+#&gt; 1 Australia Paid work    211.
+#&gt; 2 Austria   Paid work    280.
+#&gt; 3 Belgium   Paid work    194.
+#&gt; 4 Canada    Paid work    269.
+#&gt; 5 Denmark   Paid work    200.
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `group_by()`: group by one or more variables
+
+```r
+time_use %&gt;% 
+  group_by(country)
+```
+
+```
+#&gt; # A tibble: 461 x 3
+*#&gt; # Groups:   country [33]
+#&gt;   country   category  minutes
+#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt;
+#&gt; 1 Australia Paid work    211.
+#&gt; 2 Austria   Paid work    280.
+#&gt; 3 Belgium   Paid work    194.
+#&gt; 4 Canada    Paid work    269.
+#&gt; 5 Denmark   Paid work    200.
+#&gt; 6 Estonia   Paid work    231.
+#&gt; # … with 455 more rows
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `group_by()`: use in conjunction with other verbs
+
+```r
+time_use %&gt;% 
+  group_by(country) %&gt;% 
+  slice(1:5)
+```
+
+```
+#&gt; # A tibble: 165 x 3
+*#&gt; # Groups:   country [33]
+#&gt;   country   category                   minutes
+#&gt;   &lt;chr&gt;     &lt;chr&gt;                        &lt;dbl&gt;
+#&gt; 1 Australia Paid work                    211. 
+#&gt; 2 Australia Education                     27.0
+#&gt; 3 Australia Care for household members    44.5
+#&gt; 4 Australia Housework                    132. 
+#&gt; 5 Australia Shopping                      29.0
+#&gt; 6 Austria   Paid work                    280. 
+#&gt; # … with 159 more rows
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `slice()` shortcuts: `slice_head()` &amp; `slice_tail()`
+
+```r
+time_use %&gt;% 
+  group_by(country) %&gt;% 
+  slice_head(n = 5)
+```
+
+```
+#&gt; # A tibble: 165 x 3
+*#&gt; # Groups:   country [33]
+#&gt;   country   category                   minutes
+#&gt;   &lt;chr&gt;     &lt;chr&gt;                        &lt;dbl&gt;
+#&gt; 1 Australia Paid work                    211. 
+#&gt; 2 Australia Education                     27.0
+#&gt; 3 Australia Care for household members    44.5
+#&gt; 4 Australia Housework                    132. 
+#&gt; 5 Australia Shopping                      29.0
+#&gt; 6 Austria   Paid work                    280. 
+#&gt; # … with 159 more rows
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `ungroup()`: removes grouping
+
+```r
+time_use %&gt;% 
+  group_by(country) %&gt;% 
+  slice_head(n = 5) %&gt;% 
+  ungroup()
+```
+
+```
+#&gt; # A tibble: 165 x 3
+#&gt;   country   category                   minutes
+#&gt;   &lt;chr&gt;     &lt;chr&gt;                        &lt;dbl&gt;
+#&gt; 1 Australia Paid work                    211. 
+#&gt; 2 Australia Education                     27.0
+#&gt; 3 Australia Care for household members    44.5
+#&gt; 4 Australia Housework                    132. 
+#&gt; 5 Australia Shopping                      29.0
+#&gt; 6 Austria   Paid work                    280. 
+#&gt; # … with 159 more rows
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `slice_sample()` randomly selects rows
+
+```r
+set.seed(220)
+time_use %&gt;% 
+  slice_sample(n = 10)
+```
+
+```
+#&gt; # A tibble: 10 x 3
+#&gt;    country     category                         minutes
+#&gt;    &lt;chr&gt;       &lt;chr&gt;                              &lt;dbl&gt;
+#&gt;  1 Norway      Housework                           82.9
+#&gt;  2 Austria     Education                           26.9
+#&gt;  3 Spain       Other leisure activities            84.7
+#&gt;  4 Estonia     Paid work                          231. 
+#&gt;  5 Canada      Education                           36.0
+#&gt;  6 Turkey      Education                           29.0
+#&gt;  7 Netherlands Housework                          105. 
+#&gt;  8 Australia   Sleep                              512. 
+#&gt;  9 Australia   Other unpaid work &amp; volunteering    57.5
+#&gt; 10 Germany     Housework                          109.
+```
+]
+
+???
+
+* random sampling
+* bootstrapping
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `arrange()`: arrange rows by columns
+
+```r
+time_use %&gt;% 
+  arrange(minutes)
+```
+
+```
+#&gt; # A tibble: 461 x 3
+#&gt;   country   category                   minutes
+#&gt;   &lt;chr&gt;     &lt;chr&gt;                        &lt;dbl&gt;
+#&gt; 1 Japan     Care for household members    0   
+#&gt; 2 Lithuania Attending events              1.35
+#&gt; 3 China     Attending events              2.00
+#&gt; 4 Turkey    Attending events              2.58
+#&gt; 5 Poland    Attending events              2.81
+#&gt; 6 Korea     Attending events              4.45
+#&gt; # … with 455 more rows
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `arrange()`: arrange rows by columns
+
+```r
+time_use %&gt;% 
+  arrange(desc(minutes)) # -minutes
+```
+
+```
+#&gt; # A tibble: 461 x 3
+#&gt;   country      category minutes
+#&gt;   &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt;
+#&gt; 1 South Africa Sleep       553.
+#&gt; 2 China        Sleep       542.
+#&gt; 3 Estonia      Sleep       530.
+#&gt; 4 India        Sleep       528.
+#&gt; 5 USA          Sleep       528.
+#&gt; 6 New Zealand  Sleep       526 
+#&gt; # … with 455 more rows
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `arrange()`: arrange rows by columns
+
+```r
+time_use %&gt;% 
+  arrange(country, desc(minutes))
+```
+
+```
+#&gt; # A tibble: 461 x 3
+#&gt;   country   category                 minutes
+#&gt;   &lt;chr&gt;     &lt;chr&gt;                      &lt;dbl&gt;
+#&gt; 1 Australia Sleep                      512. 
+#&gt; 2 Australia Paid work                  211. 
+#&gt; 3 Australia TV and Radio               140. 
+#&gt; 4 Australia Housework                  132. 
+#&gt; 5 Australia Eating and drinking         89.1
+#&gt; 6 Australia Other leisure activities    76.1
+#&gt; # … with 455 more rows
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `filter()`: subset rows using columns
+
+```r
+time_use %&gt;% 
+  filter(minutes == max(minutes))
+```
+
+```
+#&gt; # A tibble: 1 x 3
+#&gt;   country      category minutes
+#&gt;   &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt;
+#&gt; 1 South Africa Sleep       553.
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `filter()`: subset rows using columns
+
+```r
+time_use %&gt;% 
+  group_by(country) %&gt;% 
+  filter(minutes == max(minutes))
+```
+
+```
+#&gt; # A tibble: 33 x 3
+#&gt; # Groups:   country [33]
+#&gt;   country   category minutes
+#&gt;   &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt;
+#&gt; 1 Australia Sleep       512.
+#&gt; 2 Austria   Sleep       498.
+#&gt; 3 Belgium   Sleep       513.
+#&gt; 4 Canada    Sleep       520 
+#&gt; 5 Denmark   Sleep       489.
+#&gt; 6 Estonia   Sleep       530.
+#&gt; # … with 27 more rows
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `filter()`: subset rows using columns
+
+```r
+an &lt;- c("Australia", "New Zealand")
+time_use %&gt;% 
+  filter(country %in% an)
+```
+
+```
+#&gt; # A tibble: 28 x 3
+#&gt;   country     category                   minutes
+#&gt;   &lt;chr&gt;       &lt;chr&gt;                        &lt;dbl&gt;
+#&gt; 1 Australia   Paid work                    211. 
+#&gt; 2 New Zealand Paid work                    241. 
+#&gt; 3 Australia   Education                     27.0
+#&gt; 4 New Zealand Education                     29  
+#&gt; 5 Australia   Care for household members    44.5
+#&gt; 6 New Zealand Care for household members    30  
+#&gt; # … with 22 more rows
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `filter()`: subset rows using columns
+
+```r
+time_use %&gt;% 
+  filter(!(country %in% an))
+```
+
+```
+#&gt; # A tibble: 433 x 3
+#&gt;   country category  minutes
+#&gt;   &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;
+#&gt; 1 Austria Paid work    280.
+#&gt; 2 Belgium Paid work    194.
+#&gt; 3 Canada  Paid work    269.
+#&gt; 4 Denmark Paid work    200.
+#&gt; 5 Estonia Paid work    231.
+#&gt; 6 Finland Paid work    200.
+#&gt; # … with 427 more rows
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `filter()`: subset rows using columns
+
+```r
+# time_use %&gt;% 
+#   filter(country %in% an &amp; minutes &gt; 30)
+time_use %&gt;% 
+  filter(country %in% an, minutes &gt; 30)
+```
+
+```
+#&gt; # A tibble: 19 x 3
+#&gt;    country     category                         minutes
+#&gt;    &lt;chr&gt;       &lt;chr&gt;                              &lt;dbl&gt;
+#&gt;  1 Australia   Paid work                          211. 
+#&gt;  2 New Zealand Paid work                          241. 
+#&gt;  3 Australia   Care for household members          44.5
+#&gt;  4 Australia   Housework                          132. 
+#&gt;  5 New Zealand Housework                          110. 
+#&gt;  6 Australia   Other unpaid work &amp; volunteering    57.5
+#&gt;  7 New Zealand Other unpaid work &amp; volunteering    59  
+#&gt;  8 Australia   Sleep                              512. 
+#&gt;  9 New Zealand Sleep                              526  
+#&gt; 10 Australia   Eating and drinking                 89.1
+#&gt; 11 New Zealand Eating and drinking                 80  
+#&gt; 12 Australia   Personal care                       56.0
+#&gt; 13 New Zealand Personal care                       42  
+#&gt; 14 Australia   Seeing friends                      40.0
+#&gt; 15 New Zealand Seeing friends                      69  
+#&gt; 16 Australia   TV and Radio                       140. 
+#&gt; 17 New Zealand TV and Radio                       124  
+#&gt; 18 Australia   Other leisure activities            76.1
+#&gt; 19 New Zealand Other leisure activities            85
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `filter()`: subset rows using columns
+
+```r
+time_use %&gt;% 
+  filter(country %in% an | minutes &gt; 30)
+```
+
+```
+#&gt; # A tibble: 337 x 3
+#&gt;   country   category  minutes
+#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt;
+#&gt; 1 Australia Paid work    211.
+#&gt; 2 Austria   Paid work    280.
+#&gt; 3 Belgium   Paid work    194.
+#&gt; 4 Canada    Paid work    269.
+#&gt; 5 Denmark   Paid work    200.
+#&gt; 6 Estonia   Paid work    231.
+#&gt; # … with 331 more rows
+```
+]
+
+---
+
+## When to `%&gt;%`
+
+---
+
+## Use {dplyr} verbs to manipulate database
+
+---
+
+## Two table verbs
+
+---
+
+## Reading
+
+.pull-left[
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px"&gt;](https://r4ds.had.co.nz)]
+]
+.pull-right[
+* [Chapter 10: Tibbles](https://r4ds.had.co.nz/tibbles.html)
+* [Chapter 11: Data import](https://r4ds.had.co.nz/data-import.html)
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

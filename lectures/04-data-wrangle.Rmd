@@ -1,6 +1,6 @@
 ---
 title: "STATS 220"
-subtitle: "Data wrangling`r emo::ji('bar_chart')`"
+subtitle: "Data wrangling`r emo::ji('hammer_and_wrench')`"
 type: "lecture"
 date: ""
 output:
@@ -33,7 +33,318 @@ xaringanExtra::use_panelset()
 read_chunk('R/04-data-wrangle.R')
 ```
 
-# Pipe
+## Let's talk about code readability again!
+
+* looooooooooooooooong!
+
+```r
+show_up_to_work(have_breakfast(glam_up(dress(shower(wake_up("I"))))))
+```
+
+* infinite nesting......
+
+```r
+show_up_to_work(
+  have_breakfast(
+    glam_up(
+      dress(
+        shower(
+          wake_up("I")
+        )
+      )
+    )
+  )
+)
+```
+
+---
+
+## Does this one look better?
+
+```r
+morning1 <- wake_up("I")
+morning2 <- shower(morning1)
+morning3 <- dress(morning2)
+morning4 <- glam_up(morning3)
+morning5 <- have_breakfast(morning4)
+morning6 <- show_up_to_work(morning5)
+```
+
+* many intermediate steps
+* not meaningful variable names
+
+---
+
+## How about this one?
+
+```r
+morning_routine <- "I" %>% 
+  wake_up() %>% 
+  shower() %>% 
+  dress() %>% 
+  glam_up() %>% 
+  have_breakfast() %>% 
+  show_up_to_work()
+```
+
+---
+
+class: inverse middle center
+
+<img src="https://github.com/rstudio/hex-stickers/raw/master/SVG/pipe.svg" height="420px">
+
+---
+
+## Time use in OECD
+
+```{r read-time-use}
+```
+
+---
+
+## Pipe the input into the first argument in the function
+
+```{r gg-time-use, fig.height = 2.5, fig.width = 8, echo = FALSE}
+```
+
+.pull-left[
+```{r ref.label = "gg-time-use", eval = FALSE}
+```
+]
+.pull-right[
+```{r gg-time-use-pipe, eval = FALSE}
+```
+]
+
+---
+
+.left-column[
+.center[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="60%">]
+]
+.right-column[
+{dplyr} is a grammar of data manipulation, providing a consistent set of **verbs** that help you solve the most common data manipulation challenges:
+
+1. `mutate()` adds new variables that are functions of existing variables
+2. `select()` picks variables based on their names.
+3. `filter()` picks cases based on their values.
+4. `summarise()` reduces multiple values down to a single summary.
+5. `arrange()` changes the ordering of the rows.
+
+These all combine naturally with `group_by()` which allows you to perform any operation “by group”.
+]
+
+---
+
+```{r rename}
+```
+
+---
+
+.pull-left[
+```{r distinct}
+```
+]
+.pull-right[
+```{r distinct2}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `slice()`: subsets rows using their positions
+```{r slice}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `group_by()`: group by one or more variables
+```{r group-by, highlight.output = 2}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `group_by()`: use in conjunction with other verbs
+```{r slice-gb, highlight.output = 2}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `slice()` shortcuts: `slice_head()` & `slice_tail()`
+```{r slice-head, highlight.output = 2}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `ungroup()`: removes grouping
+```{r ungroup}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `slice_sample()` randomly selects rows
+```{r slice-sample}
+```
+]
+
+???
+
+* random sampling
+* bootstrapping
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `arrange()`: arrange rows by columns
+```{r arrange}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `arrange()`: arrange rows by columns
+```{r arrange-desc}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `arrange()`: arrange rows by columns
+```{r arrange-desc2}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `filter()`: subset rows using columns
+```{r filter}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `filter()`: subset rows using columns
+```{r filter-gb}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `filter()`: subset rows using columns
+```{r filter-in}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `filter()`: subset rows using columns
+```{r filter-not}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `filter()`: subset rows using columns
+```{r filter-and}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `filter()`: subset rows using columns
+```{r filter-or}
+```
+]
+
+---
+
+## When to `%>%`
+
+---
+
+## Use {dplyr} verbs to manipulate database
+
+---
+
+## Two table verbs
 
 ---
 

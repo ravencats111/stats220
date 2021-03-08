@@ -445,7 +445,7 @@ head -4 data/pisa/pisa-student.csv # shell command, not R
 
 ---
 
-## Let's talk about the file path first!
+## Let's talk about the file path again!
 
 ```{r ref.label = "read-csv", eval = FALSE, echo = 2}
 ```
