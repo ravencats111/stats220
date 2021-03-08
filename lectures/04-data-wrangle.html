@@ -154,6 +154,12 @@ These all combine naturally with `group_by()` which allows you to perform any op
 
 ---
 
+class: inverse middle
+
+# One table verbs
+
+---
+
 
 ```r
 time_use &lt;- time_use_raw %&gt;% 
@@ -500,7 +506,7 @@ time_use %&gt;%
 ### - rowwise
 ]
 .right-column[
-* `filter()`: subset rows using columns
+* `filter()`: subsets rows using columns
 
 ```r
 time_use %&gt;% 
@@ -522,7 +528,7 @@ time_use %&gt;%
 ### - rowwise
 ]
 .right-column[
-* `filter()`: subset rows using columns
+* `filter()`: subsets rows using columns
 
 ```r
 time_use %&gt;% 
@@ -552,12 +558,12 @@ time_use %&gt;%
 ### - rowwise
 ]
 .right-column[
-* `filter()`: subset rows using columns
+* `filter()`: subsets rows using columns
 
 ```r
-an &lt;- c("Australia", "New Zealand")
+anz &lt;- c("Australia", "New Zealand")
 time_use %&gt;% 
-  filter(country %in% an)
+  filter(country %in% anz)
 ```
 
 ```
@@ -581,11 +587,11 @@ time_use %&gt;%
 ### - rowwise
 ]
 .right-column[
-* `filter()`: subset rows using columns
+* `filter()`: subsets rows using columns
 
 ```r
 time_use %&gt;% 
-  filter(!(country %in% an))
+  filter(!(country %in% anz))
 ```
 
 ```
@@ -609,13 +615,13 @@ time_use %&gt;%
 ### - rowwise
 ]
 .right-column[
-* `filter()`: subset rows using columns
+* `filter()`: subsets rows using columns
 
 ```r
-# time_use %&gt;% 
-#   filter(country %in% an &amp; minutes &gt; 30)
 time_use %&gt;% 
-  filter(country %in% an, minutes &gt; 30)
+  filter(country %in% anz, minutes &gt; 30)
+## time_use %&gt;% 
+##   filter(country %in% anz &amp; minutes &gt; 30)
 ```
 
 ```
@@ -651,11 +657,11 @@ time_use %&gt;%
 ### - rowwise
 ]
 .right-column[
-* `filter()`: subset rows using columns
+* `filter()`: subsets rows using columns
 
 ```r
 time_use %&gt;% 
-  filter(country %in% an | minutes &gt; 30)
+  filter(country %in% anz | minutes &gt; 30)
 ```
 
 ```
@@ -674,7 +680,233 @@ time_use %&gt;%
 
 ---
 
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `filter()`: subsets rows using columns
+
+```r
+time_use_anz &lt;- time_use %&gt;% 
+  filter(country %in% anz)
+```
+&lt;img src="figure/filter-anz-line-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+### - colwise
+]
+.right-column[
+* `select()`: subsets columns using their names and types
+
+```r
+time_use_anz %&gt;% 
+  select(country, category)
+## time_use_anz %&gt;% 
+##   select(-minutes) # !minutes
+## time_use_anz %&gt;% 
+##   select(country:category)
+```
+
+```
+#&gt; # A tibble: 28 x 2
+#&gt;   country     category                  
+#&gt;   &lt;chr&gt;       &lt;chr&gt;                     
+#&gt; 1 Australia   Paid work                 
+#&gt; 2 New Zealand Paid work                 
+#&gt; 3 Australia   Education                 
+#&gt; 4 New Zealand Education                 
+#&gt; 5 Australia   Care for household members
+#&gt; 6 New Zealand Care for household members
+#&gt; # … with 22 more rows
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+### - colwise
+]
+.right-column[
+Selection helpers
+
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+### - colwise
+]
+.right-column[
+* `mutate()`: creates, modifies, and deletes columns
+
+```r
+time_use_anz2 &lt;- time_use_anz %&gt;%
+  mutate(
+    hours = minutes / 60,
+    iso = case_when(
+      country == "Australia" ~ "AU", 
+      TRUE ~ "NZ"))
+time_use_anz2
+```
+
+```
+#&gt; # A tibble: 28 x 5
+#&gt;   country     category                   minutes hours iso  
+#&gt;   &lt;chr&gt;       &lt;chr&gt;                        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+#&gt; 1 Australia   Paid work                    211.  3.52  AU   
+#&gt; 2 New Zealand Paid work                    241.  4.02  NZ   
+#&gt; 3 Australia   Education                     27.0 0.450 AU   
+#&gt; 4 New Zealand Education                     29   0.483 NZ   
+#&gt; 5 Australia   Care for household members    44.5 0.742 AU   
+#&gt; 6 New Zealand Care for household members    30   0.5   NZ   
+#&gt; # … with 22 more rows
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+### - colwise
+]
+.right-column[
+* `summarise()`: summarises to one row
+
+```r
+time_use_anz2 %&gt;% 
+  summarise( # summarize()
+    min = min(hours), 
+    max = max(hours),
+    avg = max(hours))
+```
+
+```
+#&gt; # A tibble: 1 x 3
+#&gt;     min   max   avg
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1   0.1  8.77  8.77
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+### - colwise
+]
+.right-column[
+* `summarise()`: summarises each group to fewer rows
+
+```r
+time_use_anz2 %&gt;% 
+  group_by(category) %&gt;% 
+  summarise(
+    min = min(hours), 
+    max = max(hours),
+    avg = max(hours))
+```
+
+```
+#&gt; # A tibble: 14 x 4
+#&gt;    category                           min   max   avg
+#&gt;  * &lt;chr&gt;                            &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1 Attending events                 0.1   0.100 0.100
+#&gt;  2 Care for household members       0.5   0.742 0.742
+#&gt;  3 Eating and drinking              1.33  1.48  1.48 
+#&gt;  4 Education                        0.450 0.483 0.483
+#&gt;  5 Housework                        1.83  2.20  2.20 
+#&gt;  6 Other leisure activities         1.27  1.42  1.42 
+#&gt;  7 Other unpaid work &amp; volunteering 0.959 0.983 0.983
+#&gt;  8 Paid work                        3.52  4.02  4.02 
+#&gt;  9 Personal care                    0.7   0.934 0.934
+#&gt; 10 Seeing friends                   0.667 1.15  1.15 
+#&gt; 11 Shopping                         0.4   0.484 0.484
+#&gt; 12 Sleep                            8.54  8.77  8.77 
+#&gt; 13 Sports                           0.283 0.317 0.317
+#&gt; 14 TV and Radio                     2.07  2.33  2.33
+```
+]
+
+---
+
+## Pipe in and out
+
+.pull-left[
+
+```r
+time_use_anz &lt;- time_use %&gt;% 
+  filter(country %in% anz)
+```
+
+```r
+time_use_anz2 &lt;- time_use_anz %&gt;%
+  mutate(
+    hours = minutes / 60,
+    iso = case_when(
+      country == "Australia" ~ "AU", 
+      TRUE ~ "NZ"))
+```
+
+```r
+time_use_anz2 %&gt;% 
+  group_by(category) %&gt;% 
+  summarise(
+    min = min(hours), 
+    max = max(hours),
+    avg = max(hours))
+```
+]
+.pull-right[
+
+```r
+time_use %&gt;% 
+  filter(country %in% anz) %&gt;% 
+  mutate(hours = minutes / 60) %&gt;% 
+  group_by(category) %&gt;% 
+  summarise(
+    min = min(hours), 
+    max = max(hours), 
+    avg = mean(hours))
+```
+]
+
+---
+
 ## When to `%&gt;%`
+
+---
+
+## Shortcuts
+
+
+```r
+time_use_anz %&gt;% 
+  group_by(country) %&gt;% 
+  summarise(n = n())
+## time_use_anz %&gt;% 
+##   count(country) # tally()
+```
+
+```
+#&gt; # A tibble: 2 x 2
+#&gt;   country         n
+#&gt; * &lt;chr&gt;       &lt;int&gt;
+#&gt; 1 Australia      14
+#&gt; 2 New Zealand    14
+```
+
 
 ---
 

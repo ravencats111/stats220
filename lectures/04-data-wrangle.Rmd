@@ -135,6 +135,12 @@ These all combine naturally with `group_by()` which allows you to perform any op
 
 ---
 
+class: inverse middle
+
+# One table verbs
+
+---
+
 ```{r rename}
 ```
 
@@ -269,7 +275,7 @@ These all combine naturally with `group_by()` which allows you to perform any op
 ### - rowwise
 ]
 .right-column[
-* `filter()`: subset rows using columns
+* `filter()`: subsets rows using columns
 ```{r filter}
 ```
 ]
@@ -281,7 +287,7 @@ These all combine naturally with `group_by()` which allows you to perform any op
 ### - rowwise
 ]
 .right-column[
-* `filter()`: subset rows using columns
+* `filter()`: subsets rows using columns
 ```{r filter-gb}
 ```
 ]
@@ -293,7 +299,7 @@ These all combine naturally with `group_by()` which allows you to perform any op
 ### - rowwise
 ]
 .right-column[
-* `filter()`: subset rows using columns
+* `filter()`: subsets rows using columns
 ```{r filter-in}
 ```
 ]
@@ -305,7 +311,7 @@ These all combine naturally with `group_by()` which allows you to perform any op
 ### - rowwise
 ]
 .right-column[
-* `filter()`: subset rows using columns
+* `filter()`: subsets rows using columns
 ```{r filter-not}
 ```
 ]
@@ -317,8 +323,8 @@ These all combine naturally with `group_by()` which allows you to perform any op
 ### - rowwise
 ]
 .right-column[
-* `filter()`: subset rows using columns
-```{r filter-and}
+* `filter()`: subsets rows using columns
+```{r filter-and, results = "hold", eval = 1}
 ```
 ]
 
@@ -329,14 +335,116 @@ These all combine naturally with `group_by()` which allows you to perform any op
 ### - rowwise
 ]
 .right-column[
-* `filter()`: subset rows using columns
+* `filter()`: subsets rows using columns
 ```{r filter-or}
 ```
 ]
 
 ---
 
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `filter()`: subsets rows using columns
+```{r filter-anz}
+```
+```{r filter-anz-line, echo = FALSE, fig.width = 3, fig.height = 3.5}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+### - colwise
+]
+.right-column[
+* `select()`: subsets columns using their names and types
+```{r select, eval = 1, results = "hold"}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+### - colwise
+]
+.right-column[
+Selection helpers
+
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+### - colwise
+]
+.right-column[
+* `mutate()`: creates, modifies, and deletes columns
+```{r mutate}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+### - colwise
+]
+.right-column[
+* `summarise()`: summarises to one row
+```{r summarise}
+```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+### - colwise
+]
+.right-column[
+* `summarise()`: summarises each group to fewer rows
+```{r summarise-gb}
+```
+]
+
+---
+
+## Pipe in and out
+
+.pull-left[
+```{r ref.label = "filter-anz", eval = FALSE}
+```
+```{r ref.label = "mutate", eval = FALSE, echo = 1:6}
+```
+```{r ref.label = "summarise-gb", eval = FALSE}
+```
+]
+.pull-right[
+```{r chain, eval = FALSE}
+```
+]
+
+---
+
 ## When to `%>%`
+
+---
+
+## Shortcuts
+
+```{r shortcuts, results = "hold", eval = 1}
+```
 
 ---
 

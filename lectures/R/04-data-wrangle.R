@@ -84,81 +84,95 @@ time_use %>%
   filter(minutes == max(minutes))
 
 ## ---- filter-in
-an <- c("Australia", "New Zealand")
+anz <- c("Australia", "New Zealand")
 time_use %>% 
-  filter(country %in% an)
+  filter(country %in% anz)
 
 ## ---- filter-not
 time_use %>% 
-  filter(!(country %in% an))
+  filter(!(country %in% anz))
 
 ## ---- filter-and
-# time_use %>% 
-#   filter(country %in% an & minutes > 30)
 time_use %>% 
-  filter(country %in% an, minutes > 30)
+  filter(country %in% anz, minutes > 30)
+time_use %>% 
+  filter(country %in% anz & minutes > 30)
 
 ## ---- filter-or
 time_use %>% 
-  filter(country %in% an | minutes > 30)
+  filter(country %in% anz | minutes > 30)
 
-## ---- filter-an
-time_use_an <- time_use %>% 
-  filter(country %in% an)
+## ---- filter-anz
+time_use_anz <- time_use %>% 
+  filter(country %in% anz)
 
-## ---- filter-an-line
-time_use_nz <- time_use_an %>% 
+## ---- filter-anz-line
+time_use_nz <- time_use_anz %>% 
   filter(country == "New Zealand")
-time_use_an %>% 
+time_use_anz %>% 
   ggplot(aes(as.factor(country), minutes, group = category)) +
   geom_line(aes(colour = category)) +
   geom_point(aes(colour = category)) +
   ggrepel::geom_text_repel(aes(label = category), data = time_use_nz,
     size = 3) +
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  scale_y_log10()
 
-time_use_an %>% 
+## ---- select
+time_use_anz %>% 
   select(country, category)
-
-time_use_an %>% 
-  select(-minutes)
-
-time_use_an %>% 
+time_use_anz %>% 
+  select(-minutes) # !minutes
+time_use_anz %>% 
   select(country:category)
 
-time_use_an %>% 
+## ---- relocate
+time_use_anz %>% 
   relocate(minutes)
 
-time_use_an %>% 
+time_use_anz %>% 
   relocate(minutes)
 
-time_use_an %>% 
+time_use_anz %>% 
   relocate(minutes, .after = country)
 
-time_use_an2 <- time_use_an %>%
+## ---- mutate
+time_use_anz2 <- time_use_anz %>%
   mutate(
     hours = minutes / 60,
     iso = case_when(
       country == "Australia" ~ "AU", 
       TRUE ~ "NZ"))
+time_use_anz2
 
-time_use_an2 %>% 
-  summarise(
-    avg_mins = mean(minutes),
-    ttl_hrs = sum(hours))
+## ---- summarise
+time_use_anz2 %>% 
+  summarise( # summarize()
+    min = min(hours), 
+    max = max(hours),
+    avg = max(hours))
 
-time_use_an2 %>% 
+## ---- summarise-gb
+time_use_anz2 %>% 
   group_by(category) %>% 
-  summarise(min = min(hours), max = max(hours))
+  summarise(
+    min = min(hours), 
+    max = max(hours),
+    avg = max(hours))
 
+## ---- chain
 time_use %>% 
-  filter(country %in% an) %>% 
+  filter(country %in% anz) %>% 
   mutate(hours = minutes / 60) %>% 
   group_by(category) %>% 
-  summarise(min = min(hours), max = max(hours), avg = mean(hours))
+  summarise(
+    min = min(hours), 
+    max = max(hours), 
+    avg = mean(hours))
 
+## ---- chain-ggplot
 time_use %>% 
-  filter(country %in% an) %>% 
+  filter(country %in% anz) %>% 
   mutate(hours = minutes / 60) %>% 
   group_by(category) %>% 
   summarise(min = min(hours), max = max(hours), avg = mean(hours)) %>% 
@@ -166,18 +180,14 @@ time_use %>%
   geom_pointrange(aes(ymin = min, ymax = max), colour = "#e6550d") +
   theme(axis.text.x = element_text(angle = 90))
 
-time_use_an %>% 
+## ---- shortcuts
+time_use_anz %>% 
   group_by(country) %>% 
   summarise(n = n())
-
-# shortcuts
-time_use_an %>% 
+time_use_anz %>% 
   count(country) # tally()
 
-time_use_an %>% 
-  group_by(country) %>% 
-  filter(minutes > median(minutes))
-
+## ---- dbplyr
 # dbplyr
 library(RSQLite)
 con <- dbConnect(SQLite(), dbname = "data/pisa/pisa-student.db")
