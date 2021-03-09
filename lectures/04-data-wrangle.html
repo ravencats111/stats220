@@ -92,7 +92,7 @@ class: inverse middle center
 ```r
 library(readxl)
 library(tidyverse)
-time_use_raw &lt;- read_xlsx("data/time-use-oced.xlsx")
+time_use_raw &lt;- read_xlsx("data/time-use-oecd.xlsx")
 time_use_raw
 ```
 
@@ -658,6 +658,17 @@ time_use %&gt;%
 ]
 .right-column[
 * `filter()`: subsets rows using columns
+.center[&lt;img src="https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/dplyr_filter.jpg" height="520px"&gt;]
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+]
+.right-column[
+* `filter()`: subsets rows using columns
 
 ```r
 time_use %&gt;% 
@@ -736,7 +747,15 @@ time_use_anz %&gt;%
 ]
 .right-column[
 Selection helpers
+  + `starts_with()`: starts with a prefix.
+  + `ends_with()`: ends with a suffix.
+  + `contains()`: contains a literal string.
+  + [more helpers](https://dplyr.tidyverse.org/reference/select.html#overview-of-selection-features)
 
+```r
+time_use_anz %&gt;% 
+  select(starts_with("c"))
+```
 ]
 
 ---
@@ -771,6 +790,30 @@ time_use_anz2
 #&gt; 6 New Zealand Care for household members    30   0.5   NZ   
 #&gt; # … with 22 more rows
 ```
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+### - colwise
+]
+.right-column[
+* `mutate()`: creates, modifies, and deletes columns
+.center[&lt;img src="https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/dplyr_mutate.png" height="520px"&gt;]
+]
+
+---
+
+.left-column[
+## Verbs
+### - rowwise
+### - colwise
+]
+.right-column[
+* `case_when()`: when it's the case, do something
+.center[&lt;img src="https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/dplyr_case_when.png" height="520px"&gt;]
 ]
 
 ---
@@ -821,7 +864,7 @@ time_use_anz2 %&gt;%
 ```
 #&gt; # A tibble: 14 x 4
 #&gt;    category                           min   max   avg
-#&gt;  * &lt;chr&gt;                            &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt;    &lt;chr&gt;                            &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 #&gt;  1 Attending events                 0.1   0.100 0.100
 #&gt;  2 Care for household members       0.5   0.742 0.742
 #&gt;  3 Eating and drinking              1.33  1.48  1.48 
@@ -896,23 +939,119 @@ time_use_anz %&gt;%
   group_by(country) %&gt;% 
   summarise(n = n())
 ## time_use_anz %&gt;% 
-##   count(country) # tally()
+##   count(country)
+## time_use_anz %&gt;% 
+##   group_by(Country) %&gt;% 
+##   tally()
 ```
 
 ```
 #&gt; # A tibble: 2 x 2
 #&gt;   country         n
-#&gt; * &lt;chr&gt;       &lt;int&gt;
+#&gt;   &lt;chr&gt;       &lt;int&gt;
 #&gt; 1 Australia      14
 #&gt; 2 New Zealand    14
 ```
 
+---
+
+## Hello again, SQL!*
+
+
+```r
+library(RSQLite)
+con &lt;- dbConnect(SQLite(), dbname = "data/pisa/pisa-student.db")
+pisa_db &lt;- tbl(con, "pisa")
+pisa_db
+```
+
+```
+*#&gt; # Source:   table&lt;pisa&gt; [?? x 22]
+*#&gt; # Database: sqlite 3.34.1
+*#&gt; #   [/Users/wany568/Teaching/stats220/lectures/data/pisa/pisa-student.db]
+#&gt;    year country school_id student_id mother_educ father_educ
+#&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;      
+#&gt; 1  2000 ALB     1001      1          &lt;NA&gt;        &lt;NA&gt;       
+#&gt; 2  2000 ALB     1001      3          &lt;NA&gt;        &lt;NA&gt;       
+#&gt; 3  2000 ALB     1001      6          &lt;NA&gt;        &lt;NA&gt;       
+#&gt; 4  2000 ALB     1001      8          &lt;NA&gt;        &lt;NA&gt;       
+#&gt; 5  2000 ALB     1001      11         &lt;NA&gt;        &lt;NA&gt;       
+#&gt; 6  2000 ALB     1001      12         &lt;NA&gt;        &lt;NA&gt;       
+#&gt; # … with more rows, and 16 more variables: gender &lt;chr&gt;,
+#&gt; #   computer &lt;chr&gt;, internet &lt;chr&gt;, math &lt;dbl&gt;, read &lt;dbl&gt;,
+#&gt; #   science &lt;dbl&gt;, stu_wgt &lt;dbl&gt;, desk &lt;chr&gt;, room &lt;chr&gt;,
+#&gt; #   dishwasher &lt;chr&gt;, television &lt;chr&gt;, computer_n &lt;chr&gt;,
+#&gt; #   car &lt;chr&gt;, book &lt;chr&gt;, wealth &lt;dbl&gt;, escs &lt;dbl&gt;
+```
 
 ---
 
-## Use {dplyr} verbs to manipulate database
+## Write {dplyr} code as usual to manipulate database
+
+
+```r
+pisa_sql &lt;- pisa_db %&gt;% 
+  filter(country %in% c("NZL", "AUS")) %&gt;% 
+  group_by(country) %&gt;% 
+  summarise(avg_math = mean(math, na.rm = TRUE)) %&gt;% 
+  arrange(desc(math))
+pisa_sql
+```
+
+```
+#&gt; # Source:     lazy query [?? x 2]
+#&gt; # Database:   sqlite 3.34.1
+#&gt; #   [/Users/wany568/Teaching/stats220/lectures/data/pisa/pisa-student.db]
+#&gt; # Ordered by: desc(math)
+#&gt;   country avg_math
+#&gt;   &lt;chr&gt;      &lt;dbl&gt;
+#&gt; 1 NZL         511.
+#&gt; 2 AUS         502.
+```
 
 ---
+
+## Speak in SQL from R
+
+.pull-left[
+.center[Show SQL queries]
+.small[
+
+```r
+pisa_sql %&gt;% show_query()
+```
+
+```
+#&gt; &lt;SQL&gt;
+#&gt; SELECT `country`, AVG(`math`) AS `avg_math`
+#&gt; FROM `pisa`
+#&gt; WHERE (`country` IN ('NZL', 'AUS'))
+#&gt; GROUP BY `country`
+#&gt; ORDER BY `math` DESC
+```
+]
+]
+.pull-right[
+.center[Retrieve results to R]
+.small[
+
+```r
+pisa_sql %&gt;% collect()
+```
+
+```
+#&gt; # A tibble: 2 x 2
+#&gt;   country avg_math
+#&gt;   &lt;chr&gt;      &lt;dbl&gt;
+#&gt; 1 NZL         511.
+#&gt; 2 AUS         502.
+```
+]
+]
+
+---
+
+class: inverse middle
 
 ## Two table verbs
 

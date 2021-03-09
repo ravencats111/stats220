@@ -126,6 +126,10 @@ time_use_anz %>%
 time_use_anz %>% 
   select(country:category)
 
+## ---- select-helpers
+time_use_anz %>% 
+  select(starts_with("c"))
+
 ## ---- relocate
 time_use_anz %>% 
   relocate(minutes)
@@ -185,22 +189,27 @@ time_use_anz %>%
   group_by(country) %>% 
   summarise(n = n())
 time_use_anz %>% 
-  count(country) # tally()
+  count(country)
+time_use_anz %>% 
+  group_by(Country) %>% 
+  tally()
 
-## ---- dbplyr
-# dbplyr
+## ---- dbplyr-con
 library(RSQLite)
 con <- dbConnect(SQLite(), dbname = "data/pisa/pisa-student.db")
 pisa_db <- tbl(con, "pisa")
+pisa_db
 
+## ---- dbplyr-verbs
 pisa_sql <- pisa_db %>% 
   filter(country %in% c("NZL", "AUS")) %>% 
   group_by(country) %>% 
   summarise(avg_math = mean(math, na.rm = TRUE)) %>% 
   arrange(desc(math))
+pisa_sql
 
-pisa_sql %>% 
-  show_query()
+## ---- dbplyr-q
+pisa_sql %>% show_query()
 
-pisa_sql %>% 
-  collect()
+## ---- dbplyr-collect
+pisa_sql %>% collect()
