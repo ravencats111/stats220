@@ -95,12 +95,6 @@ sci_tbl[-4, 2]
 sci_tbl[1:3, "count"]
 sci_tbl[c(rep(TRUE, 3), FALSE), 2]
 
-## ---- tmp
-# spreadsheet-like data
-# data src: https://stats.oecd.org/Index.aspx?DataSetCode=TIME_USE#
-# how individuals spend their time
-# read from url
-
 ## ---- read-csv
 library(readr) # or library(tidyverse)
 pisa <- read_csv("data/pisa/pisa-student.csv", n_max = 2929621)
@@ -112,7 +106,7 @@ pisa <- vroom("data/pisa/pisa-student.csv", n_max = 2929621)
 
 ## ---- excel
 library(readxl)
-time_use <- read_xlsx("data/time-use-oced.xlsx")
+time_use <- read_xlsx("data/time-use-oecd.xlsx")
 time_use
 
 ## ---- skimr

@@ -246,7 +246,7 @@ as.list(1:3)
 ]
 .right-column[
 .pull-left[
-Subset by `[[]]`
+Subset by `[]`
 
 ```r
 lst[1]
@@ -258,7 +258,7 @@ lst[1]
 ```
 ]
 .pull-right[
-Subset by `[]`
+Subset by `[[]]`
 
 ```r
 lst[[1]]
@@ -525,9 +525,9 @@ glimpse(sci_tbl) # to replace str()
 ```
 #&gt; Rows: 4
 #&gt; Columns: 3
-#&gt; $ department &lt;chr&gt; "Physics", "Mathematics", "Statistics"…
+#&gt; $ department &lt;chr&gt; "Physics", "Mathematics", "Statistics",…
 #&gt; $ count      &lt;int&gt; 12, 8, 20, 23
-#&gt; $ percentage &lt;dbl&gt; 0.1904762, 0.1269841, 0.3174603, 0.365…
+#&gt; $ percentage &lt;dbl&gt; 0.1904762, 0.1269841, 0.3174603, 0.3650…
 ```
 
 Data types and their abbreviations
@@ -736,10 +736,10 @@ library(tidyverse)
 ```
 
 ```
-#&gt; ✔ ggplot2 3.3.3     ✔ dplyr   1.0.4
-#&gt; ✔ tidyr   1.1.2     ✔ stringr 1.4.0
-#&gt; ✔ readr   1.4.0     ✔ forcats 0.5.0
-#&gt; ✔ purrr   0.3.4
+#&gt; ✔ ggplot2 3.3.3     ✔ purrr   0.3.4
+#&gt; ✔ tibble  3.1.0     ✔ dplyr   1.0.5
+#&gt; ✔ tidyr   1.1.3     ✔ stringr 1.4.0
+#&gt; ✔ readr   1.4.0     ✔ forcats 0.5.1
 ```
 
 ```
@@ -821,7 +821,7 @@ pisa
 
 ---
 
-## Let's talk about the file path first!
+## Let's talk about the file path again!
 
 
 ```r
@@ -1172,14 +1172,14 @@ movies_tbl
 
 ```
 #&gt; # A tibble: 3,201 x 16
-#&gt;   Title US_Gross Worldwide_Gross US_DVD_Sales
-#&gt;   &lt;chr&gt;    &lt;int&gt;           &lt;dbl&gt;        &lt;int&gt;
-#&gt; 1 The …   146083          146083           NA
-#&gt; 2 Firs…    10876           10876           NA
-#&gt; 3 I Ma…   203134          203134           NA
-#&gt; 4 Let'…   373615          373615           NA
-#&gt; 5 Slam   1009819         1087521           NA
-#&gt; 6 Miss…    24551         2624551           NA
+#&gt;   Title                US_Gross Worldwide_Gross US_DVD_Sales
+#&gt;   &lt;chr&gt;                   &lt;int&gt;           &lt;dbl&gt;        &lt;int&gt;
+#&gt; 1 The Land Girls         146083          146083           NA
+#&gt; 2 First Love, Last Ri…    10876           10876           NA
+#&gt; 3 I Married a Strange…   203134          203134           NA
+#&gt; 4 Let's Talk About Sex   373615          373615           NA
+#&gt; 5 Slam                  1009819         1087521           NA
+#&gt; 6 Mississippi Mermaid     24551         2624551           NA
 #&gt; # … with 3,195 more rows, and 12 more variables:
 #&gt; #   Production_Budget &lt;int&gt;, Release_Date &lt;chr&gt;,
 #&gt; #   MPAA_Rating &lt;chr&gt;, Running_Time_min &lt;int&gt;,

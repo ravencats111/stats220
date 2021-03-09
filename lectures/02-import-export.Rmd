@@ -398,7 +398,7 @@ class: middle inverse
 
 ## Use {tidyverse}
 
-```{r tidyverse, message = TRUE}
+```{r tidyverse, message = TRUE, cache = FALSE}
 library(tidyverse)
 ```
 
@@ -577,15 +577,15 @@ class: middle
 .right-column[
 ## Connecting R to database*
 * reading data from database
-```{r db-read, cache = FALSE}
+```{r db-read, eval = FALSE}
 ```
 
 * writing SQL queries to read chunks
-```{r db-query, cache = FALSE}
+```{r db-query, eval = FALSE}
 ```
 
 * closing connection
-```{r db-close, cache = FALSE}
+```{r db-close, eval = FALSE}
 ```
 ]
 

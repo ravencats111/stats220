@@ -1,7 +1,7 @@
 ## ---- read-time-use
 library(readxl)
 library(tidyverse)
-time_use_raw <- read_xlsx("data/time-use-oced.xlsx")
+time_use_raw <- read_xlsx("data/time-use-oecd.xlsx")
 time_use_raw
 
 ## ---- gg-time-use
