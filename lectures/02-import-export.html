@@ -36,6 +36,10 @@ nstaff &lt;- c(12L, 8L, 20L, 23L)
 
 .footnote[image credit: Jenny Bryan]
 
+???
+
+* an ensemble of scalars -&gt; vectors
+
 ---
 
 ## 1d ➡️ 2d 
@@ -70,6 +74,11 @@ sci_tbl
 
 .footnote[image credit: Jenny Bryan]
 
+
+???
+
+* an ensemble of vectors -&gt; rect data/tabular data, like spreadsheet
+
 ---
 
 class: inverse middle
@@ -82,6 +91,13 @@ class: inverse middle
 
 ### 3. Data frames and tibbles
 
+???
+
+* Common data strs beyond 1d
+* start with the most flex one
+* briefly talk about mat
+* focus on data frames, more specifically tibbles
+
 ---
 
 .left-column[
@@ -89,7 +105,7 @@ class: inverse middle
 ### - lists
 ]
 .right-column[
-An object contains elements of different data types.
+An object contains elements of **different data types**.
 
 ```r
 lst &lt;- list( # list constructor/creator
@@ -115,6 +131,12 @@ lst
 #&gt; [1] 2.3 5.9
 ```
 ]
+
+???
+
+* to create a list using `list()`
+* put 4 atomic vectors inside my lst
+* a list of 4 elements, or length of 4
 
 ---
 
@@ -149,6 +171,7 @@ class(lst) # type + attributes
 
 ```r
 str(lst)
+# el can be of diff lengths
 ```
 
 ```
@@ -158,10 +181,45 @@ str(lst)
 #&gt;  $ : logi [1:3] TRUE FALSE TRUE
 #&gt;  $ : num [1:2] 2.3 5.9
 ```
+]
+]
+
+???
+
+* vis rep: a container, 4 items inside
+* primitive: original, cannot be modified
+* class: type + attrs, can be modified
+* rstudio values uses `str()`
+
+---
+
+.left-column[
+## data strs
+### - lists
+]
+.right-column[
+.pull-left[
 
 ```r
-# el can be of diff lengths
+lst
 ```
+
+```
+#&gt; [[1]]
+#&gt; [1] 1 2 3
+#&gt; 
+#&gt; [[2]]
+#&gt; [1] "a"
+#&gt; 
+#&gt; [[3]]
+#&gt; [1]  TRUE FALSE  TRUE
+#&gt; 
+#&gt; [[4]]
+#&gt; [1] 2.3 5.9
+```
+]
+.pull-right[
+.center[&lt;img src="img/lst.png" height="100%"&gt;]
 ]
 ]
 
@@ -175,6 +233,7 @@ str(lst)
 A list can contain other lists, i.e. **recursive**
 
 ```r
+# a named list
 str(list(first_el = lst, second_el = mtcars))
 ```
 
@@ -199,6 +258,11 @@ str(list(first_el = lst, second_el = mtcars))
 #&gt;   ..$ carb: num [1:32] 4 4 1 1 2 1 4 2 2 4 ...
 ```
 ]
+
+???
+
+* most flex: put a list into a list
+* a named list
 
 ---
 
@@ -237,6 +301,12 @@ as.list(1:3)
 ```
 ]
 ]
+
+???
+
+* to test if an object is one type, funs prefixed `is`
+* to coerce/convert from one type to another type, funs prefixed with `as`
+* from a vector of integers to a list
 
 ---
 
@@ -299,6 +369,10 @@ matrix(1:9, nrow = 3)
 * `is.matrix()` to test for a matrix
 ]
 
+???
+
+* we don't deal with matrix in 220, matrix for computational stats.
+
 ---
 
 .left-column[
@@ -340,7 +414,7 @@ array(1:9, dim = c(1, 3, 3))
 ### - tibbles
 ]
 .right-column[
-A data frame is a named **list** of vectors of the **same length**.
+A data frame is a **named list** of vectors of the **same length**.
 
 ```r
 sci_df &lt;- data.frame(
@@ -388,7 +462,7 @@ class(sci_df)
 ```
 ]
 .pull-right[
-.center[data attribute]
+.center[data attributes (meta info)]
 
 ```r
 attributes(sci_df)
@@ -407,6 +481,11 @@ attributes(sci_df)
 ]
 ]
 
+???
+
+* `data.frame` represents tabular data in R
+* attributes: colnames and rownames
+
 ---
 
 .left-column[
@@ -416,7 +495,7 @@ attributes(sci_df)
 ### - tibbles
 ]
 .right-column[
-A tibble is a modern reimagining of the data frame.
+A tibble is a **modern reimagining** of the data frame.
 
 ```r
 library(tibble)
@@ -439,6 +518,10 @@ sci_tbl
 * `as_tibble()` to coerce to a tibble
 * `is_tibble()` to test for a tibble
 ]
+
+???
+
+* why we call it `tibble`
 
 ---
 
@@ -469,6 +552,10 @@ class(sci_tbl) # tibble is a special class of data.frame
 #&gt; [1] "tbl_df"     "tbl"        "data.frame"
 ```
 ]
+
+???
+
+* multi cls: left to right, specific to more general
 
 ---
 
@@ -513,6 +600,10 @@ sci_tbl
 ```
 ]
 
+???
+
+* tibble's display: friendly &amp; informative
+
 ---
 
 ## Glimpse data
@@ -545,12 +636,16 @@ Data types and their abbreviations
 * more [column data types](https://tibble.tidyverse.org/articles/types.html)
 ]
 
+???
+
+text in pink suggest links
+
 ---
 
 ## Subsetting tibble
 
 .left-column[
-### - to vectors
+### - to 1d
 ]
 .right-column[
 * with `[[]]` or `$`
@@ -585,7 +680,7 @@ sci_tbl$count # col name
 ## Subsetting tibble
 
 .left-column[
-### - to vectors
+### - to 1d
 ### - by columns
 ]
 .right-column[
@@ -630,7 +725,7 @@ sci_tbl[2] # sci_tbl[, 2]
 ## Subsetting tibble
 
 .left-column[
-### - to vectors
+### - to 1d
 ### - by columns
 ### - by rows
 ]
@@ -672,7 +767,7 @@ sci_tbl[-c(2, 4), ]
 ## Subsetting tibble
 
 .left-column[
-### - to vectors
+### - to 1d
 ### - by columns
 ### - by rows
 ### - by cols &amp; rows
@@ -760,6 +855,11 @@ background-image: url(img/pisa.png)
 
 .footnote[&lt;https://www.oecd.org/pisa/&gt;]
 
+???
+
+* 3M students from more than 90 countries
+* conducted every 3 yrs
+
 ---
 
 .left-column[
@@ -795,7 +895,7 @@ head -4 data/pisa/pisa-student.csv # shell command, not R
 ## Reading comma delimited files
 
 ```r
-library(readr) # or library(tidyverse)
+library(readr) # library(tidyverse)
 pisa &lt;- read_csv("data/pisa/pisa-student.csv", n_max = 2929621)
 pisa
 ```
@@ -818,6 +918,10 @@ pisa
 #&gt; #   book &lt;chr&gt;, wealth &lt;dbl&gt;, escs &lt;dbl&gt;
 ```
 ]
+
+???
+
+* from external files in a disk to a tibble obj in R
 
 ---
 
@@ -871,6 +975,11 @@ read_csv(
 ```
 ]
 
+???
+
+* w/o using arguments, readr makes smart guesses, which means take a little longer
+* more specific, speed up the reading
+
 ---
 
 .left-column[
@@ -888,6 +997,12 @@ pisa &lt;- vroom("data/pisa/pisa-student.csv", n_max = 2929621)
 ```
 ]
 
+???
+
+* {readr} as toyota, {vroom} sports car
+* super optimized for fast reading, likely have edge cases, better not for production
+* when {vroom} moves to a more stable lifecylce, backend {readr}
+
 ---
 
 .left-column[
@@ -901,7 +1016,7 @@ pisa &lt;- vroom("data/pisa/pisa-student.csv", n_max = 2929621)
 
 ```r
 library(readxl)
-time_use &lt;- read_xlsx("data/time-use-oced.xlsx")
+time_use &lt;- read_xlsx("data/time-use-oecd.xlsx")
 time_use
 ```
 
@@ -918,6 +1033,10 @@ time_use
 #&gt; # … with 455 more rows
 ```
 ]
+
+???
+
+* contrasting to plain-text, binary files have to be opened by a certain app
 
 ---
 
@@ -956,6 +1075,7 @@ class: middle
   + [SQLite](https://www.sqlite.org/index.html)
   + BigQuery
   + PostgresSQL
+  + Spark SQL
 
 ### However, 220 is all about R!
 
@@ -990,6 +1110,13 @@ dbListFields(con, "pisa")
 ```
 .footnote[NOTE: slides marked with `*` are not examinable.]
 ]
+
+???
+
+* dbi: database interface, communicating b/t R and db
+* connecting to SQLite
+* multi tables typically
+* fields = column names
 
 ---
 
@@ -1082,6 +1209,8 @@ list(
 * a lightweight text format
 * easy for humans to read and write
 * easy for machines to parse and generate
+* annologue to list
+* `null` is `NA`
 
 ---
 
@@ -1157,6 +1286,11 @@ movies[[1]]
 ```
 ]
 
+???
+
+* read from url
+* but url is temporary
+
 ---
 
 .left-column[
@@ -1217,7 +1351,8 @@ akl_bus &lt;- st_read("data/BusService/BusService.shp")
 
 ???
 
-audio, images, etc
+* sf: simple features
+* spatial data: points, lines from a to b (bus routes), polygons
 
 ---
 
@@ -1301,6 +1436,11 @@ ggplot() +
 ]
 ]
 ]
+
+???
+
+* rich data fmts: audio, images, etc
+* seen an unseen file type: google that type and the corresponding r function
 
 ---
 

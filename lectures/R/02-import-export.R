@@ -22,6 +22,7 @@ str(lst)
 # el can be of diff lengths
 
 ## ---- lists-rec
+# a named list
 str(list(first_el = lst, second_el = mtcars))
 
 ## ---- is-list
@@ -96,7 +97,7 @@ sci_tbl[1:3, "count"]
 sci_tbl[c(rep(TRUE, 3), FALSE), 2]
 
 ## ---- read-csv
-library(readr) # or library(tidyverse)
+library(readr) # library(tidyverse)
 pisa <- read_csv("data/pisa/pisa-student.csv", n_max = 2929621)
 pisa
 
