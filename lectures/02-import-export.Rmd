@@ -679,7 +679,7 @@ class: middle
 
 * dbi: database interface, communicating b/t R and db
 * connecting to SQLite
-* multi tables typically
+* multi tables typically: students, schools
 * fields = column names
 
 ---
@@ -712,6 +712,13 @@ class: middle
 ```{r chunked, eval = FALSE}
 ```
 ]
+
+???
+
+* GPU, disk size, RAM
+* data files in disk
+* R obj in RAM
+* crashed, blow up my RAM for reading pisa twice
 
 ---
 
@@ -778,6 +785,7 @@ list(
 
 * read from url
 * but url is temporary
+* labs/assignments must use relative path, no web url accepted
 
 ---
 
