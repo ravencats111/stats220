@@ -653,7 +653,7 @@ class: middle
 
 ## Your turn
 
-**What is the R data format? What's its file extension?**
+**What is the R data format for a single object? What is its file extension?**
 
 ---
 
