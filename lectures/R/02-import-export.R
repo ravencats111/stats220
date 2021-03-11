@@ -149,7 +149,7 @@ length(movies)
 movies[[1]]
 
 ## ---- json-df
-movies_tbl <- as_tibble(read_json(url, simplify = TRUE))
+movies_tbl <- as_tibble(read_json(url, simplifyVector = TRUE))
 movies_tbl
 
 ## ---- sf
