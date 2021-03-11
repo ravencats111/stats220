@@ -1067,6 +1067,14 @@ data source: [https://www.oecd.org/pisa/data/2018database/](https://www.oecd.org
 
 class: middle
 
+## Your turn
+
+&gt; What is the R data format for a single object? What is its file extension?
+
+---
+
+class: middle
+
 ## Well, SQL!
 
 * **Structured Query Language** for accessing and manipulating databases.
@@ -1115,7 +1123,7 @@ dbListFields(con, "pisa")
 
 * dbi: database interface, communicating b/t R and db
 * connecting to SQLite
-* multi tables typically
+* multi tables typically: students, schools
 * fields = column names
 
 ---
@@ -1161,6 +1169,13 @@ pisa2018 &lt;- read_csv_chunked("data/pisa/pisa-student.csv",
   callback = DataFrameCallback$new(chunked))
 ```
 ]
+
+???
+
+* GPU, disk size, RAM
+* data files in disk
+* R obj in RAM
+* crashed, blow up my RAM for reading pisa twice
 
 ---
 
@@ -1290,6 +1305,7 @@ movies[[1]]
 
 * read from url
 * but url is temporary
+* labs/assignments must use relative path, no web url accepted
 
 ---
 
