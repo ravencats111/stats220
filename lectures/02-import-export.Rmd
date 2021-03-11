@@ -663,10 +663,10 @@ class: middle
 
 * **Structured Query Language** for accessing and manipulating databases.
 * Relational database management systems
-  + [MySQL](https://www.mysql.com)
   + [SQLite](https://www.sqlite.org/index.html)
-  + BigQuery
+  + [MySQL](https://www.mysql.com)
   + PostgresSQL
+  + BigQuery
   + Spark SQL
 
 ### However, 220 is all about R!
