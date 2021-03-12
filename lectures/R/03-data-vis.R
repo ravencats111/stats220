@@ -102,6 +102,17 @@ p +
   geom_col(aes(fill = dept)) +
   theme(axis.text.x = element_text(angle = 90))
 
+## ---- gg-theme-bw
+p +
+  geom_col(aes(fill = dept)) +
+  theme_bw()
+
+## ---- ggthemes
+library(ggthemes)
+p +
+  geom_col(aes(fill = dept)) +
+  theme_solarized()
+
 ## ---- mpg
 mpg
 
