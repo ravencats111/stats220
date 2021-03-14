@@ -100,7 +100,7 @@ p +
 ## ---- gg-theme
 p +
   geom_col(aes(fill = dept)) +
-  theme(axis.text.x = element_text(angle = 90))
+  theme(axis.text.x = element_text(angle = 30))
 
 ## ---- gg-theme-bw
 p +

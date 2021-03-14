@@ -12,8 +12,9 @@ A list of datasets (`data/`) used in the course:
 * `pisa/` PISA student data, sourced from [OECD Programmed for International Student Assessment](https://www.oecd.org/pisa/)
   + [`pisa-student.csv`](https://github.com/STATS-UOA/stats220/releases/download/v2.0/pisa-student.csv) (370.2MB)
   + [`pisa-student.db`](https://github.com/STATS-UOA/stats220/releases/download/v2.0/pisa-student.db) (405.3MB)
-* `animal-crossing/` 
+* `animal-crossing/` User and critic reviews from Metacritic; villagers, items, crafting, accessories, including links to their images from VillagerDB
   + [`critic.tsv`](https://github.com/rfordatascience/tidytuesday/raw/master/data/2020/2020-05-05/critic.tsv)
   + [`user_reviews.tsv`](https://github.com/rfordatascience/tidytuesday/raw/master/data/2020/2020-05-05/user_reviews.tsv)
   + [`villagers.csv`](https://github.com/rfordatascience/tidytuesday/raw/master/data/2020/2020-05-05/villagers.csv)
   + [`items.csv`](https://github.com/rfordatascience/tidytuesday/raw/master/data/2020/2020-05-05/items.csv)
+* [`gapminder.rds`](https://github.com/STATS-UOA/stats220/raw/master/lectures/data/gapminder.rds) Excerpt of the Gapminder data on life expectancy, GDP per capita, and population by country

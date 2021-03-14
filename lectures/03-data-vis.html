@@ -70,7 +70,7 @@ dino
 --
 
 .pull-right[
-&lt;img src="figure/plots-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/plots-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -129,7 +129,7 @@ barplot(as.matrix(sci_tbl$count),
   legend = sci_tbl$dept)
 ```
 
-&lt;img src="figure/base-barplot-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/base-barplot-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 * Pie chart
@@ -139,7 +139,7 @@ pie(sci_tbl$count,
   labels = sci_tbl$dept)
 ```
 
-&lt;img src="figure/base-pieplot-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/base-pieplot-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -208,7 +208,7 @@ ggplot(data = sci_tbl) +
   )
 ```
 
-&lt;img src="figure/gg-col-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-col-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -221,7 +221,7 @@ ggplot(data = sci_tbl) +
 * coord_polar(theta = "y")
 ```
 
-&lt;img src="figure/gg-pie-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-pie-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -243,7 +243,7 @@ ggplot(data = &lt;DATA&gt;, mapping = aes(&lt;MAPPINGS&gt;)) +
 
 ---
 
-## Layer
+## Layers
 
 
 ```r
@@ -251,7 +251,7 @@ ggplot(data = sci_tbl, mapping = aes(x = dept, y = count)) +
   layer(geom = "bar", stat = "identity", position = "identity")
 ```
 
-&lt;img src="figure/gg-layer-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-layer-1.png" width="480" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -263,11 +263,11 @@ p &lt;- ggplot(sci_tbl, aes(x = dept, y = count))
 p
 ```
 
-&lt;img src="figure/aes-map-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/aes-map-1.png" width="480" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Geom .small[(a shorthand to `layer()`)]
+## Geoms .small[(a shorthand to `layer()`)]
 
 .pull-left[
 
@@ -276,7 +276,7 @@ p +
   geom_bar(stat = "identity")
 ```
 
-&lt;img src="figure/gg-bar-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-bar-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -292,7 +292,7 @@ p +
 
 ---
 
-## Geom
+## Geoms
 
 .pull-left[
 .small[
@@ -302,7 +302,7 @@ p +
   geom_point()
 ```
 
-&lt;img src="figure/gg-point-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-point-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 ]
 .pull-right[
@@ -313,7 +313,7 @@ p +
   geom_segment(aes(xend = dept, y = 0, yend = count))
 ```
 
-&lt;img src="figure/gg-seg-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-seg-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 ]
 
@@ -328,20 +328,20 @@ p +
   geom_segment(aes(xend = dept, y = 0, yend = count))
 ```
 
-&lt;img src="figure/gg-pop-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-pop-1.png" width="480" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Geom catalogue
+## Geom [catalogue](https://ggplot2.tidyverse.org/reference/index.html#section-layers)
 
-<div id="htmlwidget-4ebbe408d7be18650ae1" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4ebbe408d7be18650ae1">{"x":{"filter":"none","data":[["geom_abline, geom_hline, geom_vline","geom_bar, geom_col","geom_bin2d","geom_blank","geom_boxplot","geom_contour, geom_contour_filled","geom_count","geom_density","geom_density_2d, geom_density2d, geom_density_2d_filled, geom_density2d_filled","geom_dotplot","geom_errorbarh","geom_function","geom_hex","geom_freqpoly, geom_histogram","geom_jitter","geom_crossbar, geom_errorbar, geom_linerange, geom_pointrange","geom_map","geom_path, geom_line, geom_step","geom_point","geom_polygon","geom_qq_line, geom_qq","geom_quantile","geom_ribbon, geom_area","geom_rug","geom_segment, geom_curve","geom_smooth","geom_spoke","geom_label, geom_text","geom_raster, geom_rect, geom_tile","geom_violin","geom_sf, geom_sf_label, geom_sf_text"],["Reference lines: horizontal, vertical, and diagonal","Bar charts","Heatmap of 2d bin counts","Draw nothing","A box and whiskers plot (in the style of Tukey)","2D contours of a 3D surface","Count overlapping points","Smoothed density estimates","Contours of a 2D density estimate","Dot plot","Horizontal error bars","Draw a function as a continuous curve","Hexagonal heatmap of 2d bin counts","Histograms and frequency polygons","Jittered points","Vertical intervals: lines, crossbars &amp; errorbars","Polygons from a reference map","Connect observations","Points","Polygons","A quantile-quantile plot","Quantile regression","Ribbons and area plots","Rug plots in the margins","Line segments and curves","Smoothed conditional means","Line segments parameterised by location, direction and distance","Text","Rectangles","Violin plot","Visualise sf objects"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>geom<\/th>\n      <th>Description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tp","ordering":false,"pageLength":5,"width":"80%","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-2c6a05cb6c29c43a641e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2c6a05cb6c29c43a641e">{"x":{"filter":"none","data":[["geom_abline, geom_hline, geom_vline","geom_bar, geom_col","geom_bin2d","geom_blank","geom_boxplot","geom_contour, geom_contour_filled","geom_count","geom_density","geom_density_2d, geom_density2d, geom_density_2d_filled, geom_density2d_filled","geom_dotplot","geom_errorbarh","geom_function","geom_hex","geom_freqpoly, geom_histogram","geom_jitter","geom_crossbar, geom_errorbar, geom_linerange, geom_pointrange","geom_map","geom_path, geom_line, geom_step","geom_point","geom_polygon","geom_qq_line, geom_qq","geom_quantile","geom_ribbon, geom_area","geom_rug","geom_segment, geom_curve","geom_smooth","geom_spoke","geom_label, geom_text","geom_raster, geom_rect, geom_tile","geom_violin","geom_sf, geom_sf_label, geom_sf_text"],["Reference lines: horizontal, vertical, and diagonal","Bar charts","Heatmap of 2d bin counts","Draw nothing","A box and whiskers plot (in the style of Tukey)","2D contours of a 3D surface","Count overlapping points","Smoothed density estimates","Contours of a 2D density estimate","Dot plot","Horizontal error bars","Draw a function as a continuous curve","Hexagonal heatmap of 2d bin counts","Histograms and frequency polygons","Jittered points","Vertical intervals: lines, crossbars &amp; errorbars","Polygons from a reference map","Connect observations","Points","Polygons","A quantile-quantile plot","Quantile regression","Ribbons and area plots","Rug plots in the margins","Line segments and curves","Smoothed conditional means","Line segments parameterised by location, direction and distance","Text","Rectangles","Violin plot","Visualise sf objects"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>geom<\/th>\n      <th>Description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tp","ordering":false,"pageLength":5,"width":"80%","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
-.footnote[&lt;https://ggplot2.tidyverse.org/reference/index.html#section-layers&gt;]
+.footnote[source code: Emi Tanaka]
 
 ---
 
-## Stat
+## Stats
 
 .pull-left[
 * Aggregated (pre-computed)
@@ -383,7 +383,7 @@ sci_tbl0
 
 ---
 
-## Stat
+## Stats
 
 .pull-left[
 
@@ -392,7 +392,7 @@ p +
   geom_bar(stat = "identity")
 ```
 
-&lt;img src="figure/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/unnamed-chunk-4-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -401,7 +401,7 @@ ggplot(sci_tbl0, aes(x = dept)) +
   geom_bar(stat = "count")
 ```
 
-&lt;img src="figure/gg-bar-c-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-bar-c-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -415,7 +415,7 @@ p +
   geom_col(aes(colour = dept))
 ```
 
-&lt;img src="figure/gg-bar-col-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-bar-col-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -424,7 +424,7 @@ p +
   geom_col(aes(fill = dept))
 ```
 
-&lt;img src="figure/gg-bar-fill-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-bar-fill-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -438,7 +438,7 @@ p +
   geom_col(aes(fill = dept))
 ```
 
-&lt;img src="figure/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/unnamed-chunk-5-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -447,7 +447,7 @@ p +
   geom_col(fill = "#756bb1")
 ```
 
-&lt;img src="figure/gg-bar-fill-str-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-bar-fill-str-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -475,7 +475,13 @@ p +
 
 ---
 
-## Coord
+## Your turn
+
+* What is a bubble chart
+
+---
+
+## Coords
 
 
 ```r
@@ -484,26 +490,28 @@ p +
   coord_polar(theta = "y")
 ```
 
-&lt;img src="figure/gg-arc-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-arc-1.png" width="600" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Theme: modify the look
+## Themes: modify the look
 
 
 ```r
 p +
   geom_col(aes(fill = dept)) +
-  theme(axis.text.x = element_text(angle = 90))
+  theme(axis.text.x = element_text(angle = 30))
 ```
 
-&lt;img src="figure/gg-theme-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-theme-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Modify the look of *texts* with `element_text()`
 
 &lt;img src="img/ggplot-theme-text-annotation.png" width="100%"&gt;
+
+.footnote[image credit: Emi Tanaka]
 
 ---
 
@@ -513,6 +521,7 @@ p +
 .center[**lines** with `element_line()`]
 
 &lt;img src="img/ggplot-annotated-line-marks.png" width="100%"&gt;
+.footnote[image credit: Emi Tanaka]
 ]
 .pull-right[
 .center[**regions** with `element_rect()`]
@@ -531,7 +540,7 @@ class: middle inverse
 ---
 
 .left-column[
-## Facet
+## Facets
 ]
 .right-column[
 `mpg` data available from {ggplot2}
@@ -558,7 +567,7 @@ mpg
 ---
 
 .left-column[
-## Facet
+## Facets
 ]
 .right-column[
 
@@ -568,13 +577,13 @@ p_mpg &lt;- ggplot(mpg, aes(displ, cty)) +
 p_mpg
 ```
 
-&lt;img src="figure/gg-mpg-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-mpg-1.png" width="600" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
 .left-column[
-## Facet
+## Facets
 ### - `facet_grid()`
 ]
 .right-column[
@@ -584,13 +593,13 @@ p_mpg +
   facet_grid(rows = vars(drv))
 ```
 
-&lt;img src="figure/gg-facet-rows-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-facet-rows-1.png" width="600" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
 .left-column[
-## Facet
+## Facets
 ### - `facet_grid()`
 ]
 .right-column[
@@ -600,13 +609,13 @@ p_mpg +
   facet_grid(cols = vars(drv))
 ```
 
-&lt;img src="figure/gg-facet-cols-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-facet-cols-1.png" width="720" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
 .left-column[
-## Facet
+## Facets
 ### - `facet_grid()`
 ]
 .right-column[
@@ -616,13 +625,13 @@ p_mpg +
   facet_grid(rows = vars(drv), cols = vars(cyl))
 ```
 
-&lt;img src="figure/gg-facet-grid-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-facet-grid-1.png" width="840" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
 .left-column[
-## Facet
+## Facets
 ### - `facet_grid()`
 ### - `facet_wrap()`
 ]
@@ -633,19 +642,17 @@ p_mpg +
   facet_wrap(vars(drv), ncol = 2)
 ```
 
-&lt;img src="figure/gg-facet-wrap-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-facet-wrap-1.png" width="720" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 
-class: middle inverse
-
-## Exploratory data visualisation
-
----
+class: middle center
 
 background-image: url(img/data-vis-log.png)
 background-size: contain
+
+# .large[.orange[Exploratory data visualisation]]
 
 .footnote[image credit: Emi Tanaka]
 
@@ -666,14 +673,14 @@ movies
 
 ```
 #&gt; # A tibble: 3,201 x 16
-#&gt;   Title US_Gross Worldwide_Gross US_DVD_Sales
-#&gt;   &lt;chr&gt;    &lt;int&gt;           &lt;dbl&gt;        &lt;int&gt;
-#&gt; 1 The …   146083          146083           NA
-#&gt; 2 Firs…    10876           10876           NA
-#&gt; 3 I Ma…   203134          203134           NA
-#&gt; 4 Let'…   373615          373615           NA
-#&gt; 5 Slam   1009819         1087521           NA
-#&gt; 6 Miss…    24551         2624551           NA
+#&gt;   Title                US_Gross Worldwide_Gross US_DVD_Sales
+#&gt;   &lt;chr&gt;                   &lt;int&gt;           &lt;dbl&gt;        &lt;int&gt;
+#&gt; 1 The Land Girls         146083          146083           NA
+#&gt; 2 First Love, Last Ri…    10876           10876           NA
+#&gt; 3 I Married a Strange…   203134          203134           NA
+#&gt; 4 Let's Talk About Sex   373615          373615           NA
+#&gt; 5 Slam                  1009819         1087521           NA
+#&gt; 6 Mississippi Mermaid     24551         2624551           NA
 #&gt; # … with 3,195 more rows, and 12 more variables:
 #&gt; #   Production_Budget &lt;int&gt;, Release_Date &lt;chr&gt;,
 #&gt; #   MPAA_Rating &lt;chr&gt;, Running_Time_min &lt;int&gt;,
@@ -689,7 +696,7 @@ movies
 .left-column[
 ## case study
 ### - import
-### - glimpse
+### - skim
 ]
 .right-column[
 .small[
@@ -750,11 +757,23 @@ skimr::skim(movies)
 .left-column[
 ## case study
 ### - import
-### - glimpse
+### - skim
 ### - vis
 ]
 .right-column[
-Q: are movies ratings consistent b/t IMDB &amp; Rotten Tomatoes?
+Data analysis starts with &lt;i class="far fa-question-circle"&gt;&lt;/i&gt;
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - skim
+### - vis
+]
+.right-column[
+&lt;i class="far fa-question-circle"&gt;&lt;/i&gt; Are movies ratings consistent b/t IMDB &amp; Rotten Tomatoes
 .small[
 
 ```r
@@ -764,7 +783,7 @@ ggplot(movies, aes(x = IMDB_Rating, y = Rotten_Tomatoes_Rating)) +
   theme(aspect.ratio = 1)
 ```
 
-&lt;img src="figure/movies-gam-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/movies-gam-1.png" width="420" style="display: block; margin: auto;" /&gt;
 ]
 ]
 
@@ -773,11 +792,11 @@ ggplot(movies, aes(x = IMDB_Rating, y = Rotten_Tomatoes_Rating)) +
 .left-column[
 ## case study
 ### - import
-### - glimpse
+### - skim
 ### - vis
 ]
 .right-column[
-Q: are movies ratings consistent b/t IMDB &amp; Rotten Tomatoes?
+&lt;i class="far fa-question-circle"&gt;&lt;/i&gt; Are movies ratings consistent b/t IMDB &amp; Rotten Tomatoes
 .small[
 
 ```r
@@ -786,7 +805,7 @@ ggplot(movies, aes(x = IMDB_Rating, y = Rotten_Tomatoes_Rating)) +
   theme(aspect.ratio = 1)
 ```
 
-&lt;img src="figure/movies-hex-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/movies-hex-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 ]
 
@@ -795,11 +814,11 @@ ggplot(movies, aes(x = IMDB_Rating, y = Rotten_Tomatoes_Rating)) +
 .left-column[
 ## case study
 ### - import
-### - glimpse
+### - skim
 ### - vis
 ]
 .right-column[
-Q: the popularity of major genre.
+&lt;i class="far fa-question-circle"&gt;&lt;/i&gt; The popularity of major genre
 .small[
 
 ```r
@@ -807,7 +826,7 @@ ggplot(movies, aes(y = Major_Genre)) +
   geom_bar()
 ```
 
-&lt;img src="figure/movies-bar-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/movies-bar-1.png" width="600" style="display: block; margin: auto;" /&gt;
 ]
 ]
 
@@ -816,11 +835,11 @@ ggplot(movies, aes(y = Major_Genre)) +
 .left-column[
 ## case study
 ### - import
-### - glimpse
+### - skim
 ### - vis
 ]
 .right-column[
-Q: the likeness of major genre.
+&lt;i class="far fa-question-circle"&gt;&lt;/i&gt; The likeness of major genre
 .small[
 
 ```r
@@ -828,7 +847,7 @@ ggplot(movies) +
   geom_boxplot(aes(x = IMDB_Rating, y = Major_Genre))
 ```
 
-&lt;img src="figure/movies-boxplot-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/movies-boxplot-1.png" width="600" style="display: block; margin: auto;" /&gt;
 ]
 ]
 
@@ -837,11 +856,11 @@ ggplot(movies) +
 .left-column[
 ## case study
 ### - import
-### - glimpse
+### - skim
 ### - vis
 ]
 .right-column[
-Q: the likeness of major genre.
+&lt;i class="far fa-question-circle"&gt;&lt;/i&gt; The likeness of major genre
 .small[
 
 ```r
@@ -849,7 +868,7 @@ ggplot(movies) +
   geom_density(aes(x = IMDB_Rating, fill = Major_Genre))
 ```
 
-&lt;img src="figure/movies-density-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/movies-density-1.png" width="720" style="display: block; margin: auto;" /&gt;
 ]
 ]
 
@@ -858,11 +877,11 @@ ggplot(movies) +
 .left-column[
 ## case study
 ### - import
-### - glimpse
+### - skim
 ### - vis
 ]
 .right-column[
-Q: the likeness of major genre.
+&lt;i class="far fa-question-circle"&gt;&lt;/i&gt; The likeness of major genre
 .small[
 
 ```r
@@ -871,17 +890,65 @@ ggplot(movies, aes(x = IMDB_Rating, y = Major_Genre)) +
   geom_density_ridges(aes(fill = Major_Genre))
 ```
 
-&lt;img src="figure/movies-ridges-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/movies-ridges-1.png" width="840" style="display: block; margin: auto;" /&gt;
 ]
 ]
 
 ---
 
-## Beyond {ggplot2}
+## {ggplot2}-ext 📦
 
 &gt; {ggplot2} now has an official extension mechanism. This means that others can now easily create their own stats, geoms and positions, and provide them in other packages. This should allow the ggplot2 community to flourish, even as less development work happens in ggplot2 itself. 
 
 ➡️ &lt;https://exts.ggplot2.tidyverse.org/gallery/&gt;
+
+---
+
+.pull-left[
+[&lt;img src="https://gganimate.com/reference/figures/logo.png" width="80px"&gt;](https://gganimate.com)
+```r
+library(gganimate)
+ggplot(mtcars, aes(factor(cyl), mpg)) +
+  geom_boxplot() +
+  # Here comes the gganimate code
+  transition_states(
+    gear,
+    transition_length = 2,
+    state_length = 1
+  ) +
+  enter_fade() +
+  exit_shrink() +
+  ease_aes('sine-in-out')
+```
+]
+.pull-right[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;img src="https://gganimate.com/reference/figures/README-unnamed-chunk-2-1.gif" width="100%"&gt;
+]
+
+---
+
+.left-column[
+[&lt;img src="https://github.com/slowkow/ggrepel/raw/master/man/figures/logo.svg" width="80px"&gt;](https://ggrepel.slowkow.com/index.html)
+]
+.right-column[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;img src="https://ggrepel.slowkow.com/articles/examples_files/figure-html/comparison-1.png" width="100%"&gt;
+]
+
+---
+
+## The R Graph Gallery
+
+.center[[&lt;img src="img/r-graph-gallery.png" width="80%"&gt;](https://www.r-graph-gallery.com)]
+
+???
+
+* d3.js
 
 ---
 
@@ -892,6 +959,7 @@ ggplot(movies, aes(x = IMDB_Rating, y = Major_Genre)) +
 ]
 .pull-right[
 * [Data visualisation](https://r4ds.had.co.nz/data-visualisation.html)
+* [{ggplot2} cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
 ]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

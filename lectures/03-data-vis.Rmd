@@ -20,7 +20,7 @@ options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE,
   tibble.width = 60, tibble.print_min = 6)
 opts_chunk$set(
   echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
-  fig.path = 'figure/', cache.path = 'cache/', cache = TRUE,
+  fig.path = 'figure/', cache.path = 'cache/', cache = TRUE, fig.retina = 3,
   fig.align = 'center', fig.width = 12, fig.height = 8.5, fig.show = 'hold',
   dpi = 120
 )
@@ -184,7 +184,7 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
 
 ---
 
-## Layer
+## Layers
 
 ```{r gg-layer, fig.height = 3.8, fig.width = 4}
 ```
@@ -198,7 +198,7 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
 
 ---
 
-## Geom .small[(a shorthand to `layer()`)]
+## Geoms .small[(a shorthand to `layer()`)]
 
 .pull-left[
 ```{r gg-bar, fig.height = 3.8, fig.width = 4}
@@ -215,7 +215,7 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
 
 ---
 
-## Geom
+## Geoms
 
 .pull-left[
 .small[
@@ -239,7 +239,7 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
 
 ---
 
-## Geom catalogue
+## Geom [catalogue](https://ggplot2.tidyverse.org/reference/index.html#section-layers)
 
 ```{r geom, echo = FALSE}
 geoms <- help.search("^geom_", package = "ggplot2")
@@ -258,11 +258,11 @@ geoms$matches %>%
                                width = "80%")) 
 ```
 
-.footnote[<https://ggplot2.tidyverse.org/reference/index.html#section-layers>]
+.footnote[source code: Emi Tanaka]
 
 ---
 
-## Stat
+## Stats
 
 .pull-left[
 * Aggregated (pre-computed)
@@ -277,7 +277,7 @@ geoms$matches %>%
 
 ---
 
-## Stat
+## Stats
 
 .pull-left[
 ```{r ref.label = "gg-bar", fig.height = 4, fig.width = 4}
@@ -339,14 +339,20 @@ geoms$matches %>%
 
 ---
 
-## Coord
+## Your turn
+
+* What is a bubble chart
+
+---
+
+## Coords
 
 ```{r gg-arc, fig.height = 5, fig.width = 5}
 ```
 
 ---
 
-## Theme: modify the look
+## Themes: modify the look
 
 ```{r gg-theme, fig.height = 3.5, fig.width = 6}
 ```
@@ -357,6 +363,8 @@ geoms$matches %>%
 
 <img src="img/ggplot-theme-text-annotation.png" width="100%">
 
+.footnote[image credit: Emi Tanaka]
+
 ---
 
 ## Modify the look of
@@ -365,6 +373,7 @@ geoms$matches %>%
 .center[**lines** with `element_line()`]
 
 <img src="img/ggplot-annotated-line-marks.png" width="100%">
+.footnote[image credit: Emi Tanaka]
 ]
 .pull-right[
 .center[**regions** with `element_rect()`]
@@ -383,7 +392,7 @@ class: middle inverse
 ---
 
 .left-column[
-## Facet
+## Facets
 ]
 .right-column[
 `mpg` data available from {ggplot2}
@@ -394,7 +403,7 @@ class: middle inverse
 ---
 
 .left-column[
-## Facet
+## Facets
 ]
 .right-column[
 ```{r gg-mpg, fig.width = 5, fig.height = 4}
@@ -404,7 +413,7 @@ class: middle inverse
 ---
 
 .left-column[
-## Facet
+## Facets
 ### - `facet_grid()`
 ]
 .right-column[
@@ -415,7 +424,7 @@ class: middle inverse
 ---
 
 .left-column[
-## Facet
+## Facets
 ### - `facet_grid()`
 ]
 .right-column[
@@ -426,7 +435,7 @@ class: middle inverse
 ---
 
 .left-column[
-## Facet
+## Facets
 ### - `facet_grid()`
 ]
 .right-column[
@@ -437,7 +446,7 @@ class: middle inverse
 ---
 
 .left-column[
-## Facet
+## Facets
 ### - `facet_grid()`
 ### - `facet_wrap()`
 ]
@@ -448,14 +457,12 @@ class: middle inverse
 
 ---
 
-class: middle inverse
-
-## Exploratory data visualisation
-
----
+class: middle center
 
 background-image: url(img/data-vis-log.png)
 background-size: contain
+
+# .large[.orange[Exploratory data visualisation]]
 
 .footnote[image credit: Emi Tanaka]
 
@@ -475,7 +482,7 @@ background-size: contain
 .left-column[
 ## case study
 ### - import
-### - glimpse
+### - skim
 ]
 .right-column[
 .small[
@@ -489,11 +496,23 @@ background-size: contain
 .left-column[
 ## case study
 ### - import
-### - glimpse
+### - skim
 ### - vis
 ]
 .right-column[
-Q: are movies ratings consistent b/t IMDB & Rotten Tomatoes?
+Data analysis starts with <i class="far fa-question-circle"></i>
+]
+
+---
+
+.left-column[
+## case study
+### - import
+### - skim
+### - vis
+]
+.right-column[
+<i class="far fa-question-circle"></i> Are movies ratings consistent b/t IMDB & Rotten Tomatoes
 .small[
 ```{r movies-gam, fig.height = 3.5, fig.width = 3.5}
 ```
@@ -505,13 +524,13 @@ Q: are movies ratings consistent b/t IMDB & Rotten Tomatoes?
 .left-column[
 ## case study
 ### - import
-### - glimpse
+### - skim
 ### - vis
 ]
 .right-column[
-Q: are movies ratings consistent b/t IMDB & Rotten Tomatoes?
+<i class="far fa-question-circle"></i> Are movies ratings consistent b/t IMDB & Rotten Tomatoes
 .small[
-```{r movies-hex, fig.height = 3.5, fig.width = 3.5}
+```{r movies-hex, fig.height = 4, fig.width = 4}
 ```
 ]
 ]
@@ -521,11 +540,11 @@ Q: are movies ratings consistent b/t IMDB & Rotten Tomatoes?
 .left-column[
 ## case study
 ### - import
-### - glimpse
+### - skim
 ### - vis
 ]
 .right-column[
-Q: the popularity of major genre.
+<i class="far fa-question-circle"></i> The popularity of major genre
 .small[
 ```{r movies-bar, fig.height = 3.5, fig.width = 5}
 ```
@@ -537,11 +556,11 @@ Q: the popularity of major genre.
 .left-column[
 ## case study
 ### - import
-### - glimpse
+### - skim
 ### - vis
 ]
 .right-column[
-Q: the likeness of major genre.
+<i class="far fa-question-circle"></i> The likeness of major genre
 .small[
 ```{r movies-boxplot, fig.height = 3.5, fig.width = 5}
 ```
@@ -553,11 +572,11 @@ Q: the likeness of major genre.
 .left-column[
 ## case study
 ### - import
-### - glimpse
+### - skim
 ### - vis
 ]
 .right-column[
-Q: the likeness of major genre.
+<i class="far fa-question-circle"></i> The likeness of major genre
 .small[
 ```{r movies-density, fig.height = 3.5, fig.width = 6}
 ```
@@ -569,11 +588,11 @@ Q: the likeness of major genre.
 .left-column[
 ## case study
 ### - import
-### - glimpse
+### - skim
 ### - vis
 ]
 .right-column[
-Q: the likeness of major genre.
+<i class="far fa-question-circle"></i> The likeness of major genre
 .small[
 ```{r movies-ridges, fig.height = 3.5, fig.width = 7}
 ```
@@ -582,11 +601,59 @@ Q: the likeness of major genre.
 
 ---
 
-## Beyond {ggplot2}
+## {ggplot2}-ext `r emo::ji("package")`
 
 > {ggplot2} now has an official extension mechanism. This means that others can now easily create their own stats, geoms and positions, and provide them in other packages. This should allow the ggplot2 community to flourish, even as less development work happens in ggplot2 itself. 
 
 `r emo::ji("arrow_right")` <https://exts.ggplot2.tidyverse.org/gallery/>
+
+---
+
+.pull-left[
+[<img src="https://gganimate.com/reference/figures/logo.png" width="80px">](https://gganimate.com)
+```r
+library(gganimate)
+ggplot(mtcars, aes(factor(cyl), mpg)) +
+  geom_boxplot() +
+  # Here comes the gganimate code
+  transition_states(
+    gear,
+    transition_length = 2,
+    state_length = 1
+  ) +
+  enter_fade() +
+  exit_shrink() +
+  ease_aes('sine-in-out')
+```
+]
+.pull-right[
+<br>
+<br>
+<br>
+<img src="https://gganimate.com/reference/figures/README-unnamed-chunk-2-1.gif" width="100%">
+]
+
+---
+
+.left-column[
+[<img src="https://github.com/slowkow/ggrepel/raw/master/man/figures/logo.svg" width="80px">](https://ggrepel.slowkow.com/index.html)
+]
+.right-column[
+<br>
+<br>
+<br>
+<img src="https://ggrepel.slowkow.com/articles/examples_files/figure-html/comparison-1.png" width="100%">
+]
+
+---
+
+## The R Graph Gallery
+
+.center[[<img src="img/r-graph-gallery.png" width="80%">](https://www.r-graph-gallery.com)]
+
+???
+
+* d3.js
 
 ---
 
@@ -597,4 +664,5 @@ Q: the likeness of major genre.
 ]
 .pull-right[
 * [Data visualisation](https://r4ds.had.co.nz/data-visualisation.html)
+* [{ggplot2} cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
 ]
