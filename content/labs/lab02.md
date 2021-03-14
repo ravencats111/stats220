@@ -32,10 +32,13 @@ download `user_reviews.tsv`
 [here](https://github.com/rfordatascience/tidytuesday/raw/master/data/2020/2020-05-05/user_reviews.tsv)
 to `data/animal-crossing/` and `gapminder.rds`
 [here](https://github.com/STATS-UOA/stats220/raw/master/lectures/data/gapminder.rds)
-to `data/` under your `Rproj`. You MUST use relative file paths
-`data/animal-crossing/user_reviews.tsv` and `data/gapminder.rds` to
-import these data. NO marks will be given for using URL links or
-different file path specifications.
+to `data/` under your `Rproj`.
+
+-   You MUST use relative file paths
+    `data/animal-crossing/user_reviews.tsv` and `data/gapminder.rds` to
+    import these data.
+-   NO marks will be given for using URL links or different file path
+    specifications.
 
 ### Question 1
 
