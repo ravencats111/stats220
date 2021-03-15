@@ -30,16 +30,17 @@
                   </div>
                   
                   <div class="panel-body text-center">
-                    <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}R/{{ .Params.r }}" target="_blank" rel="noopener" role="button" download><i class="fa fa-download"></i> R </a>
-                    <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.rmd }}" target="_blank" rel="noopener" role="button" download><i class="fa fa-download"></i> Rmd </a>
+                    <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.obj }}" target="_blank" rel="noopener" role="button"><i class="fas fa-bullseye"></i></a>
+                    <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}R/{{ .Params.r }}" target="_blank" rel="noopener" role="button" download><i class="fab fa-r-project"></i></a>
+                    <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.rmd }}" target="_blank" rel="noopener" role="button" download><i class="fab fa-markdown"></i></a>
                     {{ if .Params.pdf }}
-                      <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.pdf }}" target="_blank" rel="noopener" role="button"><i class="fa fa-file"></i> PDF </a>
+                      <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.pdf }}" target="_blank" rel="noopener" role="button"><i class="fas fa-file-pdf"></i></a>
                     {{ end }}
                     {{ if .Params.lab }}
-                      <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.lab }}" target="_blank" rel="noopener" role="button"><i class="fa fa-external-link-square"></i> Lab </a>
+                      <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.lab }}" target="_blank" rel="noopener" role="button"><i class="fas fa-laptop-code"></i></a>
                     {{ end }}
                     {{ if .Params.sol }}
-                      <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.sol }}" target="_blank" rel="noopener" role="button"><i class="fa fa-key"></i> Solution </a>
+                      <a class="btn btn-info btn-sm list-group-item-text" href="{{ .Site.BaseURL }}{{ .Params.sol }}" target="_blank" rel="noopener" role="button"><i class="fas fa-key"></i></a>
                     {{ end }}
                   </div>
                   <!-- <div class="panel&#45;body"><small> -->
