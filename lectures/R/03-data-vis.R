@@ -92,26 +92,30 @@ p +
 p +
   geom_col(fill = "#756bb1")
 
+## ---- bubble-chart
+p +
+  geom_point(aes(size = count))
+
 ## ---- gg-arc
 p +
   geom_col(aes(fill = dept)) +
-  coord_polar(theta = "y")
-
-## ---- gg-theme
-p +
-  geom_col(aes(fill = dept)) +
-  theme(axis.text.x = element_text(angle = 30))
+  coord_polar(theta = "y") #<<
 
 ## ---- gg-theme-bw
 p +
   geom_col(aes(fill = dept)) +
-  theme_bw()
+  theme_bw() #<<
 
 ## ---- ggthemes
 library(ggthemes)
 p +
   geom_col(aes(fill = dept)) +
-  theme_solarized()
+  theme_economist()
+
+## ---- gg-theme
+p +
+  geom_col(aes(fill = dept)) +
+  theme(axis.text.x = element_text(angle = 30))
 
 ## ---- mpg
 mpg
@@ -124,18 +128,22 @@ p_mpg
 ## ---- gg-facet-rows
 p_mpg +
   facet_grid(rows = vars(drv))
+  # facet_grid(~ drv)
 
 ## ---- gg-facet-cols
 p_mpg +
   facet_grid(cols = vars(drv))
+  # facet_grid(drv ~ .)
 
 ## ---- gg-facet-grid
 p_mpg +
   facet_grid(rows = vars(drv), cols = vars(cyl))
+  # facet_grid(cyl ~ drv)
 
 ## ---- gg-facet-wrap
 p_mpg +
   facet_wrap(vars(drv), ncol = 2)
+  # facet_wrap(~ drv, ncol = 2)
 
 ## ---- movies
 movies <- as_tibble(jsonlite::read_json(

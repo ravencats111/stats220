@@ -34,10 +34,13 @@ to `data/animal-crossing/` and `gapminder.rds`
 [here](https://github.com/STATS-UOA/stats220/raw/master/lectures/data/gapminder.rds)
 to `data/` under your `Rproj`.
 
--   You MUST use **relative file paths
+-   You’re required to use **relative file paths
     `data/animal-crossing/user_reviews.tsv` and `data/gapminder.rds`**
     to import these data.
 -   NO marks will be given for using URL links or different file paths.
+-   Code below is only there to help you to verify your results. You DO
+    NOT need to include the code like `sum(good_grade)`, and print these
+    objects.
 
 ### Question 1
 
@@ -86,7 +89,8 @@ assigned to `good_grade`.
 ### Question 4
 
 Subset `user_reviews` given `user_grade` greater than or equal to `7`,
-and the `text` column to be excluded.
+and the `text` column to be excluded, with values assigned to
+`user_good_grade`.
 
     user_good_grade
 

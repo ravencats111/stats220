@@ -7,6 +7,7 @@ output:
   xaringan::moon_reader:
     css: ["assets/remark.css"]
     lib_dir: libs
+    beforeInit: ["https://platform.twitter.com/widgets.js"]
     nature:
       ratio: 16:9
       highlightStyle: github
@@ -303,7 +304,7 @@ geoms$matches %>%
 
 ---
 
-## Mapping variables vs Setting constants
+## Mapping .brown[variables] vs Setting .brown[constants]
 
 .pull-left[
 ```{r ref.label = "gg-bar-fill", fig.height = 4, fig.width = 4}
@@ -341,18 +342,63 @@ geoms$matches %>%
 
 ## Your turn
 
-* What is a bubble chart
+Describe a bubble chart in terms of grammar of graphics.
+
+```{r bubble-chart, echo = FALSE, fig.height = 4, fig.width = 5}
+```
 
 ---
 
 ## Coords
 
+.pull-left[
+* Coordinate systems
+  + `coord_cartesian()` (default)
+  + ~~`coord_flip()`~~ (deprecated; now you can simply swap `x` and `y`)
+  + `coord_map()`
+  + `coord_polor()`
+]
+.pull-right[
 ```{r gg-arc, fig.height = 5, fig.width = 5}
 ```
+]
 
 ---
 
 ## Themes: modify the look
+
+.pull-left[
+* [Built-in ggplot themes](https://ggplot2.tidyverse.org/reference/ggtheme.html)
+  + `theme_grey()`/`theme_gray()`
+  + `theme_bw()`, `theme_linedraw()`
+  + `theme_light()`, `theme_dark()`
+  + `theme_minimal()`, `theme_classic()`
+  + `theme_void()`
+]
+.pull-right[
+```{r gg-theme-bw, fig.height = 3.5, fig.width = 5}
+```
+]
+
+---
+
+## Themes: modify the look
+
+.pull-left[
+* Many R packages provide themes
+  + [{ggthemes}](https://github.com/jrnold/ggthemes)
+  + [{ggthemr}](https://github.com/Mikata-Project/ggthemr)
+  + [{hrbrthemes}](https://cinc.rud.is/web/packages/hrbrthemes/)
+  + [{ggtech}](https://github.com/ricardo-bion/ggtech)
+]
+.pull-right[
+```{r ggthemes, fig.height = 3.5, fig.width = 4}
+```
+]
+
+---
+
+## Modify the look of *texts* with `element_text()`
 
 ```{r gg-theme, fig.height = 3.5, fig.width = 6}
 ```
@@ -500,7 +546,10 @@ background-size: contain
 ### - vis
 ]
 .right-column[
-Data analysis starts with <i class="far fa-question-circle"></i>
+* Data analysis starts with questions.
+.center[
+<img src="https://rstudio-education.github.io/tidyverse-cookbook/images/data-science-workflow.png" width="100%">
+]
 ]
 
 ---
@@ -654,6 +703,15 @@ ggplot(mtcars, aes(factor(cyl), mpg)) +
 ???
 
 * d3.js
+
+---
+
+.left-column[
+## To be continued ...
+]
+.right-column[
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">NEW: the Thursday 19 March update of our coronavirus mortality trajectories tracker<br><br>• Italy now has more Covid-19 deaths than China’s total<br>• UK remains on a steeper mortality curve than Italy, while Britain remains far from lockdown<br><br>Live version here: <a href="https://t.co/VcSZISFxzF">https://t.co/VcSZISFxzF</a> <a href="https://t.co/QvByzSj6QX">pic.twitter.com/QvByzSj6QX</a></p>&mdash; John Burn-Murdoch (@jburnmurdoch) <a href="https://twitter.com/jburnmurdoch/status/1240723388336877569?ref_src=twsrc%5Etfw">March 19, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+]
 
 ---
 
