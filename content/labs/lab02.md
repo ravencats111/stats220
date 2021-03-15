@@ -16,7 +16,7 @@ This lab exercise is **due 23:59 Monday 22 March (NZDT)**.
 -   Late assignments are NOT accepted unless prior arrangement for
     medical/compassionate reasons.
 
-<hr>
+---
 
 In this lab exercise, we’re going to work with two data sets: user
 reviews for Animal Crossing - New Horizons as in `user_reviews.csv` and
