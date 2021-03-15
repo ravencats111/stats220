@@ -31,7 +31,7 @@ for this lab session:
 Suppose that you have created an `Rproj` for this course. You need to
 download `user_reviews.tsv`
 [here](https://github.com/rfordatascience/tidytuesday/raw/master/data/2020/2020-05-05/user_reviews.tsv)
-(right click, select “Download Linked File As”) to
+(right click, select "Save link as"/“Download Linked File As”) to
 `data/animal-crossing/` and `gapminder.rds`
 [here](https://github.com/STATS-UOA/stats220/raw/master/lectures/data/gapminder.rds)
 to `data/` under your `Rproj`.
