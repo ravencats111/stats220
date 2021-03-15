@@ -16,21 +16,23 @@ This lab exercise is **due 23:59 Monday 22 March (NZDT)**.
 -   Late assignments are NOT accepted unless prior arrangement for
     medical/compassionate reasons.
 
----
+------------------------------------------------------------------------
 
-In this lab exercise, we’re going to work with two data sets: user
+In this lab exercise, you are going to work with two data sets: user
 reviews for Animal Crossing - New Horizons as in `user_reviews.csv` and
-Gapminder as in `gapminder.rds`. We shall use the following packages:
+Gapminder as in `gapminder.rds`. You shall use the following packages
+for this lab session:
 
     library(tidyverse)
 
-for this lab. Please make sure to include the snippet above upfront in
-your R file.
+-   Make sure to include the snippet above upfront in your R file.
+-   DO NOT include `install.packages()` in your R file.
 
 Suppose that you have created an `Rproj` for this course. You need to
 download `user_reviews.tsv`
 [here](https://github.com/rfordatascience/tidytuesday/raw/master/data/2020/2020-05-05/user_reviews.tsv)
-to `data/animal-crossing/` and `gapminder.rds`
+(right click, select “Download Linked File As”) to
+`data/animal-crossing/` and `gapminder.rds`
 [here](https://github.com/STATS-UOA/stats220/raw/master/lectures/data/gapminder.rds)
 to `data/` under your `Rproj`.
 
@@ -44,8 +46,8 @@ to `data/` under your `Rproj`.
 
 ### Question 1
 
-Import `user_reviews.tsv` to R, and assign the result to a symbol called
-`user_reviews`.
+Import `data/animal-crossing/user_reviews.tsv` to R. You should end up
+with a **tibble** called `user_reviews`.
 
     user_reviews
 
@@ -66,8 +68,8 @@ Import `user_reviews.tsv` to R, and assign the result to a symbol called
 
 ### Question 2
 
-Extract the `grade` column from the `user_reviews` tibble, with values
-assigned to `user_grade`.
+Extract the `grade` column from the `user_reviews` tibble. You should
+end up with **a double vector** called `user_grade`.
 
     mean(user_grade)
 
@@ -75,8 +77,8 @@ assigned to `user_grade`.
 
 ### Question 3
 
-Compare `user_grade` to be greater than or equal to `7`, with values
-assigned to `good_grade`.
+Compare `user_grade` to be greater than or equal to `7`. You should end
+up with **a logical vector** called `good_grade`.
 
     typeof(good_grade)
 
@@ -89,8 +91,8 @@ assigned to `good_grade`.
 ### Question 4
 
 Subset `user_reviews` given `user_grade` greater than or equal to `7`,
-and the `text` column to be excluded, with values assigned to
-`user_good_grade`.
+and the `text` column to be excluded. You should end up with a
+**tibble** called `user_good_grade`.
 
     user_good_grade
 
@@ -113,8 +115,8 @@ and the `text` column to be excluded, with values assigned to
 
 Find the function from
 [{readr}](https://readr.tidyverse.org/reference/index.html) to import an
-R data format `gapminder.rds` to R, and assign to a symbol called
-`gapminder`.
+R data format `data/gapminder.rds` to R. You should end up with a
+**tibble** called `gapminder`.
 
     gapminder
 

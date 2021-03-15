@@ -12,6 +12,8 @@ By the end of this week, students should be able to
   + geometrics
   + statistics
   + facets
+  + scales
   + coordinates
   + themes
-* Write {ggplot2} code to generate a broad range of graphics 
+* Write {ggplot2} code to generate a broad range of graphics for mining information
+* Interpret graphical results

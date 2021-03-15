@@ -17,4 +17,4 @@ A list of datasets (`data/`) used in the course:
   + [`user_reviews.tsv`](https://github.com/rfordatascience/tidytuesday/raw/master/data/2020/2020-05-05/user_reviews.tsv)
   + [`villagers.csv`](https://github.com/rfordatascience/tidytuesday/raw/master/data/2020/2020-05-05/villagers.csv)
   + [`items.csv`](https://github.com/rfordatascience/tidytuesday/raw/master/data/2020/2020-05-05/items.csv)
-* [`gapminder.rds`](https://github.com/STATS-UOA/stats220/raw/master/lectures/data/gapminder.rds) Excerpt of the Gapminder data on life expectancy, GDP per capita, and population by country
+* [`gapminder.rds`](https://raw.github.com/STATS-UOA/stats220/master/lectures/data/gapminder.rds) Excerpt of the Gapminder data on life expectancy, GDP per capita, and population by country
