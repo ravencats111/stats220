@@ -61,6 +61,13 @@ read_chunk('R/03-data-vis.R')
 ```
 ]
 
+???
+
+* A picture is worth a thousand words. -Henrik Ibsen  
+* Data visualisation generally communicates information much quicker than numerical tables.
+* Data visualisation can also reveal unexpected structures in data; it is not surprising that data visualisation is one of the key tools in exploratory data analysis.
+* Data plot is usually more eye-catching even if you lose accuracy of the information.
+
 ---
 
 ## numbers vs plots

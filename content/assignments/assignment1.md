@@ -167,9 +167,9 @@ one-time customers. Present a bar chart for the tallies of trips by each
 ### Question 7
 
 You’re interested in riding behaviours of users of different genders
-conditional on their user types. Produce a small multiples of bar charts
-to display the tallies of trips by each `gender`, faceted by `usertype`
-on columns. You should end up with a **ggplot** object called `p3`.
+based on their user types. Produce a side-by-side bar charts to display
+the tallies of trips by each `gender`, grouped by `usertype`. You should
+end up with a **ggplot** object called `p3`.
 
     p3
 
