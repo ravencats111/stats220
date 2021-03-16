@@ -56,8 +56,7 @@ to `data/` under your `Rproj`.
 -   NO marks will be given for using URL links or different file paths.
 -   DO NOT apply any `theme()` and aesthetics other than what I asked to
     your plots.
--   DO NOT resize your plots, and leave all plots in their default
-    widths and heights.
+-   DO NOT print any R objects and plots.
 
 ### Question 1
 
