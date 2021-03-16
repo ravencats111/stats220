@@ -177,7 +177,7 @@ on columns. You should end up with a **ggplot** object called `p3`.
 
 ### Question 8
 
-Do younger customers ride for longer trips? Generate a scatter plot with
+Do younger users ride for longer trips? Generate a scatter plot with
 `birth_year` on x axis and `tripduration` on y axis, faceted by
 `usertype` on rows and `gender` on columns. You should end up with a
 **ggplot** object named `p4` with
