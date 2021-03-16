@@ -1,4 +1,7 @@
 ---
+output: 
+  md_document:
+    preserve_yaml: true
 layout: page
 title: Assignment 1
 ---
@@ -9,9 +12,9 @@ This assignment is **due 23:59 Friday 26 March (NZDT)**.
     code that assigns **the appropriate values** to **the appropriate
     symbols**.
 -   Your R file will be executed in order and checked against the values
-    that have been assigned to the relevant symbols using an automatic
-    grading system. Marks will be fully deducted for **non-identical**
-    results.
+    that have been assigned to the relevant symbols using an
+    **automatic** grading system. Marks will be fully deducted for
+    **non-identical** results.
 -   Intermediate steps to achieve the final results will NOT be checked.
 -   Each question is worth 1 point.
 -   You should submit your R file on Canvas.
@@ -21,8 +24,22 @@ This assignment is **due 23:59 Friday 26 March (NZDT)**.
 ------------------------------------------------------------------------
 
 In this assignment, your are going to work with 2018 Citi Bike trip data
-in New York City (`2018-citibike-tripdata.csv`). You shall use the
-following packages for this assignment:
+in New York City (`2018-citibike-tripdata.csv`). The data includes:
+
+-   Trip Duration (seconds)
+-   Start Time and Date
+-   Stop Time and Date
+-   Start Station Name
+-   End Station Name
+-   Station ID
+-   Station Lat/Long
+-   Bike ID
+-   User Type (Customer = 24-hour pass or 3-day pass user; Subscriber =
+    Annual Member)
+-   Gender (Zero=unknown; 1=male; 2=female)
+-   Year of Birth
+
+You shall use the following packages for this assignment:
 
     library(tidyverse)
 
@@ -35,10 +52,10 @@ download `2018-citibike-tripdata.csv`
 to `data/` under your `Rproj`.
 
 -   You’re required to use **relative file paths
-    `data/2018-citibike-tripdata.csv`** to import these data.
+    `data/2018-citibike-tripdata.csv`** to import the data.
 -   NO marks will be given for using URL links or different file paths.
--   DO NOT apply any `theme()` and aesthetics other than I asked to your
-    plots.
+-   DO NOT apply any `theme()` and aesthetics other than what I asked to
+    your plots.
 -   DO NOT resize your plots, and leave all plots in their default
     widths and heights.
 
@@ -72,9 +89,9 @@ Read `data/2018-citibike-tripdata.csv` into R. You should end up with a
 ### Question 2
 
 Regarding `nycbikes18_raw`, you are interested in the total number of
-bike trips ridden by each age group in 2018. Plot a bar chart to address
-the question of interest. You should end up with a **ggplot** object
-called `p1`, with
+bike trips ridden by each age group and user type. Plot a bar chart to
+address the question of interest. You should end up with a **ggplot**
+object called `p1`, with
 
 -   `colour = "white"`.
 
@@ -116,7 +133,7 @@ should end up with a **tibble** called `nycbikes18`.
 
 ------------------------------------------------------------------------
 
-#### You shall work with `nycbikes18` for the rest of the assignment.
+##### ‼️ You shall work with `nycbikes18` for the rest of the assignment.
 
 ### Question 4
 
@@ -165,7 +182,7 @@ Do younger customers ride for longer trips? Generate a scatter plot with
 `usertype` on rows and `gender` on columns. You should end up with a
 **ggplot** object named `p4` with
 
--   `size = 0.3`.
+-   `size = 0.5`.
 
 <!-- -->
 
