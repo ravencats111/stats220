@@ -666,6 +666,12 @@ background-size: contain
 ]
 ]
 
+???
+
+* There's no best single plot for the data.
+* Make as many plots as possible to get most facets of the data
+* eda: wandering around a city as a tourist
+
 ---
 
 .left-column[
