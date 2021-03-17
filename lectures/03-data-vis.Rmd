@@ -45,6 +45,12 @@ read_chunk('R/03-data-vis.R')
 .center[<img src="img/eda.jpg" height="100%">]
 ]
 
+???
+
+* John Tukey, one of the most well-known stat
+* invent boxplot, stem-and-leaf (pencil and paper)
+* coined the term EDA
+
 ---
 
 ## numbers vs plots
@@ -63,10 +69,8 @@ read_chunk('R/03-data-vis.R')
 
 ???
 
-* A picture is worth a thousand words. -Henrik Ibsen  
-* Data visualisation generally communicates information much quicker than numerical tables.
-* Data visualisation can also reveal unexpected structures in data; it is not surprising that data visualisation is one of the key tools in exploratory data analysis.
-* Data plot is usually more eye-catching even if you lose accuracy of the information.
+* humans digest info quicker through eyes than reading tables. -> ytb, tt
+* numbers on their own don't make sense to us.
 
 ---
 
@@ -76,11 +80,32 @@ read_chunk('R/03-data-vis.R')
 
 .footnote[image credit: Steph Locke]
 
+???
+
+* simple stats cannot reveal full pic.
+* all xy data tbl share the same mean/sd/corr, but different str in data...
+
+---
+
+## Why data visualisation?`r emo::ji('bar_chart')`
+
+> A picture is worth a thousand words. -- Henrik Ibsen  
+
+1. Data visualisation communicates information much quicker than numerical tables.
+2. Data visualisation can reveal unexpected structures in data; it is not surprising that data visualisation is one of the key tools in exploratory data analysis.
+3. Data plot is usually more eye-catching even if you lose accuracy of the information.
+
 ---
 
 class: middle inverse
 
 ## Charts `r emo::ji("boxing_glove")` Graphics
+
+???
+
+* When we talk about data vis, we use plots, charts, graphics interchangablely
+* But when comes to stats, there's difference bt.
+* What do we mean by graphics, how to make graphics
 
 ---
 
@@ -100,6 +125,10 @@ What types of plots can we make?
 2. pie chart for proportions
 ]
 
+???
+
+
+
 ---
 
 ## Named charts
@@ -114,6 +143,12 @@ What types of plots can we make?
 ```{r base-pieplot, fig.width = 4, fig.height = 4}
 ```
 ]
+
+???
+
+* default r functions
+* one-off functions
+* What's the fundamental difference bt bar and pie
 
 ---
 
@@ -134,6 +169,8 @@ What types of plots can we make?
 ```
 ]
 
+???
+
 ---
 
 .pull-left[
@@ -145,6 +182,13 @@ What types of plots can we make?
 > Grammar makes language expressive. A language consisting of words and no grammar (statement = word) expresses only as many ideas as there are words. By specifying how words are combined in statements, a grammar expands a language’s scope.
 ]
 
+???
+
+* a book blew my mind, changed the view to look at stat graphics.
+* we can easily run out of names
+* we can generate many types of new graphics by combine components following the grammar.
+* this books lays the theoretical foundation to {ggplot2}, {tab}, {vega-lite}
+
 ---
 
 class: inverse
@@ -154,6 +198,10 @@ background-size: cover
 
 .footnote[image credit: Thomas Lin Pederson]
 
+???
+
+decomposed to
+
 ---
 
 class: inverse middle
@@ -161,6 +209,11 @@ class: inverse middle
 ### The *grammar of graphics* takes us beyond a limited set of .blue[charts (words)] to an almost unlimited world of .blue[graphical forms (statements)]. 
 <hr>
 ### *{ggplot2}* provides a cohesive system for declaratively creating elegant graphics, based on The Grammar of Graphics.
+
+???
+
+* extends gg, and layered gg.
+* provides a cohesive and declarative grammar to create graphics
 
 ---
 
@@ -173,6 +226,11 @@ class: inverse middle
 ```
 ]
 
+???
+
+* Back to our question, the difference
+* The difference is plotting bars on the polar coord
+
 ---
 
 ## A graphing template
@@ -183,16 +241,25 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
   layer(geom = <GEOM>, stat = <STAT>, position = <POSITION>)
 ```
 
-1. `data`: tibble.
-2. `mapping`: aesthetic mappings between data variables and visual elements.
+1. `data`: tibble/data.frame.
+2. `mapping`: .brown[aes]thetic mappings between data variables and visual elements, via `aes()`.
 3. `layer()`: a graphical layer is a combination of data, stat and geom with a potential position adjustment.
   * `geom`: geometric elements to render each data observation.
-  * `stat`: statistical transformations applied to the data.
+  * `stat`: statistical transformations applied to the data prior to plotting.
   * `position`: position adjustment, such as "identity", "stack", "dodge" etc.
+
+???
+
+* geom: points, bars, lines, text
+* stat: "identity", leave as is, boxplot, five numbers
+* `+`: layer + layer
+* When you think about a graphic to make:
+  + which geom to represent the data
+  + any stats to be used
 
 ---
 
-## Layers
+## Layers: a bar chart `r emo::ji('bar_chart')`
 
 ```{r gg-layer, fig.height = 3.8, fig.width = 4}
 ```
@@ -203,6 +270,11 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
 
 ```{r aes-map, fig.height = 3.8, fig.width = 4}
 ```
+
+???
+
+* `ggplot()` initialise the plot
+* save a ggplot obj to a symbol
 
 ---
 
@@ -221,6 +293,10 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
 **Generally, we use `geom_*()` instead of `layer()` in practice.**
 ]
 
+???
+
+* auto complete for `geom_*()`
+
 ---
 
 ## Geoms
@@ -237,6 +313,12 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
 ```
 ]
 ]
+
+???
+
+* We don't have to stick with bar
+* we can use points/vertical lines
+* `geom_segment()`: more aes
 
 ---
 
@@ -288,7 +370,7 @@ geoms$matches %>%
 ## Stats
 
 .pull-left[
-```{r ref.label = "gg-bar", fig.height = 4, fig.width = 4}
+```{r gg-bar-asis, fig.height = 4, fig.width = 4}
 ```
 ]
 .pull-right[
@@ -311,7 +393,7 @@ geoms$matches %>%
 
 ---
 
-## Mapping .brown[variables] vs Setting .brown[constants]
+## Mapping .brown[variables] / Setting .brown[constants]
 
 .pull-left[
 ```{r ref.label = "gg-bar-fill", fig.height = 4, fig.width = 4}
@@ -321,6 +403,12 @@ geoms$matches %>%
 ```{r gg-bar-fill-str, fig.height = 4, fig.width = 4}
 ```
 ]
+
+???
+
+* bar -> rect -> 2d
+  + stroke + fill
++ auto legend
 
 ---
 
@@ -363,12 +451,22 @@ Describe a bubble chart in terms of grammar of graphics.
   + `coord_cartesian()` (default)
   + ~~`coord_flip()`~~ (deprecated; now you can simply swap `x` and `y`)
   + `coord_map()`
-  + `coord_polor()`
+  + `coord_polar()`
 ]
 .pull-right[
 ```{r gg-arc, fig.height = 5, fig.width = 5}
 ```
 ]
+
+???
+
+live demo:
+* `ggplot()`
+* `ggplot(data)`
+* `ggplot(data, aes())`
+* inherit aes
++ layers
+* swap x and y
 
 ---
 

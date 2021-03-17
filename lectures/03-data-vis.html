@@ -43,6 +43,12 @@ class: center, middle, inverse, title-slide
 .center[&lt;img src="img/eda.jpg" height="100%"&gt;]
 ]
 
+???
+
+* John Tukey, one of the most well-known stat
+* invent boxplot, stem-and-leaf (pencil and paper)
+* coined the term EDA
+
 ---
 
 ## numbers vs plots
@@ -73,6 +79,11 @@ dino
 &lt;img src="figure/plots-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 
+???
+
+* humans digest info quicker through eyes than reading tables. -&gt; ytb, tt
+* numbers on their own don't make sense to us.
+
 ---
 
 ## numbers vs plots
@@ -81,11 +92,32 @@ dino
 
 .footnote[image credit: Steph Locke]
 
+???
+
+* simple stats cannot reveal full pic.
+* all xy data tbl share the same mean/sd/corr, but different str in data...
+
+---
+
+## Why data visualisation?📊
+
+&gt; A picture is worth a thousand words. -- Henrik Ibsen  
+
+1. Data visualisation communicates information much quicker than numerical tables.
+2. Data visualisation can reveal unexpected structures in data; it is not surprising that data visualisation is one of the key tools in exploratory data analysis.
+3. Data plot is usually more eye-catching even if you lose accuracy of the information.
+
 ---
 
 class: middle inverse
 
 ## Charts 🥊 Graphics
+
+???
+
+* When we talk about data vis, we use plots, charts, graphics interchangablely
+* But when comes to stats, there's difference bt.
+* What do we mean by graphics, how to make graphics
 
 ---
 
@@ -117,6 +149,10 @@ What types of plots can we make?
 2. pie chart for proportions
 ]
 
+???
+
+
+
 ---
 
 ## Named charts
@@ -141,6 +177,12 @@ pie(sci_tbl$count,
 
 &lt;img src="figure/base-pieplot-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
+
+???
+
+* default r functions
+* one-off functions
+* What's the fundamental difference bt bar and pie
 
 ---
 
@@ -167,6 +209,8 @@ pie(sci_tbl$count,
 ```
 ]
 
+???
+
 ---
 
 .pull-left[
@@ -178,6 +222,13 @@ pie(sci_tbl$count,
 &gt; Grammar makes language expressive. A language consisting of words and no grammar (statement = word) expresses only as many ideas as there are words. By specifying how words are combined in statements, a grammar expands a language’s scope.
 ]
 
+???
+
+* a book blew my mind, changed the view to look at stat graphics.
+* we can easily run out of names
+* we can generate many types of new graphics by combine components following the grammar.
+* this books lays the theoretical foundation to {ggplot2}, {tab}, {vega-lite}
+
 ---
 
 class: inverse
@@ -187,6 +238,10 @@ background-size: cover
 
 .footnote[image credit: Thomas Lin Pederson]
 
+???
+
+decomposed to
+
 ---
 
 class: inverse middle
@@ -194,6 +249,11 @@ class: inverse middle
 ### The *grammar of graphics* takes us beyond a limited set of .blue[charts (words)] to an almost unlimited world of .blue[graphical forms (statements)]. 
 &lt;hr&gt;
 ### *{ggplot2}* provides a cohesive system for declaratively creating elegant graphics, based on The Grammar of Graphics.
+
+???
+
+* extends gg, and layered gg.
+* provides a cohesive and declarative grammar to create graphics
 
 ---
 
@@ -224,6 +284,11 @@ ggplot(data = sci_tbl) +
 &lt;img src="figure/gg-pie-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 
+???
+
+* Back to our question, the difference
+* The difference is plotting bars on the polar coord
+
 ---
 
 ## A graphing template
@@ -234,16 +299,25 @@ ggplot(data = &lt;DATA&gt;, mapping = aes(&lt;MAPPINGS&gt;)) +
   layer(geom = &lt;GEOM&gt;, stat = &lt;STAT&gt;, position = &lt;POSITION&gt;)
 ```
 
-1. `data`: tibble.
-2. `mapping`: aesthetic mappings between data variables and visual elements.
+1. `data`: tibble/data.frame.
+2. `mapping`: .brown[aes]thetic mappings between data variables and visual elements, via `aes()`.
 3. `layer()`: a graphical layer is a combination of data, stat and geom with a potential position adjustment.
   * `geom`: geometric elements to render each data observation.
-  * `stat`: statistical transformations applied to the data.
+  * `stat`: statistical transformations applied to the data prior to plotting.
   * `position`: position adjustment, such as "identity", "stack", "dodge" etc.
+
+???
+
+* geom: points, bars, lines, text
+* stat: "identity", leave as is, boxplot, five numbers
+* `+`: layer + layer
+* When you think about a graphic to make:
+  + which geom to represent the data
+  + any stats to be used
 
 ---
 
-## Layers
+## Layers: a bar chart 📊
 
 
 ```r
@@ -259,11 +333,16 @@ ggplot(data = sci_tbl, mapping = aes(x = dept, y = count)) +
 
 
 ```r
-p &lt;- ggplot(sci_tbl, aes(x = dept, y = count))
+*p &lt;- ggplot(sci_tbl, aes(x = dept, y = count))
 p
 ```
 
 &lt;img src="figure/aes-map-1.png" width="480" style="display: block; margin: auto;" /&gt;
+
+???
+
+* `ggplot()` initialise the plot
+* save a ggplot obj to a symbol
 
 ---
 
@@ -289,6 +368,10 @@ p +
 
 **Generally, we use `geom_*()` instead of `layer()` in practice.**
 ]
+
+???
+
+* auto complete for `geom_*()`
 
 ---
 
@@ -317,6 +400,12 @@ p +
 ]
 ]
 
+???
+
+* We don't have to stick with bar
+* we can use points/vertical lines
+* `geom_segment()`: more aes
+
 ---
 
 ## Composite geoms: lollipop 🍭 = points + segments
@@ -334,8 +423,8 @@ p +
 
 ## Geom [catalogue](https://ggplot2.tidyverse.org/reference/index.html#section-layers)
 
-<div id="htmlwidget-2c6a05cb6c29c43a641e" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2c6a05cb6c29c43a641e">{"x":{"filter":"none","data":[["geom_abline, geom_hline, geom_vline","geom_bar, geom_col","geom_bin2d","geom_blank","geom_boxplot","geom_contour, geom_contour_filled","geom_count","geom_density","geom_density_2d, geom_density2d, geom_density_2d_filled, geom_density2d_filled","geom_dotplot","geom_errorbarh","geom_function","geom_hex","geom_freqpoly, geom_histogram","geom_jitter","geom_crossbar, geom_errorbar, geom_linerange, geom_pointrange","geom_map","geom_path, geom_line, geom_step","geom_point","geom_polygon","geom_qq_line, geom_qq","geom_quantile","geom_ribbon, geom_area","geom_rug","geom_segment, geom_curve","geom_smooth","geom_spoke","geom_label, geom_text","geom_raster, geom_rect, geom_tile","geom_violin","geom_sf, geom_sf_label, geom_sf_text"],["Reference lines: horizontal, vertical, and diagonal","Bar charts","Heatmap of 2d bin counts","Draw nothing","A box and whiskers plot (in the style of Tukey)","2D contours of a 3D surface","Count overlapping points","Smoothed density estimates","Contours of a 2D density estimate","Dot plot","Horizontal error bars","Draw a function as a continuous curve","Hexagonal heatmap of 2d bin counts","Histograms and frequency polygons","Jittered points","Vertical intervals: lines, crossbars &amp; errorbars","Polygons from a reference map","Connect observations","Points","Polygons","A quantile-quantile plot","Quantile regression","Ribbons and area plots","Rug plots in the margins","Line segments and curves","Smoothed conditional means","Line segments parameterised by location, direction and distance","Text","Rectangles","Violin plot","Visualise sf objects"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>geom<\/th>\n      <th>Description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tp","ordering":false,"pageLength":5,"width":"80%","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b726dfc7fef4de8a49cd" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b726dfc7fef4de8a49cd">{"x":{"filter":"none","data":[["geom_abline, geom_hline, geom_vline","geom_bar, geom_col","geom_bin2d","geom_blank","geom_boxplot","geom_contour, geom_contour_filled","geom_count","geom_density","geom_density_2d, geom_density2d, geom_density_2d_filled, geom_density2d_filled","geom_dotplot","geom_errorbarh","geom_function","geom_hex","geom_freqpoly, geom_histogram","geom_jitter","geom_crossbar, geom_errorbar, geom_linerange, geom_pointrange","geom_map","geom_path, geom_line, geom_step","geom_point","geom_polygon","geom_qq_line, geom_qq","geom_quantile","geom_ribbon, geom_area","geom_rug","geom_segment, geom_curve","geom_smooth","geom_spoke","geom_label, geom_text","geom_raster, geom_rect, geom_tile","geom_violin","geom_sf, geom_sf_label, geom_sf_text"],["Reference lines: horizontal, vertical, and diagonal","Bar charts","Heatmap of 2d bin counts","Draw nothing","A box and whiskers plot (in the style of Tukey)","2D contours of a 3D surface","Count overlapping points","Smoothed density estimates","Contours of a 2D density estimate","Dot plot","Horizontal error bars","Draw a function as a continuous curve","Hexagonal heatmap of 2d bin counts","Histograms and frequency polygons","Jittered points","Vertical intervals: lines, crossbars &amp; errorbars","Polygons from a reference map","Connect observations","Points","Polygons","A quantile-quantile plot","Quantile regression","Ribbons and area plots","Rug plots in the margins","Line segments and curves","Smoothed conditional means","Line segments parameterised by location, direction and distance","Text","Rectangles","Violin plot","Visualise sf objects"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>geom<\/th>\n      <th>Description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tp","ordering":false,"pageLength":5,"width":"80%","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 .footnote[source code: Emi Tanaka]
 
@@ -388,11 +477,11 @@ sci_tbl0
 .pull-left[
 
 ```r
-p + 
+ggplot(sci_tbl, aes(x = dept, y = count)) +
   geom_bar(stat = "identity")
 ```
 
-&lt;img src="figure/unnamed-chunk-4-1.png" width="480" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-bar-asis-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -429,7 +518,7 @@ p +
 
 ---
 
-## Mapping .brown[variables] vs Setting .brown[constants]
+## Mapping .brown[variables] / Setting .brown[constants]
 
 .pull-left[
 
@@ -438,7 +527,7 @@ p +
   geom_col(aes(fill = dept))
 ```
 
-&lt;img src="figure/unnamed-chunk-5-1.png" width="480" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/unnamed-chunk-4-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -449,6 +538,12 @@ p +
 
 &lt;img src="figure/gg-bar-fill-str-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
+
+???
+
+* bar -&gt; rect -&gt; 2d
+  + stroke + fill
++ auto legend
 
 ---
 
@@ -490,7 +585,7 @@ Describe a bubble chart in terms of grammar of graphics.
   + `coord_cartesian()` (default)
   + ~~`coord_flip()`~~ (deprecated; now you can simply swap `x` and `y`)
   + `coord_map()`
-  + `coord_polor()`
+  + `coord_polar()`
 ]
 .pull-right[
 
@@ -502,6 +597,16 @@ p +
 
 &lt;img src="figure/gg-arc-1.png" width="600" style="display: block; margin: auto;" /&gt;
 ]
+
+???
+
+live demo:
+* `ggplot()`
+* `ggplot(data)`
+* `ggplot(data, aes())`
+* inherit aes
++ layers
+* swap x and y
 
 ---
 

@@ -48,7 +48,7 @@ ggplot(data = sci_tbl, mapping = aes(x = dept, y = count)) +
   layer(geom = "bar", stat = "identity", position = "identity")
 
 ## ---- aes-map
-p <- ggplot(sci_tbl, aes(x = dept, y = count))
+p <- ggplot(sci_tbl, aes(x = dept, y = count)) #<<
 p
 
 ## ---- gg-bar
@@ -75,6 +75,10 @@ p +
 ## ---- sci-disaggregated
 sci_tbl0 <- uncount(sci_tbl, count)
 sci_tbl0
+
+## ---- gg-bar-asis
+ggplot(sci_tbl, aes(x = dept, y = count)) +
+  geom_bar(stat = "identity")
 
 ## ---- gg-bar-c
 ggplot(sci_tbl0, aes(x = dept)) +
