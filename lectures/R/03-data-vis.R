@@ -146,8 +146,8 @@ p_mpg +
 
 ## ---- gg-facet-wrap
 p_mpg +
-  facet_wrap(vars(drv), ncol = 2)
-  # facet_wrap(~ drv, ncol = 2)
+  facet_wrap(vars(drv, cyl), ncol = 3)
+  # facet_wrap(~ drv + cyl, ncol = 3)
 
 ## ---- movies
 movies <- as_tibble(jsonlite::read_json(

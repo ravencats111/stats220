@@ -813,8 +813,8 @@ p_mpg +
 
 ```r
 p_mpg +
-  facet_wrap(vars(drv), ncol = 2)
-  # facet_wrap(~ drv, ncol = 2)
+  facet_wrap(vars(drv, cyl), ncol = 3)
+  # facet_wrap(~ drv + cyl, ncol = 3)
 ```
 
 &lt;img src="figure/gg-facet-wrap-1.png" width="720" style="display: block; margin: auto;" /&gt;
@@ -941,6 +941,12 @@ skimr::skim(movies)
 &lt;img src="https://rstudio-education.github.io/tidyverse-cookbook/images/data-science-workflow.png" width="100%"&gt;
 ]
 ]
+
+???
+
+* There's no best single plot for the data.
+* Make as many plots as possible to get most facets of the data
+* eda: wandering around a city as a tourist
 
 ---
 
