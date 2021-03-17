@@ -6,6 +6,7 @@ slides: "03-data-vis.html"
 obj: "objs/obj03"
 r: "03-data-vis.R"
 rmd: "03-data-vis.Rmd"
+pdf: "03-data-vis.pdf"
 lab:
 sol:
 ---
