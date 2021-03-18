@@ -213,3 +213,43 @@ pisa_sql %>% show_query()
 
 ## ---- dbplyr-collect
 pisa_sql %>% collect()
+
+## ---- countrycode
+country_code <- read_csv("data/countrycode.csv")
+
+## ---- inner-join
+time_use_raw %>% 
+  inner_join(country_code, by = c("Country" = "country_name"))
+
+## ---- left-join
+time_use_raw %>% 
+  left_join(country_code, by = c("Country" = "country_name"))
+
+## ---- left-join-na
+time_use_raw %>% 
+  left_join(country_code, by = c("Country" = "country_name")) %>%
+  filter(Country %in% c("New Zealand", "USA")) %>% 
+  group_by(Country) %>% 
+  slice_head()
+
+## ---- right-join
+time_use_raw %>% 
+  right_join(country_code, by = c("Country" = "country_name"))
+
+## ---- full-join
+time_use_raw %>% 
+  full_join(country_code, by = c("Country" = "country_name"))
+
+## ---- semi-join
+time_use_raw %>% 
+  semi_join(country_code, by = c("Country" = "country_name"))
+
+## ---- anti-join
+time_use_raw %>% 
+  anti_join(country_code, by = c("Country" = "country_name"))
+
+## ---- lookup
+time_use_ctr <- unique(time_use_raw$Country)
+country_code_name <- unique(country_code$country_name)
+
+time_use_ctr[!time_use_ctr %in% country_code_name]

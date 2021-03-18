@@ -93,6 +93,8 @@ class: inverse middle center
 
 <img src="https://github.com/rstudio/hex-stickers/raw/master/SVG/pipe.svg" height="420px">
 
+RStudio shortcut: Ctrl/Cmd + Shift + M
+
 ---
 
 ## Time use in OECD
@@ -527,12 +529,15 @@ class: inverse middle
 
 ---
 
+---
+
 ## Reading
 
 .pull-left[
 .center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
 ]
 .pull-right[
-* [Chapter 10: Tibbles](https://r4ds.had.co.nz/tibbles.html)
-* [Chapter 11: Data import](https://r4ds.had.co.nz/data-import.html)
+* [Data transformation](https://r4ds.had.co.nz/transform.html)
+* [Relational data](https://r4ds.had.co.nz/relational-data.html)
+* [{dplyr} cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
 ]
