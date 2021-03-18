@@ -114,12 +114,12 @@ p +
 library(ggthemes)
 p +
   geom_col(aes(fill = dept)) +
-  theme_economist()
+  theme_economist() #<<
 
 ## ---- gg-theme
 p +
   geom_col(aes(fill = dept)) +
-  theme(axis.text.x = element_text(angle = 30))
+  theme(axis.text.x = element_text(angle = 30, vjust = 0.1))
 
 ## ---- mpg
 mpg

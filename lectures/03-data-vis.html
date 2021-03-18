@@ -631,12 +631,16 @@ p +
 &lt;img src="figure/gg-theme-bw-1.png" width="600" style="display: block; margin: auto;" /&gt;
 ]
 
+???
+
+* start with p11
+
 ---
 
 ## Themes: modify the look
 
 .pull-left[
-* Many R packages provide themes
+* Many R packages provide themes.
   + [{ggthemes}](https://github.com/jrnold/ggthemes)
   + [{ggthemr}](https://github.com/Mikata-Project/ggthemr)
   + [{hrbrthemes}](https://cinc.rud.is/web/packages/hrbrthemes/)
@@ -648,24 +652,17 @@ p +
 library(ggthemes)
 p +
   geom_col(aes(fill = dept)) +
-  theme_economist()
+* theme_economist()
 ```
 
 &lt;img src="figure/ggthemes-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 
----
+???
 
-## Modify the look of *texts* with `element_text()`
-
-
-```r
-p +
-  geom_col(aes(fill = dept)) +
-  theme(axis.text.x = element_text(angle = 30))
-```
-
-&lt;img src="figure/gg-theme-1.png" width="720" style="display: block; margin: auto;" /&gt;
+* to be able to modify the theme is the 1st step to make pub-ready plot
+* in an organisation, use a uniform theme across
+* if you want to make your first R package, contributing a theme would be a good start.
 
 ---
 
@@ -675,21 +672,38 @@ p +
 
 .footnote[image credit: Emi Tanaka]
 
+???
+
+* tons of args in `themes()` for fine tune
+
 ---
 
-## Modify the look of
+## Modify the look of *texts* with `element_text()`
 
-.pull-left[
-.center[**lines** with `element_line()`]
 
-&lt;img src="img/ggplot-annotated-line-marks.png" width="100%"&gt;
+```r
+p +
+  geom_col(aes(fill = dept)) +
+  theme(axis.text.x = element_text(angle = 30, vjust = 0.1))
+```
+
+&lt;img src="figure/gg-theme-1.png" width="720" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Modify the look of *lines* with `element_line()`
+
+.center[&lt;img src="img/ggplot-annotated-line-marks.png" width="80%"&gt;]
+
 .footnote[image credit: Emi Tanaka]
-]
-.pull-right[
-.center[**regions** with `element_rect()`]
 
-&lt;img src="img/ggplot-annotated-rect-marks.png" width="100%"&gt;
-]
+---
+
+## Modify the look of *regions* with `element_rect()`
+
+.center[&lt;img src="img/ggplot-annotated-rect-marks.png" width="60%"&gt;]
+
+.footnote[image credit: Emi Tanaka]
 
 ---
 

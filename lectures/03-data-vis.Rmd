@@ -485,12 +485,16 @@ live demo:
 ```
 ]
 
+???
+
+* start with p11
+
 ---
 
 ## Themes: modify the look
 
 .pull-left[
-* Many R packages provide themes
+* Many R packages provide themes.
   + [{ggthemes}](https://github.com/jrnold/ggthemes)
   + [{ggthemr}](https://github.com/Mikata-Project/ggthemr)
   + [{hrbrthemes}](https://cinc.rud.is/web/packages/hrbrthemes/)
@@ -501,12 +505,11 @@ live demo:
 ```
 ]
 
----
+???
 
-## Modify the look of *texts* with `element_text()`
-
-```{r gg-theme, fig.height = 3.5, fig.width = 6}
-```
+* to be able to modify the theme is the 1st step to make pub-ready plot
+* in an organisation, use a uniform theme across
+* if you want to make your first R package, contributing a theme would be a good start.
 
 ---
 
@@ -516,21 +519,33 @@ live demo:
 
 .footnote[image credit: Emi Tanaka]
 
+???
+
+* tons of args in `themes()` for fine tune
+* I'll quickly go through these args, but dive more deeply in week 7 for effective data vis.
+
 ---
 
-## Modify the look of
+## Modify the look of *texts* with `element_text()`
 
-.pull-left[
-.center[**lines** with `element_line()`]
+```{r gg-theme, fig.height = 3.5, fig.width = 6}
+```
 
-<img src="img/ggplot-annotated-line-marks.png" width="100%">
+---
+
+## Modify the look of *lines* with `element_line()`
+
+.center[<img src="img/ggplot-annotated-line-marks.png" width="80%">]
+
 .footnote[image credit: Emi Tanaka]
-]
-.pull-right[
-.center[**regions** with `element_rect()`]
 
-<img src="img/ggplot-annotated-rect-marks.png" width="100%">
-]
+---
+
+## Modify the look of *regions* with `element_rect()`
+
+.center[<img src="img/ggplot-annotated-rect-marks.png" width="60%">]
+
+.footnote[image credit: Emi Tanaka]
 
 ---
 
@@ -539,6 +554,10 @@ class: middle inverse
 ## Small multiples .small[(or trellis/faceting plots)]
 
 ### `r emo::ji("star2")` the idea of conditioning on the values taken on by one or more of the variables in a data set
+
+???
+
+
 
 ---
 
