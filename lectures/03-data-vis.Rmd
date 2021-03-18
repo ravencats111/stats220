@@ -370,12 +370,16 @@ geoms$matches %>%
 ## Stats
 
 .pull-left[
+.small[
 ```{r gg-bar-asis, fig.height = 4, fig.width = 4}
 ```
 ]
+]
 .pull-right[
+.small[
 ```{r gg-bar-c, fig.height = 4, fig.width = 4}
 ```
+]
 ]
 
 ---
@@ -441,6 +445,11 @@ Describe a bubble chart in terms of grammar of graphics.
 
 ```{r bubble-chart, echo = FALSE, fig.height = 4, fig.width = 5}
 ```
+
+???
+
+gg: grammar of graphics
+{ggplot2}: the second version
 
 ---
 
@@ -676,6 +685,12 @@ background-size: contain
 ]
 ]
 
+???
+
+* There's no best single plot for the data.
+* Make as many plots as possible to get most facets of the data
+* eda: wandering around a city as a tourist
+
 ---
 
 .left-column[
@@ -779,6 +794,10 @@ background-size: contain
 > {ggplot2} now has an official extension mechanism. This means that others can now easily create their own stats, geoms and positions, and provide them in other packages. This should allow the ggplot2 community to flourish, even as less development work happens in ggplot2 itself. 
 
 `r emo::ji("arrow_right")` <https://exts.ggplot2.tidyverse.org/gallery/>
+
+???
+
+* {ggplot2} has been around for more than 10 yrs.
 
 ---
 
