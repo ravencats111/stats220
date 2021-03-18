@@ -423,8 +423,8 @@ p +
 
 ## Geom [catalogue](https://ggplot2.tidyverse.org/reference/index.html#section-layers)
 
-<div id="htmlwidget-2c6a05cb6c29c43a641e" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2c6a05cb6c29c43a641e">{"x":{"filter":"none","data":[["geom_abline, geom_hline, geom_vline","geom_bar, geom_col","geom_bin2d","geom_blank","geom_boxplot","geom_contour, geom_contour_filled","geom_count","geom_density","geom_density_2d, geom_density2d, geom_density_2d_filled, geom_density2d_filled","geom_dotplot","geom_errorbarh","geom_function","geom_hex","geom_freqpoly, geom_histogram","geom_jitter","geom_crossbar, geom_errorbar, geom_linerange, geom_pointrange","geom_map","geom_path, geom_line, geom_step","geom_point","geom_polygon","geom_qq_line, geom_qq","geom_quantile","geom_ribbon, geom_area","geom_rug","geom_segment, geom_curve","geom_smooth","geom_spoke","geom_label, geom_text","geom_raster, geom_rect, geom_tile","geom_violin","geom_sf, geom_sf_label, geom_sf_text"],["Reference lines: horizontal, vertical, and diagonal","Bar charts","Heatmap of 2d bin counts","Draw nothing","A box and whiskers plot (in the style of Tukey)","2D contours of a 3D surface","Count overlapping points","Smoothed density estimates","Contours of a 2D density estimate","Dot plot","Horizontal error bars","Draw a function as a continuous curve","Hexagonal heatmap of 2d bin counts","Histograms and frequency polygons","Jittered points","Vertical intervals: lines, crossbars &amp; errorbars","Polygons from a reference map","Connect observations","Points","Polygons","A quantile-quantile plot","Quantile regression","Ribbons and area plots","Rug plots in the margins","Line segments and curves","Smoothed conditional means","Line segments parameterised by location, direction and distance","Text","Rectangles","Violin plot","Visualise sf objects"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>geom<\/th>\n      <th>Description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tp","ordering":false,"pageLength":5,"width":"80%","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b726dfc7fef4de8a49cd" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b726dfc7fef4de8a49cd">{"x":{"filter":"none","data":[["geom_abline, geom_hline, geom_vline","geom_bar, geom_col","geom_bin2d","geom_blank","geom_boxplot","geom_contour, geom_contour_filled","geom_count","geom_density","geom_density_2d, geom_density2d, geom_density_2d_filled, geom_density2d_filled","geom_dotplot","geom_errorbarh","geom_function","geom_hex","geom_freqpoly, geom_histogram","geom_jitter","geom_crossbar, geom_errorbar, geom_linerange, geom_pointrange","geom_map","geom_path, geom_line, geom_step","geom_point","geom_polygon","geom_qq_line, geom_qq","geom_quantile","geom_ribbon, geom_area","geom_rug","geom_segment, geom_curve","geom_smooth","geom_spoke","geom_label, geom_text","geom_raster, geom_rect, geom_tile","geom_violin","geom_sf, geom_sf_label, geom_sf_text"],["Reference lines: horizontal, vertical, and diagonal","Bar charts","Heatmap of 2d bin counts","Draw nothing","A box and whiskers plot (in the style of Tukey)","2D contours of a 3D surface","Count overlapping points","Smoothed density estimates","Contours of a 2D density estimate","Dot plot","Horizontal error bars","Draw a function as a continuous curve","Hexagonal heatmap of 2d bin counts","Histograms and frequency polygons","Jittered points","Vertical intervals: lines, crossbars &amp; errorbars","Polygons from a reference map","Connect observations","Points","Polygons","A quantile-quantile plot","Quantile regression","Ribbons and area plots","Rug plots in the margins","Line segments and curves","Smoothed conditional means","Line segments parameterised by location, direction and distance","Text","Rectangles","Violin plot","Visualise sf objects"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>geom<\/th>\n      <th>Description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tp","ordering":false,"pageLength":5,"width":"80%","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 .footnote[source code: Emi Tanaka]
 
@@ -684,6 +684,7 @@ p +
 ???
 
 * tons of args in `themes()` for fine tune
+* I'll quickly go through these args, but dive more deeply in week 7 for effective data vis.
 
 ---
 
@@ -721,6 +722,10 @@ class: middle inverse
 ## Small multiples .small[(or trellis/faceting plots)]
 
 ### 🌟 the idea of conditioning on the values taken on by one or more of the variables in a data set
+
+???
+
+
 
 ---
 
@@ -781,6 +786,11 @@ p_mpg +
 
 &lt;img src="figure/gg-facet-rows-1.png" width="600" style="display: block; margin: auto;" /&gt;
 ]
+
+???
+
+* looking at conditional distribution
+* `grid` -&gt; 2d matrix layout
 
 ---
 
@@ -950,7 +960,7 @@ skimr::skim(movies)
 ### - vis
 ]
 .right-column[
-* Data analysis starts with questions.
+* Data analysis starts with questions (a.k.a. curiosity).
 .center[
 &lt;img src="https://rstudio-education.github.io/tidyverse-cookbook/images/data-science-workflow.png" width="100%"&gt;
 ]
@@ -958,9 +968,12 @@ skimr::skim(movies)
 
 ???
 
+* eda: wandering around a city as a tourist: sometimes have destinations, sometimes no.
+* once you started off with one question, more questions on the way.
 * There's no best single plot for the data.
-* Make as many plots as possible to get most facets of the data
-* eda: wandering around a city as a tourist
+* Make as many plots as possible, as quick as possible to get most facets of the data
+* end up with nothing
+* for internal use, don't need to polish
 
 ---
 
@@ -1006,6 +1019,10 @@ ggplot(movies, aes(x = IMDB_Rating, y = Rotten_Tomatoes_Rating)) +
 &lt;img src="figure/movies-hex-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 ]
+
+???
+
+* live demo: for rendering speed
 
 ---
 
@@ -1070,6 +1087,11 @@ ggplot(movies) +
 ]
 ]
 
+???
+
+* overlapping
+* could use facet
+
 ---
 
 .left-column[
@@ -1103,6 +1125,7 @@ ggplot(movies, aes(x = IMDB_Rating, y = Major_Genre)) +
 ???
 
 * {ggplot2} has been around for more than 10 yrs.
+* {ggplot2} is extensible
 
 ---
 
@@ -1150,7 +1173,7 @@ ggplot(mtcars, aes(factor(cyl), mpg)) +
 
 ???
 
-* d3.js
+* good resources for d3.js
 
 ---
 
@@ -1160,6 +1183,12 @@ ggplot(mtcars, aes(factor(cyl), mpg)) +
 .right-column[
 &lt;blockquote class="twitter-tweet"&gt;&lt;p lang="en" dir="ltr"&gt;NEW: the Thursday 19 March update of our coronavirus mortality trajectories tracker&lt;br&gt;&lt;br&gt;• Italy now has more Covid-19 deaths than China’s total&lt;br&gt;• UK remains on a steeper mortality curve than Italy, while Britain remains far from lockdown&lt;br&gt;&lt;br&gt;Live version here: &lt;a href="https://t.co/VcSZISFxzF"&gt;https://t.co/VcSZISFxzF&lt;/a&gt; &lt;a href="https://t.co/QvByzSj6QX"&gt;pic.twitter.com/QvByzSj6QX&lt;/a&gt;&lt;/p&gt;&amp;mdash; John Burn-Murdoch (@jburnmurdoch) &lt;a href="https://twitter.com/jburnmurdoch/status/1240723388336877569?ref_src=twsrc%5Etfw"&gt;March 19, 2020&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
 ]
+
+???
+
+* a tragic yr cos of covid-19
+* a blast yr for data vis
+* log scale
 
 ---
 

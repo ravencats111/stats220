@@ -600,6 +600,11 @@ class: middle inverse
 ```
 ]
 
+???
+
+* looking at conditional distribution
+* `grid` -> 2d matrix layout
+
 ---
 
 .left-column[
@@ -679,7 +684,7 @@ background-size: contain
 ### - vis
 ]
 .right-column[
-* Data analysis starts with questions.
+* Data analysis starts with questions (a.k.a. curiosity).
 .center[
 <img src="https://rstudio-education.github.io/tidyverse-cookbook/images/data-science-workflow.png" width="100%">
 ]
@@ -687,9 +692,12 @@ background-size: contain
 
 ???
 
+* eda: wandering around a city as a tourist: sometimes have destinations, sometimes no.
+* once you started off with one question, more questions on the way.
 * There's no best single plot for the data.
-* Make as many plots as possible to get most facets of the data
-* eda: wandering around a city as a tourist
+* Make as many plots as possible, as quick as possible to get most facets of the data
+* end up with nothing
+* for internal use, don't need to polish
 
 ---
 
@@ -722,6 +730,10 @@ background-size: contain
 ```
 ]
 ]
+
+???
+
+* live demo: for rendering speed
 
 ---
 
@@ -771,6 +783,11 @@ background-size: contain
 ]
 ]
 
+???
+
+* overlapping
+* could use facet
+
 ---
 
 .left-column[
@@ -798,6 +815,7 @@ background-size: contain
 ???
 
 * {ggplot2} has been around for more than 10 yrs.
+* {ggplot2} is extensible
 
 ---
 
@@ -845,7 +863,7 @@ ggplot(mtcars, aes(factor(cyl), mpg)) +
 
 ???
 
-* d3.js
+* good resources for d3.js
 
 ---
 
@@ -855,6 +873,12 @@ ggplot(mtcars, aes(factor(cyl), mpg)) +
 .right-column[
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">NEW: the Thursday 19 March update of our coronavirus mortality trajectories tracker<br><br>• Italy now has more Covid-19 deaths than China’s total<br>• UK remains on a steeper mortality curve than Italy, while Britain remains far from lockdown<br><br>Live version here: <a href="https://t.co/VcSZISFxzF">https://t.co/VcSZISFxzF</a> <a href="https://t.co/QvByzSj6QX">pic.twitter.com/QvByzSj6QX</a></p>&mdash; John Burn-Murdoch (@jburnmurdoch) <a href="https://twitter.com/jburnmurdoch/status/1240723388336877569?ref_src=twsrc%5Etfw">March 19, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 ]
+
+???
+
+* a tragic yr cos of covid-19
+* a blast yr for data vis
+* log scale
 
 ---
 
