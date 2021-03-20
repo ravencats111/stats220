@@ -73,8 +73,10 @@ morning5 <- have_breakfast(morning4)
 morning6 <- show_up_to_work(morning5)
 ```
 
+.x[
 * many intermediate steps
 * not meaningful variable names
+]
 ]
 
 --
@@ -91,8 +93,9 @@ morning_routine <- "I" %>%
   have_breakfast() %>% 
   show_up_to_work()
 ```
-
+.checked[
 * `%>%` for expressing a **linear** sequence of multiple operations
+]
 ]
 
 ---
@@ -790,7 +793,7 @@ class: inverse middle
 
 class: center
 
-## .purple[R-Ladies meetup]
+## .purple[Upcoming R-Ladies meetup]
 
 [<img src="img/rladies-meetup.png" width="100%">](https://www.meetup.com/en-AU/rladies-auckland/events/276942471)
 

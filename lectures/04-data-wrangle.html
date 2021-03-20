@@ -63,8 +63,10 @@ morning5 &lt;- have_breakfast(morning4)
 morning6 &lt;- show_up_to_work(morning5)
 ```
 
+.x[
 * many intermediate steps
 * not meaningful variable names
+]
 ]
 
 --
@@ -81,8 +83,9 @@ morning_routine &lt;- "I" %&gt;%
   have_breakfast() %&gt;% 
   show_up_to_work()
 ```
-
+.checked[
 * `%&gt;%` for expressing a **linear** sequence of multiple operations
+]
 ]
 
 ---
@@ -1188,17 +1191,17 @@ class: inverse middle
 .small[
 
 ```r
-time_use_raw %&gt;% 
-  filter(Country %in% c("New Zealand", "USA")) %&gt;% 
-  distinct(Country, .keep_all = TRUE)
+time_use %&gt;% 
+  filter(country %in% c("New Zealand", "USA")) %&gt;% 
+  distinct(country, .keep_all = TRUE)
 ```
 
 ```
 #&gt; # A tibble: 2 x 3
-#&gt;   Country     Category  `Time (minutes)`
-#&gt;   &lt;chr&gt;       &lt;chr&gt;                &lt;dbl&gt;
-#&gt; 1 New Zealand Paid work             241.
-#&gt; 2 USA         Paid work             251.
+#&gt;   country     category  minutes
+#&gt;   &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt;
+#&gt; 1 New Zealand Paid work    241.
+#&gt; 2 USA         Paid work    251.
 ```
 ]
 ]
@@ -1261,20 +1264,20 @@ country_code %&gt;%
 
 
 ```r
-time_use_raw %&gt;% 
-  inner_join(country_code, by = c("Country" = "country_name"))
+time_use %&gt;% 
+  inner_join(country_code, by = c("country" = "country_name"))
 ```
 
 ```
 #&gt; # A tibble: 377 x 4
-#&gt;   Country   Category  `Time (minutes)` country
-#&gt;   &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;  
-#&gt; 1 Australia Paid work             211. AUS    
-#&gt; 2 Austria   Paid work             280. AUT    
-#&gt; 3 Belgium   Paid work             194. BEL    
-#&gt; 4 Canada    Paid work             269. CAN    
-#&gt; 5 Denmark   Paid work             200. DNK    
-#&gt; 6 Estonia   Paid work             231. EST    
+#&gt;   country   category  minutes country.y
+#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;    
+#&gt; 1 Australia Paid work    211. AUS      
+#&gt; 2 Austria   Paid work    280. AUT      
+#&gt; 3 Belgium   Paid work    194. BEL      
+#&gt; 4 Canada    Paid work    269. CAN      
+#&gt; 5 Denmark   Paid work    200. DNK      
+#&gt; 6 Estonia   Paid work    231. EST      
 #&gt; # … with 371 more rows
 ```
 ]
@@ -1303,20 +1306,20 @@ time_use_raw %&gt;%
 * `left_join()`: All rows from `x`, and all columns from `x` and `y`. Rows in `x` with no match in `y` will have `NA` values in the new columns.
 
 ```r
-time_use_raw %&gt;% 
-  left_join(country_code, by = c("Country" = "country_name"))
+time_use %&gt;% 
+  left_join(country_code, by = c("country" = "country_name"))
 ```
 
 ```
 #&gt; # A tibble: 461 x 4
-#&gt;   Country   Category  `Time (minutes)` country
-#&gt;   &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;  
-#&gt; 1 Australia Paid work             211. AUS    
-#&gt; 2 Austria   Paid work             280. AUT    
-#&gt; 3 Belgium   Paid work             194. BEL    
-#&gt; 4 Canada    Paid work             269. CAN    
-#&gt; 5 Denmark   Paid work             200. DNK    
-#&gt; 6 Estonia   Paid work             231. EST    
+#&gt;   country   category  minutes country.y
+#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;    
+#&gt; 1 Australia Paid work    211. AUS      
+#&gt; 2 Austria   Paid work    280. AUT      
+#&gt; 3 Belgium   Paid work    194. BEL      
+#&gt; 4 Canada    Paid work    269. CAN      
+#&gt; 5 Denmark   Paid work    200. DNK      
+#&gt; 6 Estonia   Paid work    231. EST      
 #&gt; # … with 455 more rows
 ```
 ]
@@ -1331,20 +1334,20 @@ time_use_raw %&gt;%
 * `left_join()`: All rows from `x`, and all columns from `x` and `y`. .brown[Rows in `x` with no match in `y` will have `NA` values in the new columns.]
 
 ```r
-time_use_raw %&gt;% 
-  left_join(country_code, by = c("Country" = "country_name"))%&gt;%
-  filter(Country %in% c("New Zealand", "USA")) %&gt;% 
-  group_by(Country) %&gt;% 
+time_use %&gt;% 
+  left_join(country_code, by = c("country" = "country_name"))%&gt;%
+  filter(country %in% c("New Zealand", "USA")) %&gt;% 
+  group_by(country) %&gt;% 
   slice_head()
 ```
 
 ```
 #&gt; # A tibble: 2 x 4
-#&gt; # Groups:   Country [2]
-#&gt;   Country     Category  `Time (minutes)` country
-#&gt;   &lt;chr&gt;       &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;  
-#&gt; 1 New Zealand Paid work             241. NZL    
-#&gt; 2 USA         Paid work             251. &lt;NA&gt;
+#&gt; # Groups:   country [2]
+#&gt;   country     category  minutes country.y
+#&gt;   &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;    
+#&gt; 1 New Zealand Paid work    241. NZL      
+#&gt; 2 USA         Paid work    251. &lt;NA&gt;
 ```
 ]
 
@@ -1371,20 +1374,20 @@ time_use_raw %&gt;%
 * `right_join()`: All rows from `y`, and all columns from `x` and `y`. Rows in `y` with no match in `x` will have `NA` values in the new columns.
 
 ```r
-time_use_raw %&gt;% 
-  right_join(country_code, by = c("Country" = "country_name"))
+time_use %&gt;% 
+  right_join(country_code, by = c("country" = "country_name"))
 ```
 
 ```
 #&gt; # A tibble: 450 x 4
-#&gt;   Country   Category  `Time (minutes)` country
-#&gt;   &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;  
-#&gt; 1 Australia Paid work             211. AUS    
-#&gt; 2 Austria   Paid work             280. AUT    
-#&gt; 3 Belgium   Paid work             194. BEL    
-#&gt; 4 Canada    Paid work             269. CAN    
-#&gt; 5 Denmark   Paid work             200. DNK    
-#&gt; 6 Estonia   Paid work             231. EST    
+#&gt;   country   category  minutes country.y
+#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;    
+#&gt; 1 Australia Paid work    211. AUS      
+#&gt; 2 Austria   Paid work    280. AUT      
+#&gt; 3 Belgium   Paid work    194. BEL      
+#&gt; 4 Canada    Paid work    269. CAN      
+#&gt; 5 Denmark   Paid work    200. DNK      
+#&gt; 6 Estonia   Paid work    231. EST      
 #&gt; # … with 444 more rows
 ```
 ]
@@ -1412,20 +1415,20 @@ time_use_raw %&gt;%
 * `full_join()`: All rows and all columns from both `x` and `y`. Where there are not matching values, returns `NA` for the one missing.
 
 ```r
-time_use_raw %&gt;% 
-  full_join(country_code, by = c("Country" = "country_name"))
+time_use %&gt;% 
+  full_join(country_code, by = c("country" = "country_name"))
 ```
 
 ```
 #&gt; # A tibble: 534 x 4
-#&gt;   Country   Category  `Time (minutes)` country
-#&gt;   &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;  
-#&gt; 1 Australia Paid work             211. AUS    
-#&gt; 2 Austria   Paid work             280. AUT    
-#&gt; 3 Belgium   Paid work             194. BEL    
-#&gt; 4 Canada    Paid work             269. CAN    
-#&gt; 5 Denmark   Paid work             200. DNK    
-#&gt; 6 Estonia   Paid work             231. EST    
+#&gt;   country   category  minutes country.y
+#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;    
+#&gt; 1 Australia Paid work    211. AUS      
+#&gt; 2 Austria   Paid work    280. AUT      
+#&gt; 3 Belgium   Paid work    194. BEL      
+#&gt; 4 Canada    Paid work    269. CAN      
+#&gt; 5 Denmark   Paid work    200. DNK      
+#&gt; 6 Estonia   Paid work    231. EST      
 #&gt; # … with 528 more rows
 ```
 ]
@@ -1456,20 +1459,20 @@ time_use_raw %&gt;%
 * `semi_join()`: All rows from `x` where there are matching values in `y`, keeping just columns from `x`.
 
 ```r
-time_use_raw %&gt;% 
-  semi_join(country_code, by = c("Country" = "country_name"))
+time_use %&gt;% 
+  semi_join(country_code, by = c("country" = "country_name"))
 ```
 
 ```
 #&gt; # A tibble: 377 x 3
-#&gt;   Country   Category  `Time (minutes)`
-#&gt;   &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt;
-#&gt; 1 Australia Paid work             211.
-#&gt; 2 Austria   Paid work             280.
-#&gt; 3 Belgium   Paid work             194.
-#&gt; 4 Canada    Paid work             269.
-#&gt; 5 Denmark   Paid work             200.
-#&gt; 6 Estonia   Paid work             231.
+#&gt;   country   category  minutes
+#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt;
+#&gt; 1 Australia Paid work    211.
+#&gt; 2 Austria   Paid work    280.
+#&gt; 3 Belgium   Paid work    194.
+#&gt; 4 Canada    Paid work    269.
+#&gt; 5 Denmark   Paid work    200.
+#&gt; 6 Estonia   Paid work    231.
 #&gt; # … with 371 more rows
 ```
 ]
@@ -1499,20 +1502,20 @@ time_use_raw %&gt;%
 * `anti_join()`: All rows from `x` where there are **not** matching values in `y`, keeping just columns from ~x~.
 
 ```r
-time_use_raw %&gt;% 
-  anti_join(country_code, by = c("Country" = "country_name"))
+time_use %&gt;% 
+  anti_join(country_code, by = c("country" = "country_name"))
 ```
 
 ```
 #&gt; # A tibble: 84 x 3
-#&gt;   Country      Category  `Time (minutes)`
-#&gt;   &lt;chr&gt;        &lt;chr&gt;                &lt;dbl&gt;
-#&gt; 1 Korea        Paid work             288.
-#&gt; 2 UK           Paid work             235.
-#&gt; 3 USA          Paid work             251.
-#&gt; 4 China        Paid work             315.
-#&gt; 5 India        Paid work             272.
-#&gt; 6 South Africa Paid work             189.
+#&gt;   country      category  minutes
+#&gt;   &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt;
+#&gt; 1 Korea        Paid work    288.
+#&gt; 2 UK           Paid work    235.
+#&gt; 3 USA          Paid work    251.
+#&gt; 4 China        Paid work    315.
+#&gt; 5 India        Paid work    272.
+#&gt; 6 South Africa Paid work    189.
 #&gt; # … with 78 more rows
 ```
 ]
@@ -1521,7 +1524,7 @@ time_use_raw %&gt;%
 
 class: center
 
-## .purple[R-Ladies meetup]
+## .purple[Upcoming R-Ladies meetup]
 
 [&lt;img src="img/rladies-meetup.png" width="100%"&gt;](https://www.meetup.com/en-AU/rladies-auckland/events/276942471)
 

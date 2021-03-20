@@ -241,43 +241,43 @@ country_code %>%
     c("New Zealand", "United States"))
 
 ## ---- time-use-2
-time_use_raw %>% 
-  filter(Country %in% c("New Zealand", "USA")) %>% 
-  distinct(Country, .keep_all = TRUE)
+time_use %>% 
+  filter(country %in% c("New Zealand", "USA")) %>% 
+  distinct(country, .keep_all = TRUE)
 
 ## ---- inner-join
-time_use_raw %>% 
-  inner_join(country_code, by = c("Country" = "country_name"))
+time_use %>% 
+  inner_join(country_code, by = c("country" = "country_name"))
 
 ## ---- left-join
-time_use_raw %>% 
-  left_join(country_code, by = c("Country" = "country_name"))
+time_use %>% 
+  left_join(country_code, by = c("country" = "country_name"))
 
 ## ---- left-join-na
-time_use_raw %>% 
-  left_join(country_code, by = c("Country" = "country_name"))%>%
-  filter(Country %in% c("New Zealand", "USA")) %>% 
-  group_by(Country) %>% 
+time_use %>% 
+  left_join(country_code, by = c("country" = "country_name"))%>%
+  filter(country %in% c("New Zealand", "USA")) %>% 
+  group_by(country) %>% 
   slice_head()
 
 ## ---- right-join
-time_use_raw %>% 
-  right_join(country_code, by = c("Country" = "country_name"))
+time_use %>% 
+  right_join(country_code, by = c("country" = "country_name"))
 
 ## ---- full-join
-time_use_raw %>% 
-  full_join(country_code, by = c("Country" = "country_name"))
+time_use %>% 
+  full_join(country_code, by = c("country" = "country_name"))
 
 ## ---- semi-join
-time_use_raw %>% 
-  semi_join(country_code, by = c("Country" = "country_name"))
+time_use %>% 
+  semi_join(country_code, by = c("country" = "country_name"))
 
 ## ---- anti-join
-time_use_raw %>% 
-  anti_join(country_code, by = c("Country" = "country_name"))
+time_use %>% 
+  anti_join(country_code, by = c("country" = "country_name"))
 
 ## ---- lookup
-time_use_ctr <- unique(time_use_raw$Country)
+time_use_ctr <- unique(time_use$Country)
 country_code_name <- unique(country_code$country_name)
 
 time_use_ctr[!time_use_ctr %in% country_code_name]
