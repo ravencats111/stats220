@@ -770,7 +770,7 @@ class: inverse middle
 ### - filtering joins
 ]
 .right-column[
-* `anti_join()`: All rows from `x` where there are **not** matching values in `y`, keeping just columns from ~x~.
+* `anti_join()`: All rows from `x` where there are **not** matching values in `y`, keeping just columns from `x`.
 .center[<img src="https://github.com/gadenbuie/tidyexplain/raw/master/images/anti-join.gif" width="50%">]
 
 .footnote[image credit: Garrick Aden-Buie]
@@ -784,7 +784,7 @@ class: inverse middle
 ### - filtering joins
 ]
 .right-column[
-* `anti_join()`: All rows from `x` where there are **not** matching values in `y`, keeping just columns from ~x~.
+* `anti_join()`: All rows from `x` where there are **not** matching values in `y`, keeping just columns from `x`.
 ```{r anti-join}
 ```
 ]

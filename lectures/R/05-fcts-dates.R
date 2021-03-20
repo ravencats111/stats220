@@ -19,6 +19,7 @@ factor(dept, levels = rev(dept))
 
 rep(dept_fct, 3)
 
+
 library(forcats)
 
 sci_tbl %>% 
@@ -38,6 +39,33 @@ sci_tbl %>%
   mutate(dept = fct_inorder(dept)) %>% 
   ggplot(aes(dept, count)) +
   geom_col()
+
+set.seed(220)
+scores_sim <- round(rnorm(309, mean = 70, sd = 10), digits = 2)
+scores_tbl <- tibble(score = scores_sim)
+scores_tbl %>% 
+  ggplot(aes(x = score)) +
+  geom_histogram()
+
+scores_tbl <- scores_tbl %>% 
+  mutate(
+    range = cut(score, 
+      breaks = c(0, seq(39, 89, by = 5), 100), 
+      include.lowest = TRUE),
+    grade = fct_recode(range,
+      "D-" = "[0,39]", "D" = "(39,44]", "D+" = "(44,49]",
+      "C-" = "(49,54]", "C" = "(54,59]", "C+" = "(59,64]",
+      "B-" = "(64,69]", "B" = "(69,74]", "B+" = "(74,79]",
+      "A-" = "(79,84]", "A" = "(84,89]", "A+" = "(89,100]"
+  )) 
+
+scores_tbl %>% 
+  ggplot(aes(x = range)) +
+  geom_bar()
+
+scores_tbl %>% 
+  ggplot(aes(x = grade)) +
+  geom_bar()
 
 movies <- as_tibble(jsonlite::read_json(
   "https://vega.github.io/vega-editor/app/data/movies.json",
@@ -60,11 +88,14 @@ movies %>%
   geom_col()
 
 movies %>% 
-  mutate(
-    Major_Genre = fct_lump_n(Major_Genre, 5),
-    Major_Genre = fct_reorder(Major_Genre, -n)
-  ) %>% 
+  mutate(Major_Genre = fct_lump_n(Major_Genre, 5)) %>% 
+  ggplot(aes(Major_Genre)) +
+  geom_bar()
+
+movies %>% 
+  mutate(Major_Genre = fct_lump_n(Major_Genre, 5)) %>% 
   count(Major_Genre) %>% 
+  mutate(Major_Genre = fct_reorder(Major_Genre, n)) %>% 
   ggplot(aes(Major_Genre, n)) +
   geom_col()
 
