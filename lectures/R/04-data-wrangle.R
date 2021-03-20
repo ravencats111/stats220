@@ -102,6 +102,18 @@ time_use %>%
 time_use %>% 
   filter(country %in% anz | minutes > 30)
 
+## ---- logical-op
+x <- c(TRUE, FALSE, TRUE, FALSE)
+y <- c(FALSE, TRUE, TRUE, FALSE)
+
+## ---- logical-op-el
+x & y
+x | y
+
+## ---- logical-op-first
+x && y
+x || y
+
 ## ---- filter-anz
 time_use_anz <- time_use %>% 
   filter(country %in% anz)
@@ -148,6 +160,14 @@ time_use_anz2 <- time_use_anz %>%
       country == "Australia" ~ "AU", 
       TRUE ~ "NZ"))
 time_use_anz2
+
+## ---- case-when
+z <- 1:10
+case_when(
+  z < 5 ~ "less than 5",
+  z > 5 ~ "greater than 5",
+  TRUE ~ "equal to 5"
+)
 
 ## ---- summarise
 time_use_anz2 %>% 
@@ -216,6 +236,14 @@ pisa_sql %>% collect()
 
 ## ---- countrycode
 country_code <- read_csv("data/countrycode.csv")
+country_code %>% 
+  filter(country_name %in% 
+    c("New Zealand", "United States"))
+
+## ---- time-use-2
+time_use_raw %>% 
+  filter(Country %in% c("New Zealand", "USA")) %>% 
+  distinct(Country, .keep_all = TRUE)
 
 ## ---- inner-join
 time_use_raw %>% 
@@ -227,7 +255,7 @@ time_use_raw %>%
 
 ## ---- left-join-na
 time_use_raw %>% 
-  left_join(country_code, by = c("Country" = "country_name")) %>%
+  left_join(country_code, by = c("Country" = "country_name"))%>%
   filter(Country %in% c("New Zealand", "USA")) %>% 
   group_by(Country) %>% 
   slice_head()

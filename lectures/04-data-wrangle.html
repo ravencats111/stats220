@@ -50,6 +50,8 @@ show_up_to_work(
 
 ---
 
+&lt;br&gt;
+.pull-left[
 ## Does this one look better?
 
 ```r
@@ -63,9 +65,11 @@ morning6 &lt;- show_up_to_work(morning5)
 
 * many intermediate steps
 * not meaningful variable names
+]
 
----
+--
 
+.pull-right[
 ## How about this one?
 
 ```r
@@ -77,6 +81,9 @@ morning_routine &lt;- "I" %&gt;%
   have_breakfast() %&gt;% 
   show_up_to_work()
 ```
+
+* `%&gt;%` for expressing a **linear** sequence of multiple operations
+]
 
 ---
 
@@ -115,7 +122,7 @@ time_use_raw
 
 ## Pipe the input into the first argument in the function
 
-&lt;img src="figure/gg-time-use-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/gg-time-use-1.png" width="960" style="display: block; margin: auto;" /&gt;
 
 .pull-left[
 
@@ -139,19 +146,26 @@ time_use_raw
 
 ---
 
+background-image: url("img/cog-comp.png")
+background-size: contain
+
+.footnote[image credit: Hadley Wickham]
+
+---
+
 .left-column[
 .center[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="60%"&gt;]
 ]
 .right-column[
 {dplyr} is a grammar of data manipulation, providing a consistent set of **verbs** that help you solve the most common data manipulation challenges:
 
-1. `mutate()` adds new variables that are functions of existing variables
-2. `select()` picks variables based on their names.
-3. `filter()` picks cases based on their values.
-4. `summarise()` reduces multiple values down to a single summary.
-5. `arrange()` changes the ordering of the rows.
+1. .green[`mutate()`] adds new variables that are functions of existing variables
+2. .green[`select()`] picks variables based on their names.
+3. .green[`filter()`] picks cases based on their values.
+4. .green[`summarise()`] reduces multiple values down to a single summary.
+5. .green[`arrange()`] changes the ordering of the rows.
 
-These all combine naturally with `group_by()` which allows you to perform any operation “by group”.
+These all combine naturally with .green[`group_by()`] which allows you to perform any operation “by group”.
 ]
 
 ---
@@ -161,6 +175,8 @@ class: inverse middle
 # One table verbs
 
 ---
+
+## Rename columns
 
 
 ```r
@@ -186,6 +202,8 @@ time_use
 ```
 
 ---
+
+## Distinct rows
 
 .pull-left[
 
@@ -693,6 +711,59 @@ time_use %&gt;%
 
 ---
 
+## Logical operators
+
+.center[
+
+```r
+x &lt;- c(TRUE, FALSE, TRUE, FALSE)
+y &lt;- c(FALSE, TRUE, TRUE, FALSE)
+```
+]
+
+.pull-left[
+* element-wise comparisons:
+
+
+```r
+x &amp; y
+```
+
+```
+#&gt; [1] FALSE FALSE  TRUE FALSE
+```
+
+```r
+x | y
+```
+
+```
+#&gt; [1]  TRUE  TRUE  TRUE FALSE
+```
+]
+.pull-right[
+* first-element only comparisons:
+
+
+```r
+x &amp;&amp; y
+```
+
+```
+#&gt; [1] FALSE
+```
+
+```r
+x || y
+```
+
+```
+#&gt; [1] TRUE
+```
+]
+
+---
+
 .left-column[
 ## Verbs
 ### - rowwise
@@ -704,7 +775,7 @@ time_use %&gt;%
 time_use_anz &lt;- time_use %&gt;% 
   filter(country %in% anz)
 ```
-&lt;img src="figure/filter-anz-line-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/filter-anz-line-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -758,6 +829,19 @@ Selection helpers
 time_use_anz %&gt;% 
   select(starts_with("c"))
 ```
+
+```
+#&gt; # A tibble: 28 x 2
+#&gt;   country     category                  
+#&gt;   &lt;chr&gt;       &lt;chr&gt;                     
+#&gt; 1 Australia   Paid work                 
+#&gt; 2 New Zealand Paid work                 
+#&gt; 3 Australia   Education                 
+#&gt; 4 New Zealand Education                 
+#&gt; 5 Australia   Care for household members
+#&gt; 6 New Zealand Care for household members
+#&gt; # … with 22 more rows
+```
 ]
 
 ---
@@ -808,14 +892,31 @@ time_use_anz2
 
 ---
 
-.left-column[
-## Verbs
-### - rowwise
-### - colwise
+## `case_when()`: when it's the case, do something
+
+.pull-left[
+&lt;br&gt;
+&lt;br&gt;
+.center[&lt;img src="https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/dplyr_case_when.png" width="100%"&gt;]
 ]
-.right-column[
-* `case_when()`: when it's the case, do something
-.center[&lt;img src="https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/dplyr_case_when.png" height="520px"&gt;]
+.pull-right[
+&lt;br&gt;
+&lt;br&gt;
+
+```r
+z &lt;- 1:10
+case_when(
+  z &lt; 5 ~ "less than 5",
+  z &gt; 5 ~ "greater than 5",
+  TRUE ~ "equal to 5"
+)
+```
+
+```
+#&gt;  [1] "less than 5"    "less than 5"    "less than 5"    "less than 5"   
+#&gt;  [5] "equal to 5"     "greater than 5" "greater than 5" "greater than 5"
+#&gt;  [9] "greater than 5" "greater than 5"
+```
 ]
 
 ---
@@ -886,7 +987,7 @@ time_use_anz2 %&gt;%
 
 ---
 
-## Pipe in and out
+## Chain with `%&gt;%`
 
 .pull-left[
 
@@ -929,11 +1030,33 @@ time_use %&gt;%
 
 ---
 
+class: middle
+
 ## When to `%&gt;%`
+
+.pull-left[
+
+```r
+time_use %&gt;% 
+  filter(country %in% anz) %&gt;% 
+  mutate(hours = minutes / 60) %&gt;% 
+  group_by(category) %&gt;% 
+  summarise(
+    min = min(hours), 
+    max = max(hours), 
+    avg = mean(hours))
+```
+]
+.pull-right[
+1. Linear code dependency structure
+2. &lt; 10 steps
+3. Inputs and outputs of the same type
+   + {dplyr} verbs, tibble in and out
+]
 
 ---
 
-## Shortcuts
+## Useful shortcuts
 
 
 ```r
@@ -957,7 +1080,7 @@ time_use_anz %&gt;%
 
 ---
 
-## Hello again, SQL!*
+## Hello again, SQL!
 
 
 ```r
@@ -970,7 +1093,7 @@ pisa_db
 ```
 *#&gt; # Source:   table&lt;pisa&gt; [?? x 22]
 *#&gt; # Database: sqlite 3.34.1
-*#&gt; #   [/Users/wany568/Teaching/stats220/lectures/data/pisa/pisa-student.db]
+*#&gt; #   [/Users/earo/Teaching/stats220/lectures/data/pisa/pisa-student.db]
 #&gt;    year country school_id student_id mother_educ father_educ
 #&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;      
 #&gt; 1  2000 ALB     1001      1          &lt;NA&gt;        &lt;NA&gt;       
@@ -1003,7 +1126,7 @@ pisa_sql
 ```
 #&gt; # Source:     lazy query [?? x 2]
 #&gt; # Database:   sqlite 3.34.1
-#&gt; #   [/Users/wany568/Teaching/stats220/lectures/data/pisa/pisa-student.db]
+#&gt; #   [/Users/earo/Teaching/stats220/lectures/data/pisa/pisa-student.db]
 #&gt; # Ordered by: desc(math)
 #&gt;   country avg_math
 #&gt;   &lt;chr&gt;      &lt;dbl&gt;
@@ -1059,6 +1182,349 @@ class: inverse middle
 
 ---
 
+## A second data table
+
+.pull-left[
+.small[
+
+```r
+time_use_raw %&gt;% 
+  filter(Country %in% c("New Zealand", "USA")) %&gt;% 
+  distinct(Country, .keep_all = TRUE)
+```
+
+```
+#&gt; # A tibble: 2 x 3
+#&gt;   Country     Category  `Time (minutes)`
+#&gt;   &lt;chr&gt;       &lt;chr&gt;                &lt;dbl&gt;
+#&gt; 1 New Zealand Paid work             241.
+#&gt; 2 USA         Paid work             251.
+```
+]
+]
+.pull-right[
+.small[
+
+```r
+country_code &lt;- read_csv("data/countrycode.csv")
+country_code %&gt;% 
+  filter(country_name %in% 
+    c("New Zealand", "United States"))
+```
+
+```
+#&gt; # A tibble: 2 x 2
+#&gt;   country country_name 
+#&gt;   &lt;chr&gt;   &lt;chr&gt;        
+#&gt; 1 NZL     New Zealand  
+#&gt; 2 USA     United States
+```
+]
+]
+
+---
+
+.left-column[
+## Joins
+### - mutating joins
+]
+.right-column[
+**Mutating joins:** .brown[add new variables] to one data frame from matching observations in another.
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.center[&lt;img src="https://d33wubrfki0l68.cloudfront.net/aeab386461820b029b7e7606ccff1286f623bae1/ef0d4/diagrams/join-venn.png" width="100%"&gt;]
+]
+
+---
+
+.left-column[
+## Joins
+### - mutating joins
+]
+.right-column[
+* `inner_join()`: All rows from `x` where there are matching values in `y`, and all columns from `x` and `y`
+
+.center[&lt;img src="https://github.com/gadenbuie/tidyexplain/raw/master/images/inner-join.gif" width="50%"&gt;]
+
+.footnote[image credit: Garrick Aden-Buie]
+]
+
+---
+
+.left-column[
+## Joins
+### - mutating joins
+]
+.right-column[
+* `inner_join()`: All rows from `x` where there are matching values in `y`, and all columns from `x` and `y`
+
+
+```r
+time_use_raw %&gt;% 
+  inner_join(country_code, by = c("Country" = "country_name"))
+```
+
+```
+#&gt; # A tibble: 377 x 4
+#&gt;   Country   Category  `Time (minutes)` country
+#&gt;   &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;  
+#&gt; 1 Australia Paid work             211. AUS    
+#&gt; 2 Austria   Paid work             280. AUT    
+#&gt; 3 Belgium   Paid work             194. BEL    
+#&gt; 4 Canada    Paid work             269. CAN    
+#&gt; 5 Denmark   Paid work             200. DNK    
+#&gt; 6 Estonia   Paid work             231. EST    
+#&gt; # … with 371 more rows
+```
+]
+
+---
+
+.left-column[
+## Joins
+### - mutating joins
+]
+.right-column[
+* `left_join()`: All rows from `x`, and all columns from `x` and `y`. Rows in `x` with no match in `y` will have `NA` values in the new columns.
+
+.center[&lt;img src="https://github.com/gadenbuie/tidyexplain/raw/master/images/left-join.gif" width="50%"&gt;]
+
+.footnote[image credit: Garrick Aden-Buie]
+]
+
+---
+
+.left-column[
+## Joins
+### - mutating joins
+]
+.right-column[
+* `left_join()`: All rows from `x`, and all columns from `x` and `y`. Rows in `x` with no match in `y` will have `NA` values in the new columns.
+
+```r
+time_use_raw %&gt;% 
+  left_join(country_code, by = c("Country" = "country_name"))
+```
+
+```
+#&gt; # A tibble: 461 x 4
+#&gt;   Country   Category  `Time (minutes)` country
+#&gt;   &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;  
+#&gt; 1 Australia Paid work             211. AUS    
+#&gt; 2 Austria   Paid work             280. AUT    
+#&gt; 3 Belgium   Paid work             194. BEL    
+#&gt; 4 Canada    Paid work             269. CAN    
+#&gt; 5 Denmark   Paid work             200. DNK    
+#&gt; 6 Estonia   Paid work             231. EST    
+#&gt; # … with 455 more rows
+```
+]
+
+---
+
+.left-column[
+## Joins
+### - mutating joins
+]
+.right-column[
+* `left_join()`: All rows from `x`, and all columns from `x` and `y`. .brown[Rows in `x` with no match in `y` will have `NA` values in the new columns.]
+
+```r
+time_use_raw %&gt;% 
+  left_join(country_code, by = c("Country" = "country_name"))%&gt;%
+  filter(Country %in% c("New Zealand", "USA")) %&gt;% 
+  group_by(Country) %&gt;% 
+  slice_head()
+```
+
+```
+#&gt; # A tibble: 2 x 4
+#&gt; # Groups:   Country [2]
+#&gt;   Country     Category  `Time (minutes)` country
+#&gt;   &lt;chr&gt;       &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;  
+#&gt; 1 New Zealand Paid work             241. NZL    
+#&gt; 2 USA         Paid work             251. &lt;NA&gt;
+```
+]
+
+---
+
+.left-column[
+## Joins
+### - mutating joins
+]
+.right-column[
+* `right_join()`: All rows from `y`, and all columns from `x` and `y`. Rows in `y` with no match in `x` will have `NA` values in the new columns.
+.center[&lt;img src="https://github.com/gadenbuie/tidyexplain/raw/master/images/right-join.gif" width="50%"&gt;]
+
+.footnote[image credit: Garrick Aden-Buie]
+]
+
+---
+
+.left-column[
+## Joins
+### - mutating joins
+]
+.right-column[
+* `right_join()`: All rows from `y`, and all columns from `x` and `y`. Rows in `y` with no match in `x` will have `NA` values in the new columns.
+
+```r
+time_use_raw %&gt;% 
+  right_join(country_code, by = c("Country" = "country_name"))
+```
+
+```
+#&gt; # A tibble: 450 x 4
+#&gt;   Country   Category  `Time (minutes)` country
+#&gt;   &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;  
+#&gt; 1 Australia Paid work             211. AUS    
+#&gt; 2 Austria   Paid work             280. AUT    
+#&gt; 3 Belgium   Paid work             194. BEL    
+#&gt; 4 Canada    Paid work             269. CAN    
+#&gt; 5 Denmark   Paid work             200. DNK    
+#&gt; 6 Estonia   Paid work             231. EST    
+#&gt; # … with 444 more rows
+```
+]
+
+---
+
+.left-column[
+## Joins
+### - mutating joins
+]
+.right-column[
+* `full_join()`: All rows and all columns from both `x` and `y`. Where there are not matching values, returns `NA` for the one missing.
+.center[&lt;img src="https://github.com/gadenbuie/tidyexplain/raw/master/images/full-join.gif" width="50%"&gt;]
+
+.footnote[image credit: Garrick Aden-Buie]
+]
+
+---
+
+.left-column[
+## Joins
+### - mutating joins
+]
+.right-column[
+* `full_join()`: All rows and all columns from both `x` and `y`. Where there are not matching values, returns `NA` for the one missing.
+
+```r
+time_use_raw %&gt;% 
+  full_join(country_code, by = c("Country" = "country_name"))
+```
+
+```
+#&gt; # A tibble: 534 x 4
+#&gt;   Country   Category  `Time (minutes)` country
+#&gt;   &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;  
+#&gt; 1 Australia Paid work             211. AUS    
+#&gt; 2 Austria   Paid work             280. AUT    
+#&gt; 3 Belgium   Paid work             194. BEL    
+#&gt; 4 Canada    Paid work             269. CAN    
+#&gt; 5 Denmark   Paid work             200. DNK    
+#&gt; 6 Estonia   Paid work             231. EST    
+#&gt; # … with 528 more rows
+```
+]
+
+---
+
+.left-column[
+## Joins
+### - mutating joins
+### - filtering joins
+]
+.right-column[
+**Filtering joins:** .brown[filter observations] from one data frame based on whether or not they match an observation in the other table.
+* `semi_join()`: All rows from `x` where there are matching values in `y`, keeping just columns from `x`.
+.center[&lt;img src="https://github.com/gadenbuie/tidyexplain/raw/master/images/semi-join.gif" width="50%"&gt;]
+
+.footnote[image credit: Garrick Aden-Buie]
+]
+
+---
+
+.left-column[
+## Joins
+### - mutating joins
+### - filtering joins
+]
+.right-column[
+* `semi_join()`: All rows from `x` where there are matching values in `y`, keeping just columns from `x`.
+
+```r
+time_use_raw %&gt;% 
+  semi_join(country_code, by = c("Country" = "country_name"))
+```
+
+```
+#&gt; # A tibble: 377 x 3
+#&gt;   Country   Category  `Time (minutes)`
+#&gt;   &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt;
+#&gt; 1 Australia Paid work             211.
+#&gt; 2 Austria   Paid work             280.
+#&gt; 3 Belgium   Paid work             194.
+#&gt; 4 Canada    Paid work             269.
+#&gt; 5 Denmark   Paid work             200.
+#&gt; 6 Estonia   Paid work             231.
+#&gt; # … with 371 more rows
+```
+]
+
+---
+
+.left-column[
+## Joins
+### - mutating joins
+### - filtering joins
+]
+.right-column[
+* `anti_join()`: All rows from `x` where there are **not** matching values in `y`, keeping just columns from ~x~.
+.center[&lt;img src="https://github.com/gadenbuie/tidyexplain/raw/master/images/anti-join.gif" width="50%"&gt;]
+
+.footnote[image credit: Garrick Aden-Buie]
+]
+
+---
+
+.left-column[
+## Joins
+### - mutating joins
+### - filtering joins
+]
+.right-column[
+* `anti_join()`: All rows from `x` where there are **not** matching values in `y`, keeping just columns from ~x~.
+
+```r
+time_use_raw %&gt;% 
+  anti_join(country_code, by = c("Country" = "country_name"))
+```
+
+```
+#&gt; # A tibble: 84 x 3
+#&gt;   Country      Category  `Time (minutes)`
+#&gt;   &lt;chr&gt;        &lt;chr&gt;                &lt;dbl&gt;
+#&gt; 1 Korea        Paid work             288.
+#&gt; 2 UK           Paid work             235.
+#&gt; 3 USA          Paid work             251.
+#&gt; 4 China        Paid work             315.
+#&gt; 5 India        Paid work             272.
+#&gt; 6 South Africa Paid work             189.
+#&gt; # … with 78 more rows
+```
+]
+
+---
+
+class: center
+
+## .purple[R-Ladies meetup]
+
+[&lt;img src="img/rladies-meetup.png" width="100%"&gt;](https://www.meetup.com/en-AU/rladies-auckland/events/276942471)
+
 ---
 
 ## Reading
@@ -1067,6 +1533,7 @@ class: inverse middle
 .center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px"&gt;](https://r4ds.had.co.nz)]
 ]
 .pull-right[
+* [Pipes](https://r4ds.had.co.nz/pipes.html)
 * [Data transformation](https://r4ds.had.co.nz/transform.html)
 * [Relational data](https://r4ds.had.co.nz/relational-data.html)
 * [{dplyr} cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
