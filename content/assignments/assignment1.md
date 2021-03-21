@@ -132,7 +132,7 @@ should end up with a **tibble** called `nycbikes18`.
 
 ------------------------------------------------------------------------
 
-##### ‼️ You shall work with `nycbikes18` for the rest of the assignment.
+### ‼️ You shall work with `nycbikes18` for the rest of the assignment.
 
 ### Question 4
 
