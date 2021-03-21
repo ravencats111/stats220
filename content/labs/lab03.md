@@ -51,7 +51,7 @@ the following code to start with this lab session:
 Suppose that you have created an `Rproj` for this course. You need to
 download `villagers.csv`
 [here](https://github.com/rfordatascience/tidytuesday/raw/master/data/2020/2020-05-05/villagers.csv)
-(right click, select “Download Linked File As”) to
+(right click, select "Save link as"/“Download Linked File As”) to
 `data/animal-crossing/` under your `Rproj` folder.
 
 -   You’re required to use **relative file paths
