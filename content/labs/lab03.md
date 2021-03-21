@@ -51,7 +51,7 @@ the following code to start with this lab session:
 Suppose that you have created an `Rproj` for this course. You need to
 download `villagers.csv`
 [here](https://github.com/rfordatascience/tidytuesday/raw/master/data/2020/2020-05-05/villagers.csv)
-(right click, select "Save link as"/“Download Linked File As”) to
+(right click, select “Save link as”/“Download Linked File As”) to
 `data/animal-crossing/` under your `Rproj` folder.
 
 -   You’re required to use **relative file paths
@@ -110,10 +110,18 @@ Present a small multiples of `p4`, conditioning on `species`.
 
 ![](/figures/lab03-q5-1.png)
 
-### Question4fun (NO marks though)
+### Question4fun (NO marks)
 
-Reverse engineer the following figure, with only the first 100 data rows
-(villagers images) plotted here.
+Reverse engineer the following figure:
+
+1.  subset the first 100 rows from `villagers`.
+2.  create a tibble with columns `x` and `y`, that contains all
+    combinations of the two vectors `1:10` and `1:10`.
+3.  bind the newly created tibble to the `villagers` subset.
+4.  plot these villagers’ images from `url`, and label them with
+    `phrase`.
+
+<!-- -->
 
     library(ggimage)
 
