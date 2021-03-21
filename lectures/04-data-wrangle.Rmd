@@ -153,6 +153,12 @@ background-size: contain
 These all combine naturally with .green[`group_by()`] which allows you to perform any operation “by group”.
 ]
 
+???
+
+* rowwise
+* colwise
+* group-wise
+
 ---
 
 class: inverse middle

@@ -171,6 +171,12 @@ background-size: contain
 These all combine naturally with .green[`group_by()`] which allows you to perform any operation “by group”.
 ]
 
+???
+
+* rowwise
+* colwise
+* group-wise
+
 ---
 
 class: inverse middle
@@ -614,7 +620,7 @@ time_use %&gt;%
 
 ```r
 time_use %&gt;% 
-  filter(!(country %in% anz))
+  filter(!(country %in% anz)) # ! logical negation (NOT)
 ```
 
 ```

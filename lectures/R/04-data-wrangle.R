@@ -90,7 +90,7 @@ time_use %>%
 
 ## ---- filter-not
 time_use %>% 
-  filter(!(country %in% anz))
+  filter(!(country %in% anz)) # ! logical negation (NOT)
 
 ## ---- filter-and
 time_use %>% 
