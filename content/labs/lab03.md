@@ -112,7 +112,7 @@ Present a small multiples of `p4`, conditioning on `species`.
 
 ### Question4fun (NO marks)
 
-Reverse engineer the following figure:
+Reproduce the following figure:
 
 1.  subset the first 100 rows from `villagers`.
 2.  create a tibble with columns `x` and `y`, that contains all
