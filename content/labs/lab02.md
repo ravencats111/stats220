@@ -19,7 +19,7 @@ This lab exercise is **due 23:59 Monday 22 March (NZDT)**.
 ------------------------------------------------------------------------
 
 In this lab exercise, you are going to work with two data sets: user
-reviews for Animal Crossing - New Horizons as in `user_reviews.csv` and
+reviews for Animal Crossing - New Horizons as in `user_reviews.tsv` and
 Gapminder as in `gapminder.rds`. You shall use the following packages
 for this lab session:
 
