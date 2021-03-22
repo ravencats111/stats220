@@ -154,6 +154,13 @@ background-size: contain
 
 .footnote[image credit: Hadley Wickham]
 
+???
+
+* as ds
+* figure out what's your questions/what you want to do
+* translate your thoughts into code
+* let developers take care of computational side
+
 ---
 
 .left-column[
@@ -292,7 +299,7 @@ time_use %&gt;%
 
 .left-column[
 ## Verbs
-### - rowwise
+### - group by
 ]
 .right-column[
 * `group_by()`: group by one or more variables
@@ -321,7 +328,7 @@ time_use %&gt;%
 
 .left-column[
 ## Verbs
-### - rowwise
+### - groupwise
 ]
 .right-column[
 * `group_by()`: use in conjunction with other verbs
@@ -351,7 +358,7 @@ time_use %&gt;%
 
 .left-column[
 ## Verbs
-### - rowwise
+### - groupwise
 ]
 .right-column[
 * `slice()` shortcuts: `slice_head()` &amp; `slice_tail()`
@@ -381,7 +388,8 @@ time_use %&gt;%
 
 .left-column[
 ## Verbs
-### - rowwise
+### - group by
+### - ungroup
 ]
 .right-column[
 * `ungroup()`: removes grouping
@@ -1065,7 +1073,7 @@ time_use %&gt;%
 
 ---
 
-## Useful shortcuts
+## Handy shortcuts
 
 
 ```r
@@ -1086,6 +1094,29 @@ time_use_anz %&gt;%
 #&gt; 1 Australia      14
 #&gt; 2 New Zealand    14
 ```
+
+---
+
+class: middle
+
+## Useful functions
+
+.pull-left[
+* one table verbs
+  * `pull()`
+  * `transmute()`
+  * `relocate()`
+* two table verbs
+  * `bind_rows()`
+  * `bind_cols()`
+]
+.pull-right[
+* set operations
+  + `union()`
+  + `union_all()`
+  + `setdiff()`
+  + `intersect()`
+]
 
 ---
 

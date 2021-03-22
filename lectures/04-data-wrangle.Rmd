@@ -136,6 +136,13 @@ background-size: contain
 
 .footnote[image credit: Hadley Wickham]
 
+???
+
+* as ds
+* figure out what's your questions/what you want to do
+* translate your thoughts into code
+* let developers take care of computational side
+
 ---
 
 .left-column[
@@ -201,7 +208,7 @@ class: inverse middle
 
 .left-column[
 ## Verbs
-### - rowwise
+### - group by
 ]
 .right-column[
 * `group_by()`: group by one or more variables
@@ -213,7 +220,7 @@ class: inverse middle
 
 .left-column[
 ## Verbs
-### - rowwise
+### - groupwise
 ]
 .right-column[
 * `group_by()`: use in conjunction with other verbs
@@ -225,7 +232,7 @@ class: inverse middle
 
 .left-column[
 ## Verbs
-### - rowwise
+### - groupwise
 ]
 .right-column[
 * `slice()` shortcuts: `slice_head()` & `slice_tail()`
@@ -237,7 +244,8 @@ class: inverse middle
 
 .left-column[
 ## Verbs
-### - rowwise
+### - group by
+### - ungroup
 ]
 .right-column[
 * `ungroup()`: removes grouping
@@ -550,10 +558,33 @@ class: middle
 
 ---
 
-## Useful shortcuts
+## Handy shortcuts
 
 ```{r shortcuts, results = "hold", eval = 1}
 ```
+
+---
+
+class: middle
+
+## Useful functions
+
+.pull-left[
+* one table verbs
+  * `pull()`
+  * `transmute()`
+  * `relocate()`
+* two table verbs
+  * `bind_rows()`
+  * `bind_cols()`
+]
+.pull-right[
+* set operations
+  + `union()`
+  + `union_all()`
+  + `setdiff()`
+  + `intersect()`
+]
 
 ---
 
