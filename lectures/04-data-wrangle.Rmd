@@ -623,6 +623,46 @@ class: middle
 
 class: inverse middle
 
+## Relational data
+<hr>
+### Multiple tables of data are called *relational data* because of the relations.
+
+---
+
+## Keys `r emo::ji("key")`
+
+.center[A key is a variable (or set of variables) that uniquely identifies an observation.]
+
+* A **primary key** uniquely identifies an observation in its own table.
+* A **foreign key** uniquely identifies an observation in another table.
+
+.pull-left[
+.small[
+```{r ref.label = "rename", echo = 2}
+```
+]
+]
+.pull-right[
+.small[
+```{r countrycode}
+```
+]
+]
+
+---
+
+class: middle
+
+## Your turn
+
+> What's the key for the `time_use` data?
+
+`r countdown::countdown(minutes = 0, seconds = 30, font_size = "48px", top = 0)`
+
+---
+
+class: inverse middle
+
 ## Two table verbs
 
 ---
@@ -637,7 +677,7 @@ class: inverse middle
 ]
 .pull-right[
 .small[
-```{r countrycode}
+```{r countrycode2}
 ```
 ]
 ]

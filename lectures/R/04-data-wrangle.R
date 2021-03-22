@@ -235,7 +235,9 @@ pisa_sql %>% show_query()
 pisa_sql %>% collect()
 
 ## ---- countrycode
-country_code <- read_csv("data/countrycode.csv")
+(country_code <- read_csv("data/countrycode.csv"))
+
+## ---- countrycode2
 country_code %>% 
   filter(country_name %in% 
     c("New Zealand", "United States"))
