@@ -1,0 +1,49 @@
+---
+title: "STATS 220"
+subtitle: "Factors`r emo::ji('rocket')` and date-times`r emo::ji('calendar')`"
+type: "lecture"
+date: ""
+output:
+  xaringan::moon_reader:
+    css: ["assets/remark.css"]
+    lib_dir: libs
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r initial, echo = FALSE, cache = FALSE, results = 'hide'}
+library(knitr)
+options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE, 
+  tibble.width = 60, tibble.print_min = 6)
+opts_chunk$set(
+  echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
+  fig.path = 'figure/', cache.path = 'cache/', cache = FALSE, fig.retina = 3,
+  fig.align = 'center', fig.width = 12, fig.height = 8.5, fig.show = 'hold',
+  dpi = 120
+)
+```
+
+```{r xaringan-panelset, echo = FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r external, include = FALSE, cache = FALSE}
+read_chunk('R/05-fcts-dates.R')
+```
+
+---
+
+## Reading
+
+.pull-left[
+.center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
+]
+.pull-right[
+* [Pipes](https://r4ds.had.co.nz/pipes.html)
+* [Data transformation](https://r4ds.had.co.nz/transform.html)
+* [Relational data](https://r4ds.had.co.nz/relational-data.html)
+* [{forcats} cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/factors.pdf)
+]

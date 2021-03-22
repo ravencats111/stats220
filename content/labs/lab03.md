@@ -2,6 +2,7 @@
 output: 
   md_document:
     preserve_yaml: true
+    variant: gfm
 layout: page
 title: Lab 03
 ---
@@ -26,9 +27,11 @@ In this lab exercise, you are going to work with a data set: villagers
 for Animal Crossing - New Horizons as in `villagers.csv`. You shall use
 the following code to start with this lab session:
 
-    library(tidyverse)
-    villagers <- read_csv("data/animal-crossing/villagers.csv")
-    villagers
+``` r
+library(tidyverse)
+villagers <- read_csv("data/animal-crossing/villagers.csv")
+villagers
+```
 
     #> # A tibble: 391 x 11
     #>    row_n id     name  gender species birthday personality song  phrase
@@ -68,9 +71,11 @@ Write {ggplot2} code to generate a bar chart that displays the counts of
 different personalities (`personality`). You should end up with a
 **ggplot** called `p1`.
 
-    p1
+``` r
+p1
+```
 
-![](/figures/lab03-q1-1.png)
+![](/figures/lab03-q1-1.png)<!-- -->
 
 ### Question 2
 
@@ -78,9 +83,11 @@ Write {ggplot2} code to generate a bar chart that displays the counts of
 different personalities (`personality`), with colour filled by `gender`.
 You should end up with a **ggplot** called `p2`.
 
-    p2
+``` r
+p2
+```
 
-![](/figures/lab03-q2-1.png)
+![](/figures/lab03-q2-1.png)<!-- -->
 
 ### Question 3
 
@@ -89,26 +96,32 @@ different personalities (`personality`), with colour filled by `gender`,
 and border colour set to `"black"`. You should end up with a **ggplot**
 called `p3`.
 
-    p3
+``` r
+p3
+```
 
-![](/figures/lab03-q3-1.png)
+![](/figures/lab03-q3-1.png)<!-- -->
 
 ### Question 4
 
 Display `p3` on polar coordinates. You should end up with a **ggplot**
 called `p4`.
 
-    p4
+``` r
+p4
+```
 
-![](/figures/lab03-q4-1.png)
+![](/figures/lab03-q4-1.png)<!-- -->
 
 ### Question 5
 
 Present a small multiples of `p4`, conditioning on `species`.
 
-    p5
+``` r
+p5
+```
 
-![](/figures/lab03-q5-1.png)
+![](/figures/lab03-q5-1.png)<!-- -->
 
 ### Question4fun (NO marks)
 
@@ -121,8 +134,8 @@ Reproduce the following figure:
 4.  plot these villagers’ images from `url`, and label them with
     `phrase`.
 
-<!-- -->
+``` r
+library(ggimage)
+```
 
-    library(ggimage)
-
-![](/figures/lab03-extra-1.png)
+![](/figures/lab03-extra-1.png)<!-- -->

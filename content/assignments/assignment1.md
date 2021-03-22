@@ -2,6 +2,7 @@
 output: 
   md_document:
     preserve_yaml: true
+    variant: gfm
 layout: page
 title: Assignment 1
 ---
@@ -41,7 +42,9 @@ in New York City (`2018-citibike-tripdata.csv`). The data includes:
 
 You shall use the following packages for this assignment:
 
-    library(tidyverse)
+``` r
+library(tidyverse)
+```
 
 -   Make sure to include the snippet above upfront in your R file.
 -   DO NOT include `install.packages()` in your R file.
@@ -63,7 +66,9 @@ to `data/` under your `Rproj`.
 Read `data/2018-citibike-tripdata.csv` into R. You should end up with a
 **tibble** called `nycbikes18_raw`.
 
-    nycbikes18_raw
+``` r
+nycbikes18_raw
+```
 
     #> # A tibble: 333,687 x 15
     #>    tripduration starttime           stoptime           
@@ -94,11 +99,11 @@ object called `p1`, with
 
 -   `colour = "white"`.
 
-<!-- -->
+``` r
+p1
+```
 
-    p1
-
-![](/figures/a1-q2-1.png)
+![](/figures/a1-q2-1.png)<!-- -->
 
 ### Question 3
 
@@ -108,7 +113,9 @@ reveal their ages. You need to remove these observations with
 `birth_year` greater than `1900` for the rest of the analysis. You
 should end up with a **tibble** called `nycbikes18`.
 
-    nycbikes18
+``` r
+nycbikes18
+```
 
     #> # A tibble: 333,557 x 15
     #>    tripduration starttime           stoptime           
@@ -132,14 +139,16 @@ should end up with a **tibble** called `nycbikes18`.
 
 ------------------------------------------------------------------------
 
-### ‼️ You shall work with `nycbikes18` for the rest of the assignment.
+##### ‼️ You shall work with `nycbikes18` for the rest of the assignment.
 
 ### Question 4
 
 Calculate the total trip durations over the year. You should end up with
 a **double** called `ttl_tripd`.
 
-    ttl_tripd
+``` r
+ttl_tripd
+```
 
     #> [1] 226912929
 
@@ -149,7 +158,9 @@ Find out the number of Citi bikes used in 2018. You should end up with
 an **integer** called `n_bikes`. (HINTS: You may find `unique()`
 useful.)
 
-    n_bikes
+``` r
+n_bikes
+```
 
     #> [1] 900
 
@@ -159,9 +170,11 @@ You’d like to know if Citi bike subscribers ride more often than
 one-time customers. Present a bar chart for the tallies of trips by each
 `usertype`. You should end up with a **ggplot** object called `p2`.
 
-    p2
+``` r
+p2
+```
 
-![](/figures/a1-q6-1.png)
+![](/figures/a1-q6-1.png)<!-- -->
 
 ### Question 7
 
@@ -170,9 +183,11 @@ based on their user types. Produce a side-by-side bar charts to display
 the tallies of trips by each `gender`, grouped by `usertype`. You should
 end up with a **ggplot** object called `p3`.
 
-    p3
+``` r
+p3
+```
 
-![](/figures/a1-q7-1.png)
+![](/figures/a1-q7-1.png)<!-- -->
 
 ### Question 8
 
@@ -183,11 +198,11 @@ Do younger users ride for longer trips? Generate a scatter plot with
 
 -   `size = 0.5`.
 
-<!-- -->
+``` r
+p4
+```
 
-    p4
-
-![](/figures/a1-q8-1.png)
+![](/figures/a1-q8-1.png)<!-- -->
 
 ### Question 9
 
@@ -197,9 +212,11 @@ geographical locations of start stations; (2) one more layer of points
 represent all end stations, on top of the first layer. You should end up
 with a **ggplot** object named `p5`.
 
-    p5
+``` r
+p5
+```
 
-![](/figures/a1-q9-1.png)
+![](/figures/a1-q9-1.png)<!-- -->
 
 ### Question 10
 
@@ -214,6 +231,8 @@ HINTS: check out the
 [`?geom_segment`](https://ggplot2.tidyverse.org/reference/geom_segment.html)
 for examples.
 
-    p6
+``` r
+p6
+```
 
-![](/figures/a1-q10-1.png)
+![](/figures/a1-q10-1.png)<!-- -->

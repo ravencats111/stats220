@@ -1,4 +1,8 @@
 ---
+output: 
+  md_document:
+    preserve_yaml: true
+    variant: gfm
 layout: page
 title: Lab 02
 ---
@@ -8,8 +12,9 @@ This lab exercise is **due 23:59 Monday 22 March (NZDT)**.
 -   You should submit an R file (i.e. file extension `.R`) containing R
     code that assigns values to **the appropriate symbols**.
 -   Your R file will be executed in order and checked against the values
-    that have been assigned to the symbols using an automatic grading
-    system. Marks will be fully deducted for **non-identical** results.
+    that have been assigned to the symbols using an **automatic**
+    grading system. Marks will be fully deducted for **non-identical**
+    results.
 -   Intermediate steps to achieve the final results will NOT be checked.
 -   Each question is worth 0.2 points.
 -   You should submit your R file on Canvas.
@@ -19,11 +24,13 @@ This lab exercise is **due 23:59 Monday 22 March (NZDT)**.
 ------------------------------------------------------------------------
 
 In this lab exercise, you are going to work with two data sets: user
-reviews for Animal Crossing - New Horizons as in `user_reviews.tsv` and
+reviews for Animal Crossing - New Horizons as in `user_reviews.csv` and
 Gapminder as in `gapminder.rds`. You shall use the following packages
 for this lab session:
 
-    library(tidyverse)
+``` r
+library(tidyverse)
+```
 
 -   Make sure to include the snippet above upfront in your R file.
 -   DO NOT include `install.packages()` in your R file.
@@ -31,7 +38,7 @@ for this lab session:
 Suppose that you have created an `Rproj` for this course. You need to
 download `user_reviews.tsv`
 [here](https://github.com/rfordatascience/tidytuesday/raw/master/data/2020/2020-05-05/user_reviews.tsv)
-(right click, select "Save link as"/“Download Linked File As”) to
+(right click, select “Download Linked File As”) to
 `data/animal-crossing/` and `gapminder.rds`
 [here](https://github.com/STATS-UOA/stats220/raw/master/lectures/data/gapminder.rds)
 to `data/` under your `Rproj`.
@@ -49,7 +56,9 @@ to `data/` under your `Rproj`.
 Import `data/animal-crossing/user_reviews.tsv` to R. You should end up
 with a **tibble** called `user_reviews`.
 
-    user_reviews
+``` r
+user_reviews
+```
 
     #> # A tibble: 2,999 x 4
     #>    grade user_name   text                                   date      
@@ -71,7 +80,9 @@ with a **tibble** called `user_reviews`.
 Extract the `grade` column from the `user_reviews` tibble. You should
 end up with **a double vector** called `user_grade`.
 
-    mean(user_grade)
+``` r
+mean(user_grade)
+```
 
     #> [1] 4.217406
 
@@ -80,11 +91,15 @@ end up with **a double vector** called `user_grade`.
 Compare `user_grade` to be greater than or equal to `7`. You should end
 up with **a logical vector** called `good_grade`.
 
-    typeof(good_grade)
+``` r
+typeof(good_grade)
+```
 
     #> [1] "logical"
 
-    sum(good_grade)
+``` r
+sum(good_grade)
+```
 
     #> [1] 1130
 
@@ -94,7 +109,9 @@ Subset `user_reviews` given `user_grade` greater than or equal to `7`,
 and the `text` column to be excluded. You should end up with a
 **tibble** called `user_good_grade`.
 
-    user_good_grade
+``` r
+user_good_grade
+```
 
     #> # A tibble: 1,130 x 3
     #>    grade user_name       date      
@@ -118,7 +135,9 @@ Find the function from
 R data format `data/gapminder.rds` to R. You should end up with a
 **tibble** called `gapminder`.
 
-    gapminder
+``` r
+gapminder
+```
 
     #> # A tibble: 1,704 x 6
     #>    country     continent  year lifeExp      pop gdpPercap
