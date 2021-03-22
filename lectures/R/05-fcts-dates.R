@@ -1,45 +1,60 @@
-library(tidyverse)
-dept <- c("Physics", "Mathematics", "Statistics",
-  "Computer Science")
-nstaff <- c(12L, 8L, 20L, 23L)
-sci_tbl <- tibble(dept = dept, count = nstaff)
-sci_tbl
+## ---- dept-chr
+dept <- c("Physics", "Mathematics",
+  "Statistics", "Computer Science")
+dept
 
+## ---- dept-fct
+library(tidyverse) # library(forcats)
+dept_fct <- as_factor(dept)
+dept_fct
+
+## ---- chr
+typeof(dept)
 class(dept)
+as.integer(dept)
 sort(dept)
 
-(dept_fct <- factor(dept))
-class(dept_fct)
+## ---- fct
 typeof(dept_fct)
+class(dept_fct)
+as.integer(dept_fct)
+sort(dept_fct)
+
+## ---- fct-lvls
+dept_fct
 levels(dept_fct)
-
-factor(dept, levels = dept)
-
-factor(dept, levels = rev(dept))
-
 rep(dept_fct, 3)
 
+## ---- fct-create
+dist_dept <- unique(dept)
+factor(dept, levels = dist_dept)
+factor(dept, levels = rev(dist_dept))
 
-library(forcats)
-
+## ---- fct-vis
+nstaff <- c(12L, 8L, 20L, 23L)
+sci_tbl <- tibble(dept = dept, count = nstaff)
 sci_tbl %>% 
   ggplot(aes(dept, count)) +
   geom_col()
 
+## ---- fct-ror
+sci_tbl %>% 
+  mutate(dept = fct_reorder(dept, count)) %>% 
+  ggplot(aes(dept, count)) +
+  geom_col()
+
+## ---- fct-ror2
 sci_tbl %>% 
   mutate(dept = fct_reorder(dept, count)) %>% 
   pull(dept)
 
-sci_tbl %>% 
-  mutate(dept = fct_reorder(dept, count)) %>% 
-  ggplot(aes(dept, count)) +
-  geom_col()
-
+## ---- fct-ino
 sci_tbl %>% 
   mutate(dept = fct_inorder(dept)) %>% 
   ggplot(aes(dept, count)) +
   geom_col()
 
+## ---- fct-cut
 set.seed(220)
 scores_sim <- round(rnorm(309, mean = 70, sd = 10), digits = 2)
 scores_tbl <- tibble(score = scores_sim)

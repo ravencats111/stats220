@@ -1,6 +1,6 @@
 ---
 title: "STATS 220"
-subtitle: "Factors`r emo::ji('rocket')` and date-times`r emo::ji('calendar')`"
+subtitle: "`r emo::ji('rocket')`Factors & date-times`r emo::ji('calendar')`"
 type: "lecture"
 date: ""
 output:
@@ -21,7 +21,7 @@ options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE,
 opts_chunk$set(
   echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
   fig.path = 'figure/', cache.path = 'cache/', cache = FALSE, fig.retina = 3,
-  fig.align = 'center', fig.width = 12, fig.height = 8.5, fig.show = 'hold',
+  fig.align = 'center', fig.width = 4.5, fig.height = 4, fig.show = 'hold',
   dpi = 120
 )
 ```
@@ -32,6 +32,81 @@ xaringanExtra::use_panelset()
 
 ```{r external, include = FALSE, cache = FALSE}
 read_chunk('R/05-fcts-dates.R')
+```
+
+```{r opts, echo = FALSE}
+op <- options(width = 40)
+```
+
+.pull-left[
+## Atomic vectors
+.center[<img src="https://d33wubrfki0l68.cloudfront.net/baa19d0ebf9b97949a7ad259b29a1c4ae031c8e2/8e9b8/diagrams/vectors/summary-tree-s3-1.png" width="100%">]
+]
+.pull-right[
+## From one type to factor
+```{r dept-chr}
+```
+```{r dept-fct, highlight.output = 3}
+```
+]
+
+---
+
+.pull-left[
+```{r chr}
+```
+]
+.pull-right[
+```{r fct}
+```
+]
+
+```{r opts-exit, echo = FALSE}
+on.exit(options(op), add = TRUE)
+```
+
+---
+
+## Factors
+
+* Factors are used to represent a **categorical variable** in R.
+* There is a fixed and known set of possible values.
+* The fixed set of values is called the **levels** of the factor.
+
+.small[
+```{r fct-lvls}
+```
+]
+
+---
+
+## Constructing factors
+
+* change the base level for modelling
+* display characters in a non-alphabetical order
+
+```{r fct-create}
+```
+
+---
+
+```{r fct-vis}
+```
+
+---
+
+.pull-left[
+```{r fct-ror}
+```
+]
+.pull-right[
+```{r fct-ror2}
+```
+]
+
+---
+
+```{r fct-ino}
 ```
 
 ---
