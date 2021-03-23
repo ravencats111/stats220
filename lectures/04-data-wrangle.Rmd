@@ -189,7 +189,7 @@ class: middle
 ---
 
 .left-column[
-.center[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="60%">]
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="60%">](http://dplyr.tidyverse.org)]
 ]
 .right-column[
 {dplyr} is a grammar of data manipulation, providing a consistent set of **verbs** that help you solve the most common data manipulation challenges:
@@ -244,6 +244,7 @@ class: inverse middle
 ???
 
 * massive data
+* check dups
 
 ---
 
@@ -255,6 +256,7 @@ class: inverse middle
 * `slice()`: subsets rows using their positions
 ```{r slice}
 ```
+.brown[`n()` is a context dependent function: the current group size]
 ]
 
 ---
@@ -333,6 +335,7 @@ class: inverse middle
 * `arrange()`: arrange rows by columns
 ```{r arrange}
 ```
+.brown[`arrange()` in ascending order by default]
 ]
 
 ---
@@ -345,6 +348,7 @@ class: inverse middle
 * `arrange()`: arrange rows by columns
 ```{r arrange-desc}
 ```
+.brown[use `desc()` in descending order]
 ]
 
 ---
@@ -369,6 +373,7 @@ class: inverse middle
 * `filter()`: subsets rows using columns
 ```{r filter}
 ```
+.brown[`filter()` observations that satisfy your conditions]
 ]
 
 ---
@@ -442,6 +447,8 @@ class: inverse middle
 ```
 ]
 
+.brown[`|`: either ... or ...]
+
 ---
 
 ## Logical operators
@@ -477,6 +484,10 @@ class: inverse middle
 ```{r filter-anz-line, echo = FALSE, fig.width = 3, fig.height = 3.5}
 ```
 ]
+
+???
+
+* from now, started in looking at the anz data
 
 ---
 

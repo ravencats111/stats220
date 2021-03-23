@@ -35,7 +35,7 @@ time_use %>%
 
 ## ---- slice
 time_use %>% 
-  slice(1:5)
+  slice((n() - 4):n())
 
 ## ---- group-by
 time_use %>% 
@@ -44,17 +44,17 @@ time_use %>%
 ## ---- slice-gb
 time_use %>% 
   group_by(country) %>% 
-  slice(1:5)
+  slice((n() - 4):n())
 
 ## ---- slice-head
 time_use %>% 
   group_by(country) %>% 
-  slice_head(n = 5)
+  slice_tail(n = 5)
 
 ## ---- ungroup
 time_use %>% 
   group_by(country) %>% 
-  slice_head(n = 5) %>% 
+  slice_tail(n = 5) %>% 
   ungroup()
 
 ## ---- slice-sample

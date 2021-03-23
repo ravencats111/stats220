@@ -209,7 +209,7 @@ class: middle
 ---
 
 .left-column[
-.center[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="60%"&gt;]
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="60%"&gt;](http://dplyr.tidyverse.org)]
 ]
 .right-column[
 {dplyr} is a grammar of data manipulation, providing a consistent set of **verbs** that help you solve the most common data manipulation challenges:
@@ -323,6 +323,7 @@ time_use %&gt;%
 ???
 
 * massive data
+* check dups
 
 ---
 
@@ -335,19 +336,20 @@ time_use %&gt;%
 
 ```r
 time_use %&gt;% 
-  slice(1:5)
+  slice((n() - 4):n())
 ```
 
 ```
 #&gt; # A tibble: 5 x 3
-#&gt;   country   category  minutes
-#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt;
-#&gt; 1 Australia Paid work    211.
-#&gt; 2 Austria   Paid work    280.
-#&gt; 3 Belgium   Paid work    194.
-#&gt; 4 Canada    Paid work    269.
-#&gt; 5 Denmark   Paid work    200.
+#&gt;   country      category                 minutes
+#&gt;   &lt;chr&gt;        &lt;chr&gt;                      &lt;dbl&gt;
+#&gt; 1 UK           Other leisure activities    98.4
+#&gt; 2 USA          Other leisure activities    73.5
+#&gt; 3 China        Other leisure activities    53.0
+#&gt; 4 India        Other leisure activities   109. 
+#&gt; 5 South Africa Other leisure activities    81.8
 ```
+.brown[`n()` is a context dependent function: the current group size]
 ]
 
 ---
@@ -391,20 +393,20 @@ time_use %&gt;%
 ```r
 time_use %&gt;% 
   group_by(country) %&gt;% 
-  slice(1:5)
+  slice((n() - 4):n())
 ```
 
 ```
 #&gt; # A tibble: 165 x 3
 *#&gt; # Groups:   country [33]
-#&gt;   country   category                   minutes
-#&gt;   &lt;chr&gt;     &lt;chr&gt;                        &lt;dbl&gt;
-#&gt; 1 Australia Paid work                    211. 
-#&gt; 2 Australia Education                     27.0
-#&gt; 3 Australia Care for household members    44.5
-#&gt; 4 Australia Housework                    132. 
-#&gt; 5 Australia Shopping                      29.0
-#&gt; 6 Austria   Paid work                    280. 
+#&gt;   country   category                 minutes
+#&gt;   &lt;chr&gt;     &lt;chr&gt;                      &lt;dbl&gt;
+#&gt; 1 Australia Sports                     19.0 
+#&gt; 2 Australia Attending events            6.00
+#&gt; 3 Australia Seeing friends             40.0 
+#&gt; 4 Australia TV and Radio              140.  
+#&gt; 5 Australia Other leisure activities   76.1 
+#&gt; 6 Austria   Sports                     32.1 
 #&gt; # … with 159 more rows
 ```
 ]
@@ -421,20 +423,20 @@ time_use %&gt;%
 ```r
 time_use %&gt;% 
   group_by(country) %&gt;% 
-  slice_head(n = 5)
+  slice_tail(n = 5)
 ```
 
 ```
 #&gt; # A tibble: 165 x 3
 *#&gt; # Groups:   country [33]
-#&gt;   country   category                   minutes
-#&gt;   &lt;chr&gt;     &lt;chr&gt;                        &lt;dbl&gt;
-#&gt; 1 Australia Paid work                    211. 
-#&gt; 2 Australia Education                     27.0
-#&gt; 3 Australia Care for household members    44.5
-#&gt; 4 Australia Housework                    132. 
-#&gt; 5 Australia Shopping                      29.0
-#&gt; 6 Austria   Paid work                    280. 
+#&gt;   country   category                 minutes
+#&gt;   &lt;chr&gt;     &lt;chr&gt;                      &lt;dbl&gt;
+#&gt; 1 Australia Sports                     19.0 
+#&gt; 2 Australia Attending events            6.00
+#&gt; 3 Australia Seeing friends             40.0 
+#&gt; 4 Australia TV and Radio              140.  
+#&gt; 5 Australia Other leisure activities   76.1 
+#&gt; 6 Austria   Sports                     32.1 
 #&gt; # … with 159 more rows
 ```
 ]
@@ -452,20 +454,20 @@ time_use %&gt;%
 ```r
 time_use %&gt;% 
   group_by(country) %&gt;% 
-  slice_head(n = 5) %&gt;% 
+  slice_tail(n = 5) %&gt;% 
   ungroup()
 ```
 
 ```
 #&gt; # A tibble: 165 x 3
-#&gt;   country   category                   minutes
-#&gt;   &lt;chr&gt;     &lt;chr&gt;                        &lt;dbl&gt;
-#&gt; 1 Australia Paid work                    211. 
-#&gt; 2 Australia Education                     27.0
-#&gt; 3 Australia Care for household members    44.5
-#&gt; 4 Australia Housework                    132. 
-#&gt; 5 Australia Shopping                      29.0
-#&gt; 6 Austria   Paid work                    280. 
+#&gt;   country   category                 minutes
+#&gt;   &lt;chr&gt;     &lt;chr&gt;                      &lt;dbl&gt;
+#&gt; 1 Australia Sports                     19.0 
+#&gt; 2 Australia Attending events            6.00
+#&gt; 3 Australia Seeing friends             40.0 
+#&gt; 4 Australia TV and Radio              140.  
+#&gt; 5 Australia Other leisure activities   76.1 
+#&gt; 6 Austria   Sports                     32.1 
 #&gt; # … with 159 more rows
 ```
 ]
@@ -533,6 +535,7 @@ time_use %&gt;%
 #&gt; 6 Korea     Attending events              4.45
 #&gt; # … with 455 more rows
 ```
+.brown[`arrange()` in ascending order by default]
 ]
 
 ---
@@ -561,6 +564,7 @@ time_use %&gt;%
 #&gt; 6 New Zealand  Sleep       526 
 #&gt; # … with 455 more rows
 ```
+.brown[use `desc()` in descending order]
 ]
 
 ---
@@ -611,6 +615,7 @@ time_use %&gt;%
 #&gt;   &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt;
 #&gt; 1 South Africa Sleep       553.
 ```
+.brown[`filter()` observations that satisfy your conditions]
 ]
 
 ---
@@ -781,6 +786,8 @@ time_use %&gt;%
 ```
 ]
 
+.brown[`|`: either ... or ...]
+
 ---
 
 ## Logical operators
@@ -849,6 +856,10 @@ time_use_anz &lt;- time_use %&gt;%
 ```
 &lt;img src="figure/filter-anz-line-1.png" width="360" style="display: block; margin: auto;" /&gt;
 ]
+
+???
+
+* from now, started in looking at the anz data
 
 ---
 
@@ -1314,7 +1325,7 @@ class: middle
 
 &gt; What's the key for the `time_use` data?
 
-<div class="countdown" id="timer_6059dc18" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<div class="countdown" id="timer_605a6f62" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">00</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">30</span></code>
 </div>
 
