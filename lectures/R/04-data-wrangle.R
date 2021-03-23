@@ -19,8 +19,8 @@ time_use_raw %>% #<<
 
 ## ---- rename
 time_use <- time_use_raw %>% 
-  rename(
-    country = Country, 
+  rename( # new_name = old_name
+    country = Country,
     category = Category, 
     minutes = `Time (minutes)`)
 time_use
@@ -58,7 +58,7 @@ time_use %>%
   ungroup()
 
 ## ---- slice-sample
-set.seed(220)
+set.seed(220) # an arbitrary number
 time_use %>% 
   slice_sample(n = 10)
 
@@ -122,7 +122,7 @@ time_use_anz <- time_use %>%
 time_use_nz <- time_use_anz %>% 
   filter(country == "New Zealand")
 time_use_anz %>% 
-  ggplot(aes(as.factor(country), minutes, group = category)) +
+  ggplot(aes(as_factor(country), minutes, group = category)) +
   geom_line(aes(colour = category)) +
   geom_point(aes(colour = category)) +
   ggrepel::geom_text_repel(aes(label = category), data = time_use_nz,

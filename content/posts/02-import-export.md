@@ -8,5 +8,5 @@ r: "02-import-export.R"
 rmd: "02-import-export.Rmd"
 pdf: "02-import-export.pdf"
 lab: "labs/lab02"
-sol:
+sol: "labs/lab02-sol"
 ---

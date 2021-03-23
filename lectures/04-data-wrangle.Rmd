@@ -58,6 +58,16 @@ show_up_to_work(
 )
 ```
 
+???
+
+* data trans is beyond subsetting
+* reshape, summarise by groups
+* depends on Qs, the object of interest varies (from individual to aggregated level)
+* wrangle ur data to answer ur Qs
+* many funs involved 
+* eg from we are rladies: morning routine
+* from wake up to go to work, interm steps
+
 ---
 
 <br>
@@ -79,6 +89,10 @@ morning6 <- show_up_to_work(morning5)
 ]
 ]
 
+???
+
+* drain off naming ideas
+
 --
 
 .pull-right[
@@ -98,6 +112,12 @@ morning_routine <- "I" %>%
 ]
 ]
 
+???
+
+* The code block: from a to z
+* ops are important to get your there
+* results from these inter ops will not be used.
+
 ---
 
 class: inverse middle center
@@ -106,12 +126,23 @@ class: inverse middle center
 
 RStudio shortcut: Ctrl/Cmd + Shift + M
 
+???
+
+* r community, obsessed w 2 things
+  + pipe
+  + hex sticker
+* pipe originates from unix
+
 ---
 
-## Time use in OECD
+## Time use in OECD: `r emo::ji("sleeping_bed")` `r emo::ji("woman_surfing")` `r emo::ji("haircut_woman")` `r emo::ji("woman_teacher")`
 
 ```{r read-time-use}
 ```
+
+???
+
+* how individuals spend their time in OECD countries
 
 ---
 
@@ -129,19 +160,31 @@ RStudio shortcut: Ctrl/Cmd + Shift + M
 ```
 ]
 
+???
+
+* nvm, an awful plot
+* seems that there's one country with more time to spend
+* special characters: space and (), need backtick
+
 ---
 
-background-image: url("img/cog-comp.png")
-background-size: contain
+class: middle
 
-.footnote[image credit: Hadley Wickham]
+.left-column[
+# .purple[Expressing yourself in <i class='fab fa-r-project'></i>]
+]
+.right-column[
+.center[<img src="img/cog-comp.png" width="80%">]
+.footnote[Hadley Wickham: Expressing yourself in R [<i class="fab fa-youtube"></i>](https://www.youtube.com/watch?v=1POb5fx_m3I)]
+]
 
 ???
 
-* as ds
-* figure out what's your questions/what you want to do
+* as ds, figure out what's your questions/what you want to do
 * translate your thoughts into code
 * let developers take care of computational side
+* the best or worst part of programming to *precisely* instruct computer to do what you want.
+* 2017, hadley gave a talk
 
 ---
 
@@ -162,15 +205,16 @@ These all combine naturally with .green[`group_by()`] which allows you to perfor
 
 ???
 
-* rowwise
+* rowwise: filter obs and arrange obs
 * colwise
 * group-wise
+* succinct and expressive
 
 ---
 
 class: inverse middle
 
-# One table verbs
+# One table verbs `r emo::ji("hammer")`
 
 ---
 
@@ -178,6 +222,11 @@ class: inverse middle
 
 ```{r rename}
 ```
+
+???
+
+* although auto-comp is neat
+* deal w colnames many times: lower case, no space
 
 ---
 
@@ -191,6 +240,10 @@ class: inverse middle
 ```{r distinct2}
 ```
 ]
+
+???
+
+* massive data
 
 ---
 
@@ -260,7 +313,7 @@ class: inverse middle
 ### - rowwise
 ]
 .right-column[
-* `slice_sample()` randomly selects rows
+* `r emo::ji("seedling")``slice_sample()` randomly selects rows
 ```{r slice-sample}
 ```
 ]
@@ -565,29 +618,6 @@ class: middle
 
 ---
 
-class: middle
-
-## Useful functions
-
-.pull-left[
-* one table verbs
-  * `pull()`
-  * `transmute()`
-  * `relocate()`
-* two table verbs
-  * `bind_rows()`
-  * `bind_cols()`
-]
-.pull-right[
-* set operations
-  + `union()`
-  + `union_all()`
-  + `setdiff()`
-  + `intersect()`
-]
-
----
-
 ## Hello again, SQL!
 
 ```{r dbplyr-con, cache = FALSE, highlight.output = 1:3}
@@ -595,7 +625,7 @@ class: middle
 
 ---
 
-## Write {dplyr} code as usual to manipulate database
+## Write {dplyr} code as usual to manipulate database <i class="fas fa-database"></i>
 
 ```{r dbplyr-verbs, cache = FALSE}
 ```
@@ -663,7 +693,7 @@ class: middle
 
 class: inverse middle
 
-## Two table verbs
+## Two table verbs`r emo::ji("handshake")`
 
 ---
 
@@ -864,6 +894,29 @@ class: inverse middle
 * `anti_join()`: All rows from `x` where there are **not** matching values in `y`, keeping just columns from `x`.
 ```{r anti-join}
 ```
+]
+
+---
+
+class: middle
+
+## Useful functions
+
+.pull-left[
+* one table verbs
+  * `pull()`
+  * `transmute()`
+  * `relocate()`
+* two table verbs
+  * `bind_rows()`
+  * `bind_cols()`
+]
+.pull-right[
+* set operations
+  + `union()`
+  + `union_all()`
+  + `setdiff()`
+  + `intersect()`
 ]
 
 ---
