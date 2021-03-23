@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STATS 220</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="assets/remark.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STATS 220
+## 🚀Factors &amp; date-times📆
+
+---
+
+
+
+
+
+
+
+
+
+
+.pull-left[
+## Atomic vectors
+.center[&lt;img src="https://d33wubrfki0l68.cloudfront.net/baa19d0ebf9b97949a7ad259b29a1c4ae031c8e2/8e9b8/diagrams/vectors/summary-tree-s3-1.png" width="100%"&gt;]
+]
+.pull-right[
+## From one type to factor
+
+```r
+dept &lt;- c("Physics", "Mathematics",
+  "Statistics", "Computer Science")
+dept
+```
+
+```
+#&gt; [1] "Physics"         
+#&gt; [2] "Mathematics"     
+#&gt; [3] "Statistics"      
+#&gt; [4] "Computer Science"
+```
+
+```r
+library(tidyverse) # library(forcats)
+dept_fct &lt;- as_factor(dept)
+dept_fct
+```
+
+```
+#&gt; [1] Physics          Mathematics     
+#&gt; [3] Statistics       Computer Science
+*#&gt; 4 Levels: Physics ... Computer Science
+```
+]
+
+---
+
+.pull-left[
+
+```r
+typeof(dept)
+```
+
+```
+#&gt; [1] "character"
+```
+
+```r
+class(dept)
+```
+
+```
+#&gt; [1] "character"
+```
+
+```r
+as.integer(dept)
+```
+
+```
+#&gt; [1] NA NA NA NA
+```
+
+```r
+sort(dept)
+```
+
+```
+#&gt; [1] "Computer Science"
+#&gt; [2] "Mathematics"     
+#&gt; [3] "Physics"         
+#&gt; [4] "Statistics"
+```
+]
+.pull-right[
+
+```r
+typeof(dept_fct)
+```
+
+```
+#&gt; [1] "integer"
+```
+
+```r
+class(dept_fct)
+```
+
+```
+#&gt; [1] "factor"
+```
+
+```r
+as.integer(dept_fct)
+```
+
+```
+#&gt; [1] 1 2 3 4
+```
+
+```r
+sort(dept_fct)
+```
+
+```
+#&gt; [1] Physics          Mathematics     
+#&gt; [3] Statistics       Computer Science
+#&gt; 4 Levels: Physics ... Computer Science
+```
+]
+
+
+
+---
+
+## Factors
+
+* Factors are used to represent a **categorical variable** in R.
+* There is a fixed and known set of possible values.
+* The fixed set of values is called the **levels** of the factor.
+
+.small[
+
+```r
+dept_fct
+```
+
+```
+#&gt; [1] Physics          Mathematics      Statistics       Computer Science
+#&gt; Levels: Physics Mathematics Statistics Computer Science
+```
+
+```r
+levels(dept_fct)
+```
+
+```
+#&gt; [1] "Physics"          "Mathematics"      "Statistics"       "Computer Science"
+```
+
+```r
+rep(dept_fct, 3)
+```
+
+```
+#&gt;  [1] Physics          Mathematics      Statistics       Computer Science
+#&gt;  [5] Physics          Mathematics      Statistics       Computer Science
+#&gt;  [9] Physics          Mathematics      Statistics       Computer Science
+#&gt; Levels: Physics Mathematics Statistics Computer Science
+```
+]
+
+---
+
+## Constructing factors
+
+* change the base level for modelling
+* display characters in a non-alphabetical order
+
+
+```r
+dist_dept &lt;- unique(dept)
+factor(dept, levels = dist_dept)
+```
+
+```
+#&gt; [1] Physics          Mathematics      Statistics       Computer Science
+#&gt; Levels: Physics Mathematics Statistics Computer Science
+```
+
+```r
+factor(dept, levels = rev(dist_dept))
+```
+
+```
+#&gt; [1] Physics          Mathematics      Statistics       Computer Science
+#&gt; Levels: Computer Science Statistics Mathematics Physics
+```
+
+---
+
+
+```r
+nstaff &lt;- c(12L, 8L, 20L, 23L)
+sci_tbl &lt;- tibble(dept = dept, count = nstaff)
+sci_tbl %&gt;% 
+  ggplot(aes(dept, count)) +
+  geom_col()
+```
+
+&lt;img src="figure/fct-vis-1.png" width="540" style="display: block; margin: auto;" /&gt;
+
+---
+
+.pull-left[
+
+```r
+sci_tbl %&gt;% 
+  mutate(dept = fct_reorder(dept, count)) %&gt;% 
+  ggplot(aes(dept, count)) +
+  geom_col()
+```
+
+&lt;img src="figure/fct-ror-1.png" width="540" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```r
+sci_tbl %&gt;% 
+  mutate(dept = fct_reorder(dept, count)) %&gt;% 
+  pull(dept)
+```
+
+```
+#&gt; [1] Physics          Mathematics      Statistics       Computer Science
+#&gt; Levels: Mathematics Physics Statistics Computer Science
+```
+]
+
+---
+
+
+```r
+sci_tbl %&gt;% 
+  mutate(dept = fct_inorder(dept)) %&gt;% 
+  ggplot(aes(dept, count)) +
+  geom_col()
+```
+
+&lt;img src="figure/fct-ino-1.png" width="540" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Reading
+
+.pull-left[
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px"&gt;](https://r4ds.had.co.nz)]
+]
+.pull-right[
+* [Pipes](https://r4ds.had.co.nz/pipes.html)
+* [Data transformation](https://r4ds.had.co.nz/transform.html)
+* [Relational data](https://r4ds.had.co.nz/relational-data.html)
+* [{forcats} cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/factors.pdf)
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
