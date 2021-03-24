@@ -184,7 +184,7 @@ time_use_anz2 %>%
   summarise(
     min = min(hours), 
     max = max(hours),
-    avg = max(hours))
+    avg = mean(hours))
 
 ## ---- chain
 time_use %>% 
