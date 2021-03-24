@@ -154,7 +154,8 @@ time_use_anz %>%
 
 ## ---- mutate
 time_use_anz2 <- time_use_anz %>%
-  mutate( # new_column = f(existing_column)
+  mutate(
+    # new_column = f(existing_column)
     hours = minutes / 60,
     iso = case_when(
       country == "Australia" ~ "AU", 
