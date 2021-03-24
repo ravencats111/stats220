@@ -597,7 +597,7 @@ on.exit(options(op), add = TRUE)
 .pull-left[
 ```{r ref.label = "filter-anz", eval = FALSE}
 ```
-```{r ref.label = "mutate", eval = FALSE, echo = 1:6}
+```{r ref.label = "mutate", eval = FALSE, echo = 1:7}
 ```
 ```{r ref.label = "summarise-gb", eval = FALSE}
 ```
