@@ -6,6 +6,7 @@ slides: "04-data-wrangle.html"
 obj: "objs/obj04"
 r: "04-data-wrangle.R"
 rmd: "04-data-wrangle.Rmd"
+pdf: "04-data-wrangle.pdf"
 lab:
 sol:
 ---
