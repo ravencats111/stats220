@@ -154,7 +154,7 @@ time_use_anz %>%
 
 ## ---- mutate
 time_use_anz2 <- time_use_anz %>%
-  mutate(
+  mutate( # new_column = f(existing_column)
     hours = minutes / 60,
     iso = case_when(
       country == "Australia" ~ "AU", 
@@ -164,6 +164,8 @@ time_use_anz2
 ## ---- case-when
 z <- 1:10
 case_when(
+  # LHS ~ RHS
+  # logical cond ~ replacement val
   z < 5 ~ "less than 5",
   z > 5 ~ "greater than 5",
   TRUE ~ "equal to 5"

@@ -445,9 +445,8 @@ class: inverse middle
 * `filter()`: subsets rows using columns
 ```{r filter-or}
 ```
-]
-
 .brown[`|`: either ... or ...]
+]
 
 ---
 
@@ -554,9 +553,14 @@ Selection helpers
 .center[<img src="https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/dplyr_case_when.png" width="100%">]
 ]
 .pull-right[
-<br>
+```{r opts, echo = FALSE}
+op <- options(width = 40)
+```
 <br>
 ```{r case-when}
+```
+```{r opts-exit, echo = FALSE}
+on.exit(options(op), add = TRUE)
 ```
 ]
 
