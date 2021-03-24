@@ -423,8 +423,8 @@ p +
 
 ## Geom [catalogue](https://ggplot2.tidyverse.org/reference/index.html#section-layers)
 
-<div id="htmlwidget-b726dfc7fef4de8a49cd" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b726dfc7fef4de8a49cd">{"x":{"filter":"none","data":[["geom_abline, geom_hline, geom_vline","geom_bar, geom_col","geom_bin2d","geom_blank","geom_boxplot","geom_contour, geom_contour_filled","geom_count","geom_density","geom_density_2d, geom_density2d, geom_density_2d_filled, geom_density2d_filled","geom_dotplot","geom_errorbarh","geom_function","geom_hex","geom_freqpoly, geom_histogram","geom_jitter","geom_crossbar, geom_errorbar, geom_linerange, geom_pointrange","geom_map","geom_path, geom_line, geom_step","geom_point","geom_polygon","geom_qq_line, geom_qq","geom_quantile","geom_ribbon, geom_area","geom_rug","geom_segment, geom_curve","geom_smooth","geom_spoke","geom_label, geom_text","geom_raster, geom_rect, geom_tile","geom_violin","geom_sf, geom_sf_label, geom_sf_text"],["Reference lines: horizontal, vertical, and diagonal","Bar charts","Heatmap of 2d bin counts","Draw nothing","A box and whiskers plot (in the style of Tukey)","2D contours of a 3D surface","Count overlapping points","Smoothed density estimates","Contours of a 2D density estimate","Dot plot","Horizontal error bars","Draw a function as a continuous curve","Hexagonal heatmap of 2d bin counts","Histograms and frequency polygons","Jittered points","Vertical intervals: lines, crossbars &amp; errorbars","Polygons from a reference map","Connect observations","Points","Polygons","A quantile-quantile plot","Quantile regression","Ribbons and area plots","Rug plots in the margins","Line segments and curves","Smoothed conditional means","Line segments parameterised by location, direction and distance","Text","Rectangles","Violin plot","Visualise sf objects"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>geom<\/th>\n      <th>Description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tp","ordering":false,"pageLength":5,"width":"80%","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-2c6a05cb6c29c43a641e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2c6a05cb6c29c43a641e">{"x":{"filter":"none","data":[["geom_abline, geom_hline, geom_vline","geom_bar, geom_col","geom_bin2d","geom_blank","geom_boxplot","geom_contour, geom_contour_filled","geom_count","geom_density","geom_density_2d, geom_density2d, geom_density_2d_filled, geom_density2d_filled","geom_dotplot","geom_errorbarh","geom_function","geom_hex","geom_freqpoly, geom_histogram","geom_jitter","geom_crossbar, geom_errorbar, geom_linerange, geom_pointrange","geom_map","geom_path, geom_line, geom_step","geom_point","geom_polygon","geom_qq_line, geom_qq","geom_quantile","geom_ribbon, geom_area","geom_rug","geom_segment, geom_curve","geom_smooth","geom_spoke","geom_label, geom_text","geom_raster, geom_rect, geom_tile","geom_violin","geom_sf, geom_sf_label, geom_sf_text"],["Reference lines: horizontal, vertical, and diagonal","Bar charts","Heatmap of 2d bin counts","Draw nothing","A box and whiskers plot (in the style of Tukey)","2D contours of a 3D surface","Count overlapping points","Smoothed density estimates","Contours of a 2D density estimate","Dot plot","Horizontal error bars","Draw a function as a continuous curve","Hexagonal heatmap of 2d bin counts","Histograms and frequency polygons","Jittered points","Vertical intervals: lines, crossbars &amp; errorbars","Polygons from a reference map","Connect observations","Points","Polygons","A quantile-quantile plot","Quantile regression","Ribbons and area plots","Rug plots in the margins","Line segments and curves","Smoothed conditional means","Line segments parameterised by location, direction and distance","Text","Rectangles","Violin plot","Visualise sf objects"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>geom<\/th>\n      <th>Description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tp","ordering":false,"pageLength":5,"width":"80%","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 .footnote[source code: Emi Tanaka]
 
@@ -548,6 +548,18 @@ p +
 * bar -&gt; rect -&gt; 2d
   + stroke + fill
 + auto legend
+
+---
+
+## Mapping .brown[variables] + Setting .brown[constants]
+
+
+```r
+p +
+  geom_col(aes(fill = dept), colour = "#000000")
+```
+
+&lt;img src="figure/gg-bar-both-1.png" width="600" style="display: block; margin: auto;" /&gt;
 
 ---
 

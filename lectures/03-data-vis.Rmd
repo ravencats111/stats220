@@ -416,6 +416,13 @@ geoms$matches %>%
 
 ---
 
+## Mapping .brown[variables] + Setting .brown[constants]
+
+```{r gg-bar-both, fig.height = 3.8, fig.width = 5}
+```
+
+---
+
 ## Visual aesthetics
 
 .pull-left[

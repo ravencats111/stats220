@@ -96,6 +96,10 @@ p +
 p +
   geom_col(fill = "#756bb1")
 
+## ---- gg-bar-both
+p +
+  geom_col(aes(fill = dept), colour = "#000000")
+
 ## ---- bubble-chart
 p +
   geom_point(aes(size = count))
