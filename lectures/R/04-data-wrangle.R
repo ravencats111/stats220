@@ -176,7 +176,7 @@ time_use_anz2 %>%
   summarise( # summarize()
     min = min(hours), 
     max = max(hours),
-    avg = max(hours))
+    avg = mean(hours))
 
 ## ---- summarise-gb
 time_use_anz2 %>% 
