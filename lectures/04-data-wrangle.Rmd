@@ -624,6 +624,11 @@ class: middle
    + {dplyr} verbs, tibble in and out
 ]
 
+???
+
+* The {tidyverse} is designed for data-centric tasks
+* a tibble in and a tibble out, that's why you can chain with ` %>% `
+
 ---
 
 ## Handy shortcuts
@@ -663,6 +668,13 @@ class: middle
 ```
 ]
 ]
+
+
+???
+
+* SQL is a beautiful and expressive language
+* dplyr is heavily inspired by SQL, but easier to use
+* as ds, you describe the data you want, and de write SQL to extract the data
 
 ---
 
@@ -714,6 +726,9 @@ class: inverse middle
 
 ## A second data table
 
+* Join `country` from `country_code` to `time_use`, by common values
+* Common values: `country` from `time_use`, but `country_name` from `country_code`
+
 .pull-left[
 .small[
 ```{r time-use-2}
@@ -726,6 +741,10 @@ class: inverse middle
 ```
 ]
 ]
+
+???
+
+* show 3 ways of printing
 
 ---
 
@@ -767,6 +786,11 @@ class: inverse middle
 ```{r inner-join}
 ```
 ]
+
+???
+
+* live: leave `by` default
+* existing `country` column, dup name will be `.y` suffix
 
 ---
 
