@@ -111,6 +111,68 @@ on.exit(options(op), add = TRUE)
 
 ---
 
+.pull-left[
+```{r scores-sim}
+```
+]
+.pull-right[
+```{r hist}
+```
+]
+
+---
+
+```{r cut}
+```
+
+---
+
+```{r recode}
+```
+
+???
+
+* Here I show the `fct_recode()`, manual work
+* what's other way to do this quickly
+
+---
+
+.pull-left[
+```{r bar-range}
+```
+]
+.pull-right[
+```{r bar-grade}
+```
+]
+
+---
+
+```{r box-movies}
+```
+
+---
+
+```{r box-movies-med}
+```
+
+---
+
+```{r col-movies}
+```
+
+---
+
+```{r col-movies-lump}
+```
+
+---
+
+```{r col-movies-lump-reord}
+```
+
+---
+
 ## Reading
 
 .pull-left[

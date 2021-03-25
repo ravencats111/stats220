@@ -257,6 +257,188 @@ sci_tbl %&gt;%
 
 ---
 
+.pull-left[
+
+```r
+set.seed(220)
+scores_sim &lt;- round(
+  rnorm(309, mean = 70, sd = 10),
+  digits = 2)
+scores_tbl &lt;- tibble(score = scores_sim)
+scores_tbl
+```
+
+```
+#&gt; # A tibble: 309 x 1
+#&gt;   score
+#&gt;   &lt;dbl&gt;
+#&gt; 1  58.2
+#&gt; 2  80.1
+#&gt; 3  51.4
+#&gt; 4  80.5
+#&gt; 5  63.8
+#&gt; 6  51.0
+#&gt; # … with 303 more rows
+```
+]
+.pull-right[
+
+```r
+scores_tbl %&gt;% 
+  ggplot(aes(x = score)) +
+  geom_histogram()
+```
+
+&lt;img src="figure/hist-1.png" width="540" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+
+```r
+scores_tbl %&gt;% 
+  mutate(
+    range = cut(score, breaks = c(0, seq(39, 89, by = 5), 100), 
+      include.lowest = TRUE))
+```
+
+```
+#&gt; # A tibble: 309 x 2
+#&gt;   score range  
+#&gt;   &lt;dbl&gt; &lt;fct&gt;  
+#&gt; 1  58.2 (54,59]
+#&gt; 2  80.1 (79,84]
+#&gt; 3  51.4 (49,54]
+#&gt; 4  80.5 (79,84]
+#&gt; 5  63.8 (59,64]
+#&gt; 6  51.0 (49,54]
+#&gt; # … with 303 more rows
+```
+
+---
+
+
+```r
+scores_more &lt;- scores_tbl %&gt;% 
+  mutate(
+    range = cut(score, breaks = c(0, seq(39, 89, by = 5), 100), 
+      include.lowest = TRUE),
+    grade = fct_recode(range,
+      "D-" = "[0,39]", "D" = "(39,44]", "D+" = "(44,49]",
+      "C-" = "(49,54]", "C" = "(54,59]", "C+" = "(59,64]",
+      "B-" = "(64,69]", "B" = "(69,74]", "B+" = "(74,79]",
+      "A-" = "(79,84]", "A" = "(84,89]", "A+" = "(89,100]"))
+scores_more
+```
+
+```
+#&gt; # A tibble: 309 x 3
+#&gt;   score range   grade
+#&gt;   &lt;dbl&gt; &lt;fct&gt;   &lt;fct&gt;
+#&gt; 1  58.2 (54,59] C    
+#&gt; 2  80.1 (79,84] A-   
+#&gt; 3  51.4 (49,54] C-   
+#&gt; 4  80.5 (79,84] A-   
+#&gt; 5  63.8 (59,64] C+   
+#&gt; 6  51.0 (49,54] C-   
+#&gt; # … with 303 more rows
+```
+
+???
+
+* Here I show the `fct_recode()`, manual work
+* what's other way to do this quickly
+
+---
+
+.pull-left[
+
+```r
+scores_more %&gt;% 
+  ggplot(aes(x = range)) +
+  geom_bar()
+```
+
+&lt;img src="figure/bar-range-1.png" width="540" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+```r
+scores_more %&gt;% 
+  ggplot(aes(x = grade)) +
+  geom_bar()
+```
+
+&lt;img src="figure/bar-grade-1.png" width="540" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+
+```r
+movies &lt;- as_tibble(jsonlite::read_json(
+  "https://vega.github.io/vega-editor/app/data/movies.json",
+  simplifyVector = TRUE))
+ggplot(movies, aes(Rotten_Tomatoes_Rating, Major_Genre)) +
+  geom_boxplot()
+```
+
+&lt;img src="figure/box-movies-1.png" width="540" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+movies %&gt;% 
+  mutate(
+    Major_Genre = fct_reorder(Major_Genre, Rotten_Tomatoes_Rating,
+      .fun = median, na.rm = TRUE)) %&gt;% 
+  ggplot(aes(Rotten_Tomatoes_Rating, Major_Genre)) +
+  geom_boxplot()
+```
+
+&lt;img src="figure/box-movies-med-1.png" width="540" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+movies %&gt;% 
+  count(Major_Genre) %&gt;% 
+  ggplot(aes(n, Major_Genre)) +
+  geom_col()
+```
+
+&lt;img src="figure/col-movies-1.png" width="540" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+movies %&gt;% 
+  mutate(Major_Genre = fct_lump_n(Major_Genre, 5)) %&gt;% 
+  ggplot(aes(y = Major_Genre)) +
+  geom_bar()
+```
+
+&lt;img src="figure/col-movies-lump-1.png" width="540" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+movies %&gt;% 
+  mutate(Major_Genre = fct_lump_n(Major_Genre, 5)) %&gt;% 
+  count(Major_Genre) %&gt;% 
+  mutate(Major_Genre = fct_reorder(Major_Genre, n)) %&gt;% 
+  ggplot(aes(n, Major_Genre)) +
+  geom_col()
+```
+
+&lt;img src="figure/col-movies-lump-reord-1.png" width="540" style="display: block; margin: auto;" /&gt;
+
+---
+
 ## Reading
 
 .pull-left[
