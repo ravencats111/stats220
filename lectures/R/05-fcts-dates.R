@@ -144,6 +144,8 @@ typeof(current)
 dt_chr <- c("2021/03/11", "2021-April-21")
 (dt <- ymd(dt_chr))
 
+as_datetime(1352068320)
+
 ymd_h("2021-03-21 14")
 ymd_h("2021-03-21 14", tz = "Pacific/Auckland")
 
