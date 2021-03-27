@@ -133,22 +133,26 @@ movies %>%
 ## ---- lubridate
 library(lubridate)
 
+## ---- dt
 (td <- today())
 class(td)
 typeof(td)
+as.integer(td)
 
+## ---- dttm
 (current <- now())
 class(current)
 typeof(current)
+as.integer(current)
 
-dt_chr <- c("2021/03/11", "2021-April-21")
-(dt <- ymd(dt_chr))
+## ---- parse-dttm
+(dt <- ymd(c("2021/03/31", "1921-Jan-21")))
+ymd_h(c("2021-03-31 14", "1921-Jan-21 03"))
+ymd_hms(c("2021-03-31 14:15:16", "1921-Jan-21 03"), tz = "Pacific/Auckland")
 
-ymd_h("2021-03-21 14")
-ymd_h("2021-03-21 14", tz = "Pacific/Auckland")
-
-make_date(2021, 3, 21)
-make_datetime(2021, 3, 21, 14)
+## ---- create-dttm
+make_date(2021, 3, 31)
+make_datetime(2021, 3, 31, 16)
 
 year(dt)
 month(dt)

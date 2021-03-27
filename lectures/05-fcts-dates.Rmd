@@ -173,6 +173,29 @@ on.exit(options(op), add = TRUE)
 
 ---
 
+```{r lubridate}
+```
+
+---
+
+.pull-left[
+## `r emo::ji('calendar')`Dates
+```{r dt}
+```
+]
+.pull-right[
+## `r emo::ji('clock')`Date-times
+```{r dttm}
+```
+]
+
+---
+
+```{r parse-dttm}
+```
+
+---
+
 ## Reading
 
 .pull-left[

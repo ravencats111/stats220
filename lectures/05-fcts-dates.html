@@ -439,6 +439,106 @@ movies %&gt;%
 
 ---
 
+
+```r
+library(lubridate)
+```
+
+---
+
+.pull-left[
+## 📆Dates
+
+```r
+(td &lt;- today())
+```
+
+```
+#&gt; [1] "2021-03-27"
+```
+
+```r
+class(td)
+```
+
+```
+#&gt; [1] "Date"
+```
+
+```r
+typeof(td)
+```
+
+```
+#&gt; [1] "double"
+```
+
+```r
+as.integer(td)
+```
+
+```
+#&gt; [1] 18713
+```
+]
+.pull-right[
+## 🕑Date-times
+
+```r
+(current &lt;- now())
+```
+
+```
+#&gt; [1] "2021-03-27 15:09:27 NZDT"
+```
+
+```r
+class(current)
+```
+
+```
+#&gt; [1] "POSIXct" "POSIXt"
+```
+
+```r
+typeof(current)
+```
+
+```
+#&gt; [1] "double"
+```
+
+```r
+as.integer(current)
+```
+
+```
+#&gt; [1] 1616810967
+```
+]
+
+---
+
+
+```r
+dt &lt;- ymd(c("2021/03/31", "1921-Jan-21"))
+ymd_h(c("2021-03-31 14", "1921-Jan-21 03"))
+```
+
+```
+#&gt; [1] "2021-03-31 14:00:00 UTC" "1921-01-21 03:00:00 UTC"
+```
+
+```r
+ymd_hms(c("2021-03-31 14:15:16", "1921-Jan-21 03"), tz = "Pacific/Auckland")
+```
+
+```
+#&gt; [1] "2021-03-31 14:15:16 NZDT" NA
+```
+
+---
+
 ## Reading
 
 .pull-left[
