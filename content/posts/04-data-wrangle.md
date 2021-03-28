@@ -7,6 +7,6 @@ obj: "objs/obj04"
 r: "04-data-wrangle.R"
 rmd: "04-data-wrangle.Rmd"
 pdf: "04-data-wrangle.pdf"
-lab:
+lab: "labs/lab04"
 sol:
 ---
