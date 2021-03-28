@@ -400,7 +400,7 @@ geoms$matches %>%
 ## Mapping .brown[variables] / Setting .brown[constants]
 
 .pull-left[
-```{r ref.label = "gg-bar-fill", fig.height = 4, fig.width = 4}
+```{r gg-bar-fill2, ref.label = "gg-bar-fill", fig.height = 4, fig.width = 4}
 ```
 ]
 .pull-right[
