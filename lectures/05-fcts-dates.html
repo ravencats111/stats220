@@ -18,6 +18,7 @@ class: center, middle, inverse, title-slide
 ---
 
 
+class: middle center inverse
 
 
 
@@ -25,24 +26,45 @@ class: center, middle, inverse, title-slide
 
 
 
+&lt;img src="https://github.com/rstudio/hex-stickers/raw/master/SVG/forcats.svg" height="420px"&gt;
+&lt;img src="https://github.com/rstudio/hex-stickers/raw/master/SVG/lubridate.svg" height="420px"&gt;
+
+???
+
+* forcats: my fav logo
+* lubridate: my fav pkg name
+
+---
+
+## Atomic vectors
 
 .pull-left[
-## Atomic vectors
-.center[&lt;img src="https://d33wubrfki0l68.cloudfront.net/baa19d0ebf9b97949a7ad259b29a1c4ae031c8e2/8e9b8/diagrams/vectors/summary-tree-s3-1.png" width="100%"&gt;]
+&lt;br&gt;
+&lt;br&gt;
+.center[&lt;img src="img/lego-vector.png" width="100%"&gt;]
 ]
 .pull-right[
+.center[&lt;img src="https://d33wubrfki0l68.cloudfront.net/baa19d0ebf9b97949a7ad259b29a1c4ae031c8e2/8e9b8/diagrams/vectors/summary-tree-s3-1.png" width="85%"&gt;]
+]
+
+---
+
+
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/forcats.png" width="60%"&gt;](http://forcats.tidyverse.org)]
+]
+.right-column[
 ## From one type to factor
 
 ```r
-dept &lt;- c("Physics", "Mathematics",
-  "Statistics", "Computer Science")
+dept &lt;- c("Physics", "Mathematics", "Statistics",
+  "Computer Science")
 dept
 ```
 
 ```
-#&gt; [1] "Physics"         
-#&gt; [2] "Mathematics"     
-#&gt; [3] "Statistics"      
+#&gt; [1] "Physics"          "Mathematics"      "Statistics"      
 #&gt; [4] "Computer Science"
 ```
 
@@ -53,13 +75,17 @@ dept_fct
 ```
 
 ```
-#&gt; [1] Physics          Mathematics     
-#&gt; [3] Statistics       Computer Science
-*#&gt; 4 Levels: Physics ... Computer Science
+#&gt; [1] Physics          Mathematics      Statistics      
+#&gt; [4] Computer Science
+*#&gt; 4 Levels: Physics Mathematics ... Computer Science
 ```
 ]
 
+
+
 ---
+
+
 
 .pull-left[
 
@@ -205,55 +231,92 @@ factor(dept, levels = rev(dist_dept))
 
 ---
 
+## Revisiting our first ggplot
 
-```r
-nstaff &lt;- c(12L, 8L, 20L, 23L)
-sci_tbl &lt;- tibble(dept = dept, count = nstaff)
-sci_tbl %&gt;% 
-  ggplot(aes(dept, count)) +
-  geom_col()
-```
-
-&lt;img src="figure/fct-vis-1.png" width="540" style="display: block; margin: auto;" /&gt;
+&lt;br&gt;
+&lt;img src="figure/fct-vis-1.png" width="420" style="display: block; margin: auto;" /&gt;
 
 ---
+
+## `fct_reorder()` for easy perception
 
 .pull-left[
+.small[
 
 ```r
 sci_tbl %&gt;% 
-  mutate(dept = fct_reorder(dept, count)) %&gt;% 
+* mutate(dept = fct_reorder(dept, count)) %&gt;%
   ggplot(aes(dept, count)) +
   geom_col()
 ```
 
-&lt;img src="figure/fct-ror-1.png" width="540" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/fct-ror-1.png" width="420" style="display: block; margin: auto;" /&gt;
+]
 ]
 .pull-right[
+.small[
 
 ```r
 sci_tbl %&gt;% 
-  mutate(dept = fct_reorder(dept, count)) %&gt;% 
-  pull(dept)
+* mutate(dept = fct_reorder(dept, -count)) %&gt;%
+  ggplot(aes(dept, count)) +
+  geom_col()
 ```
 
-```
-#&gt; [1] Physics          Mathematics      Statistics       Computer Science
-#&gt; Levels: Mathematics Physics Statistics Computer Science
-```
+&lt;img src="figure/fct-ror2-1.png" width="420" style="display: block; margin: auto;" /&gt;
+]
 ]
 
 ---
 
 
 ```r
-sci_tbl %&gt;% 
-  mutate(dept = fct_inorder(dept)) %&gt;% 
-  ggplot(aes(dept, count)) +
-  geom_col()
+movies &lt;- as_tibble(jsonlite::read_json(
+  "https://vega.github.io/vega-editor/app/data/movies.json",
+  simplifyVector = TRUE))
+ggplot(movies, aes(Rotten_Tomatoes_Rating, Major_Genre)) +
+  geom_boxplot()
 ```
 
-&lt;img src="figure/fct-ino-1.png" width="540" style="display: block; margin: auto;" /&gt;
+&lt;img src="figure/box-movies-1.png" width="540" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+movies %&gt;% 
+  mutate(
+    Major_Genre = fct_reorder(Major_Genre, Rotten_Tomatoes_Rating,
+      .fun = median, na.rm = TRUE)) %&gt;% 
+  ggplot(aes(Rotten_Tomatoes_Rating, Major_Genre)) +
+  geom_boxplot()
+```
+
+&lt;img src="figure/box-movies-med-1.png" width="540" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+movies %&gt;% 
+  mutate(Major_Genre = fct_infreq(Major_Genre)) %&gt;% 
+  ggplot(aes(y = Major_Genre)) +
+  geom_bar()
+```
+
+&lt;img src="figure/col-movies-1.png" width="540" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+```r
+movies %&gt;% 
+  mutate(Major_Genre = fct_infreq(fct_lump_n(Major_Genre, 6))) %&gt;% 
+  ggplot(aes(y = Major_Genre)) +
+  geom_bar()
+```
+
+&lt;img src="figure/col-movies-lump-1.png" width="540" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -372,77 +435,22 @@ scores_more %&gt;%
 &lt;img src="figure/bar-grade-1.png" width="540" style="display: block; margin: auto;" /&gt;
 ]
 
----
-
-
-```r
-movies &lt;- as_tibble(jsonlite::read_json(
-  "https://vega.github.io/vega-editor/app/data/movies.json",
-  simplifyVector = TRUE))
-ggplot(movies, aes(Rotten_Tomatoes_Rating, Major_Genre)) +
-  geom_boxplot()
-```
-
-&lt;img src="figure/box-movies-1.png" width="540" style="display: block; margin: auto;" /&gt;
 
 ---
 
-
-```r
-movies %&gt;% 
-  mutate(
-    Major_Genre = fct_reorder(Major_Genre, Rotten_Tomatoes_Rating,
-      .fun = median, na.rm = TRUE)) %&gt;% 
-  ggplot(aes(Rotten_Tomatoes_Rating, Major_Genre)) +
-  geom_boxplot()
-```
-
-&lt;img src="figure/box-movies-med-1.png" width="540" style="display: block; margin: auto;" /&gt;
-
----
-
-
-```r
-movies %&gt;% 
-  count(Major_Genre) %&gt;% 
-  ggplot(aes(n, Major_Genre)) +
-  geom_col()
-```
-
-&lt;img src="figure/col-movies-1.png" width="540" style="display: block; margin: auto;" /&gt;
-
----
-
-
-```r
-movies %&gt;% 
-  mutate(Major_Genre = fct_lump_n(Major_Genre, 5)) %&gt;% 
-  ggplot(aes(y = Major_Genre)) +
-  geom_bar()
-```
-
-&lt;img src="figure/col-movies-lump-1.png" width="540" style="display: block; margin: auto;" /&gt;
-
----
-
-
-```r
-movies %&gt;% 
-  mutate(Major_Genre = fct_lump_n(Major_Genre, 5)) %&gt;% 
-  count(Major_Genre) %&gt;% 
-  mutate(Major_Genre = fct_reorder(Major_Genre, n)) %&gt;% 
-  ggplot(aes(n, Major_Genre)) +
-  geom_col()
-```
-
-&lt;img src="figure/col-movies-lump-reord-1.png" width="540" style="display: block; margin: auto;" /&gt;
-
----
-
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/lubridate.png" width="60%"&gt;](http://lubridate.tidyverse.org)]
+]
+.right-column[
+1. An **instant** is a specific moment in time, such as January 1st, 2012.
+2. An **interval** is a period of time that occurs between two specific instants.
+3. A **duration** records the time span in seconds, it will have an exact length since seconds always have the same length.
+4. A **period** records a time span in units larger than seconds, such as years, months, weeks, days, hours, and minutes.
 
 ```r
 library(lubridate)
 ```
+]
 
 ---
 
@@ -454,7 +462,7 @@ library(lubridate)
 ```
 
 ```
-#&gt; [1] "2021-03-27"
+#&gt; [1] "2021-03-28"
 ```
 
 ```r
@@ -478,7 +486,7 @@ as.integer(td)
 ```
 
 ```
-#&gt; [1] 18713
+#&gt; [1] 18714
 ```
 ]
 .pull-right[
@@ -489,7 +497,7 @@ as.integer(td)
 ```
 
 ```
-#&gt; [1] "2021-03-27 15:09:27 NZDT"
+#&gt; [1] "2021-03-28 00:14:33 NZDT"
 ```
 
 ```r
@@ -513,28 +521,269 @@ as.integer(current)
 ```
 
 ```
-#&gt; [1] 1616810967
+#&gt; [1] 1616843673
 ```
 ]
 
 ---
 
+## Parse date-times
+
 
 ```r
-dt &lt;- ymd(c("2021/03/31", "1921-Jan-21"))
-ymd_h(c("2021-03-31 14", "1921-Jan-21 03"))
+ymd(c("2021/03/31", "1921-Jan-21"))
 ```
 
 ```
-#&gt; [1] "2021-03-31 14:00:00 UTC" "1921-01-21 03:00:00 UTC"
+#&gt; [1] "2021-03-31" "1921-01-21"
 ```
 
 ```r
-ymd_hms(c("2021-03-31 14:15:16", "1921-Jan-21 03"), tz = "Pacific/Auckland")
+ymd_h(c("2021-03-31 16", "2021-June-04 10"))
 ```
 
 ```
-#&gt; [1] "2021-03-31 14:15:16 NZDT" NA
+#&gt; [1] "2021-03-31 16:00:00 UTC" "2021-06-04 10:00:00 UTC"
+```
+
+```r
+ymd_h(c("2021-03-31 16", "2021-June-04 10"), tz = "Pacific/Auckland")
+```
+
+```
+#&gt; [1] "2021-03-31 16:00:00 NZDT" "2021-06-04 10:00:00 NZST"
+```
+
+```r
+as_date(18713)
+```
+
+```
+#&gt; [1] "2021-03-27"
+```
+
+```r
+as_datetime(1616810967)
+```
+
+```
+#&gt; [1] "2021-03-27 02:09:27 UTC"
+```
+
+---
+
+
+```r
+set.seed(220)
+OlsonNames()[sample(1:length(OlsonNames()), 20)]
+```
+
+```
+#&gt;  [1] "Pacific/Midway"      "Africa/Asmera"       "Africa/Lusaka"      
+#&gt;  [4] "ROK"                 "America/Montreal"    "Europe/Dublin"      
+#&gt;  [7] "Asia/Irkutsk"        "Africa/Cairo"        "Asia/Dubai"         
+#&gt; [10] "America/Yellowknife" "Asia/Tbilisi"        "America/Menominee"  
+#&gt; [13] "Atlantic/Azores"     "GMT-0"               "America/Louisville" 
+#&gt; [16] "Europe/Astrakhan"    "Pacific/Fakaofo"     "America/Nome"       
+#&gt; [19] "Etc/GMT+10"          "Pacific/Efate"
+```
+
+---
+
+## Identify date-times
+
+
+```r
+make_date(2021, c(3, 6), c(31, 4))
+```
+
+```
+#&gt; [1] "2021-03-31" "2021-06-04"
+```
+
+```r
+make_datetime(2021, c(3, 6), c(31, 4), c(16, 10))
+```
+
+```
+#&gt; [1] "2021-03-31 16:00:00 UTC" "2021-06-04 10:00:00 UTC"
+```
+
+```r
+dttm &lt;- ymd_h(c("2021-03-31 16", "2021-June-04 10"), tz = "Pacific/Auckland")
+dttm
+```
+
+```
+#&gt; [1] "2021-03-31 16:00:00 NZDT" "2021-06-04 10:00:00 NZST"
+```
+
+---
+
+## Extract and modify components of date-times
+
+
+```r
+date(dttm)
+```
+
+```
+#&gt; [1] "2021-03-31" "2021-06-04"
+```
+
+```r
+year(dttm)
+```
+
+```
+#&gt; [1] 2021 2021
+```
+
+```r
+month(dttm)
+```
+
+```
+#&gt; [1] 3 6
+```
+
+```r
+month(dttm, label = TRUE)
+```
+
+```
+#&gt; [1] Mar Jun
+#&gt; 12 Levels: Jan &lt; Feb &lt; Mar &lt; Apr &lt; May &lt; Jun &lt; Jul &lt; Aug &lt; Sep &lt; ... &lt; Dec
+```
+
+```r
+day(dttm) # mday(dttm)
+```
+
+```
+#&gt; [1] 31  4
+```
+
+```r
+yday(dttm)
+```
+
+```
+#&gt; [1]  90 155
+```
+
+```r
+wday(dttm)
+```
+
+```
+#&gt; [1] 4 6
+```
+
+```r
+wday(dttm, label = TRUE)
+```
+
+```
+#&gt; [1] Wed Fri
+#&gt; Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat
+```
+
+```r
+wday(dttm, label = TRUE, week_start = 1)
+```
+
+```
+#&gt; [1] Wed Fri
+#&gt; Levels: Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat &lt; Sun
+```
+
+---
+
+
+```r
+floor_date(dttm, "1 hour")
+```
+
+```
+#&gt; [1] "2021-03-31 16:00:00 NZDT" "2021-06-04 10:00:00 NZST"
+```
+
+```r
+ceiling_date(dttm, "2 days")
+```
+
+```
+#&gt; [1] "2021-04-02 NZDT" "2021-06-05 NZST"
+```
+
+```r
+round_date(dttm, "3 months")
+```
+
+```
+#&gt; [1] "2021-04-01 NZDT" "2021-07-01 NZST"
+```
+
+---
+
+## Perform accurate math on date-times
+
+
+```r
+dttm + 1
+```
+
+```
+#&gt; [1] "2021-03-31 16:00:01 NZDT" "2021-06-04 10:00:01 NZST"
+```
+
+```r
+dttm + minutes(2)
+```
+
+```
+#&gt; [1] "2021-03-31 16:02:00 NZDT" "2021-06-04 10:02:00 NZST"
+```
+
+```r
+dttm + hours(3)
+```
+
+```
+#&gt; [1] "2021-03-31 19:00:00 NZDT" "2021-06-04 13:00:00 NZST"
+```
+
+```r
+dttm + days(4)
+```
+
+```
+#&gt; [1] "2021-04-04 16:00:00 NZST" "2021-06-08 10:00:00 NZST"
+```
+
+```r
+dttm + weeks(5)
+```
+
+```
+#&gt; [1] "2021-05-05 16:00:00 NZST" "2021-07-09 10:00:00 NZST"
+```
+
+```r
+dttm + months(6)
+```
+
+```
+#&gt; [1] NA                         "2021-12-04 10:00:00 NZDT"
+```
+
+```r
+dttm + years(7)
+```
+
+```
+#&gt; [1] "2028-03-31 16:00:00 NZDT" "2028-06-04 10:00:00 NZST"
 ```
 
 ---
@@ -545,10 +794,10 @@ ymd_hms(c("2021-03-31 14:15:16", "1921-Jan-21 03"), tz = "Pacific/Auckland")
 .center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px"&gt;](https://r4ds.had.co.nz)]
 ]
 .pull-right[
-* [Pipes](https://r4ds.had.co.nz/pipes.html)
-* [Data transformation](https://r4ds.had.co.nz/transform.html)
-* [Relational data](https://r4ds.had.co.nz/relational-data.html)
+* [Factors](https://r4ds.had.co.nz/factors.html)
+* [Dates and times](https://r4ds.had.co.nz/dates-and-times.html)
 * [{forcats} cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/factors.pdf)
+* [{lubridate} cheatsheet](https://rawgit.com/rstudio/cheatsheets/master/lubridate.pdf)
 ]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

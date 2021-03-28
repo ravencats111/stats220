@@ -1,6 +1,6 @@
 ## ---- dept-chr
-dept <- c("Physics", "Mathematics",
-  "Statistics", "Computer Science")
+dept <- c("Physics", "Mathematics", "Statistics",
+  "Computer Science")
 dept
 
 ## ---- dept-fct
@@ -39,20 +39,18 @@ sci_tbl %>%
 
 ## ---- fct-ror
 sci_tbl %>% 
-  mutate(dept = fct_reorder(dept, count)) %>% 
+  mutate(dept = fct_reorder(dept, count)) %>% #<<
   ggplot(aes(dept, count)) +
   geom_col()
 
 ## ---- fct-ror2
 sci_tbl %>% 
-  mutate(dept = fct_reorder(dept, count)) %>% 
-  pull(dept)
-
-## ---- fct-ino
-sci_tbl %>% 
-  mutate(dept = fct_inorder(dept)) %>% 
+  mutate(dept = fct_reorder(dept, -count)) %>% #<<
   ggplot(aes(dept, count)) +
   geom_col()
+
+## ---- fct-vct
+fct_reorder(sci_tbl$dept, sci_tbl$count)
 
 ## ---- scores-sim
 set.seed(220)
@@ -112,23 +110,15 @@ movies %>%
 
 ## ---- col-movies
 movies %>% 
-  count(Major_Genre) %>% 
-  ggplot(aes(n, Major_Genre)) +
-  geom_col()
-
-## ---- col-movies-lump
-movies %>% 
-  mutate(Major_Genre = fct_lump_n(Major_Genre, 5)) %>% 
+  mutate(Major_Genre = fct_infreq(Major_Genre)) %>% 
   ggplot(aes(y = Major_Genre)) +
   geom_bar()
 
-## ---- col-movies-lump-reord
+## ---- col-movies-lump
 movies %>% 
-  mutate(Major_Genre = fct_lump_n(Major_Genre, 5)) %>% 
-  count(Major_Genre) %>% 
-  mutate(Major_Genre = fct_reorder(Major_Genre, n)) %>% 
-  ggplot(aes(n, Major_Genre)) +
-  geom_col()
+  mutate(Major_Genre = fct_infreq(fct_lump_n(Major_Genre, 6))) %>% 
+  ggplot(aes(y = Major_Genre)) +
+  geom_bar()
 
 ## ---- lubridate
 library(lubridate)
@@ -146,27 +136,48 @@ typeof(current)
 as.integer(current)
 
 ## ---- parse-dttm
-(dt <- ymd(c("2021/03/31", "1921-Jan-21")))
-ymd_h(c("2021-03-31 14", "1921-Jan-21 03"))
-ymd_hms(c("2021-03-31 14:15:16", "1921-Jan-21 03"), tz = "Pacific/Auckland")
+ymd(c("2021/03/31", "1921-Jan-21"))
+ymd_h(c("2021-03-31 16", "2021-June-04 10"))
+ymd_h(c("2021-03-31 16", "2021-June-04 10"), tz = "Pacific/Auckland")
+as_date(18713)
+as_datetime(1616810967)
+
+## ---- tz-name
+set.seed(220)
+OlsonNames()[sample(1:length(OlsonNames()), 20)]
 
 ## ---- create-dttm
-make_date(2021, 3, 31)
-make_datetime(2021, 3, 31, 16)
+make_date(2021, c(3, 6), c(31, 4))
+make_datetime(2021, c(3, 6), c(31, 4), c(16, 10))
+dttm <- ymd_h(c("2021-03-31 16", "2021-June-04 10"), tz = "Pacific/Auckland")
+dttm
 
-year(dt)
-month(dt)
-month(dt, label = TRUE)
-day(dt) # mday(dt)
-yday(dt)
-wday(dt)
-wday(dt, label = TRUE)
-wday(dt, label = TRUE, week_start = 1)
+## ---- extract
+date(dttm)
+year(dttm)
+month(dttm)
+month(dttm, label = TRUE)
+day(dttm) # mday(dttm)
+yday(dttm)
+wday(dttm)
+wday(dttm, label = TRUE)
+wday(dttm, label = TRUE, week_start = 1)
 
-floor_date(dt, "1 month")
-ceiling_date(dt, "1 month")
-round_date(dt, "1 month")
+## ---- cal
+floor_date(dttm, "1 hour")
+ceiling_date(dttm, "2 days")
+round_date(dttm, "3 months")
 
+## ---- arith
+dttm + 1
+dttm + minutes(2)
+dttm + hours(3)
+dttm + days(4)
+dttm + weeks(5)
+dttm + months(6)
+dttm + years(7)
+
+## ---- misc
 # data example
 
 # scale_x_date()

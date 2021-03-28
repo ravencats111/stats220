@@ -14,6 +14,8 @@ output:
       countIncrementalSlides: false
 ---
 
+class: middle center inverse
+
 ```{r initial, echo = FALSE, cache = FALSE, results = 'hide'}
 library(knitr)
 options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE, 
@@ -34,15 +36,37 @@ xaringanExtra::use_panelset()
 read_chunk('R/05-fcts-dates.R')
 ```
 
-```{r opts, echo = FALSE}
-op <- options(width = 40)
-```
+<img src="https://github.com/rstudio/hex-stickers/raw/master/SVG/forcats.svg" height="420px">
+<img src="https://github.com/rstudio/hex-stickers/raw/master/SVG/lubridate.svg" height="420px">
+
+???
+
+* forcats: my fav logo
+* lubridate: my fav pkg name
+
+---
+
+## Atomic vectors
 
 .pull-left[
-## Atomic vectors
-.center[<img src="https://d33wubrfki0l68.cloudfront.net/baa19d0ebf9b97949a7ad259b29a1c4ae031c8e2/8e9b8/diagrams/vectors/summary-tree-s3-1.png" width="100%">]
+<br>
+<br>
+.center[<img src="img/lego-vector.png" width="100%">]
 ]
 .pull-right[
+.center[<img src="https://d33wubrfki0l68.cloudfront.net/baa19d0ebf9b97949a7ad259b29a1c4ae031c8e2/8e9b8/diagrams/vectors/summary-tree-s3-1.png" width="85%">]
+]
+
+---
+
+```{r opts0, echo = FALSE}
+op <- options(width = 60)
+```
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/forcats.png" width="60%">](http://forcats.tidyverse.org)]
+]
+.right-column[
 ## From one type to factor
 ```{r dept-chr}
 ```
@@ -50,7 +74,15 @@ op <- options(width = 40)
 ```
 ]
 
+```{r opts-exit0, echo = FALSE}
+on.exit(options(op), add = TRUE)
+```
+
 ---
+
+```{r opts, echo = FALSE}
+op <- options(width = 40)
+```
 
 .pull-left[
 ```{r chr}
@@ -90,23 +122,47 @@ on.exit(options(op), add = TRUE)
 
 ---
 
-```{r fct-vis}
+## Revisiting our first ggplot
+
+<br>
+```{r fct-vis, echo = FALSE, fig.width = 3.5, fig.height = 3.5}
 ```
 
 ---
+
+## `fct_reorder()` for easy perception
 
 .pull-left[
-```{r fct-ror}
+.small[
+```{r fct-ror, fig.width = 3.5, fig.height = 3.5}
 ```
 ]
+]
 .pull-right[
-```{r fct-ror2}
+.small[
+```{r fct-ror2, fig.width = 3.5, fig.height = 3.5}
 ```
+]
 ]
 
 ---
 
-```{r fct-ino}
+```{r box-movies}
+```
+
+---
+
+```{r box-movies-med}
+```
+
+---
+
+```{r col-movies}
+```
+
+---
+
+```{r col-movies-lump}
 ```
 
 ---
@@ -146,35 +202,20 @@ on.exit(options(op), add = TRUE)
 ```
 ]
 
----
-
-```{r box-movies}
-```
 
 ---
 
-```{r box-movies-med}
-```
-
----
-
-```{r col-movies}
-```
-
----
-
-```{r col-movies-lump}
-```
-
----
-
-```{r col-movies-lump-reord}
-```
-
----
-
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/lubridate.png" width="60%">](http://lubridate.tidyverse.org)]
+]
+.right-column[
+1. An **instant** is a specific moment in time, such as January 1st, 2012.
+2. An **interval** is a period of time that occurs between two specific instants.
+3. A **duration** records the time span in seconds, it will have an exact length since seconds always have the same length.
+4. A **period** records a time span in units larger than seconds, such as years, months, weeks, days, hours, and minutes.
 ```{r lubridate}
 ```
+]
 
 ---
 
@@ -191,7 +232,40 @@ on.exit(options(op), add = TRUE)
 
 ---
 
+## Parse date-times
+
 ```{r parse-dttm}
+```
+
+---
+
+```{r tz-name}
+```
+
+---
+
+## Identify date-times
+
+```{r create-dttm}
+```
+
+---
+
+## Extract and modify components of date-times
+
+```{r extract}
+```
+
+---
+
+```{r cal}
+```
+
+---
+
+## Perform accurate math on date-times
+
+```{r arith}
 ```
 
 ---
@@ -202,8 +276,8 @@ on.exit(options(op), add = TRUE)
 .center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
 ]
 .pull-right[
-* [Pipes](https://r4ds.had.co.nz/pipes.html)
-* [Data transformation](https://r4ds.had.co.nz/transform.html)
-* [Relational data](https://r4ds.had.co.nz/relational-data.html)
+* [Factors](https://r4ds.had.co.nz/factors.html)
+* [Dates and times](https://r4ds.had.co.nz/dates-and-times.html)
 * [{forcats} cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/factors.pdf)
+* [{lubridate} cheatsheet](https://rawgit.com/rstudio/cheatsheets/master/lubridate.pdf)
 ]

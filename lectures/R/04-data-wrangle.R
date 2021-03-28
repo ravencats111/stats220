@@ -228,7 +228,7 @@ pisa_sql <- pisa_db %>%
   filter(country %in% c("NZL", "AUS")) %>% 
   group_by(country) %>% 
   summarise(avg_math = mean(math, na.rm = TRUE)) %>% 
-  arrange(desc(math))
+  arrange(desc(avg_math))
 pisa_sql
 
 ## ---- dbplyr-q
