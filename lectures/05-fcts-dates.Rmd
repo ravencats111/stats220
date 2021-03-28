@@ -112,7 +112,7 @@ on.exit(options(op), add = TRUE)
 
 ---
 
-## Constructing factors
+## Create factors
 
 * change the base level for modelling
 * display characters in a non-alphabetical order
@@ -122,15 +122,22 @@ on.exit(options(op), add = TRUE)
 
 ---
 
-## Revisiting our first ggplot
+## Reorder factor levels to easily perceive patterns
 
-<br>
+.pull-left[
+### .center[`sci_tbl`]
 ```{r fct-vis, echo = FALSE, fig.width = 3.5, fig.height = 3.5}
 ```
+]
+.pull-right[
+### .center[`movies`]
+```{r box-movies, echo = FALSE, fig.height = 3.5}
+```
+]
 
 ---
 
-## `fct_reorder()` for easy perception
+## `fct_reorder()` by sorting along another variable
 
 .pull-left[
 .small[
@@ -147,41 +154,80 @@ on.exit(options(op), add = TRUE)
 
 ---
 
-```{r box-movies}
+## `fct_reorder()` by sorting along another variable
+
+```{r fct-vct, highlight.output = 2}
 ```
 
 ---
 
-```{r box-movies-med}
+## `fct_reorder()` by sorting along another variable with `fun()`
+
+.pull-left[
+<br>
+```{r box-movies-med, eval = FALSE}
 ```
+]
+.pull-right[
+```{r ref.label = "box-movies-med", echo = FALSE, fig.height = 4.5}
+```
+]
 
 ---
 
-```{r col-movies}
+## `fct_infreq()` by counting obs with each level (largest first)
+
+.pull-left[
+<br>
+<br>
+<br>
+```{r col-movies, eval = FALSE}
 ```
+]
+.pull-right[
+```{r ref.label = "col-movies", echo = FALSE, fig.height = 4.5}
+```
+]
 
 ---
 
-```{r col-movies-lump}
+## `fct_lump()` by lumping together factor levels into "other"
+
+.pull-left[
+<br>
+<br>
+<br>
+```{r col-movies-lump, eval = FALSE}
 ```
+]
+.pull-right[
+```{r ref.label = "col-movies-lump", echo = FALSE, fig.height = 4.5}
+```
+]
 
 ---
+
+## Convert numerics to factors: UoA grade scales
 
 .pull-left[
 ```{r scores-sim}
 ```
 ]
 .pull-right[
-```{r hist}
+```{r hist, fig.height = 3.5}
 ```
 ]
 
 ---
 
+## `cut()` numerics to factors
+
 ```{r cut}
 ```
 
 ---
+
+## `fct_recode()` changes factor levels by hand
 
 ```{r recode}
 ```
@@ -202,6 +248,15 @@ on.exit(options(op), add = TRUE)
 ```
 ]
 
+---
+
+class: middle
+
+## Your turn
+
+> What function can we use to replace `fct_recode()` for the `scores_tbl` data?
+
+`r countdown::countdown(minutes = 0, seconds = 30, font_size = "48px", top = 0)`
 
 ---
 
@@ -209,12 +264,13 @@ on.exit(options(op), add = TRUE)
 .center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/lubridate.png" width="60%">](http://lubridate.tidyverse.org)]
 ]
 .right-column[
+`r emo::ji("arrow_down")` {lubridate} is NOT part of the core {tidyverse}
+```{r lubridate}
+```
 1. An **instant** is a specific moment in time, such as January 1st, 2012.
 2. An **interval** is a period of time that occurs between two specific instants.
 3. A **duration** records the time span in seconds, it will have an exact length since seconds always have the same length.
 4. A **period** records a time span in units larger than seconds, such as years, months, weeks, days, hours, and minutes.
-```{r lubridate}
-```
 ]
 
 ---
@@ -225,10 +281,24 @@ on.exit(options(op), add = TRUE)
 ```
 ]
 .pull-right[
-## `r emo::ji('clock')`Date-times
+## `r emo::ji('watch')`Date-times
 ```{r dttm}
 ```
 ]
+
+---
+
+## Create date-times
+
+```{r create-dttm}
+```
+
+---
+
+## Available time zones (~ 600`r emo::ji("bangbang")`)
+
+```{r tz-name}
+```
 
 ---
 
@@ -236,27 +306,53 @@ on.exit(options(op), add = TRUE)
 
 ```{r parse-dttm}
 ```
+.pull-left[
+* `ymd()`, `ymd_h()`, `ymd_hm()`, `ymd_hms()`
+* `dmy()`, `dmy_h()`, `dmy_hm()`, `dmy_hms()`
+]
+.pull-right[
+* `mdy()`, `mdy_h()`, `mdy_hm()`, `mdy_hms()`
+]
 
 ---
 
-```{r tz-name}
-```
+## Extract components of date-times
 
----
-
-## Identify date-times
-
-```{r create-dttm}
-```
-
----
-
-## Extract and modify components of date-times
-
+.pull-left[
 ```{r extract}
 ```
+]
+.pull-right[
+```{r extract2}
+```
+]
 
 ---
+
+## Extract months/weekdays of date-times
+
+```{r opts3, echo = FALSE}
+op <- options(width = 40)
+```
+
+.pull-left[
+* month
+```{r extract-mth}
+```
+]
+.pull-right[
+* weekday
+```{r extract-wday}
+```
+]
+
+```{r opts3-exit, echo = FALSE}
+on.exit(options(op), add = TRUE)
+```
+
+---
+
+## Round, floor and ceiling date-times
 
 ```{r cal}
 ```
@@ -265,8 +361,68 @@ on.exit(options(op), add = TRUE)
 
 ## Perform accurate math on date-times
 
+```{r opts4, echo = FALSE}
+op <- options(width = 40)
+```
+
+.small[
+.pull-left[
 ```{r arith}
 ```
+```{r arith1, highlight.output = 1}
+```
+]
+.pull-right[
+```{r arith2}
+```
+```{r arith3, highlight.output = 1}
+```
+```{r arith4}
+```
+]
+]
+
+```{r opts4-exit, echo = FALSE}
+on.exit(options(op), add = TRUE)
+```
+
+---
+
+## Format date-times (also convert to characters)
+
+.pull-left[
+.small[
+```{r fmt}
+```
+]
+]
+.pull-right[
+* `a`/`A`: Abbreviated/full weekday name.
+* `b`/`B`: Abbreviated or full month name.
+* `m`: Month as decimal number (01--12 or 1--12).
+* `d`: Day of the month as decimal number (01--31 or 0--31)
+* `w`: Weekday as decimal number (0--6, Sunday is 0).
+* `y`/`Y`: Year without/with century.
+* more on [`?parse_date_time()`](https://lubridate.tidyverse.org/reference/parse_date_time.html)
+]
+
+---
+
+class: middle
+
+.pull-left[
+## `r emo::ji("film_projector")``movies`
+.small[
+```{r release-date-chr}
+```
+```{r release-date, eval = FALSE}
+```
+]
+]
+.pull-right[
+```{r ref.label = "release-date", echo = FALSE, fig.height = 3.8}
+```
+]
 
 ---
 
