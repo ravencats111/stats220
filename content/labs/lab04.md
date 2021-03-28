@@ -27,7 +27,8 @@ This lab exercise is **due 23:59 Wednesday 7 April (NZST)**.
 In this lab exercise, you are going to work with two data sets:
 `step-count.csv` that contains Dr Wang’s hourly step counts, and
 `location.csv` with cities where she was in 2019. You shall use the
-following code to start with this lab session:
+following code snippet (and **include them upfront in your R file**) to
+start with this lab session:
 
 ``` r
 library(tidyverse)
@@ -70,8 +71,6 @@ location
     #>  9 2019-01-23 Austin  
     #> 10 2019-01-24 Austin  
     #> # … with 11 more rows
-
--   Make sure to include the snippet above upfront in your R file.
 
 Suppose that you have created an `Rproj` for this course. You need to
 download `step-count.csv`
