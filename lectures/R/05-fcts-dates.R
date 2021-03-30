@@ -27,8 +27,8 @@ rep(dept_fct, 3)
 
 ## ---- fct-create
 dist_dept <- unique(dept)
-factor(dept, levels = dist_dept)
-factor(dept, levels = rev(dist_dept))
+factor(dept, levels = dist_dept) # in first appearance order
+factor(dept, levels = rev(dist_dept)) # in reverse order
 
 ## ---- fct-vis
 nstaff <- c(12L, 8L, 20L, 23L)
@@ -140,7 +140,7 @@ as.integer(td) # 1970-01-01
 (current <- now())
 class(current)
 typeof(current)
-as.integer(current) # 1970-01-01
+as.integer(current) # 1970-01-01 00:00:00
 
 ## ---- create-dttm
 make_date(2021, c(3, 6), c(31, 4))
@@ -154,8 +154,7 @@ OlsonNames()[sample(1:length(OlsonNames()), 32)]
 ## ---- parse-dttm
 ymd(c("2021/03/31", "2021-June-04"))
 ymd_h(c("2021-03-31 16", "2021-June-04 10"))
-dttm <- ymd_h(c("2021-03-31 16", "2021-June-04 10"), tz = "Pacific/Auckland")
-dttm
+(dttm <- ymd_h(c("2021-03-31 16", "2021-June-04 10"), tz = "Pacific/Auckland"))
 
 ## ---- convert-dttm
 # origin: 1970-01-01
@@ -184,9 +183,9 @@ wday(dttm, label = TRUE)
 wday(dttm, label = TRUE, week_start = 1)
 
 ## ---- cal
-floor_date(dttm, "1 hour")
+floor_date(dttm, "3 hours")
 ceiling_date(dttm, "2 days")
-round_date(dttm, "3 months")
+round_date(dttm, "1 month")
 
 ## ---- arith
 dttm + 1

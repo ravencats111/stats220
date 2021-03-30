@@ -67,7 +67,7 @@ op <- options(width = 60)
 .center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/forcats.png" width="60%">](http://forcats.tidyverse.org)]
 ]
 .right-column[
-## From one type to factor
+## Coerce to factors from one type
 ```{r dept-chr}
 ```
 ```{r dept-fct, highlight.output = 3}
@@ -77,6 +77,11 @@ op <- options(width = 60)
 ```{r opts-exit0, echo = FALSE}
 on.exit(options(op), add = TRUE)
 ```
+
+???
+
+* diff displays
+* fct: w meta info
 
 ---
 
@@ -117,21 +122,42 @@ on.exit(options(op), add = TRUE)
 * change the base level for modelling
 * display characters in a non-alphabetical order
 
-```{r fct-create}
+```{r fct-create, highlight.output = 2}
 ```
+
+???
+
+* data values not changing, only meta info levels changed
 
 ---
 
 ## Reorder factor levels to easily perceive patterns
+## .center[`sci_tbl` <i class="fas fa-table"></i>]
 
 .pull-left[
-### .center[`sci_tbl`]
 ```{r fct-vis, echo = FALSE, fig.width = 3.5, fig.height = 3.5}
 ```
 ]
 .pull-right[
-### .center[`movies`]
+```{r fct-ror, echo = FALSE, fig.width = 3.5, fig.height = 3.5}
+```
+]
+
+???
+
+* in default order, takes time to process info
+
+---
+
+## Reorder factor levels to easily perceive patterns
+## .center[`movies` <i class="fas fa-table"></i>]
+
+.pull-left[
 ```{r box-movies, echo = FALSE, fig.height = 3.5}
+```
+]
+.pull-right[
+```{r box-movies-med, echo = FALSE, fig.height = 3.5}
 ```
 ]
 
@@ -141,7 +167,7 @@ on.exit(options(op), add = TRUE)
 
 .pull-left[
 .small[
-```{r fct-ror, fig.width = 3.5, fig.height = 3.5}
+```{r fct-ror-p2, ref.label = "fct-ror", fig.width = 3.5, fig.height = 3.5}
 ```
 ]
 ]
@@ -165,11 +191,11 @@ on.exit(options(op), add = TRUE)
 
 .pull-left[
 <br>
-```{r box-movies-med, eval = FALSE}
+```{r box-movies-med2, ref.label = "box-movies-med", eval = FALSE}
 ```
 ]
 .pull-right[
-```{r ref.label = "box-movies-med", echo = FALSE, fig.height = 4.5}
+```{r box-movies-med3, ref.label = "box-movies-med", echo = FALSE, fig.height = 4.5}
 ```
 ]
 
@@ -225,6 +251,11 @@ on.exit(options(op), add = TRUE)
 ```{r cut}
 ```
 
+???
+
+* underappreciated `cut()`, built-in function
+* include `0`, but doesn't matter for this data
+
 ---
 
 ## `fct_recode()` changes factor levels by hand
@@ -258,20 +289,32 @@ class: middle
 
 `r countdown::countdown(minutes = 0, seconds = 30, font_size = "48px", top = 0)`
 
+???
+
+live demo: `fct_rev()`
+
 ---
 
 .left-column[
 .center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/lubridate.png" width="60%">](http://lubridate.tidyverse.org)]
 ]
 .right-column[
-`r emo::ji("arrow_down")` {lubridate} is NOT part of the core {tidyverse}
+`r emo::ji("arrow_down")` {lubridate} is NOT part of the core {tidyverse}, so load with
 ```{r lubridate}
 ```
+Relative and exact time units:
 1. An **instant** is a specific moment in time, such as January 1st, 2012.
 2. An **interval** is a period of time that occurs between two specific instants.
 3. A **duration** records the time span in seconds, it will have an exact length since seconds always have the same length.
 4. A **period** records a time span in units larger than seconds, such as years, months, weeks, days, hours, and minutes.
 ]
+
+???
+
+* temporal data (recorded over time) is everywhere. Ur phone tracks your daily life.
+* instant: timestamp
+* leap seconds/years, time zones, DST
+* lab04, tz
 
 ---
 
@@ -388,7 +431,7 @@ on.exit(options(op), add = TRUE)
 
 ---
 
-## Format date-times (also convert to characters)
+## Format date-times (also coerce to characters)
 
 .pull-left[
 .small[
@@ -399,9 +442,9 @@ on.exit(options(op), add = TRUE)
 .pull-right[
 * `a`/`A`: Abbreviated/full weekday name.
 * `b`/`B`: Abbreviated or full month name.
-* `m`: Month as decimal number (01--12 or 1--12).
-* `d`: Day of the month as decimal number (01--31 or 0--31)
-* `w`: Weekday as decimal number (0--6, Sunday is 0).
+* `m`: Month as decimal number (01-12 or 1-12).
+* `d`: Day of the month as decimal number (01-31 or 0-31)
+* `w`: Weekday as decimal number (0-6, Sunday is 0).
 * `y`/`Y`: Year without/with century.
 * more on [`?parse_date_time()`](https://lubridate.tidyverse.org/reference/parse_date_time.html)
 ]
