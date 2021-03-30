@@ -8,5 +8,5 @@ r: "03-data-vis.R"
 rmd: "03-data-vis.Rmd"
 pdf: "03-data-vis.pdf"
 lab: "labs/lab03"
-sol:
+sol: "labs/lab03-sol"
 ---
