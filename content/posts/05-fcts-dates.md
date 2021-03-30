@@ -6,7 +6,7 @@ slides: "05-fcts-dates.htm"
 obj: "objs/obj05"
 r: "05-fcts-dates.R"
 rmd: "05-fcts-dates.Rmd"
-pdf: ""
+pdf: "05-fcts-dates.pdf"
 lab:
 sol:
 ---

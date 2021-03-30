@@ -211,7 +211,7 @@ format(dttm, "%y/%b/%d %H:%M:%S")
 format(dttm, "on %d %B (%a)")
 
 ## ---- release-date-chr
-movies$Release_Date[38:39]
+movies$Release_Date[c(38:39, 268)]
 
 ## ---- release-date
 movies %>% 
