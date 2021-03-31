@@ -234,8 +234,12 @@ with a **ggplot** object named `p5`.
 ``` r
 p5 <- nycbikes18 %>% 
   ggplot() +
-  geom_point(aes(start_station_longitude, start_station_latitude)) +
-  geom_point(aes(end_station_longitude, end_station_latitude))
+  geom_point(aes(
+    start_station_longitude, 
+    start_station_latitude)) +
+  geom_point(aes(
+    end_station_longitude, 
+    end_station_latitude))
 p5
 ```
 
@@ -257,7 +261,9 @@ for examples.
 ``` r
 p6 <- nycbikes18 %>% 
   ggplot(aes(start_station_longitude, start_station_latitude)) +
-  geom_segment(aes(xend = end_station_longitude, yend = end_station_latitude),
+  geom_segment(aes(
+    xend = end_station_longitude, 
+    yend = end_station_latitude),
     arrow = arrow(length = unit(0.01, "npc")), alpha = 0.3)
 p6
 ```
