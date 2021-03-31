@@ -118,6 +118,9 @@ reveal their ages. You need to remove these observations with
 should end up with a **tibble** called `nycbikes18`.
 
 ``` r
+#nycbikes18 <- nycbikes18_raw[nycbikes18_raw$birth_year > 1900,]
+nycbikes18 <- nycbikes18_raw %>% 
+  filter(birth_year > 1900)
 nycbikes18
 ```
 
