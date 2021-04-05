@@ -2,3 +2,4 @@
 resources/
 .Rproj.user
 cache/
+ghcnd-stations.txt

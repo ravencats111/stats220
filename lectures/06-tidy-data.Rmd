@@ -1,0 +1,77 @@
+---
+title: "STATS 220"
+subtitle: "Tidy data`r emo::ji('broom')`"
+type: "lecture"
+date: ""
+output:
+  xaringan::moon_reader:
+    css: ["assets/remark.css"]
+    lib_dir: libs
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+background-image: url("img/what-you-think-about-ds.png")
+background-size: contain
+
+```{r initial, echo = FALSE, cache = FALSE, results = 'hide'}
+library(knitr)
+options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE, 
+  tibble.width = 60, tibble.print_min = 6)
+opts_chunk$set(
+  echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
+  fig.path = 'figure/', cache.path = 'cache/', cache = FALSE, fig.retina = 3,
+  fig.align = 'center', fig.width = 4.5, fig.height = 4, fig.show = 'hold',
+  dpi = 120
+)
+```
+
+```{r xaringan-panelset, echo = FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r external, include = FALSE, cache = FALSE}
+read_chunk('R/06-tidy-data.R')
+```
+
+## .yellow[What you think about data science] `r emo::ji("star_struck")`
+
+.footnote[image credit: Hilary Parker]
+
+???
+
+---
+
+background-image: url("img/what-ds-in-reality.png")
+background-size: contain
+
+## .yellow[What data science is in reality] `r emo::ji("sob")`
+
+.footnote[image credit: Hilary Parker]
+
+---
+
+## tidy data <i class="fas fa-not-equal"></i> clean data
+
+---
+
+Tabular data is column-oriented format
+
+<img src="https://github.com/gadenbuie/tidyexplain/raw/master/images/static/png/original-dfs-tidy.png" height="420px">
+
+---
+
+## Reading
+
+.pull-left[
+.center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
+]
+.pull-right[
+* [Factors](https://r4ds.had.co.nz/factors.html)
+* [Dates and times](https://r4ds.had.co.nz/dates-and-times.html)
+* [{forcats} cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/factors.pdf)
+* [{lubridate} cheatsheet](https://rawgit.com/rstudio/cheatsheets/master/lubridate.pdf)
+]
