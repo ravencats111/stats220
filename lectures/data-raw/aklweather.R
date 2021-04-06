@@ -26,37 +26,6 @@ akl_ncdc <- map2_dfr(startdate, enddate, function(x, y) {
   ncdcout$data
 })
 aklweather <- akl_ncdc %>%
-  select(date, datatype, value) %>%
   mutate(date = as_date(ymd_hms(date))) %>%
-  pivot_wider(names_from = datatype, values_from = value) %>%
-  rename_with(tolower) %>%
-  mutate(across(!date, ~ . / 10))
-
-usethis::use_data(aklweather, overwrite = TRUE)
-
-akl_weather <- aklweather %>%
-  mutate(rain = as.integer(prcp > 0))
-
-timeline <- select_interval("x")
-p_time <- akl_weather %>%
-  vega(enc(x = date, y = tavg), width = 600, height = 100) %>%
-  mark_line(size = 0.5, selection = timeline)
-p_avg <- akl_weather %>%
-  vega(enc(x = vg_month(date)), width = 600, height = 350) %>%
-  # filter(timeline) %>%
-  mark_ribbon(
-    enc(y = vg_mean(tmin), y2 = vg_mean(tmax)),
-    interpolate = "monotone",
-    colour = "#fc9272", opacity = 0.3,
-    transform = timeline) %>% # filter(.vega, timeline)
-  mark_line(enc(y = vg_mean(prcp)), colour = "#3182bd",
-    transform = timeline) %>%
-  mark_point(enc(y = vg_mean(prcp)), colour = "#3182bd",
-    transform = timeline) %>%
-  resolve_views(scale = list(y = "independent"))
-p_rain <- akl_weather %>%
-  vega(width = 600, height = 40) %>%
-  mark_bar(enc(x= vg_sum(rain)), fill =  "#3182bd",
-    transform = timeline) %>%
-  scale_x(name = "# of raining days")
-vconcat(p_time, p_avg, p_rain)
+  rename_with(tolower)
+write_csv(aklweather, "data/ghcnd/ghcnd-akl.csv")
