@@ -1,4 +1,6 @@
 # Graphical perception
+# Towards publication-ready plots
+# Generative arts
 library(tidyverse)
 covid19 <- read_csv("data/covid19-daily-cases.csv")
 
