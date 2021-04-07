@@ -6,6 +6,9 @@ paginate = 12
 
 staticDir = ["static", "lectures"]
 
+[markup.goldmark.renderer]
+  unsafe = true
+
 [params]
   custom_css = ["css/wang.css"]
 

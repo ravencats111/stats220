@@ -52,6 +52,11 @@ background-size: contain
 
 .footnote[image credit: Hilary Parker]
 
+???
+
+* it's invaluable to know the data pipeline: how data collected and organised
+* covid19, different def for each country in the early stage
+
 ---
 
 ## tidy data <i class="fas fa-not-equal"></i> clean data

@@ -4,6 +4,21 @@ title: Info
 permalink: /info/
 ---
 
+### Timetable
+
+{{<table "table table-striped table-bordered">}}
+|             | Day | Time  | Venue    |
+|-------------|-----|-------|----------|
+| Lecture     | Wed | 16-17 | Eng1.439 |
+|             | Fri | 10-11 | Eng1.439 |
+| Lab         | Wed | 09-10 | 303S.175 |
+|             | Wed | 12-13 | 302.G40  |
+|             | Wed | 13-14 | 302.G40  |
+|             | Fri | 11-12 | 302.G40  |
+|             | Thu | 16-17 | offshore |
+| Office hour | Thu | 14-15 | 303.323  |
+{{</table>}}
+
 ### Software
 
 You first need to download and install:
