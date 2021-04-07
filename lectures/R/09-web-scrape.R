@@ -53,3 +53,30 @@ stats220_urls <- stats220 %>%
 pdf_urls <- stats220_urls[stringr::str_detect(stats220_urls, "pdf")]
 pdf_ursl %>% 
   map(download.file)
+
+stats220_info <- read_html("https://stats220.earo.me/pages/info/")
+
+stats220_info %>% 
+  html_elements("h3") %>% 
+  html_text()
+
+stats220_info %>% 
+  html_elements("#timetable") %>% 
+  html_text()
+
+stats220_info %>% 
+  html_element("table") %>% 
+  html_table()
+
+# https://docs.github.com/en/rest
+library(httr)
+library(lubridate)
+library(tidyverse)
+stats220_gh <- "https://api.github.com/repos/STATS-UOA/stats220/commits"
+resp <- GET(stats220_gh)
+status_code(resp)
+
+lst <- content(resp)
+dttm_chr <- map_chr(lst, ~ .$commit$committer$date)
+as_datetime(dttm_chr)
+as_datetime(dttm_chr, tz = "Pacific/Auckland")

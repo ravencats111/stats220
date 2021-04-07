@@ -6,7 +6,7 @@ permalink: /info/
 
 ### Timetable
 
-{{<table "table table-striped table-bordered">}}
+{{<table "table table-striped table-hover table-bordered table-responsive">}}
 |             | Day | Time  | Venue    |
 |-------------|-----|-------|----------|
 | Lecture     | Wed | 16-17 | Eng1.439 |
