@@ -95,23 +95,68 @@ time_use %>%
 # Generative arts
 # interactive graphics
 covid19 <- read_csv("data/covid19-daily-cases.csv")
-covid19 %>% 
-  group_by(country_region) %>% 
-  slice_head() %>% 
-  ungroup() %>% 
-  slice_max(confirmed)
 
-p <- covid19 %>% 
+covid19 %>% 
   ggplot(aes(x = date, y = confirmed, colour = country_region)) +
   geom_line() +
   guides(colour = FALSE)
 
-p + scale_y_log10()
+covid19 %>% 
+  ggplot(aes(x = date, y = log10(confirmed), colour = country_region)) +
+  geom_line() +
+  guides(colour = FALSE)
 
 covid19 %>% 
+  ggplot(aes(x = date, y = confirmed, colour = country_region)) +
+  geom_line() +
+  guides(colour = FALSE) +
+  scale_y_log10()
+
+covid19_rel <- covid19 %>% 
+  mutate(confirmed = na_if(confirmed, 0)) %>% 
   group_by(country_region) %>% 
   mutate(days = as.numeric(date - min(date))) %>% 
+  ungroup()
+
+covid19_rel %>% 
   ggplot(aes(x = days, y = confirmed, colour = country_region)) +
   geom_line() +
   scale_y_log10() +
   guides(colour = FALSE)
+
+p_nz <- covid19_rel %>% 
+  filter(country_region != "New Zealand") %>% 
+  ggplot(aes(x = days, y = confirmed, group = country_region)) +
+  geom_line(colour = "grey", alpha = 0.5) +
+  geom_line(
+    colour = "#238b45", size = 1,
+    data = covid19_rel %>% filter(country_region == "New Zealand")) +
+  scale_y_log10() +
+  guides(colour = FALSE)
+p_nz
+
+p_nz <- p_nz +
+  geom_label(
+    aes(x = max(days), y = max(confirmed), label = country_region),
+    colour = "#238b45", nudge_x = 3, nudge_y = .3,
+    data = covid19_rel %>% filter(country_region == "New Zealand"))
+p_nz
+
+p_nz <- p_nz +
+  scale_y_log10(labels = scales::label_comma()) +
+  xlim(c(0, 100))
+p_nz
+
+# remotes::install_github("Financial-Times/ftplottools")
+p_nz +
+  labs(
+    x = "Days since March 1",
+    y = "Confirmed cases (in log10)",
+    title = "Worldwide coronavirus confirmed cases (March 1 - May 31)",
+    subtitle = "highlighting New Zealand",
+    caption = "Data source: John Hopkins University, CSSE"
+  ) +
+  ftplottools::ft_theme() +
+  theme(
+    plot.title.position = "plot", 
+    plot.background = element_rect(fill = "#FFF1E0"))

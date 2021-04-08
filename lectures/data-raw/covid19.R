@@ -18,6 +18,9 @@ covid19_raw
 covid19 <- covid19_raw %>% 
   left_join(date_tbl) %>% 
   select(date, everything(), -id) %>% 
+  mutate(country_region = case_when(
+    country_region == "Mainland China"~ "China", 
+    TRUE ~ country_region)) %>% 
   group_by(country_region, date) %>% 
   summarise(confirmed = sum(confirmed, na.rm = TRUE)) %>% 
   ungroup() %>% 
