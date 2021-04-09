@@ -213,7 +213,7 @@ levels(nycbikes18_age$age_group)
 ### Question 5
 
 Generate a side-by-side boxplot to demonstrate the differences of trip
-durations across age groups coloured by user types. (NOTE: you need to
+durations across age groups coloured by user types. (**NOTE:** you need to
 modify labels of this plot.)
 
 You should end up with a **ggplot** called `p3`.
