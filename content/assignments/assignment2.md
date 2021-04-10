@@ -426,7 +426,7 @@ p6
 
 <img src="/figures/a2-q10-1.png" width="840" />
 
-### Question4fun
+### Question4fun (NO marks)
 
 Create an interactive map that marks all bike stations in clusters. By
 zooming in and out, you can see how clusters change. By hovering
