@@ -391,6 +391,12 @@ mean(hourly_ntrips$starttime)
     #> [1] "2018-06-29 14:11:53 EDT"
 
 ``` r
+mean(hourly_ntrips$ntrips)
+```
+
+    #> [1] 28.4255
+
+``` r
 levels(hourly_ntrips$startwday)
 ```
 
