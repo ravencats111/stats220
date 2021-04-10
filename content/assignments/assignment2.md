@@ -403,8 +403,8 @@ Let’s look at user behaviours between Subscriber and Customer in
 temporal context. Visualise the following layered graphics, faceted by
 weekdays and user types:
 
-1.  lines over time of the day from `hourly_ntrips`, with
-    `colour = "#bdbdbd"` and `alpha = 0.5`.
+1.  grey lines indicating the hourly number of trips against time of the day 
+    from `hourly_ntrips`, with `colour = "#bdbdbd"` and `alpha = 0.5`.
 2.  superimposed lines indicating the average number of trips by hours
     of the day, weekdays, and user types, with `size = 1`.
 
