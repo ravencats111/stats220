@@ -8,6 +8,7 @@
 
 {{ $main := resources.Get "sass/main.scss" | resources.ToCSS (dict "outputStyle" "compressed") }}
 <link rel="stylesheet" href="{{ $main.RelPermalink }}">
+<script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 {{ range .Site.Params.custom_css -}}
 <link rel="stylesheet" href="{{ . | absURL }}">
@@ -29,4 +30,5 @@
 <script src="/assignment2_files/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
 <script src="/assignment2_files/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
 <script src="/assignment2_files/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script>
+<script async type="text/javascript"  src="/js/clip.js"></script>
 </head>

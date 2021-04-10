@@ -61,15 +61,23 @@ background-size: contain
 
 ## tidy data <i class="fas fa-not-equal"></i> clean data
 
----
+.center[.brown[Tidy data is organising data in a consistent format, not cleaning data.]]
 
 Tabular data is column-oriented format
 
-<img src="https://github.com/gadenbuie/tidyexplain/raw/master/images/static/png/original-dfs-tidy.png" height="420px">
+???
+
+Can you easily plot a dataset like this using ggplot2?
 
 ---
 
-Can you easily plot a dataset like this using ggplot2?
+class: center
+
+<img src="https://github.com/gadenbuie/tidyexplain/raw/master/images/static/png/original-dfs-tidy.png" height="520px">
+
+## one data, two representations
+
+---
 
 ---
 
