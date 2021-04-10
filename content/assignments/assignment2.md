@@ -213,8 +213,8 @@ levels(nycbikes18_age$age_group)
 ### Question 5
 
 Generate a side-by-side boxplot to demonstrate the differences of trip
-durations across age groups coloured by user types. (**NOTE:** you need to
-modify labels of this plot.)
+durations across age groups coloured by user types. (**NOTE:** you need
+to modify labels of this plot.)
 
 You should end up with a **ggplot** called `p3`.
 
@@ -277,7 +277,6 @@ order that matches to the last value of each line.)
 Intermediate data for the plot looks like as follows:
 
     #> # A tibble: 55 x 3
-    #> # Groups:   month [11]
     #>    month age_group qtl_tripd
     #>    <ord> <fct>         <dbl>
     #>  1 Jan   (14,24]        9.18
@@ -403,8 +402,9 @@ Let’s look at user behaviours between Subscriber and Customer in
 temporal context. Visualise the following layered graphics, faceted by
 weekdays and user types:
 
-1.  grey lines indicating the hourly number of trips against time of the day 
-    from `hourly_ntrips`, with `colour = "#bdbdbd"` and `alpha = 0.5`.
+1.  grey lines indicating the hourly number of trips against time of the
+    day from `hourly_ntrips`, with `colour = "#bdbdbd"` and
+    `alpha = 0.5`.
 2.  superimposed lines indicating the average number of trips by hours
     of the day, weekdays, and user types, with `size = 1`.
 
