@@ -74,7 +74,7 @@ nycbikes18
 Suppose that you have created an `Rproj` for this course. You need to
 download `2018-citibike-tripdata.csv`
 [here](https://github.com/STATS-UOA/stats220/releases/download/v1.0/2018-citibike-tripdata.csv)
-to `data/` under your `Rproj`.
+to `data/` under your `Rproj` folder.
 
 -   You’re required to use **relative file paths
     `data/2018-citibike-tripdata.csv`** to import the data. **NO marks
