@@ -6,6 +6,8 @@
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
+    <link href="libs/countdown/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown/countdown.js"></script>
     <link rel="stylesheet" href="assets/remark.css" type="text/css" />
   </head>
   <body>
@@ -49,25 +51,516 @@ background-size: contain
 
 ---
 
-## tidy data &lt;i class="fas fa-not-equal"&gt;&lt;/i&gt; clean data
+## .center[tidy data &lt;i class="fas fa-not-equal"&gt;&lt;/i&gt; clean data]
 
-.center[.brown[Tidy data is organising data in a consistent format, not cleaning data.]]
+.brown[.center[The `movies` data is tidy but not clean.]]
 
-Tabular data is column-oriented format
+
+```
+#&gt; # A tibble: 5 x 16
+#&gt;   Release_Date US_DVD_Sales Title      US_Gross Worldwide_Gross Production_Budg…
+#&gt;   &lt;chr&gt;               &lt;int&gt; &lt;chr&gt;         &lt;int&gt;           &lt;dbl&gt;            &lt;int&gt;
+#&gt; 1 9-Mar-94               NA Four Wedd… 52700832       242895809          4500000
+#&gt; 2 18-Oct-06              NA 51 Birch …    84689           84689           350000
+*#&gt; 3 1963-01-01             NA 55 Days a… 10000000        10000000         17000000
+#&gt; 4 &lt;NA&gt;                   NA Drei              0               0          7200000
+#&gt; 5 16-Jan-98              NA The Dress     16556           16556          2650000
+#&gt; # … with 10 more variables: MPAA_Rating &lt;chr&gt;, Running_Time_min &lt;int&gt;,
+#&gt; #   Distributor &lt;chr&gt;, Source &lt;chr&gt;, Major_Genre &lt;chr&gt;, Creative_Type &lt;chr&gt;,
+#&gt; #   Director &lt;chr&gt;, Rotten_Tomatoes_Rating &lt;int&gt;, IMDB_Rating &lt;dbl&gt;,
+#&gt; #   IMDB_Votes &lt;int&gt;
+```
+
+---
+
+## .center[tidy data &lt;i class="fas fa-not-equal"&gt;&lt;/i&gt; clean data]
+
+.brown[.center[They are tidy and clean in their own way.]]
+
+.pull-left[
+* `time_use`
+
+```
+#&gt; # A tibble: 28 x 3
+#&gt;   country    category            minutes
+#&gt;   &lt;chr&gt;      &lt;chr&gt;                 &lt;dbl&gt;
+#&gt; 1 New Zeala… Paid work             241. 
+#&gt; 2 USA        Paid work             251. 
+#&gt; 3 New Zeala… Education              29  
+#&gt; 4 USA        Education              31.4
+#&gt; 5 New Zeala… Care for household…    30  
+#&gt; 6 USA        Care for household…    30.6
+#&gt; # … with 22 more rows
+```
+]
+.pull-right[
+* `countrycode`
+
+```
+#&gt; # A tibble: 2 x 2
+#&gt;   country country_name 
+#&gt;   &lt;chr&gt;   &lt;chr&gt;        
+#&gt; 1 NZL     New Zealand  
+#&gt; 2 USA     United States
+```
+]
 
 ???
 
-Can you easily plot a dataset like this using ggplot2?
+* Data cleaning is laborious, and highly dependent on the data itself.
+* No golden standards or principles to guide how to clean data.
+
+---
+
+class: middle inverse
+
+# Tidy data describes a standard way of storing data in .blue[a consistent format].
+
+---
+
+## Your turn
+
+Tuberculosis data from WHO (`data/tb.csv`):
+1. Is `tb` tidy data?
+2. What are the data observations? What are the data variables?
+
+```r
+tb
+```
+
+
+```
+#&gt; # A tibble: 5,769 x 22
+#&gt;   iso2   year  m_04 m_514 m_014 m_1524 m_2534 m_3544 m_4554 m_5564  m_65   m_u
+#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 AD     1989    NA    NA    NA     NA     NA     NA     NA     NA    NA    NA
+#&gt; 2 AD     1990    NA    NA    NA     NA     NA     NA     NA     NA    NA    NA
+#&gt; 3 AD     1991    NA    NA    NA     NA     NA     NA     NA     NA    NA    NA
+#&gt; 4 AD     1992    NA    NA    NA     NA     NA     NA     NA     NA    NA    NA
+#&gt; 5 AD     1993    NA    NA    NA     NA     NA     NA     NA     NA    NA    NA
+#&gt; 6 AD     1994    NA    NA    NA     NA     NA     NA     NA     NA    NA    NA
+#&gt; # … with 5,763 more rows, and 10 more variables: f_04 &lt;dbl&gt;, f_514 &lt;dbl&gt;,
+#&gt; #   f_014 &lt;dbl&gt;, f_1524 &lt;dbl&gt;, f_2534 &lt;dbl&gt;, f_3544 &lt;dbl&gt;, f_4554 &lt;dbl&gt;,
+#&gt; #   f_5564 &lt;dbl&gt;, f_65 &lt;dbl&gt;, f_u &lt;dbl&gt;
+```
+
+<div class="countdown" id="timer_60728259" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+???
+
+* Can you easily plot a dataset like this using ggplot2? by sex and age
+* come back later
 
 ---
 
 class: center
 
+## one data, many representations
+
 &lt;img src="https://github.com/gadenbuie/tidyexplain/raw/master/images/static/png/original-dfs-tidy.png" height="520px"&gt;
 
-## one data, two representations
+.left[.footnote[image credit: Garrick Aden-Buie]]
+
+???
+
+* which rep does `tb` resemble?
+* which rep is easier to work with?
 
 ---
+
+background-image: url(https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidydata_1.jpg)
+background-size: contain
+
+???
+
+* Tidy data principles are a rephrase of third norm in a database schema design.
+&lt;https://en.wikipedia.org/wiki/Third_normal_form&gt;
+
+* tidy data is for human consumption.
+
+---
+
+background-image: url(https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidydata_2.jpg)
+background-size: contain
+
+---
+
+background-image: url(https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidydata_5.jpg)
+background-size: contain
+
+## Making friends with tidy data
+
+* one set of consistent tools for different datasets
+* easier for automation and iteration
+
+.footnote[credit: Illustrations from the Openscapes blog [Tidy Data for reproducibility, efficiency, and collaboration](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst]
+
+???
+
+* To work with messy data, every time you need to switch to different gears
+* learn new tools that just works for that specific dataset
+* It's much more pleasant to work with tidy data, 
+* spent less flighting with different tools, focus more on data analyis bc one set of consistent tools
+* the {tidyverse} philosophy to work with the tidy data structures
+* Tabular data is column-oriented format
+
+---
+
+class: middle
+
+.pull-right[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="240px"&gt;](http://tidyr.tidyverse.org)]
+]
+.pull-left[
+<table style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif; display: table; border-collapse: collapse; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;">
+  
+  <thead style="border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
+    <tr>
+      <th style="color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: left;" rowspan="1" colspan="1">type</th>
+      <th style="color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: left;" rowspan="1" colspan="1"><code>function()</code></th>
+      <th style="color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 6px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; text-align: left;" rowspan="1" colspan="1"><code>function()</code></th>
+    </tr>
+  </thead>
+  <tbody style="border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3;">
+    <tr>
+      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p><strong>pivoting</strong></p>
+</div></td>
+      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p><code>pivot_longer()</code></p>
+</div></td>
+      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p><code>pivot_wider()</code></p>
+</div></td>
+    </tr>
+    <tr>
+      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p><strong>splitting/combining</strong></p>
+</div></td>
+      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p><code>seperate()</code></p>
+</div></td>
+      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p><code>unite()</code></p>
+</div></td>
+    </tr>
+    <tr>
+      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p><strong>nesting/unnesting</strong></p>
+</div></td>
+      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p><code>nest()</code></p>
+</div></td>
+      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p><code>unnest()</code></p>
+</div></td>
+    </tr>
+    <tr>
+      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p><strong>missing</strong></p>
+</div></td>
+      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p><code>complete()</code></p>
+</div></td>
+      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p><code>fill()</code></p>
+</div></td>
+    </tr>
+  </tbody>
+  
+  
+</table>
+]
+
+---
+
+.pull-left[
+.x[
+* Messy
+]
+&lt;hr&gt;
+
+```
+#&gt; # A tibble: 5,769 x 22
+*#&gt;   iso2   year  m_04 m_514 m_014
+#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 AD     1989    NA    NA    NA
+#&gt; 2 AD     1990    NA    NA    NA
+#&gt; 3 AD     1991    NA    NA    NA
+#&gt; 4 AD     1992    NA    NA    NA
+#&gt; 5 AD     1993    NA    NA    NA
+#&gt; 6 AD     1994    NA    NA    NA
+#&gt; # … with 5,763 more rows, and 17
+#&gt; #   more variables: m_1524 &lt;dbl&gt;,
+#&gt; #   m_2534 &lt;dbl&gt;, m_3544 &lt;dbl&gt;,
+#&gt; #   m_4554 &lt;dbl&gt;, m_5564 &lt;dbl&gt;,
+#&gt; #   m_65 &lt;dbl&gt;, m_u &lt;dbl&gt;,
+#&gt; #   f_04 &lt;dbl&gt;, f_514 &lt;dbl&gt;,
+#&gt; #   f_014 &lt;dbl&gt;, f_1524 &lt;dbl&gt;,
+#&gt; #   f_2534 &lt;dbl&gt;, f_3544 &lt;dbl&gt;,
+#&gt; #   f_4554 &lt;dbl&gt;, f_5564 &lt;dbl&gt;,
+#&gt; #   f_65 &lt;dbl&gt;, f_u &lt;dbl&gt;
+```
+]
+
+.pull-right[
+.checked[
+* Tidy
+]
+&lt;hr&gt;
+
+```
+#&gt; # A tibble: 115,380 x 5
+*#&gt;   iso2   year sex   age   cases
+#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+#&gt; 1 AD     1989 m     04        0
+#&gt; 2 AD     1989 m     514       0
+#&gt; 3 AD     1989 m     014       0
+#&gt; 4 AD     1989 m     1524      0
+#&gt; 5 AD     1989 m     2534      0
+#&gt; 6 AD     1989 m     3544      0
+#&gt; # … with 115,374 more rows
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%"&gt;](http://tidyr.tidyverse.org)]
+### - pivot
+]
+.right-column[
+* `pivot_longer()` wide data
+
+```r
+library(tidyverse) # library(tidyr)
+tb %&gt;% 
+  pivot_longer(
+*   cols = m_04:f_u, # cols in the data for pivoting
+*   names_to = "sex_age", # new col contains previous headers
+*   values_to = "cases") # new col contains previous values
+```
+
+```
+#&gt; # A tibble: 115,380 x 4
+#&gt;   iso2   year sex_age cases
+#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+#&gt; 1 AD     1989 m_04       NA
+#&gt; 2 AD     1989 m_514      NA
+#&gt; 3 AD     1989 m_014      NA
+#&gt; 4 AD     1989 m_1524     NA
+#&gt; 5 AD     1989 m_2534     NA
+#&gt; 6 AD     1989 m_3544     NA
+#&gt; # … with 115,374 more rows
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%"&gt;](http://tidyr.tidyverse.org)]
+### - pivot
+]
+.right-column[
+&lt;br&gt;
+.center[![](img/tidyr-longer-wider.gif)]
+]
+
+.footnote[image credit: Garrick Aden-Buie &amp; Mara Averick]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%"&gt;](http://tidyr.tidyverse.org)]
+### - pivot
+### - split
+]
+.right-column[
+* `seperate()` a character column into multiple columns
+
+```r
+tb %&gt;% 
+  pivot_longer(cols = m_04:f_u, 
+    names_to = "sex_age", values_to = "cases") %&gt;% 
+* separate(sex_age, into = c("sex", "age"), sep = "_")
+```
+
+```
+#&gt; # A tibble: 115,380 x 5
+#&gt;   iso2   year sex   age   cases
+#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+#&gt; 1 AD     1989 m     04       NA
+#&gt; 2 AD     1989 m     514      NA
+#&gt; 3 AD     1989 m     014      NA
+#&gt; 4 AD     1989 m     1524     NA
+#&gt; 5 AD     1989 m     2534     NA
+#&gt; 6 AD     1989 m     3544     NA
+#&gt; # … with 115,374 more rows
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%"&gt;](http://tidyr.tidyverse.org)]
+### - pivot
+### - split
+### - fill
+]
+.right-column[
+* `fill()` in `NA` with previous (.brown[`"down"`]) or next (.brown[`"up"`]) value
+
+```r
+tb_tidy &lt;- tb %&gt;% 
+  pivot_longer(cols = m_04:f_u, 
+    names_to = "sex_age", values_to = "cases") %&gt;% 
+  separate(sex_age, into = c("sex", "age"), sep = "_") %&gt;% 
+  group_by(iso2) %&gt;% 
+* fill(cases, .direction = "updown") %&gt;%
+  ungroup()
+```
+
+```
+#&gt; # A tibble: 115,380 x 5
+#&gt;   iso2   year sex   age   cases
+#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+#&gt; 1 AD     1989 m     04        0
+#&gt; 2 AD     1989 m     514       0
+#&gt; 3 AD     1989 m     014       0
+#&gt; 4 AD     1989 m     1524      0
+#&gt; 5 AD     1989 m     2534      0
+#&gt; 6 AD     1989 m     3544      0
+#&gt; # … with 115,374 more rows
+```
+]
+
+???
+
+demo on `direction`
+
+---
+
+background-image:url(img/lst-col.png)
+background-position: 85% 50%
+background-size: 10%
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%"&gt;](http://tidyr.tidyverse.org)]
+### - pivot
+### - split
+### - fill
+### - nest
+]
+.right-column[
+* `nest()` creates a .brown[list-column] of tibbles
+
+```r
+tb_tidy %&gt;% 
+  nest(data = year:cases)
+```
+
+```
+#&gt; # A tibble: 213 x 2
+#&gt;   iso2  data                  
+#&gt;   &lt;chr&gt; &lt;list&gt;                
+#&gt; 1 AD    &lt;tibble[,4] [380 × 4]&gt;
+#&gt; 2 AE    &lt;tibble[,4] [520 × 4]&gt;
+#&gt; 3 AF    &lt;tibble[,4] [480 × 4]&gt;
+#&gt; 4 AG    &lt;tibble[,4] [540 × 4]&gt;
+#&gt; 5 AI    &lt;tibble[,4] [440 × 4]&gt;
+#&gt; 6 AL    &lt;tibble[,4] [540 × 4]&gt;
+#&gt; # … with 207 more rows
+```
+]
+
+???
+
+* complex objs in tibble
+
+---
+
+## Modelling in scale
+
+
+```r
+tb_fit &lt;- tb_tidy %&gt;% 
+  nest(data = year:cases) %&gt;% 
+  mutate( # below for week 11
+    model = map(data, lm),
+    intercept = map_dbl(model, ~ coef(.)[1]),
+    slope = map_dbl(model, ~ coef(.)[2])
+  )
+```
+
+```
+#&gt; # A tibble: 213 x 5
+#&gt;   iso2  data                   model  intercept  slope
+#&gt;   &lt;chr&gt; &lt;list&gt;                 &lt;list&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+#&gt; 1 AD    &lt;tibble[,4] [380 × 4]&gt; &lt;lm&gt;       1999. -0.291
+#&gt; 2 AE    &lt;tibble[,4] [520 × 4]&gt; &lt;lm&gt;       1998.  0.177
+#&gt; 3 AF    &lt;tibble[,4] [480 × 4]&gt; &lt;lm&gt;       1992.  2.08 
+#&gt; 4 AG    &lt;tibble[,4] [540 × 4]&gt; &lt;lm&gt;       1992.  0.140
+#&gt; 5 AI    &lt;tibble[,4] [440 × 4]&gt; &lt;lm&gt;       2006.  0.300
+#&gt; 6 AL    &lt;tibble[,4] [540 × 4]&gt; &lt;lm&gt;       1995. -2.05 
+#&gt; # … with 207 more rows
+```
+
+???
+
+* holding others constant, change over years
+
+---
+
+.panelset[
+
+.panel[.panel-name[Plot]
+
+
+&lt;img src="figure/tb-mod-plot-1.png" width="1080" style="display: block; margin: auto;" /&gt;
+
+.panel[.panel-name[Code]
+
+
+```r
+tb_fit %&gt;% 
+  ggplot(aes(x = fct_reorder(iso2, slope), y = slope)) +
+  geom_hline(yintercept = 0, size = 0.8, colour = "grey") +
+  geom_point(aes(colour = slope &lt; 0), size = 0.8) +
+  scale_x_discrete(guide = guide_axis(n.dodge = 2)) +
+  theme_bw() +
+  theme(
+    axis.text.x = element_text(angle = 90, size = 5),
+    legend.position = "top"
+  )
+```
+]
+]
+]
+
+---
+
+## Your turn
+
+Auckland weather data from GHCND (`data/ghcnd/ghcnd-akl.csv`):
+
+1. Is `aklweather` tidy data?
+2. What are the data observations? What are the data variables?
+
+
+```r
+aklweather
+```
+
+```
+#&gt; # A tibble: 2,974 x 3
+#&gt;   date       datatype value
+#&gt;   &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt;
+#&gt; 1 2019-01-01 PRCP         0
+#&gt; 2 2019-01-01 TAVG       206
+#&gt; 3 2019-01-01 TMAX       232
+#&gt; 4 2019-01-01 TMIN       188
+#&gt; 5 2019-01-02 PRCP         5
+#&gt; 6 2019-01-02 TAVG       207
+#&gt; # … with 2,968 more rows
+```
+
+<div class="countdown" id="timer_6072818a" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+???
+
+demo on `read_csv2()`
 
 ---
 

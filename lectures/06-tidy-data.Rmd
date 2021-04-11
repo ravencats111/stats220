@@ -59,25 +59,296 @@ background-size: contain
 
 ---
 
-## tidy data <i class="fas fa-not-equal"></i> clean data
+## .center[tidy data <i class="fas fa-not-equal"></i> clean data]
 
-.center[.brown[Tidy data is organising data in a consistent format, not cleaning data.]]
+.brown[.center[The `movies` data is tidy but not clean.]]
 
-Tabular data is column-oriented format
+```{r movies, echo = FALSE, highlight.output = 6}
+```
+
+---
+
+## .center[tidy data <i class="fas fa-not-equal"></i> clean data]
+
+.brown[.center[They are tidy and clean in their own way.]]
+
+.pull-left[
+* `time_use`
+```{r timeuse, echo = FALSE}
+```
+]
+.pull-right[
+* `countrycode`
+```{r country, echo = FALSE}
+```
+]
 
 ???
 
-Can you easily plot a dataset like this using ggplot2?
+* Data cleaning is laborious, and highly dependent on the data itself.
+* No golden standards or principles to guide how to clean data.
+
+---
+
+class: middle inverse
+
+# Tidy data describes a standard way of storing data in .blue[a consistent format].
+
+---
+
+## Your turn
+
+Tuberculosis data from WHO (`data/tb.csv`):
+1. Is `tb` tidy data?
+2. What are the data observations? What are the data variables?
+
+```r
+tb
+```
+
+```{r tb, echo = FALSE}
+```
+
+`r countdown::countdown(minutes = 1, seconds = 0, font_size = "48px", top = 0)`
+
+???
+
+* Can you easily plot a dataset like this using ggplot2? by sex and age
+* come back later
 
 ---
 
 class: center
 
+## one data, many representations
+
 <img src="https://github.com/gadenbuie/tidyexplain/raw/master/images/static/png/original-dfs-tidy.png" height="520px">
 
-## one data, two representations
+.left[.footnote[image credit: Garrick Aden-Buie]]
+
+???
+
+* which rep does `tb` resemble?
+* which rep is easier to work with?
 
 ---
+
+background-image: url(https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidydata_1.jpg)
+background-size: contain
+
+???
+
+* Tidy data principles are a rephrase of third norm in a database schema design.
+<https://en.wikipedia.org/wiki/Third_normal_form>
+
+* tidy data is for human consumption.
+
+---
+
+background-image: url(https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidydata_2.jpg)
+background-size: contain
+
+---
+
+background-image: url(https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidydata_5.jpg)
+background-size: contain
+
+## Making friends with tidy data
+
+* one set of consistent tools for different datasets
+* easier for automation and iteration
+
+.footnote[credit: Illustrations from the Openscapes blog [Tidy Data for reproducibility, efficiency, and collaboration](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst]
+
+???
+
+* To work with messy data, every time you need to switch to different gears
+* learn new tools that just works for that specific dataset
+* It's much more pleasant to work with tidy data, 
+* spent less flighting with different tools, focus more on data analyis bc one set of consistent tools
+* the {tidyverse} philosophy to work with the tidy data structures
+* Tabular data is column-oriented format
+
+---
+
+class: middle
+
+.pull-right[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="240px">](http://tidyr.tidyverse.org)]
+]
+.pull-left[
+```{r tidyr-gt, echo = FALSE}
+library(gt)
+tidyr <- tribble(
+  ~ type, ~ `fun1()`, ~ `fun2()`,
+  "**pivoting**", "`pivot_longer()`", "`pivot_wider()`",
+  "**splitting/combining**", "`seperate()`", "`unite()`",
+  "**nesting/unnesting**", "`nest()`", "`unnest()`",
+  "**missing**", "`complete()`", "`fill()`"
+)
+
+tidyr %>% 
+  gt() %>% 
+  fmt_markdown(everything()) %>% 
+  cols_label(
+    `fun1()` = md("`function()`"),
+    `fun2()` = md("`function()`")
+  ) %>% 
+  as_raw_html()
+```
+]
+
+---
+
+.pull-left[
+.x[
+* Messy
+]
+<hr>
+```{r tb-2, echo = FALSE, highlight.output = 2}
+print(tb, width = 36)
+```
+]
+
+.pull-right[
+.checked[
+* Tidy
+]
+<hr>
+```{r tb-fill, echo = FALSE, highlight.output = 2}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - pivot
+]
+.right-column[
+* `pivot_longer()` wide data
+```{r tb-pivot}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - pivot
+]
+.right-column[
+<br>
+.center[![](img/tidyr-longer-wider.gif)]
+]
+
+.footnote[image credit: Garrick Aden-Buie & Mara Averick]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - pivot
+### - split
+]
+.right-column[
+* `seperate()` a character column into multiple columns
+```{r tb-sep}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - pivot
+### - split
+### - fill
+]
+.right-column[
+* `fill()` in `NA` with previous (.brown[`"down"`]) or next (.brown[`"up"`]) value
+```{r tb-fill, echo = 1}
+```
+]
+
+???
+
+demo on `direction`
+
+---
+
+background-image:url(img/lst-col.png)
+background-position: 85% 50%
+background-size: 10%
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - pivot
+### - split
+### - fill
+### - nest
+]
+.right-column[
+* `nest()` creates a .brown[list-column] of tibbles
+```{r tb-nest}
+```
+]
+
+???
+
+* complex objs in tibble
+
+---
+
+## Modelling in scale
+
+```{r tb-mod, echo = 1}
+```
+
+???
+
+* holding others constant, change over years
+
+---
+
+.panelset[
+
+.panel[.panel-name[Plot]
+
+
+```{r tb-mod-plot, echo = FALSE, fig.width = 9, fig.height = 4.5}
+```
+
+.panel[.panel-name[Code]
+
+```{r ref.label = "tb-mod-plot", eval = FALSE}
+```
+]
+]
+]
+
+---
+
+## Your turn
+
+Auckland weather data from GHCND (`data/ghcnd/ghcnd-akl.csv`):
+
+1. Is `aklweather` tidy data?
+2. What are the data observations? What are the data variables?
+
+```{r aklweather, echo = 2}
+```
+
+`r countdown::countdown(minutes = 1, seconds = 0, font_size = "48px", top = 0)`
+
+???
+
+* demo on `read_csv2()`
+* temp values unbelievably large?
+
+---
+
+
 
 ---
 

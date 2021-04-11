@@ -1,56 +1,91 @@
+## ---- movies
 library(tidyverse)
-tb <- read_csv("data/tb.csv")
-tb
+movies <- as_tibble(jsonlite::read_json(
+  "https://vega.github.io/vega-editor/app/data/movies.json",
+  simplifyVector = TRUE))
 
+movies %>% 
+  relocate(Release_Date, US_DVD_Sales) %>% 
+  slice(37:39, 268:269) %>% 
+  print(width = 80)
+
+## ---- timeuse
+library(readxl)
+time_use <- read_xlsx("data/time-use-oecd.xlsx") %>% 
+  rename_with(~ c("country", "category", "minutes")) %>% 
+  filter(country %in% c("New Zealand", "USA")) %>% 
+  print(width = 40)
+
+## ---- country
+country_code <- read_csv("data/countrycode.csv") %>% 
+  filter(country_name %in% c("New Zealand", "United States")) %>% 
+  print()
+
+## ---- tb
+tb <- read_csv("data/tb.csv") %>% 
+  print(width = 80)
+
+## ---- tb-pivot
+library(tidyverse) # library(tidyr)
 tb %>% 
-  pivot_longer(cols = m_04:f_u, names_to = "sex_age", values_to = "cases")
+  pivot_longer(
+    cols = m_04:f_u, # cols in the data for pivoting #<<
+    names_to = "sex_age", # new col contains previous headers #<<
+    values_to = "cases") # new col contains previous values #<<
 
+## ---- tb-sep
 tb %>% 
-  pivot_longer(cols = m_04:f_u, names_to = "sex_age", values_to = "cases") %>% 
-  separate(sex_age, into = c("sex", "age"), sep = "_")
+  pivot_longer(cols = m_04:f_u, 
+    names_to = "sex_age", values_to = "cases") %>% 
+  separate(sex_age, into = c("sex", "age"), sep = "_") #<<
 
+## ---- tb-fill
 tb_tidy <- tb %>% 
-  pivot_longer(cols = m_04:f_u, names_to = "sex_age", values_to = "cases") %>% 
+  pivot_longer(cols = m_04:f_u, 
+    names_to = "sex_age", values_to = "cases") %>% 
   separate(sex_age, into = c("sex", "age"), sep = "_") %>% 
   group_by(iso2) %>% 
-  fill(cases, .direction = "updown") %>% 
+  fill(cases, .direction = "updown") %>% #<<
   ungroup()
 tb_tidy
 
+## ---- tb-nest
 tb_tidy %>% 
   nest(data = year:cases)
 
-tb_tidy %>% 
+## ---- tb-mod
+tb_fit <- tb_tidy %>% 
   nest(data = year:cases) %>% 
   mutate( # below for week 11
     model = map(data, lm),
     intercept = map_dbl(model, ~ coef(.)[1]),
     slope = map_dbl(model, ~ coef(.)[2])
   )
+tb_fit
   
-tb_tidy %>% 
-  nest(data = year:cases) %>% 
-  mutate(
-    model = map(data, lm),
-    intercept = map_dbl(model, ~ coef(.)[1]),
-    slope = map_dbl(model, ~ coef(.)[2])
-  ) %>% 
+## ---- tb-mod-plot
+tb_fit %>% 
   ggplot(aes(x = fct_reorder(iso2, slope), y = slope)) +
-  geom_point(aes(colour = slope < 0)) +
+  geom_hline(yintercept = 0, size = 0.8, colour = "grey") +
+  geom_point(aes(colour = slope < 0), size = 0.8) +
   scale_x_discrete(guide = guide_axis(n.dodge = 2)) +
-  theme(axis.text.x = element_text(angle = 90))
+  theme_bw() +
+  theme(
+    axis.text.x = element_text(angle = 90, size = 5),
+    legend.position = "top"
+  )
 
+## ---- aklweather
 aklweather <- read_csv2("data/ghcnd/ghcnd-akl.csv",
   col_types = cols_only(date = "D", datatype = "c", value = "d"))
 aklweather
 
-aklweather %>%
-  mutate(value = value / 10)
-
+## ---- akl-pivot
 aklweather %>%
   mutate(value = value / 10) %>% 
   pivot_wider(names_from = datatype, values_from = value)
 
+## ---- akl-rename
 aklweather_tidy <- aklweather %>%
   mutate(value = value / 10) %>% 
   pivot_wider(names_from = datatype, values_from = value) %>% 
