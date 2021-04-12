@@ -559,8 +559,6 @@ Why ribbon is missing in the end?
 .center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
 ]
 .pull-right[
-* [Factors](https://r4ds.had.co.nz/factors.html)
-* [Dates and times](https://r4ds.had.co.nz/dates-and-times.html)
-* [{forcats} cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/factors.pdf)
-* [{lubridate} cheatsheet](https://rawgit.com/rstudio/cheatsheets/master/lubridate.pdf)
+* [Tidy data](https://r4ds.had.co.nz/tidy-data.html)
+* [{tidyr} cheatsheet](https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf)
 ]
