@@ -226,7 +226,7 @@ print(tb, width = 36)
 ### - pivot
 ]
 .right-column[
-* `pivot_longer()` wide data
+* `pivot_longer()` a wider-format data
 ```{r tb-pivot}
 ```
 ]
@@ -289,7 +289,7 @@ background-size: 10%
 ### - nest
 ]
 .right-column[
-* `nest()` creates a .brown[list-column] of tibbles
+* `nest()` multiple columns into a .brown[list-column]
 ```{r tb-nest}
 ```
 ]
@@ -300,14 +300,14 @@ background-size: 10%
 
 ---
 
-## Modelling in scale
+## Building many models
 
 ```{r tb-mod, echo = 1}
 ```
 
 ???
 
-* holding others constant, change over years
+* r2 for each country
 
 ---
 
@@ -343,12 +343,213 @@ Auckland weather data from GHCND (`data/ghcnd/ghcnd-akl.csv`):
 
 ???
 
+The `value` column contains multiple types of measurements.
+
+---
+
+.pull-left[
+.x[
+* Messy
+]
+<hr>
+```{r ref.label = "aklweather", echo = FALSE, highlight.output = 2}
+```
+```{r ref.label = "aklweather", eval = FALSE}
+```
+]
+
+.pull-right[
+.checked[
+* Tidy
+]
+<hr>
+```{r akl-wide, echo = FALSE, highlight.output = 2}
+```
+]
+
+???
+
 * demo on `read_csv2()`
 * temp values unbelievably large?
 
 ---
 
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - calibrate
+]
+.right-column[
+* calibrate the measurements
+```{r akl-clean}
+```
+]
 
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+]
+.right-column[
+* `pivot_wider()` a longer-format data
+```{r akl-pivot}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+]
+.right-column[
+<br>
+.center[![](img/tidyr-longer-wider.gif)]
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+### - rename
+]
+.right-column[
+* `rename_with()` renames columns using a function
+```{r akl-rename}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+### - rename
+### - complete
+]
+.right-column[
+* `complete()` data with missing combinations of data
+```{r akl-complete, highlight.output = 7}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+### - rename
+### - complete
+### - wrangle
+]
+.right-column[
+```{r akl-rainfall}
+```
+]
+
+---
+
+## Your turn
+
+<br>
+> 1. Why do I fill `0` to missing `prcp`, instead of leaving `NA` as is?
+> 2. Why do I calculate monthly cumulative precipitations?
+
+`r countdown::countdown(minutes = 0, seconds = 30, font_size = "48px", top = 0)`
+
+???
+
+Now you need to think why I make this decision not that decision?
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+### - rename
+### - complete
+### - wrangle
+### - visualise
+]
+.right-column[
+<br>
+.panelset[
+
+.panel[.panel-name[Plot]
+
+
+```{r akl-rainfall-plot, echo = FALSE, fig.width = 7, fig.height = 3.5}
+```
+
+.panel[.panel-name[Code]
+
+```{r ref.label = "akl-rainfall-plot", eval = FALSE}
+```
+]
+]
+]
+]
+
+???
+
+* felt super try in 2020 summer
+* Rainfall in last summer lower than the year before
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+### - rename
+### - complete
+### - wrangle
+]
+.right-column[
+```{r akl-monthly}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+### - rename
+### - complete
+### - wrangle
+### - visualise
+]
+.right-column[
+<br>
+.panelset[
+
+.panel[.panel-name[Plot]
+
+
+```{r akl-monthly-plot, echo = FALSE, fig.width = 7, fig.height = 3.5}
+```
+
+.panel[.panel-name[Code]
+
+```{r ref.label = "akl-monthly-plot", eval = FALSE}
+```
+]
+]
+]
+]
+
+???
+
+Why ribbon is missing in the end?
 
 ---
 

@@ -22,3 +22,5 @@ A list of datasets (`data/`) used in the course:
 * `step-count/` Dr Wang's hourly step counts in 2019
   + [`step-count.csv`](https://raw.githubusercontent.com/STATS-UOA/stats220/master/lectures/data/step-count/step-count.csv)
   + [`location.csv`](https://raw.githubusercontent.com/STATS-UOA/stats220/master/lectures/data/step-count/location.csv)
+* [`tb.csv`](https://raw.githubusercontent.com/STATS-UOA/stats220/master/lectures/data/tb.csv) Tuberculosis data from WHO
+* [`ghcnd/ghcnd-akl.csv`](https://raw.githubusercontent.com/STATS-UOA/stats220/master/lectures/data/ghcnd/ghcnd-akl.csv) Auckland daily temperatures and precipitations, sourced from [Global Historical Climatology Network Daily](https://www.ncdc.noaa.gov/ghcnd-data-access)

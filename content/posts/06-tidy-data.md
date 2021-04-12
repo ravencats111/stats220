@@ -2,9 +2,10 @@
 title: "Tidy data"
 week: 6
 img: "https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/tidydata_7.jpg"
-slides: ""
-r: ""
-rmd: ""
+slides: "06-tidy-data.html"
+obj: "objs/obj06"
+r: "06-tidy-data.R"
+rmd: "06-tidy-data.Rmd"
 lab:
 sol:
 ---

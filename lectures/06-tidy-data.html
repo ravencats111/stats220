@@ -144,7 +144,7 @@ tb
 #&gt; #   f_5564 &lt;dbl&gt;, f_65 &lt;dbl&gt;, f_u &lt;dbl&gt;
 ```
 
-<div class="countdown" id="timer_60728259" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<div class="countdown" id="timer_6073cec3" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -320,15 +320,15 @@ class: middle
 ### - pivot
 ]
 .right-column[
-* `pivot_longer()` wide data
+* `pivot_longer()` a wider-format data
 
 ```r
 library(tidyverse) # library(tidyr)
 tb %&gt;% 
   pivot_longer(
 *   cols = m_04:f_u, # cols in the data for pivoting
-*   names_to = "sex_age", # new col contains previous headers
-*   values_to = "cases") # new col contains previous values
+*   names_to = "sex_age", # new col contains old headers
+*   values_to = "cases") # new col contains old values
 ```
 
 ```
@@ -442,7 +442,7 @@ background-size: 10%
 ### - nest
 ]
 .right-column[
-* `nest()` creates a .brown[list-column] of tibbles
+* `nest()` multiple columns into a .brown[list-column]
 
 ```r
 tb_tidy %&gt;% 
@@ -469,35 +469,34 @@ tb_tidy %&gt;%
 
 ---
 
-## Modelling in scale
+## Building many models
 
 
 ```r
 tb_fit &lt;- tb_tidy %&gt;% 
   nest(data = year:cases) %&gt;% 
   mutate( # below for week 11
-    model = map(data, lm),
-    intercept = map_dbl(model, ~ coef(.)[1]),
-    slope = map_dbl(model, ~ coef(.)[2])
+    model = map(data, ~ lm(cases ~ year + sex + age, data = .)),
+    r2 = map_dbl(model, ~ broom::glance(.)$r.squared)
   )
 ```
 
 ```
-#&gt; # A tibble: 213 x 5
-#&gt;   iso2  data                   model  intercept  slope
-#&gt;   &lt;chr&gt; &lt;list&gt;                 &lt;list&gt;     &lt;dbl&gt;  &lt;dbl&gt;
-#&gt; 1 AD    &lt;tibble[,4] [380 × 4]&gt; &lt;lm&gt;       1999. -0.291
-#&gt; 2 AE    &lt;tibble[,4] [520 × 4]&gt; &lt;lm&gt;       1998.  0.177
-#&gt; 3 AF    &lt;tibble[,4] [480 × 4]&gt; &lt;lm&gt;       1992.  2.08 
-#&gt; 4 AG    &lt;tibble[,4] [540 × 4]&gt; &lt;lm&gt;       1992.  0.140
-#&gt; 5 AI    &lt;tibble[,4] [440 × 4]&gt; &lt;lm&gt;       2006.  0.300
-#&gt; 6 AL    &lt;tibble[,4] [540 × 4]&gt; &lt;lm&gt;       1995. -2.05 
+#&gt; # A tibble: 213 x 4
+#&gt;   iso2  data                   model     r2
+#&gt;   &lt;chr&gt; &lt;list&gt;                 &lt;list&gt; &lt;dbl&gt;
+#&gt; 1 AD    &lt;tibble[,4] [380 × 4]&gt; &lt;lm&gt;   0.165
+#&gt; 2 AE    &lt;tibble[,4] [520 × 4]&gt; &lt;lm&gt;   0.133
+#&gt; 3 AF    &lt;tibble[,4] [480 × 4]&gt; &lt;lm&gt;   0.487
+#&gt; 4 AG    &lt;tibble[,4] [540 × 4]&gt; &lt;lm&gt;   0.220
+#&gt; 5 AI    &lt;tibble[,4] [440 × 4]&gt; &lt;lm&gt;   0.515
+#&gt; 6 AL    &lt;tibble[,4] [540 × 4]&gt; &lt;lm&gt;   0.478
 #&gt; # … with 207 more rows
 ```
 
 ???
 
-* holding others constant, change over years
+* r2 for each country
 
 ---
 
@@ -513,14 +512,14 @@ tb_fit &lt;- tb_tidy %&gt;%
 
 ```r
 tb_fit %&gt;% 
-  ggplot(aes(x = fct_reorder(iso2, slope), y = slope)) +
-  geom_hline(yintercept = 0, size = 0.8, colour = "grey") +
-  geom_point(aes(colour = slope &lt; 0), size = 0.8) +
-  scale_x_discrete(guide = guide_axis(n.dodge = 2)) +
+  ggplot(aes(x = fct_reorder(iso2, r2), y = r2)) +
+  geom_hline(yintercept = 0.5, size = 0.8, colour = "grey") +
+  geom_point(aes(colour = r2 &lt; 0.5), size = 0.8) +
+* scale_x_discrete(guide = guide_axis(n.dodge = 2)) +
   theme_bw() +
   theme(
     axis.text.x = element_text(angle = 90, size = 5),
-    legend.position = "top"
+*   legend.position = "top"
   )
 ```
 ]
@@ -554,13 +553,382 @@ aklweather
 #&gt; # … with 2,968 more rows
 ```
 
-<div class="countdown" id="timer_6072818a" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<div class="countdown" id="timer_6073ce93" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
 ???
 
-demo on `read_csv2()`
+The `value` column contains multiple types of measurements.
+
+---
+
+.pull-left[
+.x[
+* Messy
+]
+&lt;hr&gt;
+
+```
+#&gt; # A tibble: 2,974 x 3
+*#&gt;   date       datatype value
+#&gt;   &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt;
+#&gt; 1 2019-01-01 PRCP         0
+#&gt; 2 2019-01-01 TAVG       206
+#&gt; 3 2019-01-01 TMAX       232
+#&gt; 4 2019-01-01 TMIN       188
+#&gt; 5 2019-01-02 PRCP         5
+#&gt; 6 2019-01-02 TAVG       207
+#&gt; # … with 2,968 more rows
+```
+
+```r
+aklweather &lt;- read_csv2(
+  "data/ghcnd/ghcnd-akl.csv",
+  col_types = cols_only(
+    date = "D", datatype = "c", 
+    value = "d"))
+aklweather
+```
+]
+
+.pull-right[
+.checked[
+* Tidy
+]
+&lt;hr&gt;
+
+```
+#&gt; # A tibble: 816 x 5
+*#&gt;   date        PRCP  TAVG  TMAX  TMIN
+#&gt;   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 2019-01-01     0   206   232   188
+#&gt; 2 2019-01-02     5   207   230   183
+#&gt; 3 2019-01-03     0   211   241   184
+#&gt; 4 2019-01-04     0   192   229    NA
+#&gt; 5 2019-01-05     0   200   233   150
+#&gt; 6 2019-01-06     0   213   237   169
+#&gt; # … with 810 more rows
+```
+]
+
+???
+
+* demo on `read_csv2()`
+* temp values unbelievably large?
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%"&gt;](http://tidyr.tidyverse.org)]
+### - calibrate
+]
+.right-column[
+* calibrate the measurements
+
+```r
+aklweather %&gt;%
+  mutate(value = value / 10)
+```
+
+```
+#&gt; # A tibble: 2,974 x 3
+#&gt;   date       datatype value
+#&gt;   &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt;
+#&gt; 1 2019-01-01 PRCP       0  
+#&gt; 2 2019-01-01 TAVG      20.6
+#&gt; 3 2019-01-01 TMAX      23.2
+#&gt; 4 2019-01-01 TMIN      18.8
+#&gt; 5 2019-01-02 PRCP       0.5
+#&gt; 6 2019-01-02 TAVG      20.7
+#&gt; # … with 2,968 more rows
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%"&gt;](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+]
+.right-column[
+* `pivot_wider()` a longer-format data
+
+```r
+aklweather %&gt;%
+  mutate(value = value / 10) %&gt;% 
+  pivot_wider(
+*   names_from = datatype, # new headers from old `datatype` val
+*   values_from = value)  # new col contains old `value`
+```
+
+```
+#&gt; # A tibble: 816 x 5
+#&gt;   date        PRCP  TAVG  TMAX  TMIN
+#&gt;   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 2019-01-01   0    20.6  23.2  18.8
+#&gt; 2 2019-01-02   0.5  20.7  23    18.3
+#&gt; 3 2019-01-03   0    21.1  24.1  18.4
+#&gt; 4 2019-01-04   0    19.2  22.9  NA  
+#&gt; 5 2019-01-05   0    20    23.3  15  
+#&gt; 6 2019-01-06   0    21.3  23.7  16.9
+#&gt; # … with 810 more rows
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%"&gt;](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+]
+.right-column[
+&lt;br&gt;
+.center[![](img/tidyr-longer-wider.gif)]
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%"&gt;](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+### - rename
+]
+.right-column[
+* `rename_with()` renames columns using a function
+
+```r
+aklweather_tidy &lt;- aklweather %&gt;%
+  mutate(value = value / 10) %&gt;% 
+  pivot_wider(
+    names_from = datatype,
+    values_from = value) %&gt;%
+  rename_with(tolower)
+aklweather_tidy
+```
+
+```
+#&gt; # A tibble: 816 x 5
+#&gt;   date        prcp  tavg  tmax  tmin
+#&gt;   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 2019-01-01   0    20.6  23.2  18.8
+#&gt; 2 2019-01-02   0.5  20.7  23    18.3
+#&gt; 3 2019-01-03   0    21.1  24.1  18.4
+#&gt; 4 2019-01-04   0    19.2  22.9  NA  
+#&gt; 5 2019-01-05   0    20    23.3  15  
+#&gt; 6 2019-01-06   0    21.3  23.7  16.9
+#&gt; # … with 810 more rows
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%"&gt;](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+### - rename
+### - complete
+]
+.right-column[
+* `complete()` data with missing combinations of data
+
+```r
+library(lubridate)
+aklweather_tidy %&gt;% 
+  complete(date = full_seq(
+    ymd(c("2019-01-01", "2021-04-01")), 1))
+```
+
+```
+#&gt; # A tibble: 822 x 5
+#&gt;   date        prcp  tavg  tmax  tmin
+#&gt;   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 2019-01-01   0    20.6  23.2  18.8
+#&gt; 2 2019-01-02   0.5  20.7  23    18.3
+#&gt; 3 2019-01-03   0    21.1  24.1  18.4
+*#&gt; 4 2019-01-04   0    19.2  22.9  NA  
+#&gt; 5 2019-01-05   0    20    23.3  15  
+#&gt; 6 2019-01-06   0    21.3  23.7  16.9
+#&gt; # … with 816 more rows
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%"&gt;](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+### - rename
+### - complete
+### - wrangle
+]
+.right-column[
+
+```r
+akl_prcp &lt;- aklweather_tidy %&gt;% 
+  complete(
+    date = full_seq(ymd(c("2019-01-01", "2021-04-01")), 1),
+*   fill = list(prcp = 0)
+  ) %&gt;% 
+  group_by(yearmonth = floor_date(date, "1 month")) %&gt;% 
+  mutate(cum_prcp = cumsum(prcp)) %&gt;% 
+  ungroup()
+akl_prcp
+```
+
+```
+#&gt; # A tibble: 822 x 7
+#&gt;   date        prcp  tavg  tmax  tmin yearmonth  cum_prcp
+#&gt;   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;date&gt;        &lt;dbl&gt;
+#&gt; 1 2019-01-01   0    20.6  23.2  18.8 2019-01-01      0  
+#&gt; 2 2019-01-02   0.5  20.7  23    18.3 2019-01-01      0.5
+#&gt; 3 2019-01-03   0    21.1  24.1  18.4 2019-01-01      0.5
+#&gt; 4 2019-01-04   0    19.2  22.9  NA   2019-01-01      0.5
+#&gt; 5 2019-01-05   0    20    23.3  15   2019-01-01      0.5
+#&gt; 6 2019-01-06   0    21.3  23.7  16.9 2019-01-01      0.5
+#&gt; # … with 816 more rows
+```
+]
+
+---
+
+## Your turn
+
+&lt;br&gt;
+&gt; 1. Why do I fill `0` to missing `prcp`, instead of leaving `NA` as is?
+&gt; 2. Why do I calculate monthly cumulative precipitations?
+
+<div class="countdown" id="timer_6073cce4" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">00</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">30</span></code>
+</div>
+
+???
+
+Now you need to think why I make this decision not that decision?
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%"&gt;](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+### - rename
+### - complete
+### - wrangle
+### - visualise
+]
+.right-column[
+&lt;br&gt;
+.panelset[
+
+.panel[.panel-name[Plot]
+
+
+&lt;img src="figure/akl-rainfall-plot-1.png" width="840" style="display: block; margin: auto;" /&gt;
+
+.panel[.panel-name[Code]
+
+
+```r
+akl_prcp %&gt;% 
+  ggplot(aes(date, cum_prcp)) +
+  geom_area(fill = "#3182bd", alpha = 0.8) +
+  geom_text(
+    aes(label = cum_prcp),
+*   data = akl_prcp %&gt;% filter(date %in% rollforward(date)),
+    nudge_y = 3
+  )
+```
+]
+]
+]
+]
+
+???
+
+* felt super try in 2020 summer
+* Rainfall in last summer lower than the year before
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%"&gt;](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+### - rename
+### - complete
+### - wrangle
+]
+.right-column[
+
+```r
+akl_monthly_temp &lt;- aklweather_tidy %&gt;% 
+  group_by(yearmonth = floor_date(date, "1 month")) %&gt;% 
+  summarise(
+    tavg = mean(tavg, na.rm = TRUE),
+    tmax = mean(tmax, na.rm = TRUE),
+    tmin = mean(tmin, na.rm = TRUE)
+  )
+akl_monthly_temp
+```
+
+```
+#&gt; # A tibble: 28 x 4
+#&gt;   yearmonth   tavg  tmax  tmin
+#&gt;   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 2019-01-01  20.6  24.4 17.3 
+#&gt; 2 2019-02-01  20.4  25.2 16.1 
+#&gt; 3 2019-03-01  19.7  24.5 15.6 
+#&gt; 4 2019-04-01  15.6  20.0 10.5 
+#&gt; 5 2019-05-01  14.8  18.9 10.2 
+#&gt; 6 2019-06-01  11.7  15.4  7.62
+#&gt; # … with 22 more rows
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%"&gt;](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+### - rename
+### - complete
+### - wrangle
+### - visualise
+]
+.right-column[
+&lt;br&gt;
+.panelset[
+
+.panel[.panel-name[Plot]
+
+
+&lt;img src="figure/akl-monthly-plot-1.png" width="840" style="display: block; margin: auto;" /&gt;
+
+.panel[.panel-name[Code]
+
+
+```r
+akl_monthly_temp %&gt;% 
+  ggplot(aes(yearmonth, tavg, ymin = tmin, ymax = tmax)) +
+  geom_line() +
+  geom_ribbon(fill = "#e6550d", alpha = 0.8) +
+* scale_x_date(date_labels = "%Y %b")
+```
+]
+]
+]
+]
+
+???
+
+Why ribbon is missing in the end?
 
 ---
 
