@@ -1,0 +1,502 @@
+---
+title: "STATS 220"
+subtitle: "Effective data visualisation`r emo::ji('woman_artist')`"
+type: "lecture"
+date: ""
+output:
+  xaringan::moon_reader:
+    css: ["assets/remark.css"]
+    lib_dir: libs
+    beforeInit: ["https://platform.twitter.com/widgets.js"]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+class: inverse middle
+
+```{r initial, echo = FALSE, cache = FALSE, results = 'hide'}
+library(knitr)
+options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE, 
+  tibble.width = 60, tibble.print_min = 6)
+opts_chunk$set(
+  echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
+  fig.path = 'figure/', cache.path = 'cache/', cache = FALSE, fig.retina = 3,
+  fig.align = 'center', fig.width = 4.5, fig.height = 4, fig.show = 'hold',
+  dpi = 120
+)
+```
+
+```{r xaringan-panelset, echo = FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r external, include = FALSE, cache = FALSE}
+read_chunk('R/07-data-vis2.R')
+```
+
+## Graphical perception `r emo::ji("eyes")`
+
+--
+
+### .blue[1.] Preattentive processing
+### .blue[2.] Proximity
+### .blue[3.] Position vs angle
+### .blue[4.] Colour matters
+
+---
+
+## Preattentive processing
+
+.pull-left[
+```{r t-shape, echo = FALSE, fig.width = 2.3, fig.height = 2.3}
+```
+]
+
+--
+
+.pull-right[
+```{r shape, echo = FALSE, fig.width = 2.3, fig.height = 2.3}
+```
+]
+
+--
+
+.center[
+```{r colour, echo = FALSE, fig.width = 2.3, fig.height = 2.3}
+```
+]
+
+---
+
+## Preattentive processing .small[.green[colour > form (shape)]]
+
+.pull-left[
+```{r t-shape2, ref.label = "t-shape", echo = FALSE, fig.width = 2.3, fig.height = 2.3}
+```
+]
+
+.pull-right[
+```{r shape2, ref.label = "shape", echo = FALSE, fig.width = 2.3, fig.height = 2.3}
+```
+]
+
+.center[
+```{r colour2, ref.label = "colour", echo = FALSE, fig.width = 2.3, fig.height = 2.3}
+```
+]
+
+---
+
+## Proximity .small[.green[Make easy comparisons by grouping elements together]]
+
+```{r time-use, echo = FALSE}
+```
+
+.pull-left[
+* compare time use in categories by country
+```{r fill-cat, fig.width = 4, fig.height = 4, echo = FALSE}
+```
+]
+.pull-right[
+* compare time use in countries by category
+```{r fill-country, fig.width = 4, fig.height = 4, echo = FALSE}
+```
+]
+
+---
+
+## Position vs angle .small[.green[]]
+
+.pull-left[
+```{r "fill-country2", ref.label = "fill-country", fig.width = 4, fig.height = 4, echo = FALSE}
+```
+]
+.pull-right[
+```{r angle, fig.width = 4, fig.height = 4, echo = FALSE}
+```
+]
+
+---
+
+## Absolute vs relative positions .small[.green[]]
+
+.pull-left[
+```{r fill-country3, ref.label = "fill-country", fig.width = 4, fig.height = 4, echo = FALSE}
+```
+]
+.pull-right[
+```{r rel-pos, fig.width = 4, fig.height = 4, echo = FALSE}
+```
+]
+
+---
+
+## Qualitative palettes .small[.green[for categorical data with no particular ordering]]
+
+```{r colorspace-q, fig.height = 4}
+```
+
+---
+
+## Sequential palettes .small[.green[for ordered data from low to high]]
+
+```{r colorspace-s, fig.height = 4, fig.width = 8.5}
+```
+
+---
+
+## Diverging palettes .small[.green[for mid-range values and extremes at both ends]]
+
+```{r colorspace-d, fig.height = 4, fig.width = 5}
+```
+
+---
+
+## Use colour palettes
+
+.pull-left[
+<br>
+```{r gg-palette, eval = FALSE}
+```
+]
+.pull-right[
+```{r gg-palette2, ref.label = "gg-palette", echo = FALSE}
+```
+]
+
+???
+
+* `scale_[aes]_()` to change the default scales
+
+---
+
+## Set custom colours
+
+.pull-left[
+<br>
+```{r gg-manual, eval = FALSE}
+```
+]
+.pull-right[
+```{r gg-manual2, ref.label = "gg-manual", echo = FALSE}
+```
+]
+
+---
+
+## Colour blindness
+
+---
+
+class: inverse middle
+
+## Publication-ready visualisation `r emo::ji("woman_artist")`
+
+---
+
+.left-column[
+## Towards publication-ready visualisation
+]
+.right-column[
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/MakingOf?src=hash&amp;ref_src=twsrc%5Etfw">#MakingOf</a> of last week&#39;s <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> plot <a href="https://t.co/Jsg41id5Nw">https://t.co/Jsg41id5Nw</a> <a href="https://t.co/dP6tSrjHy0">pic.twitter.com/dP6tSrjHy0</a></p>&mdash; Georgios Karamanis (@geokaramanis) <a href="https://twitter.com/geokaramanis/status/1374066377879908358?ref_src=twsrc%5Etfw">March 22, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+]
+
+---
+
+class: middle
+
+## Case study: COVID-19
+
+```{r covid}
+```
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+]
+.right-column[
+<br>
+.panelset[
+
+.panel[.panel-name[Plot]
+
+```{r covid-scale0, echo = FALSE, fig.width = 7, fig.height = 3.5}
+```
+
+.panel[.panel-name[Code]
+
+```{r ref.label = "covid-scale0", eval = FALSE}
+```
+]
+]
+]
+]
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+]
+.right-column[
+<br>
+.panelset[
+
+.panel[.panel-name[Plot]
+
+```{r covid-scale1, echo = FALSE, fig.width = 7, fig.height = 3.5}
+```
+
+.panel[.panel-name[Code]
+
+```{r ref.label = "covid-scale1", eval = FALSE}
+```
+]
+]
+]
+]
+
+???
+
+perceive the change rate
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+]
+.right-column[
+<br>
+.panelset[
+
+.panel[.panel-name[Plot]
+
+```{r covid-scale-log10, echo = FALSE, fig.width = 7, fig.height = 3.5}
+```
+
+.panel[.panel-name[Code]
+
+```{r ref.label = "covid-scale-log10", eval = FALSE}
+```
+]
+]
+]
+
+.footnote[Rob J Hyndman's blog post on [Why log ratios are useful for tracking COVID-19](https://robjhyndman.com/hyndsight/logratios-covid19/)]
+]
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+### - scale-x
+]
+.right-column[
+```{r covid-rel}
+```
+]
+
+???
+
+log(0) -> Inf
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+### - scale-x
+]
+.right-column[
+<br>
+.panelset[
+
+.panel[.panel-name[Plot]
+
+```{r covid-rel-p, echo = FALSE, fig.width = 7, fig.height = 3.5}
+```
+
+.panel[.panel-name[Code]
+
+```{r ref.label = "covid-rel-p", eval = FALSE}
+```
+]
+]
+]
+]
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+### - scale-x
+### - highlight
+]
+.right-column[
+<br>
+.panelset[
+
+.panel[.panel-name[Plot]
+
+```{r covid-rel-nz, echo = FALSE, fig.width = 7, fig.height = 3.5}
+```
+
+.panel[.panel-name[Code]
+
+```{r ref.label = "covid-rel-nz", eval = FALSE}
+```
+]
+]
+]
+]
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+### - scale-x
+### - highlight
+### - annotate
+]
+.right-column[
+<br>
+.panelset[
+
+.panel[.panel-name[Plot]
+
+```{r covid-rel-nz-lab, echo = FALSE, fig.width = 7, fig.height = 3.5}
+```
+
+.panel[.panel-name[Code]
+
+```{r ref.label = "covid-rel-nz-lab", eval = FALSE}
+```
+]
+]
+]
+]
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+### - scale-x
+### - highlight
+### - annotate
+### - limits
+]
+.right-column[
+<br>
+.panelset[
+
+.panel[.panel-name[Plot]
+
+```{r covid-rel-nz-lim, echo = FALSE, fig.width = 7, fig.height = 3.5}
+```
+
+.panel[.panel-name[Code]
+
+```{r ref.label = "covid-rel-nz-lim", eval = FALSE}
+```
+]
+]
+]
+]
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+### - scale-x
+### - highlight
+### - annotate
+### - limits
+### - labels
+]
+.right-column[
+<br>
+.panelset[
+
+.panel[.panel-name[Plot]
+
+```{r covid-rel-nz-title, echo = FALSE, fig.width = 7, fig.height = 3.5}
+```
+
+.panel[.panel-name[Code]
+
+```{r ref.label = "covid-rel-nz-title", eval = FALSE}
+```
+]
+]
+]
+]
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+### - scale-x
+### - highlight
+### - annotate
+### - limits
+### - labels
+### - theme
+]
+.right-column[
+<br>
+.panelset[
+
+.panel[.panel-name[Plot]
+
+```{r covid-rel-nz-theme, echo = FALSE, fig.width = 7, fig.height = 3.5}
+```
+
+.panel[.panel-name[Code]
+
+```{r ref.label = "covid-rel-nz-theme", eval = FALSE}
+```
+]
+]
+]
+]
+
+---
+
+class: inverse middle
+
+## Generative art
+
+---
+
+## .center[Thomas Lin Pedersen's [art works](https://www.data-imaginist.com/art)]
+<img src="https://d33wubrfki0l68.cloudfront.net/b0ca94c787e0e509fe70e7b9285fafffb47a649a/3b7de/art/005_genesis/genesis338_hu19fc60717d90451585acb0fb6a565bcb_106689_500x500_fill_box_center_2.png" width="280px">
+<img src="https://d33wubrfki0l68.cloudfront.net/62f4ab9648b5f2359756c5d7e7f4019defe7faf5/e68a3/art/008_emergence/emergence6802_hu7c58ad2a8fca059ec9ebad497d24566e_22821446_500x500_fill_box_center_2.png" width="280px">
+<img src="https://d33wubrfki0l68.cloudfront.net/c3f652266f3310fa6ef7bc6f8c1f3080cac74d2e/522f0/art/009_prism/prism627_hu5fd6b3df9c854c0c26e8cdeebe574e51_31622651_500x500_fill_box_center_2.png" width="280px">
+<img src="https://d33wubrfki0l68.cloudfront.net/64a2403d266498344f73af33668397e34e9b2b28/857ea/art/008_emergence/emergence526_huc93094888f54e1c55d93d2c9f1d65eda_17094834_500x500_fill_box_center_2.png" width="280px">
+<img src="https://d33wubrfki0l68.cloudfront.net/1d067ea931f5be062c1a93bf29fd1e292e84c72b/e1949/art/005_genesis/genesis99_hue66520854e953909155239426845f632_183306_500x500_fill_box_center_2.png" width="280px">
+<img src="https://d33wubrfki0l68.cloudfront.net/ba46a11d676efa5481fb8abc447539022241d5a5/4d746/art/003_unfold/unfold06_hu9cba8b0d8a0b0efc5b2fd5f2cd3f12c5_113220_500x500_fill_box_center_2.png" width="280px">
+<img src="https://d33wubrfki0l68.cloudfront.net/19592674aaa73f13cd74cee56c819f9efe6cec2c/39caf/art/007_storms/storms4500_hu299e9f5ad6cb567eb7c45aeae728a52d_2314689_500x500_fill_box_center_2.png" width="280px">
+<img src="https://d33wubrfki0l68.cloudfront.net/749bf5026fe35d4c1322a8ecde2c6a43294d463d/c2664/art/005_genesis/genesis9458_hu6cbae2b11ecd76683bfe4f6d913c2b92_401118_500x500_fill_box_center_2.png" width="280px">
+
+---
+
+## Reading
+
+.pull-left[
+.center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
+]
+.pull-right[
+* [Graphics for communication](https://r4ds.had.co.nz/graphics-for-communication.html)
+]

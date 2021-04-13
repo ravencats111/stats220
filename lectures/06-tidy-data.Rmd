@@ -300,7 +300,7 @@ background-size: 10%
 
 ---
 
-## Building many models
+## Building many models*
 
 ```{r tb-mod, echo = 1}
 ```

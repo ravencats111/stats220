@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STATS 220</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="assets/remark.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STATS 220
+## Effective data visualisation👩‍🎨
+
+---
+
+
+class: inverse middle
+
+
+
+
+
+
+
+## Graphical perception 👀
+
+--
+
+### .blue[1.] Preattentive processing
+### .blue[2.] Proximity
+### .blue[3.] Position vs angle
+### .blue[4.] Colour matters
+
+---
+
+## Preattentive processing
+
+.pull-left[
+&lt;img src="figure/t-shape-1.png" width="276" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.pull-right[
+&lt;img src="figure/shape-1.png" width="276" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.center[
+&lt;img src="figure/colour-1.png" width="276" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Preattentive processing .small[.green[colour &gt; form (shape)]]
+
+.pull-left[
+&lt;img src="figure/t-shape2-1.png" width="276" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+&lt;img src="figure/shape2-1.png" width="276" style="display: block; margin: auto;" /&gt;
+]
+
+.center[
+&lt;img src="figure/colour2-1.png" width="276" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Proximity .small[.green[Make easy comparisons by grouping elements together]]
+
+
+
+.pull-left[
+* compare time use in categories by country
+&lt;img src="figure/fill-cat-1.png" width="480" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+* compare time use in countries by category
+&lt;img src="figure/fill-country-1.png" width="480" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Position vs angle .small[.green[]]
+
+.pull-left[
+&lt;img src="figure/fill-country2-1.png" width="480" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="figure/angle-1.png" width="480" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Absolute vs relative positions .small[.green[]]
+
+.pull-left[
+&lt;img src="figure/fill-country3-1.png" width="480" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="figure/rel-pos-1.png" width="480" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Qualitative palettes .small[.green[for categorical data with no particular ordering]]
+
+
+```r
+colorspace::hcl_palettes("Qualitative", plot = TRUE, n = 7)
+```
+
+&lt;img src="figure/colorspace-q-1.png" width="540" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Sequential palettes .small[.green[for ordered data from low to high]]
+
+
+```r
+colorspace::hcl_palettes("Sequential", plot = TRUE, n = 7)
+```
+
+&lt;img src="figure/colorspace-s-1.png" width="1020" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Diverging palettes .small[.green[for mid-range values and extremes at both ends]]
+
+
+```r
+colorspace::hcl_palettes("Diverging", plot = TRUE, n = 7)
+```
+
+&lt;img src="figure/colorspace-d-1.png" width="600" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Use colour palettes
+
+.pull-left[
+&lt;br&gt;
+
+```r
+time_use %&gt;% 
+  ggplot(aes(country, time_minutes)) +
+  geom_col(
+    aes(fill = category), 
+    position = "dodge") +
+* scale_fill_brewer(palette = "Dark2") +
+  labs(y = "") +
+  theme(legend.position = "bottom")
+```
+]
+.pull-right[
+&lt;img src="figure/gg-palette2-1.png" width="540" style="display: block; margin: auto;" /&gt;
+]
+
+???
+
+* `scale_[aes]_()` to change the default scales
+
+---
+
+## Set custom colours
+
+.pull-left[
+&lt;br&gt;
+
+```r
+time_use %&gt;% 
+  ggplot(aes(country, time_minutes)) +
+  geom_col(
+    aes(fill = category),
+    position = "dodge") +
+* scale_fill_manual(
+*   values = c("#EF476F", "#FFD166",
+*              "#06D6A0", "#118AB2",
+*              "#073B4C", "grey")) +
+  labs(y = "") +
+  theme(legend.position = "bottom")
+```
+]
+.pull-right[
+&lt;img src="figure/gg-manual2-1.png" width="540" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Colour blindness
+
+---
+
+class: inverse middle
+
+## Publication-ready visualisation 👩‍🎨
+
+---
+
+.left-column[
+## Towards publication-ready visualisation
+]
+.right-column[
+&lt;blockquote class="twitter-tweet"&gt;&lt;p lang="en" dir="ltr"&gt;&lt;a href="https://twitter.com/hashtag/MakingOf?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#MakingOf&lt;/a&gt; of last week&amp;#39;s &lt;a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#TidyTuesday&lt;/a&gt; plot &lt;a href="https://t.co/Jsg41id5Nw"&gt;https://t.co/Jsg41id5Nw&lt;/a&gt; &lt;a href="https://t.co/dP6tSrjHy0"&gt;pic.twitter.com/dP6tSrjHy0&lt;/a&gt;&lt;/p&gt;&amp;mdash; Georgios Karamanis (@geokaramanis) &lt;a href="https://twitter.com/geokaramanis/status/1374066377879908358?ref_src=twsrc%5Etfw"&gt;March 22, 2021&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+]
+
+---
+
+class: middle
+
+## Case study: COVID-19
+
+
+```r
+covid19 &lt;- read_csv("data/covid19-daily-cases.csv")
+covid19
+```
+
+```
+#&gt; # A tibble: 15,677 x 3
+#&gt;   country_region date       confirmed
+#&gt;   &lt;chr&gt;          &lt;date&gt;         &lt;dbl&gt;
+#&gt; 1 Afghanistan    2020-03-01         1
+#&gt; 2 Afghanistan    2020-03-02         1
+#&gt; 3 Afghanistan    2020-03-03         2
+#&gt; 4 Afghanistan    2020-03-04         4
+#&gt; 5 Afghanistan    2020-03-05         4
+#&gt; 6 Afghanistan    2020-03-06         4
+#&gt; # … with 15,671 more rows
+```
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+]
+.right-column[
+&lt;br&gt;
+.panelset[
+
+.panel[.panel-name[Plot]
+
+&lt;img src="figure/covid-scale0-1.png" width="840" style="display: block; margin: auto;" /&gt;
+
+.panel[.panel-name[Code]
+
+
+```r
+covid19 %&gt;% 
+  ggplot(aes(
+    x = date, 
+    y = confirmed, 
+    colour = country_region)) +
+  geom_line() +
+* guides(colour = FALSE) # rm colour legend
+```
+]
+]
+]
+]
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+]
+.right-column[
+&lt;br&gt;
+.panelset[
+
+.panel[.panel-name[Plot]
+
+&lt;img src="figure/covid-scale1-1.png" width="840" style="display: block; margin: auto;" /&gt;
+
+.panel[.panel-name[Code]
+
+
+```r
+covid19 %&gt;% 
+  ggplot(aes(
+    x = date, 
+*   y = log10(confirmed),
+    colour = country_region)) +
+  geom_line() +
+  guides(colour = FALSE)
+```
+]
+]
+]
+]
+
+???
+
+perceive the change rate
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+]
+.right-column[
+&lt;br&gt;
+.panelset[
+
+.panel[.panel-name[Plot]
+
+&lt;img src="figure/covid-scale-log10-1.png" width="840" style="display: block; margin: auto;" /&gt;
+
+.panel[.panel-name[Code]
+
+
+```r
+covid19 %&gt;% 
+  ggplot(aes(
+    x = date, 
+    y = confirmed, 
+    colour = country_region)) +
+  geom_line() +
+  guides(colour = FALSE) +
+* scale_y_log10()
+```
+]
+]
+]
+
+.footnote[Rob J Hyndman's blog post on [Why log ratios are useful for tracking COVID-19](https://robjhyndman.com/hyndsight/logratios-covid19/)]
+]
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+### - scale-x
+]
+.right-column[
+
+```r
+covid19_rel &lt;- covid19 %&gt;% 
+* mutate(confirmed = na_if(confirmed, 0)) %&gt;%
+  group_by(country_region) %&gt;% 
+  mutate(days = as.numeric(date - min(date))) %&gt;% 
+  ungroup()
+covid19_rel
+```
+
+```
+#&gt; # A tibble: 15,677 x 4
+#&gt;   country_region date       confirmed  days
+#&gt;   &lt;chr&gt;          &lt;date&gt;         &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1 Afghanistan    2020-03-01         1     0
+#&gt; 2 Afghanistan    2020-03-02         1     1
+#&gt; 3 Afghanistan    2020-03-03         2     2
+#&gt; 4 Afghanistan    2020-03-04         4     3
+#&gt; 5 Afghanistan    2020-03-05         4     4
+#&gt; 6 Afghanistan    2020-03-06         4     5
+#&gt; # … with 15,671 more rows
+```
+]
+
+???
+
+log(0) -&gt; Inf
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+### - scale-x
+]
+.right-column[
+&lt;br&gt;
+.panelset[
+
+.panel[.panel-name[Plot]
+
+&lt;img src="figure/covid-rel-p-1.png" width="840" style="display: block; margin: auto;" /&gt;
+
+.panel[.panel-name[Code]
+
+
+```r
+covid19_rel %&gt;% 
+  ggplot(aes(
+    x = days,
+    y = confirmed, 
+    colour = country_region)) +
+  geom_line() +
+  scale_y_log10() +
+  guides(colour = FALSE)
+```
+]
+]
+]
+]
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+### - scale-x
+### - highlight
+]
+.right-column[
+&lt;br&gt;
+.panelset[
+
+.panel[.panel-name[Plot]
+
+&lt;img src="figure/covid-rel-nz-1.png" width="840" style="display: block; margin: auto;" /&gt;
+
+.panel[.panel-name[Code]
+
+
+```r
+p_nz &lt;- covid19_rel %&gt;% 
+  filter(country_region != "New Zealand") %&gt;% 
+  ggplot(aes(
+    x = days, y = confirmed, 
+*   group = country_region)) +
+  geom_line(colour = "grey", alpha = 0.5) +
+  geom_line(
+    colour = "#238b45", size = 1,
+    data = covid19_rel %&gt;% 
+      filter(country_region == "New Zealand")) +
+  scale_y_log10() +
+  guides(colour = FALSE)
+p_nz
+```
+]
+]
+]
+]
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+### - scale-x
+### - highlight
+### - annotate
+]
+.right-column[
+&lt;br&gt;
+.panelset[
+
+.panel[.panel-name[Plot]
+
+&lt;img src="figure/covid-rel-nz-lab-1.png" width="840" style="display: block; margin: auto;" /&gt;
+
+.panel[.panel-name[Code]
+
+
+```r
+p_nz &lt;- p_nz +
+  geom_label(aes(
+*   x = max(days), y = max(confirmed),
+    label = country_region),
+    colour = "#238b45", nudge_x = 3, nudge_y = .5,
+    data = covid19_rel %&gt;% 
+      filter(country_region == "New Zealand"))
+p_nz
+```
+]
+]
+]
+]
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+### - scale-x
+### - highlight
+### - annotate
+### - limits
+]
+.right-column[
+&lt;br&gt;
+.panelset[
+
+.panel[.panel-name[Plot]
+
+&lt;img src="figure/covid-rel-nz-lim-1.png" width="840" style="display: block; margin: auto;" /&gt;
+
+.panel[.panel-name[Code]
+
+
+```r
+p_nz &lt;- p_nz +
+* scale_y_log10(labels = scales::label_comma()) +
+* xlim(c(0, 100))
+p_nz
+```
+]
+]
+]
+]
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+### - scale-x
+### - highlight
+### - annotate
+### - limits
+### - labels
+]
+.right-column[
+&lt;br&gt;
+.panelset[
+
+.panel[.panel-name[Plot]
+
+&lt;img src="figure/covid-rel-nz-title-1.png" width="840" style="display: block; margin: auto;" /&gt;
+
+.panel[.panel-name[Code]
+
+
+```r
+p_nz &lt;- p_nz +
+  labs(
+    x = "Days since March 1",
+    y = "Confirmed cases (on log10)",
+    title = "Worldwide coronavirus confirmed cases",
+    subtitle = "highlighting New Zealand",
+    caption = "Data source: John Hopkins University, CSSE"
+  )
+p_nz
+```
+]
+]
+]
+]
+
+---
+
+.left-column[
+## COVID-19
+### - scale-y
+### - scale-x
+### - highlight
+### - annotate
+### - limits
+### - labels
+### - theme
+]
+.right-column[
+&lt;br&gt;
+.panelset[
+
+.panel[.panel-name[Plot]
+
+&lt;img src="figure/covid-rel-nz-theme-1.png" width="840" style="display: block; margin: auto;" /&gt;
+
+.panel[.panel-name[Code]
+
+
+```r
+# remotes::install_github("Financial-Times/ftplottools")
+p_nz +
+  ftplottools::ft_theme() +
+  theme(
+    plot.title.position = "plot", 
+    plot.background = element_rect(fill = "#FFF1E0"))
+```
+]
+]
+]
+]
+
+---
+
+class: inverse middle
+
+## Generative art
+
+---
+
+## .center[Thomas Lin Pedersen's [art works](https://www.data-imaginist.com/art)]
+&lt;img src="https://d33wubrfki0l68.cloudfront.net/b0ca94c787e0e509fe70e7b9285fafffb47a649a/3b7de/art/005_genesis/genesis338_hu19fc60717d90451585acb0fb6a565bcb_106689_500x500_fill_box_center_2.png" width="280px"&gt;
+&lt;img src="https://d33wubrfki0l68.cloudfront.net/62f4ab9648b5f2359756c5d7e7f4019defe7faf5/e68a3/art/008_emergence/emergence6802_hu7c58ad2a8fca059ec9ebad497d24566e_22821446_500x500_fill_box_center_2.png" width="280px"&gt;
+&lt;img src="https://d33wubrfki0l68.cloudfront.net/c3f652266f3310fa6ef7bc6f8c1f3080cac74d2e/522f0/art/009_prism/prism627_hu5fd6b3df9c854c0c26e8cdeebe574e51_31622651_500x500_fill_box_center_2.png" width="280px"&gt;
+&lt;img src="https://d33wubrfki0l68.cloudfront.net/64a2403d266498344f73af33668397e34e9b2b28/857ea/art/008_emergence/emergence526_huc93094888f54e1c55d93d2c9f1d65eda_17094834_500x500_fill_box_center_2.png" width="280px"&gt;
+&lt;img src="https://d33wubrfki0l68.cloudfront.net/1d067ea931f5be062c1a93bf29fd1e292e84c72b/e1949/art/005_genesis/genesis99_hue66520854e953909155239426845f632_183306_500x500_fill_box_center_2.png" width="280px"&gt;
+&lt;img src="https://d33wubrfki0l68.cloudfront.net/ba46a11d676efa5481fb8abc447539022241d5a5/4d746/art/003_unfold/unfold06_hu9cba8b0d8a0b0efc5b2fd5f2cd3f12c5_113220_500x500_fill_box_center_2.png" width="280px"&gt;
+&lt;img src="https://d33wubrfki0l68.cloudfront.net/19592674aaa73f13cd74cee56c819f9efe6cec2c/39caf/art/007_storms/storms4500_hu299e9f5ad6cb567eb7c45aeae728a52d_2314689_500x500_fill_box_center_2.png" width="280px"&gt;
+&lt;img src="https://d33wubrfki0l68.cloudfront.net/749bf5026fe35d4c1322a8ecde2c6a43294d463d/c2664/art/005_genesis/genesis9458_hu6cbae2b11ecd76683bfe4f6d913c2b92_401118_500x500_fill_box_center_2.png" width="280px"&gt;
+
+---
+
+## Reading
+
+.pull-left[
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px"&gt;](https://r4ds.had.co.nz)]
+]
+.pull-right[
+* [Graphics for communication](https://r4ds.had.co.nz/graphics-for-communication.html)
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
