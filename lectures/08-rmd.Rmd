@@ -1,0 +1,232 @@
+---
+title: "STATS 220"
+subtitle: "R Markdown`r emo::ji('knit')`"
+type: "lecture"
+date: ""
+output:
+  xaringan::moon_reader:
+    css: ["assets/remark.css"]
+    lib_dir: libs
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+class: inverse middle center
+
+```{r initial, echo = FALSE, cache = FALSE, results = 'hide'}
+library(knitr)
+options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE, 
+  tibble.width = 60, tibble.print_min = 6)
+opts_chunk$set(
+  echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
+  fig.path = 'figure/', cache.path = 'cache/', cache = FALSE, fig.retina = 3,
+  fig.align = 'center', fig.width = 4.5, fig.height = 4, fig.show = 'hold',
+  dpi = 120
+)
+```
+
+```{r xaringan-panelset, echo = FALSE}
+xaringanExtra::use_panelset()
+```
+
+# .large[.large[.large[<i class="fab fa-r-project"></i>]]] + .large[.large[.large[<i class="fab fa-markdown"></i>]]]
+
+---
+
+## Markdown <i class="fab fa-markdown"></i> `.md`
+
+* Created by [John Gruber](https://daringfireball.net/projects/markdown/) & [Aaron Swartz](http://www.aaronsw.com) in 2004
+* A lightweight .brown[markup language] to add formatting elements to plain-text documents, contrasting to WYSIWYG
+* Portable, platform independent, everywhere (e.g. Piazza, but not Canvas `r emo::ji("angry")`)
+
+<img src="img/piazza-md.png" width="100%">
+
+???
+
+* aaron, reddit
+* The course website: write in md, and render in html by hugo
+* commonmark: it's one of markdown flavours, e.g. github
+
+---
+
+## <i class="fab fa-markdown"></i> Basic syntax
+
+---
+
+.pull-left[
+## R Markdown `.Rmd`
+* how to create an Rmd
+]
+.pull-right[
+````markdow
+---
+title: "STATS220 R Markdown demo"
+author: "Earo Wang"
+date: "``r 'r'` lubridate::today()`"
+output: html_document
+---
+
+```{r setup, include = FALSE}`r ''`
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+You can embed an R code chunk like this:
+
+```{r mtcars}`r ''`
+library(ggplot2)
+mtcars
+```
+
+See <http://rmarkdown.rstudio.com>.
+````
+]
+
+---
+
+.pull-left[
+## Yaml header
+* one markdown file, many formats
+* {tinytex} for pdf
+]
+.pull-right[
+````markdow
+*---
+*title: "STATS220 R Markdown demo"
+*author: "Earo Wang"
+*date: "``r 'r'` lubridate::today()`"
+*output: html_document
+*---
+
+```{r setup, include = FALSE}`r ''`
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+You can embed an R code chunk like this:
+
+```{r mtcars}`r ''`
+library(ggplot2)
+mtcars
+```
+
+See <http://rmarkdown.rstudio.com>.
+````
+]
+
+---
+
+.pull-left[
+## R chunk for global setting
+]
+.pull-right[
+````markdow
+---
+title: "STATS220 R Markdown demo"
+author: "Earo Wang"
+date: "``r 'r'` lubridate::today()`"
+output: html_document
+---
+
+*```{r setup, include = FALSE}`r ''`
+*knitr::opts_chunk$set(echo = TRUE)
+*```
+
+## R Markdown
+
+You can embed an R code chunk like this:
+
+```{r mtcars}`r ''`
+library(ggplot2)
+mtcars
+```
+
+See <http://rmarkdown.rstudio.com>.
+````
+]
+
+---
+
+.pull-left[
+## Write in markdown
+]
+.pull-right[
+````markdow
+---
+title: "STATS220 R Markdown demo"
+author: "Earo Wang"
+date: "``r 'r'` lubridate::today()`"
+output: html_document
+---
+
+```{r setup, include = FALSE}`r ''`
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+*## R Markdown
+
+*You can embed an R code chunk like this:
+
+```{r mtcars}`r ''`
+library(ggplot2)
+mtcars
+```
+
+*See <http://rmarkdown.rstudio.com>.
+````
+]
+
+---
+
+.pull-left[
+## R chunk
+]
+.pull-right[
+````markdow
+---
+title: "STATS220 R Markdown demo"
+author: "Earo Wang"
+date: "``r 'r'` lubridate::today()`"
+output: html_document
+---
+
+```{r setup, include = FALSE}`r ''`
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+You can embed an R code chunk like this:
+
+*```{r mtcars}`r ''`
+*library(ggplot2)
+*mtcars
+*```
+
+See <http://rmarkdown.rstudio.com>.
+````
+]
+
+---
+
+Render
+
+---
+
+Chunk options
+
+---
+
+## Reading
+
+.pull-left[
+.center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
+]
+.pull-right[
+* [Graphics for communication](https://r4ds.had.co.nz/graphics-for-communication.html)
+]
