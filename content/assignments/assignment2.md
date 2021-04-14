@@ -117,7 +117,7 @@ p1
 
 ### Question 2
 
-Find **the most used bike**’s data records.
+Find **the most frequently used bike**’s data records.
 
 You should end up with a **tibble** called `top_bike_trips`.
 
@@ -147,7 +147,7 @@ top_bike_trips
 
 ### Question 3
 
-Plot all journeys that the most used bike has travelled on.
+Plot all journeys that the most frequently used bike has travelled on.
 
 You should end up with a **ggplot** called `p2`, with `alpha = 0.5`.
 

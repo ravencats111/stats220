@@ -103,7 +103,7 @@ aklweather_tidy <- aklweather %>%
   pivot_wider(
     names_from = datatype,
     values_from = value) %>%
-  rename_with(tolower)
+  rename_with(tolower) #<<
 aklweather_tidy
 
 ## ---- akl-complete
