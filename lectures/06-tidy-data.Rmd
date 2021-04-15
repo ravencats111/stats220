@@ -479,7 +479,7 @@ Now you need to think why I make this decision not that decision?
 ### - visualise
 ]
 .right-column[
-<br>
+## Area plot for monthly cumulative rainfall
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -529,7 +529,7 @@ Now you need to think why I make this decision not that decision?
 ### - visualise
 ]
 .right-column[
-<br>
+## Ribbon plot for monthly temperatures
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -550,6 +550,36 @@ Now you need to think why I make this decision not that decision?
 ???
 
 Why ribbon is missing in the end?
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+### - rename
+### - complete
+### - wrangle
+### - visualise
+]
+.right-column[
+## Heatmap for monthly average temperatures
+.panelset[
+
+.panel[.panel-name[Plot]
+
+
+```{r akl-heatmap, echo = FALSE, fig.width = 7, fig.height = 3.5}
+```
+
+.panel[.panel-name[Code]
+
+```{r ref.label = "akl-heatmap", eval = FALSE}
+```
+]
+]
+]
+]
 
 ---
 

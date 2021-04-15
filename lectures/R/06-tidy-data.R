@@ -64,7 +64,7 @@ tb_fit
   
 ## ---- tb-mod-plot
 tb_fit %>% 
-  ggplot(aes(x = fct_reorder(iso2, r2), y = r2)) +
+  ggplot(aes(x = fct_reorder(iso2, -r2), y = r2)) +
   geom_hline(yintercept = 0.5, size = 0.8, colour = "grey") +
   geom_point(aes(colour = r2 < 0.5), size = 0.8) +
   scale_x_discrete(guide = guide_axis(n.dodge = 2)) + #<<
@@ -149,3 +149,14 @@ akl_monthly_temp %>%
   geom_line() +
   geom_ribbon(fill = "#e6550d", alpha = 0.8) +
   scale_x_date(date_labels = "%Y %b") #<<
+
+## ---- akl-heatmap
+akl_monthly_temp %>% 
+  mutate(
+    year = year(yearmonth),
+    month = month(yearmonth, label = TRUE)) %>% 
+  ggplot(aes(month, y = year, fill = tavg)) +
+  geom_tile(width = 0.95, height = 0.95) + #<<
+  scale_fill_viridis_c(option = "B") + #<<
+  coord_fixed() + #<<
+  theme_classic()
