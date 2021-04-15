@@ -134,6 +134,10 @@ read_chunk('R/07-data-vis2.R')
 
 ---
 
+## Colour matters
+
+---
+
 ## Qualitative palettes .small[.green[for categorical data with no particular ordering]]
 
 ```{r colorspace-q, fig.height = 4}
@@ -161,6 +165,7 @@ read_chunk('R/07-data-vis2.R')
 <br>
 ```{r gg-palette, eval = FALSE}
 ```
+in {ggplot2}, `scale_[aes]_[datatype]()` for custom scales.
 ]
 .pull-right[
 ```{r gg-palette2, ref.label = "gg-palette", echo = FALSE}
@@ -169,7 +174,7 @@ read_chunk('R/07-data-vis2.R')
 
 ???
 
-* `scale_[aes]_()` to change the default scales
+* `scale_[aes]_[datatype]()` to change the default scales
 
 ---
 
@@ -187,15 +192,11 @@ read_chunk('R/07-data-vis2.R')
 
 ---
 
-## Colour blindness
+## Colour-vision deficiency
 
 ---
 
 ## {colorspace} choose colour (two shiny apps)
-
----
-
-## Useful websites to choose colours
 
 ---
 
