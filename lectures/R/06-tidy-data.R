@@ -63,14 +63,22 @@ tb_fit <- tb_tidy %>%
 tb_fit
   
 ## ---- tb-mod-plot
-tb_fit %>% 
-  ggplot(aes(x = fct_reorder(iso2, -r2), y = r2)) +
+set.seed(220)
+tb_fit_pre <- tb_fit %>% 
+  arrange(-r2) %>% 
+  mutate(iso2 = fct_inorder(iso2), index = row_number()) #<<
+hl_tb <- tb_fit_pre %>% 
+  slice_sample(n = 20)
+tb_fit_pre %>% 
+  ggplot(aes(x = index, y = r2)) +
   geom_hline(yintercept = 0.5, size = 0.8, colour = "grey") +
-  geom_point(aes(colour = r2 < 0.5), size = 0.8) +
-  scale_x_discrete(guide = guide_axis(n.dodge = 2)) + #<<
+  geom_point(aes(colour = r2 < 0.5), size = 0.8) + #<<
+  ggrepel::geom_label_repel(aes(label = iso2), data = hl_tb, box.padding = 1) + #<<
   theme_bw() +
   theme(
-    axis.text.x = element_text(angle = 90, size = 5),
+    axis.text.x = element_blank(), #<<
+    axis.ticks.x = element_blank(), #<<
+    panel.grid.major.x = element_blank(), #<<
     legend.position = "top" #<<
   )
 

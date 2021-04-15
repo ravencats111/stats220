@@ -327,6 +327,10 @@ background-size: 10%
 ]
 ]
 
+???
+
+* direct labeling instead of >200 country labels underneath
+
 ---
 
 ## Your turn

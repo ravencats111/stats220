@@ -194,9 +194,25 @@ in {ggplot2}, `scale_[aes]_[datatype]()` for custom scales.
 
 ## Colour-vision deficiency
 
+* Red-green color-vision deficiency is the most common
+.center[<img src = "https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/red-green-cvd-sim-1.png", width = 70%></img>]
+* Blue-green color-vision deficiency is rare but does occur
+.center[<img src = "https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/blue-green-cvd-sim-1.png", width = 70%></img>]
+
+.footnote[image credit: Claus O. Wilke [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/)]
+
 ---
 
-## {colorspace} choose colour (two shiny apps)
+## Choose colours using {colorspace}
+
+.pull-left[
+* `colorspace::hclwizard()`
+.center[<img src = "img/wizard.png", height = "320px"></img>]
+]
+.pull-right[
+* `colorspace::hcl_color_picker()`
+.center[<img src = "img/hcl.png", height = "320px"></img>]
+]
 
 ---
 
@@ -229,7 +245,8 @@ class: middle
 ### - scale-y
 ]
 .right-column[
-<br>
+## Data as is
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -246,6 +263,10 @@ class: middle
 ]
 ]
 
+???
+
+full screen of legends
+
 ---
 
 .left-column[
@@ -253,7 +274,8 @@ class: middle
 ### - scale-y
 ]
 .right-column[
-<br>
+## Logarithmic scale
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -272,7 +294,7 @@ class: middle
 
 ???
 
-perceive the change rate
+perceive the rate of infections, slowing down
 
 ---
 
@@ -281,7 +303,8 @@ perceive the change rate
 ### - scale-y
 ]
 .right-column[
-<br>
+## Logarithmic scale
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -324,7 +347,8 @@ log(0) -> Inf
 ### - scale-x
 ]
 .right-column[
-<br>
+## Relative days
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -350,7 +374,8 @@ log(0) -> Inf
 ### - highlight
 ]
 .right-column[
-<br>
+## Highlight New Zealand
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -377,7 +402,8 @@ log(0) -> Inf
 ### - annotate
 ]
 .right-column[
-<br>
+## Label New Zealand
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -405,7 +431,8 @@ log(0) -> Inf
 ### - limits
 ]
 .right-column[
-<br>
+## Expand limits
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -434,7 +461,8 @@ log(0) -> Inf
 ### - labels
 ]
 .right-column[
-<br>
+## Every figure needs the title
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -464,7 +492,8 @@ log(0) -> Inf
 ### - theme
 ]
 .right-column[
-<br>
+## Apply themes
+
 .panelset[
 
 .panel[.panel-name[Plot]

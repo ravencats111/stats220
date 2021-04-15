@@ -86,9 +86,6 @@ time_use %>%
   theme(legend.position = "bottom")
 
 # Colour matters
-# hclwizard()
-# hcl_color_picker()
-# https://coolors.co
 ## ---- colorspace-q
 colorspace::hcl_palettes("Qualitative", plot = TRUE, n = 7)
 
@@ -172,16 +169,14 @@ covid19_rel %>%
   guides(colour = FALSE)
 
 ## ---- covid-rel-nz
+covid19_nz <- covid19_rel %>% 
+  filter(country_region == "New Zealand")
 p_nz <- covid19_rel %>% 
   filter(country_region != "New Zealand") %>% 
-  ggplot(aes(
-    x = days, y = confirmed, 
+  ggplot(aes(x = days, y = confirmed, 
     group = country_region)) + #<<
   geom_line(colour = "grey", alpha = 0.5) +
-  geom_line(
-    colour = "#238b45", size = 1,
-    data = covid19_rel %>% 
-      filter(country_region == "New Zealand")) +
+  geom_line(colour = "#238b45", size = 1, data = covid19_nz) +
   scale_y_log10() +
   guides(colour = FALSE)
 p_nz
@@ -190,10 +185,8 @@ p_nz
 p_nz <- p_nz +
   geom_label(aes(
     x = max(days), y = max(confirmed), #<<
-    label = country_region),
-    colour = "#238b45", nudge_x = 3, nudge_y = .5,
-    data = covid19_rel %>% 
-      filter(country_region == "New Zealand"))
+    label = country_region), data = covid19_nz,
+    colour = "#238b45", nudge_x = 3, nudge_y = .5)
 p_nz
 
 ## ---- covid-rel-nz-lim

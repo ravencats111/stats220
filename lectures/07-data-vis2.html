@@ -110,6 +110,10 @@ class: inverse middle
 
 ---
 
+## Colour matters
+
+---
+
 ## Qualitative palettes .small[.green[for categorical data with no particular ordering]]
 
 
@@ -158,6 +162,7 @@ time_use %&gt;%
   labs(y = "") +
   theme(legend.position = "bottom")
 ```
+in {ggplot2}, `scale_[aes]_[datatype]()` for custom scales.
 ]
 .pull-right[
 &lt;img src="figure/gg-palette2-1.png" width="540" style="display: block; margin: auto;" /&gt;
@@ -165,7 +170,7 @@ time_use %&gt;%
 
 ???
 
-* `scale_[aes]_()` to change the default scales
+* `scale_[aes]_[datatype]()` to change the default scales
 
 ---
 
@@ -194,15 +199,27 @@ time_use %&gt;%
 
 ---
 
-## Colour blindness
+## Colour-vision deficiency
+
+* Red-green color-vision deficiency is the most common
+.center[&lt;img src = "https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/red-green-cvd-sim-1.png", width = 70%&gt;&lt;/img&gt;]
+* Blue-green color-vision deficiency is rare but does occur
+.center[&lt;img src = "https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/blue-green-cvd-sim-1.png", width = 70%&gt;&lt;/img&gt;]
+
+.footnote[image credit: Claus O. Wilke [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/)]
 
 ---
 
-## {colorspace} choose colour (two shiny apps)
+## Choose colours using {colorspace}
 
----
-
-## Useful websites to choose colours
+.pull-left[
+* `colorspace::hclwizard()`
+.center[&lt;img src = "img/wizard.png", height = "320px"&gt;&lt;/img&gt;]
+]
+.pull-right[
+* `colorspace::hcl_color_picker()`
+.center[&lt;img src = "img/hcl.png", height = "320px"&gt;&lt;/img&gt;]
+]
 
 ---
 
@@ -251,7 +268,8 @@ covid19
 ### - scale-y
 ]
 .right-column[
-&lt;br&gt;
+## Data as is
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -275,6 +293,10 @@ covid19 %&gt;%
 ]
 ]
 
+???
+
+full screen of legends
+
 ---
 
 .left-column[
@@ -282,7 +304,8 @@ covid19 %&gt;%
 ### - scale-y
 ]
 .right-column[
-&lt;br&gt;
+## Logarithmic scale
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -308,7 +331,7 @@ covid19 %&gt;%
 
 ???
 
-perceive the change rate
+perceive the rate of infections, slowing down
 
 ---
 
@@ -317,7 +340,8 @@ perceive the change rate
 ### - scale-y
 ]
 .right-column[
-&lt;br&gt;
+## Logarithmic scale
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -388,7 +412,8 @@ log(0) -&gt; Inf
 ### - scale-x
 ]
 .right-column[
-&lt;br&gt;
+## Relative days
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -422,7 +447,8 @@ covid19_rel %&gt;%
 ### - highlight
 ]
 .right-column[
-&lt;br&gt;
+## Highlight New Zealand
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -433,16 +459,14 @@ covid19_rel %&gt;%
 
 
 ```r
+covid19_nz &lt;- covid19_rel %&gt;% 
+  filter(country_region == "New Zealand")
 p_nz &lt;- covid19_rel %&gt;% 
   filter(country_region != "New Zealand") %&gt;% 
-  ggplot(aes(
-    x = days, y = confirmed, 
+  ggplot(aes(x = days, y = confirmed, 
 *   group = country_region)) +
   geom_line(colour = "grey", alpha = 0.5) +
-  geom_line(
-    colour = "#238b45", size = 1,
-    data = covid19_rel %&gt;% 
-      filter(country_region == "New Zealand")) +
+  geom_line(colour = "#238b45", size = 1, data = covid19_nz) +
   scale_y_log10() +
   guides(colour = FALSE)
 p_nz
@@ -462,7 +486,8 @@ p_nz
 ### - annotate
 ]
 .right-column[
-&lt;br&gt;
+## Label New Zealand
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -476,10 +501,8 @@ p_nz
 p_nz &lt;- p_nz +
   geom_label(aes(
 *   x = max(days), y = max(confirmed),
-    label = country_region),
-    colour = "#238b45", nudge_x = 3, nudge_y = .5,
-    data = covid19_rel %&gt;% 
-      filter(country_region == "New Zealand"))
+    label = country_region), data = covid19_nz,
+    colour = "#238b45", nudge_x = 3, nudge_y = .5)
 p_nz
 ```
 ]
@@ -498,7 +521,8 @@ p_nz
 ### - limits
 ]
 .right-column[
-&lt;br&gt;
+## Expand limits
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -531,7 +555,8 @@ p_nz
 ### - labels
 ]
 .right-column[
-&lt;br&gt;
+## Every figure needs the title
+
 .panelset[
 
 .panel[.panel-name[Plot]
@@ -570,7 +595,8 @@ p_nz
 ### - theme
 ]
 .right-column[
-&lt;br&gt;
+## Apply themes
+
 .panelset[
 
 .panel[.panel-name[Plot]

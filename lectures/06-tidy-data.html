@@ -144,7 +144,7 @@ tb
 #&gt; #   f_5564 &lt;dbl&gt;, f_65 &lt;dbl&gt;, f_u &lt;dbl&gt;
 ```
 
-<div class="countdown" id="timer_6077a572" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<div class="countdown" id="timer_6078c4b1" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -511,20 +511,32 @@ tb_fit &lt;- tb_tidy %&gt;%
 
 
 ```r
-tb_fit %&gt;% 
-  ggplot(aes(x = fct_reorder(iso2, -r2), y = r2)) +
+set.seed(220)
+tb_fit_pre &lt;- tb_fit %&gt;% 
+  arrange(-r2) %&gt;% 
+* mutate(iso2 = fct_inorder(iso2), index = row_number())
+hl_tb &lt;- tb_fit_pre %&gt;% 
+  slice_sample(n = 20)
+tb_fit_pre %&gt;% 
+  ggplot(aes(x = index, y = r2)) +
   geom_hline(yintercept = 0.5, size = 0.8, colour = "grey") +
-  geom_point(aes(colour = r2 &lt; 0.5), size = 0.8) +
-* scale_x_discrete(guide = guide_axis(n.dodge = 2)) +
+* geom_point(aes(colour = r2 &lt; 0.5), size = 0.8) +
+* ggrepel::geom_label_repel(aes(label = iso2), data = hl_tb, box.padding = 1) +
   theme_bw() +
   theme(
-    axis.text.x = element_text(angle = 90, size = 5),
+*   axis.text.x = element_blank(),
+*   axis.ticks.x = element_blank(),
+*   panel.grid.major.x = element_blank(),
 *   legend.position = "top"
   )
 ```
 ]
 ]
 ]
+
+???
+
+* direct labeling instead of &gt;200 country labels underneath
 
 ---
 
@@ -553,7 +565,7 @@ aklweather
 #&gt; # … with 2,968 more rows
 ```
 
-<div class="countdown" id="timer_6077a2b2" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<div class="countdown" id="timer_6078c3eb" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -803,7 +815,7 @@ akl_prcp
 &gt; 1. Why do I fill `0` to missing `prcp`, instead of leaving `NA` as is?
 &gt; 2. Why do I calculate monthly cumulative precipitations?
 
-<div class="countdown" id="timer_6077a343" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<div class="countdown" id="timer_6078c335" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">00</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">30</span></code>
 </div>
 
