@@ -77,9 +77,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 You can embed an R code chunk like this:
 
-```{r mtcars}`r ''`
-library(ggplot2)
-mtcars
+```{r mpg, message = FALSE}`r ''`
+library(tidyverse)
+mpg
 ```
 
 See <http://rmarkdown.rstudio.com>.
@@ -89,7 +89,7 @@ See <http://rmarkdown.rstudio.com>.
 ---
 
 .pull-left[
-## Yaml header
+## YAML header
 * one markdown file, many formats
 * {tinytex} for pdf
 ]
@@ -110,9 +110,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 You can embed an R code chunk like this:
 
-```{r mtcars}`r ''`
-library(ggplot2)
-mtcars
+```{r mpg, message = FALSE}`r ''`
+library(tidyverse)
+mpg
 ```
 
 See <http://rmarkdown.rstudio.com>.
@@ -141,9 +141,9 @@ output: html_document
 
 You can embed an R code chunk like this:
 
-```{r mtcars}`r ''`
-library(ggplot2)
-mtcars
+```{r mpg, message = FALSE}`r ''`
+library(tidyverse)
+mpg
 ```
 
 See <http://rmarkdown.rstudio.com>.
@@ -172,9 +172,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 *You can embed an R code chunk like this:
 
-```{r mtcars}`r ''`
-library(ggplot2)
-mtcars
+```{r mpg, message = FALSE}`r ''`
+library(tidyverse)
+mpg
 ```
 
 *See <http://rmarkdown.rstudio.com>.
@@ -203,9 +203,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 You can embed an R code chunk like this:
 
-*```{r mtcars}`r ''`
-*library(ggplot2)
-*mtcars
+*```{r mpg, message = FALSE}`r ''`
+*library(tidyverse)
+*mpg
 *```
 
 See <http://rmarkdown.rstudio.com>.
@@ -214,11 +214,114 @@ See <http://rmarkdown.rstudio.com>.
 
 ---
 
-Render
+.pull-left[
+## Render
+]
+.pull-right[
+<br>
+<img src="img/demo-rmd-render.png" width="100%">
+]
 
 ---
 
-Chunk options
+````r
+```{r scatterplot, fig.align = "center", fig.width = 4.5, fig.height = 4}`r ''`
+ggplot(mpg, aes(displ, cty)) +
+  geom_point()
+```
+````
+
+.pull-left[
+## Chunk options
+
+* `scatterplot` gives the chunk a name.
+* `fig.align`: alignment of figures
+* `fig.width`/`fig.height`
+* [other figure options](https://yihui.org/knitr/options/#plots)
+]
+.pull-right[
+<img src="https://itsalocke.com/blog/img/namer-oh-no.png" width="100%">
+<img src="https://itsalocke.com/blog/img/namer-yaaasss.png" width="100%">
+.footnote[image credit: Maelle Salmon]
+]
+
+---
+
+````r
+```{r biglm, echo = FALSE, cache = TRUE}`r ''`
+ggplot(mpg, aes(displ, cty)) +
+  geom_point()
+```
+````
+
+.pull-left[
+## Chunk options
+
+* `scatterplot` gives the chunk a name.
+* `fig.align`: alignment of figures
+* `fig.width`/`fig.height`
+* [other figure options](https://yihui.org/knitr/options/#plots)
+]
+.pull-right[
+]
+
+---
+
+## Beyond <i class="fab fa-r-project"></i>: language engines
+
+````py
+*```{python hello}`r ''`
+# remotes::install_github("rstudio/reticulate")
+x = "hello, python world!"
+print(x.split(" "))
+```
+````
+
+```{python hello, echo = FALSE}
+x = "hello, python world!"
+print(x.split(" "))
+```
+
+<hr>
+
+````sh
+*```{sh head}`r ''`
+head -4 data/pisa/pisa-student.csv
+```
+````
+
+```{sh pisa-header, echo = FALSE}
+head -4 data/pisa/pisa-student.csv
+```
+
+---
+
+## Beyond <i class="fab fa-r-project"></i>: language engines
+
+````r
+```{r db}`r ''`
+library(RSQLite)
+db <- dbConnect(SQLite(), dbname = "data/pisa/pisa-student.db")
+```
+
+*```{sql query, connection = db, output.var = "pisa18"}`r ''`
+SELECT * FROM pisa WHERE year = 2018
+```
+````
+
+
+```{r db, echo = FALSE}
+library(RSQLite)
+db <- dbConnect(SQLite(), dbname = "data/pisa/pisa-student.db")
+```
+
+```{sql sql, connection = db, echo = FALSE, output.var = "pisa18"}
+SELECT * FROM pisa WHERE year = 2018
+```
+
+```{r r-pisa, echo = FALSE}
+tibble::as_tibble(pisa18)
+```
 
 ---
 
@@ -228,5 +331,5 @@ Chunk options
 .center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
 ]
 .pull-right[
-* [Graphics for communication](https://r4ds.had.co.nz/graphics-for-communication.html)
+* [R Markdown](https://r4ds.had.co.nz/r-markdown.html)
 ]

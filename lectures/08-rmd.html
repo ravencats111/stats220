@@ -69,9 +69,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 You can embed an R code chunk like this:
 
-```{r mtcars}
-library(ggplot2)
-mtcars
+```{r mpg, message = FALSE}
+library(tidyverse)
+mpg
 ```
 
 See &lt;http://rmarkdown.rstudio.com&gt;.
@@ -81,7 +81,7 @@ See &lt;http://rmarkdown.rstudio.com&gt;.
 ---
 
 .pull-left[
-## Yaml header
+## YAML header
 * one markdown file, many formats
 * {tinytex} for pdf
 ]
@@ -102,9 +102,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 You can embed an R code chunk like this:
 
-```{r mtcars}
-library(ggplot2)
-mtcars
+```{r mpg, message = FALSE}
+library(tidyverse)
+mpg
 ```
 
 See &lt;http://rmarkdown.rstudio.com&gt;.
@@ -133,9 +133,9 @@ output: html_document
 
 You can embed an R code chunk like this:
 
-```{r mtcars}
-library(ggplot2)
-mtcars
+```{r mpg, message = FALSE}
+library(tidyverse)
+mpg
 ```
 
 See &lt;http://rmarkdown.rstudio.com&gt;.
@@ -164,9 +164,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 *You can embed an R code chunk like this:
 
-```{r mtcars}
-library(ggplot2)
-mtcars
+```{r mpg, message = FALSE}
+library(tidyverse)
+mpg
 ```
 
 *See &lt;http://rmarkdown.rstudio.com&gt;.
@@ -195,9 +195,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 You can embed an R code chunk like this:
 
-*```{r mtcars}
-*library(ggplot2)
-*mtcars
+*```{r mpg, message = FALSE}
+*library(tidyverse)
+*mpg
 *```
 
 See &lt;http://rmarkdown.rstudio.com&gt;.
@@ -206,11 +206,128 @@ See &lt;http://rmarkdown.rstudio.com&gt;.
 
 ---
 
-Render
+.pull-left[
+## Render
+]
+.pull-right[
+&lt;br&gt;
+&lt;img src="img/demo-rmd-render.png" width="100%"&gt;
+]
 
 ---
 
-Chunk options
+````r
+```{r scatterplot, fig.align = "center", fig.width = 4.5, fig.height = 4}
+ggplot(mpg, aes(displ, cty)) +
+  geom_point()
+```
+````
+
+.pull-left[
+## Chunk options
+
+* `scatterplot` gives the chunk a name.
+* `fig.align`: alignment of figures
+* `fig.width`/`fig.height`
+* [other figure options](https://yihui.org/knitr/options/#plots)
+]
+.pull-right[
+&lt;img src="https://itsalocke.com/blog/img/namer-oh-no.png" width="100%"&gt;
+&lt;img src="https://itsalocke.com/blog/img/namer-yaaasss.png" width="100%"&gt;
+.footnote[image credit: Maelle Salmon]
+]
+
+---
+
+````r
+```{r biglm, echo = FALSE, cache = TRUE}
+ggplot(mpg, aes(displ, cty)) +
+  geom_point()
+```
+````
+
+.pull-left[
+## Chunk options
+
+* `scatterplot` gives the chunk a name.
+* `fig.align`: alignment of figures
+* `fig.width`/`fig.height`
+* [other figure options](https://yihui.org/knitr/options/#plots)
+]
+.pull-right[
+]
+
+---
+
+## Beyond &lt;i class="fab fa-r-project"&gt;&lt;/i&gt;: language engines
+
+````py
+*```{python hello}
+# remotes::install_github("rstudio/reticulate")
+x = "hello, python world!"
+print(x.split(" "))
+```
+````
+
+
+```
+#&gt; ['hello,', 'python', 'world!']
+```
+
+&lt;hr&gt;
+
+````sh
+*```{sh head}
+head -4 data/pisa/pisa-student.csv
+```
+````
+
+
+```
+#&gt; year,country,school_id,student_id,mother_educ,father_educ,gender,computer,internet,math,read,science,stu_wgt,desk,room,dishwasher,television,computer_n,car,book,wealth,escs
+#&gt; 2000,ALB,1001,1,NA,NA,female,NA,no,324.35,397.87,345.66,2.16,yes,no,no,1,3+,1,11-50,-0.6,0.10575582991490981
+#&gt; 2000,ALB,1001,3,NA,NA,female,NA,no,NA,368.41,385.83,2.16,yes,yes,no,2,0,0,1-10,-1.84,-1.424044581128788
+#&gt; 2000,ALB,1001,6,NA,NA,male,NA,no,NA,294.17,327.94,2.16,yes,yes,no,2,0,0,1-10,-1.46,-1.306683855365612
+```
+
+---
+
+## Beyond &lt;i class="fab fa-r-project"&gt;&lt;/i&gt;: language engines
+
+````r
+```{r db}
+library(RSQLite)
+db &lt;- dbConnect(SQLite(), dbname = "data/pisa/pisa-student.db")
+```
+
+*```{sql query, connection = db, output.var = "pisa18"}
+SELECT * FROM pisa WHERE year = 2018
+```
+````
+
+
+
+
+
+
+
+```
+#&gt; # A tibble: 612,004 x 22
+#&gt;    year country school_id student_id mother_educ father_educ
+#&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;      
+#&gt; 1  2018 ALB     800002    800251     ISCED 3A    ISCED 3A   
+#&gt; 2  2018 ALB     800002    800402     ISCED 2     ISCED 2    
+#&gt; 3  2018 ALB     800002    801902     ISCED 2     ISCED 2    
+#&gt; 4  2018 ALB     800002    803546     ISCED 2     ISCED 2    
+#&gt; 5  2018 ALB     800002    804776     ISCED 2     ISCED 3A   
+#&gt; 6  2018 ALB     800002    804825     ISCED 2     ISCED 2    
+#&gt; # … with 611,998 more rows, and 16 more variables:
+#&gt; #   gender &lt;chr&gt;, computer &lt;chr&gt;, internet &lt;chr&gt;,
+#&gt; #   math &lt;dbl&gt;, read &lt;dbl&gt;, science &lt;dbl&gt;, stu_wgt &lt;dbl&gt;,
+#&gt; #   desk &lt;chr&gt;, room &lt;chr&gt;, dishwasher &lt;chr&gt;,
+#&gt; #   television &lt;chr&gt;, computer_n &lt;chr&gt;, car &lt;chr&gt;,
+#&gt; #   book &lt;chr&gt;, wealth &lt;dbl&gt;, escs &lt;dbl&gt;
+```
 
 ---
 
@@ -220,7 +337,7 @@ Chunk options
 .center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px"&gt;](https://r4ds.had.co.nz)]
 ]
 .pull-right[
-* [Graphics for communication](https://r4ds.had.co.nz/graphics-for-communication.html)
+* [R Markdown](https://r4ds.had.co.nz/r-markdown.html)
 ]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
