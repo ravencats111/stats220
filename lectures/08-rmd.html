@@ -18,11 +18,15 @@ class: center, middle, inverse, title-slide
 ---
 
 
+
+
+
+
+## Reproducible reporting
+
+---
+
 class: inverse middle center
-
-
-
-
 
 # .large[.large[.large[&lt;i class="fab fa-r-project"&gt;&lt;/i&gt;]]] + .large[.large[.large[&lt;i class="fab fa-markdown"&gt;&lt;/i&gt;]]]
 
@@ -49,8 +53,11 @@ class: inverse middle center
 ---
 
 .pull-left[
-## R Markdown `.Rmd`
-* how to create an Rmd
+## Create R Markdown `.Rmd`
+&lt;br&gt;
+.center[
+&lt;img src="img/click-rmd.png" width="20%"&gt;
+&lt;img src="img/new-rmd.png" width="60%"&gt;]
 ]
 .pull-right[
 ````markdow
@@ -82,8 +89,24 @@ See &lt;http://rmarkdown.rstudio.com&gt;.
 
 .pull-left[
 ## YAML header
+YAML is commonly used for configuration files, and starts and ends with
+`---`
+
+````markdow
+`r lubridate::today()`
+````
+⬆️ inline executable R code
 * one markdown file, many formats
-* {tinytex} for pdf
+  + `pdf_document`
+  + `xaringan::moon_reader`
+
+.small[
+To compile to PDF, 
+```r
+install.packages('tinytex')
+tinytex::install_tinytex()
+```
+]
 ]
 .pull-right[
 ````markdow
@@ -114,7 +137,17 @@ See &lt;http://rmarkdown.rstudio.com&gt;.
 ---
 
 .pull-left[
-## R chunk for global setting
+## R chunk for global settings
+````markdow
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+````
+⬆️ executable R chunk
+* `r`: language engine
+* `setup`: unique chunk name
+* `include`: include chunk output or not
+* `echo`: display source code or not
 ]
 .pull-right[
 ````markdow
@@ -146,6 +179,11 @@ See &lt;http://rmarkdown.rstudio.com&gt;.
 
 .pull-left[
 ## Write in markdown
+&lt;br&gt;
+.center[Weave together narrative text and code]
+&lt;br&gt;
+&lt;br&gt;
+.center[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/knitr.png" width="240px"&gt;]
 ]
 .pull-right[
 ````markdow
@@ -177,6 +215,29 @@ mpg
 
 .pull-left[
 ## R chunk
+* `mpg`: unique chunk name
+* `message`: suppress message or not
+
+```r
+library(tidyverse)
+```
+
+```
+#&gt; ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
+```
+
+```
+#&gt; ✔ ggplot2 3.3.3     ✔ purrr   0.3.4
+#&gt; ✔ tibble  3.1.0     ✔ dplyr   1.0.5
+#&gt; ✔ tidyr   1.1.3     ✔ stringr 1.4.0
+#&gt; ✔ readr   1.4.0     ✔ forcats 0.5.1
+```
+
+```
+#&gt; ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+#&gt; ✖ dplyr::filter() masks stats::filter()
+#&gt; ✖ dplyr::lag()    masks stats::lag()
+```
 ]
 .pull-right[
 ````markdow
@@ -208,10 +269,17 @@ See &lt;http://rmarkdown.rstudio.com&gt;.
 
 .pull-left[
 ## Render
+&lt;br&gt;
+&lt;br&gt;
+3 ways to render an `.Rmd`
+
+1. click &lt;img src="img/knit.png" width="20%"&gt;
+2. shortcut: Ctrl/Cmd + Shift + K
+3. `rmarkdown::render("demo.Rmd")`
 ]
 .pull-right[
 &lt;br&gt;
-&lt;img src="img/demo-rmd-render.png" width="100%"&gt;
+&lt;img src="img/demo-rmd-render.png", style = "box-shadow: 3px 5px 3px 1px #00000080;", width="100%"&gt;
 ]
 
 ---
@@ -230,6 +298,8 @@ ggplot(mpg, aes(displ, cty)) +
 * `fig.align`: alignment of figures
 * `fig.width`/`fig.height`
 * [other figure options](https://yihui.org/knitr/options/#plots)
+
+**Good practice**: naming your chunk!
 ]
 .pull-right[
 &lt;img src="https://itsalocke.com/blog/img/namer-oh-no.png" width="100%"&gt;
@@ -240,19 +310,19 @@ ggplot(mpg, aes(displ, cty)) +
 ---
 
 ````r
-```{r biglm, echo = FALSE, cache = TRUE}
-ggplot(mpg, aes(displ, cty)) +
-  geom_point()
+```{r lm, echo = FALSE, cache = TRUE}
+fit &lt;- lm(cty ~ ., data = mpg)
+knitr::kable(coef(summary(fit)))
 ```
 ````
 
 .pull-left[
 ## Chunk options
 
-* `scatterplot` gives the chunk a name.
-* `fig.align`: alignment of figures
-* `fig.width`/`fig.height`
-* [other figure options](https://yihui.org/knitr/options/#plots)
+* `echo`: overwrites the global setting
+* `cache`: evaluate once and skip for the future
+
+`kable()` generates a very simple table.
 ]
 .pull-right[
 ]

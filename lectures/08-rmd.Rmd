@@ -14,15 +14,13 @@ output:
       countIncrementalSlides: false
 ---
 
-class: inverse middle center
-
 ```{r initial, echo = FALSE, cache = FALSE, results = 'hide'}
 library(knitr)
 options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE, 
   tibble.width = 60, tibble.print_min = 6)
 opts_chunk$set(
   echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
-  fig.path = 'figure/', cache.path = 'cache/', cache = FALSE, fig.retina = 3,
+  fig.path = 'figure/', cache.path = 'cache/', cache = TRUE, fig.retina = 3,
   fig.align = 'center', fig.width = 4.5, fig.height = 4, fig.show = 'hold',
   dpi = 120
 )
@@ -31,6 +29,12 @@ opts_chunk$set(
 ```{r xaringan-panelset, echo = FALSE}
 xaringanExtra::use_panelset()
 ```
+
+## Reproducible reporting
+
+---
+
+class: inverse middle center
 
 # .large[.large[.large[<i class="fab fa-r-project"></i>]]] + .large[.large[.large[<i class="fab fa-markdown"></i>]]]
 
@@ -57,8 +61,11 @@ xaringanExtra::use_panelset()
 ---
 
 .pull-left[
-## R Markdown `.Rmd`
-* how to create an Rmd
+## Create R Markdown `.Rmd`
+<br>
+.center[
+<img src="img/click-rmd.png" width="20%">
+<img src="img/new-rmd.png" width="60%">]
 ]
 .pull-right[
 ````markdow
@@ -90,8 +97,24 @@ See <http://rmarkdown.rstudio.com>.
 
 .pull-left[
 ## YAML header
+YAML is commonly used for configuration files, and starts and ends with
+`---`
+
+````markdow
+``r 'r'` lubridate::today()`
+````
+`r emo::ji("arrow_up")` inline executable R code
 * one markdown file, many formats
-* {tinytex} for pdf
+  + `pdf_document`
+  + `xaringan::moon_reader`
+
+.small[
+To compile to PDF, 
+```r
+install.packages('tinytex')
+tinytex::install_tinytex()
+```
+]
 ]
 .pull-right[
 ````markdow
@@ -122,7 +145,17 @@ See <http://rmarkdown.rstudio.com>.
 ---
 
 .pull-left[
-## R chunk for global setting
+## R chunk for global settings
+````markdow
+```{r setup, include = FALSE}`r ''`
+knitr::opts_chunk$set(echo = TRUE)
+```
+````
+`r emo::ji("arrow_up")` executable R chunk
+* `r`: language engine
+* `setup`: unique chunk name
+* `include`: include chunk output or not
+* `echo`: display source code or not
 ]
 .pull-right[
 ````markdow
@@ -154,6 +187,11 @@ See <http://rmarkdown.rstudio.com>.
 
 .pull-left[
 ## Write in markdown
+<br>
+.center[Weave together narrative text and code]
+<br>
+<br>
+.center[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/knitr.png" width="240px">]
 ]
 .pull-right[
 ````markdow
@@ -185,6 +223,11 @@ mpg
 
 .pull-left[
 ## R chunk
+* `mpg`: unique chunk name
+* `message`: suppress message or not
+```{r tidyverse, message = TRUE, cache = FALSE}
+library(tidyverse)
+```
 ]
 .pull-right[
 ````markdow
@@ -216,10 +259,17 @@ See <http://rmarkdown.rstudio.com>.
 
 .pull-left[
 ## Render
+<br>
+<br>
+3 ways to render an `.Rmd`
+
+1. click <img src="img/knit.png" width="20%">
+2. shortcut: Ctrl/Cmd + Shift + K
+3. `rmarkdown::render("demo.Rmd")`
 ]
 .pull-right[
 <br>
-<img src="img/demo-rmd-render.png" width="100%">
+<img src="img/demo-rmd-render.png", style = "box-shadow: 3px 5px 3px 1px #00000080;", width="100%">
 ]
 
 ---
@@ -238,6 +288,8 @@ ggplot(mpg, aes(displ, cty)) +
 * `fig.align`: alignment of figures
 * `fig.width`/`fig.height`
 * [other figure options](https://yihui.org/knitr/options/#plots)
+
+**Good practice**: naming your chunk!
 ]
 .pull-right[
 <img src="https://itsalocke.com/blog/img/namer-oh-no.png" width="100%">
@@ -248,19 +300,19 @@ ggplot(mpg, aes(displ, cty)) +
 ---
 
 ````r
-```{r biglm, echo = FALSE, cache = TRUE}`r ''`
-ggplot(mpg, aes(displ, cty)) +
-  geom_point()
+```{r lm, echo = FALSE, cache = TRUE}`r ''`
+fit <- lm(cty ~ ., data = mpg)
+knitr::kable(coef(summary(fit)))
 ```
 ````
 
 .pull-left[
 ## Chunk options
 
-* `scatterplot` gives the chunk a name.
-* `fig.align`: alignment of figures
-* `fig.width`/`fig.height`
-* [other figure options](https://yihui.org/knitr/options/#plots)
+* `echo`: overwrites the global setting
+* `cache`: evaluate once and skip for the future
+
+`kable()` generates a very simple table.
 ]
 .pull-right[
 ]
