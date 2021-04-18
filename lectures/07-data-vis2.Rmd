@@ -134,6 +134,8 @@ read_chunk('R/07-data-vis2.R')
 
 ---
 
+class: inverse middle
+
 ## Colour matters
 
 ---
