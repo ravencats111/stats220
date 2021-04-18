@@ -343,7 +343,999 @@ h1 {
 
 ---
 
+count: false
+
+.pull-left[
 ## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS selector
+
+&lt;table class="gray" style="width:98%;margin-left:10px;margin-right:10px;"&gt;
+&lt;tr class="red"&gt;
+&lt;td class="remark-code"&gt;* &lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div, p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; and &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; within &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div &gt; p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; one level deep in &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr valign="top"&gt;
+&lt;td class="remark-code"&gt;div + p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; immediately after a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div ~ p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; preceded by a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+]
+.pull-right[
+&lt;pre style="font-size: 13pt;" class="red"&gt;
+&amp;lt;body&gt;
+&amp;lt;h1&gt;This is a sample html&amp;lt;/h1&gt;
+
+&amp;lt;blockquote&gt;
+&amp;lt;p&gt;Maybe stories are just data with a soul.&amp;lt;/p&gt;
+&amp;lt;footer&gt;—Brene Brown&amp;lt;/footer&gt;
+&amp;lt;/blockquote&gt;
+
+&amp;lt;div id="p1" class="parent"&gt;
+Hmm
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+How are you? 
+&amp;lt;div class="child nice"&gt;
+  &amp;lt;p&gt;Hello!&amp;lt;/p&gt;
+&amp;lt;/div&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;p&gt;Household 1&amp;lt;/p&gt;
+
+&amp;lt;div class="parent"&gt;
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+&amp;lt;blockquote class="child rebel"&gt;
+  &amp;lt;p&gt;Don't talk to me!&amp;lt;/p&gt;
+&amp;lt;/blockquote&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;span class="child"&gt;
+&amp;lt;span class="parent child rebel"&gt;
+  &amp;lt;p&gt;Clean your room!&amp;lt;/p&gt;
+&amp;lt;/span&gt;
+&amp;lt;/span&gt;
+
+&amp;lt;p&gt;End of households&amp;lt;/p&gt;
+
+&amp;lt;/body&gt;
+&lt;/pre&gt;
+]
+
+---
+
+count: false
+
+.pull-left[
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS selector
+
+&lt;table class="gray" style="width:98%;margin-left:10px;margin-right:10px;"&gt;
+&lt;tr &gt;
+&lt;td class="remark-code"&gt;* &lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="red"&gt;
+&lt;td class="remark-code"&gt;div&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div, p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; and &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; within &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div &gt; p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; one level deep in &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr valign="top"&gt;
+&lt;td class="remark-code"&gt;div + p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; immediately after a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div ~ p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; preceded by a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+]
+.pull-right[
+&lt;pre style="font-size: 13pt"&gt;
+&amp;lt;body&gt;
+&amp;lt;h1&gt;This is a sample html&amp;lt;/h1&gt;
+
+&amp;lt;blockquote&gt;
+&amp;lt;p&gt;Maybe stories are just data with a soul.&amp;lt;/p&gt;
+&amp;lt;footer&gt;—Brene Brown&amp;lt;/footer&gt;
+&amp;lt;/blockquote&gt;
+
+&lt;span class="red"&gt;&amp;lt;div id="p1" class="parent"&gt;
+Hmm
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+How are you? 
+&amp;lt;div class="child nice"&gt;
+  &amp;lt;p&gt;Hello!&amp;lt;/p&gt;
+&amp;lt;/div&gt;
+&amp;lt;/div&gt;&lt;/span&gt;
+
+&amp;lt;p&gt;Household 1&amp;lt;/p&gt;
+
+&lt;span class="red"&gt;&amp;lt;div class="parent"&gt;
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+&amp;lt;blockquote class="child rebel"&gt;
+  &amp;lt;p&gt;Don't talk to me!&amp;lt;/p&gt;
+&amp;lt;/blockquote&gt;
+&amp;lt;/div&gt;&lt;/span&gt;
+
+&amp;lt;span class="child"&gt;
+&amp;lt;span class="parent child rebel"&gt;
+  &amp;lt;p&gt;Clean your room!&amp;lt;/p&gt;
+&amp;lt;/span&gt;
+&amp;lt;/span&gt;
+
+&amp;lt;p&gt;End of households&amp;lt;/p&gt;
+
+&amp;lt;/body&gt;
+&lt;/pre&gt;
+]
+
+---
+
+count: false
+
+.pull-left[
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS selector
+
+&lt;table class="gray" style="width:98%;margin-left:10px;margin-right:10px;"&gt;
+&lt;tr &gt;
+&lt;td class="remark-code"&gt;* &lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="red"&gt;
+&lt;td class="remark-code"&gt;blockquote&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;blockquote&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div, p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; and &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; within &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div &gt; p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; one level deep in &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr valign="top"&gt;
+&lt;td class="remark-code"&gt;div + p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; immediately after a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div ~ p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; preceded by a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+]
+.pull-right[
+&lt;pre style="font-size: 13pt"&gt;
+&amp;lt;body&gt;
+&amp;lt;h1&gt;This is a sample html&amp;lt;/h1&gt;
+
+&lt;span class="red"&gt;&amp;lt;blockquote&gt;
+&amp;lt;p&gt;Maybe stories are just data with a soul.&amp;lt;/p&gt;
+&amp;lt;footer&gt;—Brene Brown&amp;lt;/footer&gt;
+&amp;lt;/blockquote&gt;&lt;/span&gt;
+
+&amp;lt;div id="p1" class="parent"&gt;
+Hmm
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+How are you? 
+&amp;lt;div class="child nice"&gt;
+  &amp;lt;p&gt;Hello!&amp;lt;/p&gt;
+&amp;lt;/div&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;p&gt;Household 1&amp;lt;/p&gt;
+
+&amp;lt;div class="parent"&gt;
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+&amp;lt;blockquote class="child rebel"&gt;
+  &amp;lt;p&gt;Don't talk to me!&amp;lt;/p&gt;
+&amp;lt;/blockquote&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;span class="child"&gt;
+&amp;lt;span class="parent child rebel"&gt;
+  &amp;lt;p&gt;Clean your room!&amp;lt;/p&gt;
+&amp;lt;/span&gt;
+&amp;lt;/span&gt;
+
+&amp;lt;p&gt;End of households&amp;lt;/p&gt;
+
+&amp;lt;/body&gt;
+&lt;/pre&gt;
+]
+
+---
+
+count: false
+
+.pull-left[
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS selector
+
+&lt;table class="gray" style="width:98%;margin-left:10px;margin-right:10px;"&gt;
+&lt;tr &gt;
+&lt;td class="remark-code"&gt;* &lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="red"&gt;
+&lt;td class="remark-code"&gt;div, p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; and &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; within &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div &gt; p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; one level deep in &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr valign="top"&gt;
+&lt;td class="remark-code"&gt;div + p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; immediately after a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div ~ p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; preceded by a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;/table&gt;
+]
+.pull-right[
+&lt;pre style="font-size: 13pt"&gt;
+&amp;lt;body&gt;
+&amp;lt;h1&gt;This is a sample html&amp;lt;/h1&gt;
+
+&amp;lt;blockquote&gt;
+&lt;span class="red"&gt;&amp;lt;p&gt;Maybe stories are just data with a soul.&amp;lt;/p&gt;&lt;/span&gt;
+&amp;lt;footer&gt;—Brene Brown&amp;lt;/footer&gt;
+&amp;lt;/blockquote&gt;
+
+&lt;span class="red"&gt;&amp;lt;div id="p1" class="parent"&gt;
+Hmm
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+How are you? 
+&amp;lt;div class="child nice"&gt;
+  &amp;lt;p&gt;Hello!&amp;lt;/p&gt;
+&amp;lt;/div&gt;
+&amp;lt;/div&gt;&lt;/span&gt;
+
+&lt;span class="red"&gt;&amp;lt;p&gt;Household 1&amp;lt;/p&gt;&lt;/span&gt;
+
+&lt;span class="red"&gt;&amp;lt;div class="parent"&gt;
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+&amp;lt;blockquote class="child rebel"&gt;
+  &amp;lt;p&gt;Don't talk to me!&amp;lt;/p&gt;
+&amp;lt;/span&gt;
+&amp;lt;/div&gt;&lt;/span&gt;
+
+&amp;lt;span class="child"&gt;
+&amp;lt;span class="parent child rebel"&gt;
+  &lt;span class="red"&gt;&amp;lt;p&gt;Clean your room!&amp;lt;/p&gt;&lt;/span&gt;
+&amp;lt;/span&gt;
+&amp;lt;/span&gt;
+
+&lt;span class="red"&gt;&amp;lt;p&gt;End of households&amp;lt;/p&gt;&lt;/span&gt;
+
+&amp;lt;/body&gt;
+&lt;/pre&gt;
+]
+
+---
+
+count: false
+
+.pull-left[
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS selector
+
+&lt;table class="gray" style="width:98%;margin-left:10px;margin-right:10px;"&gt;
+&lt;tr &gt;
+&lt;td class="remark-code"&gt;* &lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div, p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; and &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="red"&gt;
+&lt;td class="remark-code"&gt;div p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; within &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div &gt; p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; one level deep in &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr valign="top"&gt;
+&lt;td class="remark-code"&gt;div + p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; immediately after a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div ~ p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; preceded by a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;/table&gt;
+]
+.pull-right[
+&lt;pre style="font-size: 13pt"&gt;
+&amp;lt;body&gt;
+&amp;lt;h1&gt;This is a sample html&amp;lt;/h1&gt;
+
+&amp;lt;blockquote&gt;
+&amp;lt;p&gt;Maybe stories are just data with a soul.&amp;lt;/p&gt;
+&amp;lt;footer&gt;—Brene Brown&amp;lt;/footer&gt;
+&amp;lt;/blockquote&gt;
+
+&amp;lt;div id="p1" class="parent"&gt;
+Hmm
+&lt;span class="red"&gt;&amp;lt;p&gt;Hi!&amp;lt;/p&gt;&lt;/span&gt;
+How are you? 
+&amp;lt;div class="child nice"&gt;
+  &lt;span class="red"&gt;&amp;lt;p&gt;Hello!&amp;lt;/p&gt;&lt;/span&gt;
+&amp;lt;/div&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;p&gt;Household 1&amp;lt;/p&gt;
+
+&amp;lt;div class="parent"&gt;
+&lt;span class="red"&gt;&amp;lt;p&gt;Hi!&amp;lt;/p&gt;&lt;/span&gt;
+&amp;lt;blockquote class="child rebel"&gt;
+  &lt;span class="red"&gt;&amp;lt;p&gt;Don't talk to me!&amp;lt;/p&gt;&lt;/span&gt;
+&amp;lt;/blockquote&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;span class="child"&gt;
+&amp;lt;span class="parent child rebel"&gt;
+  &amp;lt;p&gt;Clean your room!&amp;lt;/p&gt;
+&amp;lt;/span&gt;
+&amp;lt;/span&gt;
+
+&amp;lt;p&gt;End of households&amp;lt;/p&gt;
+
+&amp;lt;/body&gt;
+&lt;/pre&gt;
+]
+
+---
+
+count: false
+
+.pull-left[
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS selector
+
+&lt;table class="gray" style="width:98%;margin-left:10px;margin-right:10px;"&gt;
+&lt;tr &gt;
+&lt;td class="remark-code"&gt;* &lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div, p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; and &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="red"&gt;
+&lt;td class="remark-code"&gt;p div&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; within &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div &gt; p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; one level deep in &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr valign="top"&gt;
+&lt;td class="remark-code"&gt;div + p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; immediately after a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div ~ p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; preceded by a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;/table&gt;
+]
+.pull-right[
+&lt;pre style="font-size: 13pt"&gt;
+&amp;lt;body&gt;
+&amp;lt;h1&gt;This is a sample html&amp;lt;/h1&gt;
+
+&amp;lt;blockquote&gt;
+&amp;lt;p&gt;Maybe stories are just data with a soul.&amp;lt;/p&gt;
+&amp;lt;footer&gt;—Brene Brown&amp;lt;/footer&gt;
+&amp;lt;/blockquote&gt;
+
+&amp;lt;div id="p1" class="parent"&gt;
+Hmm
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+How are you? 
+&amp;lt;div class="child nice"&gt;
+  &amp;lt;p&gt;Hello!&amp;lt;/p&gt;
+&amp;lt;/div&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;p&gt;Household 1&amp;lt;/p&gt;
+
+&amp;lt;div class="parent"&gt;
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+&amp;lt;blockquote class="child rebel"&gt;
+  &amp;lt;p&gt;Don't talk to me!&amp;lt;/p&gt;
+&amp;lt;/blockquote&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;span class="child"&gt;
+&amp;lt;span class="parent child rebel"&gt;
+  &amp;lt;p&gt;Clean your room!&amp;lt;/p&gt;
+&amp;lt;/span&gt;
+&amp;lt;/span&gt;
+
+&amp;lt;p&gt;End of households&amp;lt;/p&gt;
+
+&amp;lt;/body&gt;
+&lt;/pre&gt;
+]
+
+---
+
+count: false
+
+.pull-left[
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS selector
+
+&lt;table class="gray" style="width:98%;margin-left:10px;margin-right:10px;"&gt;
+&lt;tr &gt;
+&lt;td class="remark-code"&gt;* &lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div, p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; and &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr &gt;
+&lt;td class="remark-code"&gt;div p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; within &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="red"&gt;
+&lt;td class="remark-code"&gt;div &gt; p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; one level deep in &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr valign="top"&gt;
+&lt;td class="remark-code"&gt;div + p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; immediately after a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div ~ p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; preceded by a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;/table&gt;
+]
+.pull-right[
+&lt;pre style="font-size: 13pt"&gt;
+&amp;lt;body&gt;
+&amp;lt;h1&gt;This is a sample html&amp;lt;/h1&gt;
+
+&amp;lt;blockquote&gt;
+&amp;lt;p&gt;Maybe stories are just data with a soul.&amp;lt;/p&gt;
+&amp;lt;footer&gt;—Brene Brown&amp;lt;/footer&gt;
+&amp;lt;/blockquote&gt;
+
+&amp;lt;div id="p1" class="parent"&gt;
+Hmm
+&lt;span class="red"&gt;&amp;lt;p&gt;Hi!&amp;lt;/p&gt;&lt;/span&gt;
+How are you? 
+&amp;lt;div class="child nice"&gt;
+  &lt;span class="red"&gt;&amp;lt;p&gt;Hello!&amp;lt;/p&gt;&lt;/span&gt;
+&amp;lt;/div&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;p&gt;Household 1&amp;lt;/p&gt;
+
+&amp;lt;div class="parent"&gt;
+&lt;span class="red"&gt;&amp;lt;p&gt;Hi!&amp;lt;/p&gt;&lt;/span&gt;
+&amp;lt;blockquote class="child rebel"&gt;
+  &amp;lt;p&gt;Don't talk to me!&amp;lt;/p&gt;
+&amp;lt;/blockquote&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;span class="child"&gt;
+&amp;lt;span class="parent child rebel"&gt;
+  &amp;lt;p&gt;Clean your room!&amp;lt;/p&gt;
+&amp;lt;/span&gt;
+&amp;lt;/span&gt;
+
+&amp;lt;p&gt;End of households&amp;lt;/p&gt;
+
+&amp;lt;/body&gt;
+&lt;/pre&gt;
+]
+
+&lt;div style="position:absolute;top:10px;left:900px;width:300px;background-color:white;border:1px solid black;font-size:16pt;padding:2px;"&gt;
+&lt;i class="fas fa-exclamation-triangle"&gt;&lt;/i&gt; Ignores inline elements like &lt;code&gt;span&lt;/code&gt;, &lt;code&gt;i&lt;/code&gt;, &lt;code&gt;b&lt;/code&gt;,...
+&lt;/div&gt;
+
+
+---
+
+count: false
+
+.pull-left[
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS selector
+
+&lt;table class="gray" style="width:98%;margin-left:10px;margin-right:10px;"&gt;
+&lt;tr &gt;
+&lt;td class="remark-code"&gt;* &lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div, p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; and &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr &gt;
+&lt;td class="remark-code"&gt;div p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; within &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div &gt; p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; one level deep in &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr  valign="top" class="red"&gt;
+&lt;td class="remark-code"&gt;div + p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; immediately after a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div ~ p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; preceded by a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;/table&gt;
+]
+.pull-right[
+&lt;pre style="font-size: 13pt"&gt;
+&amp;lt;body&gt;
+&amp;lt;h1&gt;This is a sample html&amp;lt;/h1&gt;
+
+&amp;lt;blockquote&gt;
+&amp;lt;p&gt;Maybe stories are just data with a soul.&amp;lt;/p&gt;
+&amp;lt;footer&gt;—Brene Brown&amp;lt;/footer&gt;
+&amp;lt;/blockquote&gt;
+
+&amp;lt;div id="p1" class="parent"&gt;
+Hmm
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+How are you? 
+&amp;lt;div class="child nice"&gt;
+  &amp;lt;p&gt;Hello!&amp;lt;/p&gt;
+&amp;lt;/div&gt;
+&amp;lt;/div&gt;
+
+&lt;span class="red"&gt;&amp;lt;p&gt;Household 1&amp;lt;/p&gt;&lt;/span&gt;
+
+&amp;lt;div class="parent"&gt;
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+&amp;lt;blockquote class="child rebel"&gt;
+  &amp;lt;p&gt;Don't talk to me!&amp;lt;/p&gt;
+&amp;lt;/blockquote&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;span class="child"&gt;
+&amp;lt;span class="parent child rebel"&gt;
+  &lt;span class="red"&gt;&amp;lt;p&gt;Clean your room!&amp;lt;/p&gt;&lt;/span&gt;
+&amp;lt;/span&gt;
+&amp;lt;/span&gt;
+
+&amp;lt;p&gt;End of households&amp;lt;/p&gt;
+
+&amp;lt;/body&gt;
+&lt;/pre&gt;
+]
+
+&lt;div style="position:absolute;top:10px;left:900px;width:300px;background-color:white;border:1px solid black;font-size:16pt;padding:2px;"&gt;
+&lt;i class="fas fa-exclamation-triangle"&gt;&lt;/i&gt; Ignores inline elements like &lt;code&gt;span&lt;/code&gt;, &lt;code&gt;i&lt;/code&gt;, &lt;code&gt;b&lt;/code&gt;,...
+&lt;/div&gt;
+
+---
+
+count: false
+
+.pull-left[
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS selector
+
+&lt;table class="gray" style="width:98%;margin-left:10px;margin-right:10px;"&gt;
+&lt;tr &gt;
+&lt;td class="remark-code"&gt;* &lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div, p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt; and &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr &gt;
+&lt;td class="remark-code"&gt;div p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; within &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div &gt; p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; one level deep in &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code"&gt;div + p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; immediately after a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="red"&gt;
+&lt;td class="remark-code"&gt;div ~ p&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;/span&gt; preceded by a &lt;span class="remark-code" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+]
+.pull-right[
+&lt;pre style="font-size: 13pt"&gt;
+&amp;lt;body&gt;
+&amp;lt;h1&gt;This is a sample html&amp;lt;/h1&gt;
+
+&amp;lt;blockquote&gt;
+&amp;lt;p&gt;Maybe stories are just data with a soul.&amp;lt;/p&gt;
+&amp;lt;footer&gt;—Brene Brown&amp;lt;/footer&gt;
+&amp;lt;/blockquote&gt;
+
+&amp;lt;div id="p1" class="parent"&gt;
+Hmm
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+How are you? 
+&amp;lt;div class="child nice"&gt;
+  &amp;lt;p&gt;Hello!&amp;lt;/p&gt;
+&amp;lt;/div&gt;
+&amp;lt;/div&gt;
+
+&lt;span class="red"&gt;&amp;lt;p&gt;Household 1&amp;lt;/p&gt;&lt;/span&gt;
+
+&amp;lt;div class="parent"&gt;
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+&amp;lt;blockquote class="child rebel"&gt;
+  &amp;lt;p&gt;Don't talk to me!&amp;lt;/p&gt;
+&amp;lt;/blockquote&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;span class="child"&gt;
+&amp;lt;span class="parent child rebel"&gt;
+  &lt;span class="red"&gt;&amp;lt;p&gt;Clean your room!&amp;lt;/p&gt;&lt;/span&gt;
+&amp;lt;/span&gt;
+&amp;lt;/span&gt;
+
+&lt;span class="red"&gt;&amp;lt;p&gt;End of households&amp;lt;/p&gt;&lt;/span&gt;
+
+&amp;lt;/body&gt;
+&lt;/pre&gt;
+]
+
+---
+
+count: false
+
+.pull-left[
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS selector
+
+&lt;table class="gray" style="width:98%;margin-left:10px;margin-right:10px;"&gt;
+&lt;tr&gt;
+&lt;td class="remark-code" valign="top"&gt;.classname&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with the attribute &lt;span class="remark-code" style="font-size:16pt"&gt;class="classname"&lt;/span&gt;. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code" valign="top"&gt;.c1.c2&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with &lt;em&gt;both&lt;/em&gt; &lt;span class="remark-code" style="font-size:16pt"&gt;c1&lt;/span&gt; and &lt;span class="remark-code" style="font-size:16pt"&gt;c2&lt;/span&gt; within its class attribute. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code" valign="top"&gt;.c1 .c2&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with  class &lt;span class="remark-code" style="font-size:16pt"&gt;c2&lt;/span&gt; that is a descendant of an element with class &lt;span class="remark-code" style="font-size:16pt"&gt;c1&lt;/span&gt;. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code" valign="top"&gt;#idname&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with the attribute &lt;span class="remark-code" style="font-size:16pt"&gt;id="idname"&lt;/span&gt;. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;div style="position:absolute;top:10px;left:900px;width:300px;background-color:white;border:1px solid black;font-size:16pt;padding:2px;"&gt;
+&lt;i class="fas fa-exclamation-triangle"&gt;&lt;/i&gt; Note some offspring do not inherit class from their parents.
+&lt;/div&gt;
+]
+.pull-right[
+&lt;pre style="font-size: 13pt"&gt;
+&amp;lt;body&gt;
+&amp;lt;h1&gt;This is a sample html&amp;lt;/h1&gt;
+
+&amp;lt;blockquote&gt;
+&amp;lt;p&gt;Maybe stories are just data with a soul.&amp;lt;/p&gt;
+&amp;lt;footer&gt;—Brene Brown&amp;lt;/footer&gt;
+&amp;lt;/blockquote&gt;
+
+&amp;lt;div id="p1" class="parent"&gt;
+Hmm
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+How are you? 
+&amp;lt;div class="child nice"&gt;
+  &amp;lt;p&gt;Hello!&amp;lt;/p&gt;
+&amp;lt;/div&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;p&gt;Household 1&amp;lt;/p&gt;
+
+&amp;lt;div class="parent"&gt;
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+&amp;lt;blockquote class="child rebel"&gt;
+  &amp;lt;p&gt;Don't talk to me!&amp;lt;/p&gt;
+&amp;lt;/blockquote&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;span class="child"&gt;
+&amp;lt;span class="parent child rebel"&gt;&lt;/span&gt;
+  &amp;lt;p&gt;Clean your room!&amp;lt;/p&gt;
+&amp;lt;/span&gt;&lt;/span&gt;
+&amp;lt;/span&gt;
+
+&amp;lt;p&gt;End of households&amp;lt;/p&gt;
+
+&amp;lt;/body&gt;
+&lt;/pre&gt;
+]
+
+---
+
+count: false
+
+.pull-left[
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS selector
+
+&lt;table class="gray" style="width:98%;margin-left:10px;margin-right:10px;"&gt;
+&lt;tr class="red"&gt;
+&lt;td class="remark-code" valign="top"&gt;.parent&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with the attribute &lt;span class="remark-code" style="font-size:16pt"&gt;class="parent"&lt;/span&gt;. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code" valign="top"&gt;.c1.c2&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with &lt;em&gt;both&lt;/em&gt; &lt;span class="remark-code" style="font-size:16pt"&gt;c1&lt;/span&gt; and &lt;span class="remark-code" style="font-size:16pt"&gt;c2&lt;/span&gt; within its class attribute. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code" valign="top"&gt;.c1 .c2&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with  class &lt;span class="remark-code" style="font-size:16pt"&gt;c2&lt;/span&gt; that is a descendant of an element with class &lt;span class="remark-code" style="font-size:16pt"&gt;c1&lt;/span&gt;. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code" valign="top"&gt;#idname&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with the attribute &lt;span class="remark-code" style="font-size:16pt"&gt;id="idname"&lt;/span&gt;. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;div style="position:absolute;top:10px;left:900px;width:300px;background-color:white;border:1px solid black;font-size:16pt;padding:2px;"&gt;
+&lt;i class="fas fa-exclamation-triangle"&gt;&lt;/i&gt; Note some offspring do not inherit class from their parents.
+&lt;/div&gt;
+]
+.pull-right[
+&lt;pre style="font-size: 13pt"&gt;
+&amp;lt;body&gt;
+&amp;lt;h1&gt;This is a sample html&amp;lt;/h1&gt;
+
+&amp;lt;blockquote&gt;
+&amp;lt;p&gt;Maybe stories are just data with a soul.&amp;lt;/p&gt;
+&amp;lt;footer&gt;—Brene Brown&amp;lt;/footer&gt;
+&amp;lt;/blockquote&gt;
+
+&lt;span class="red"&gt;&amp;lt;div id="p1" class="parent"&gt;
+Hmm
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+How are you? 
+&amp;lt;div class="child nice"&gt;
+  &amp;lt;p&gt;Hello!&amp;lt;/p&gt;
+&amp;lt;/div&gt;
+&amp;lt;/div&gt;&lt;/span&gt;
+
+&amp;lt;p&gt;Household 1&amp;lt;/p&gt;
+
+&lt;span class="red"&gt;&amp;lt;div class="parent"&gt;
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+&amp;lt;blockquote class="child rebel"&gt;
+  &amp;lt;p&gt;Don't talk to me!&amp;lt;/p&gt;
+&amp;lt;/blockquote&gt;
+&amp;lt;/div&gt;&lt;/span&gt;
+
+&amp;lt;span class="child"&gt;
+&lt;span class="red"&gt;&amp;lt;span class="parent child rebel"&gt;&lt;/span&gt;
+  &amp;lt;p&gt;Clean your room!&amp;lt;/p&gt;
+&lt;span class="red"&gt;&amp;lt;/span&gt;&lt;/span&gt;
+&amp;lt;/span&gt;
+
+&amp;lt;p&gt;End of households&amp;lt;/p&gt;
+
+&amp;lt;/body&gt;
+&lt;/pre&gt;
+]
+
+---
+
+count: false
+
+.pull-left[
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS selector
+
+&lt;table class="gray" style="width:98%;margin-left:10px;margin-right:10px;"&gt;
+&lt;td class="remark-code" valign="top"&gt;.classname&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with the attribute &lt;span class="remark-code" style="font-size:16pt"&gt;class="classname"&lt;/span&gt;. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="red"&gt;
+&lt;td class="remark-code" valign="top"&gt;.child.rebel&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with &lt;em&gt;both&lt;/em&gt; &lt;span class="remark-code" style="font-size:16pt"&gt;child&lt;/span&gt; and &lt;span class="remark-code" style="font-size:16pt"&gt;rebel&lt;/span&gt; within its class attribute. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code" valign="top"&gt;.c1 .c2&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with  class &lt;span class="remark-code" style="font-size:16pt"&gt;c2&lt;/span&gt; that is a descendant of an element with class &lt;span class="remark-code" style="font-size:16pt"&gt;c1&lt;/span&gt;. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code" valign="top"&gt;#idname&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with the attribute &lt;span class="remark-code" style="font-size:16pt"&gt;id="idname"&lt;/span&gt;. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+]
+.pull-right[
+&lt;pre style="font-size: 13pt"&gt;
+&amp;lt;body&gt;
+&amp;lt;h1&gt;This is a sample html&amp;lt;/h1&gt;
+
+&amp;lt;blockquote&gt;
+&amp;lt;p&gt;Maybe stories are just data with a soul.&amp;lt;/p&gt;
+&amp;lt;footer&gt;—Brene Brown&amp;lt;/footer&gt;
+&amp;lt;/blockquote&gt;
+
+&amp;lt;div id="p1" class="parent"&gt;
+Hmm
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+How are you?
+&amp;lt;div class="child nice"&gt;
+  &amp;lt;p&gt;Hello!&amp;lt;/p&gt;
+&amp;lt;/div&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;p&gt;Household 1&amp;lt;/p&gt;
+
+&amp;lt;div class="parent"&gt;
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+&lt;span class="red"&gt;&amp;lt;blockquote class="child rebel"&gt;
+  &amp;lt;p&gt;Don't talk to me!&amp;lt;/p&gt;
+&amp;lt;/blockquote&gt;&lt;/span&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;span class="child"&gt;
+&lt;span class="red"&gt;&amp;lt;span class="parent child rebel"&gt;&lt;/span&gt;
+  &amp;lt;p&gt;Clean your room!&amp;lt;/p&gt;
+&lt;span class="red"&gt;&amp;lt;/span&gt;&lt;/span&gt;
+&amp;lt;/span&gt;
+
+&amp;lt;p&gt;End of households&amp;lt;/p&gt;
+
+&amp;lt;/body&gt;
+&lt;/pre&gt;
+]
+
+---
+
+count: false
+
+.pull-left[
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS selector
+
+&lt;table class="gray" style="width:98%;margin-left:10px;margin-right:10px;"&gt;
+&lt;tr&gt;
+&lt;td class="remark-code" valign="top"&gt;.classname&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with the attribute &lt;span class="remark-code" style="font-size:16pt"&gt;class="classname"&lt;/span&gt;. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code" valign="top"&gt;.c1.c2&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with &lt;em&gt;both&lt;/em&gt; &lt;span class="remark-code" style="font-size:16pt"&gt;c1&lt;/span&gt; and &lt;span class="remark-code" style="font-size:16pt"&gt;c2&lt;/span&gt; within its class attribute. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="red"&gt;
+&lt;td class="remark-code" valign="top"&gt;.parent .rebel&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with  class &lt;span class="remark-code" style="font-size:16pt"&gt;rebel&lt;/span&gt; that is a descendant of an element with class &lt;span class="remark-code" style="font-size:16pt"&gt;parent&lt;/span&gt;. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code" valign="top"&gt;#idname&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with the attribute &lt;span class="remark-code" style="font-size:16pt"&gt;id="idname"&lt;/span&gt;. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+]
+.pull-right[
+&lt;pre style="font-size: 13pt"&gt;
+&amp;lt;body&gt;
+&amp;lt;h1&gt;This is a sample html&amp;lt;/h1&gt;
+
+&amp;lt;blockquote&gt;
+&amp;lt;p&gt;Maybe stories are just data with a soul.&amp;lt;/p&gt;
+&amp;lt;footer&gt;—Brene Brown&amp;lt;/footer&gt;
+&amp;lt;/blockquote&gt;
+
+&amp;lt;div id="p1" class="parent"&gt;
+Hmm
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+How are you?
+&amp;lt;div class="child nice"&gt;
+  &amp;lt;p&gt;Hello!&amp;lt;/p&gt;
+&amp;lt;/div&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;p&gt;Household 1&amp;lt;/p&gt;
+
+lt;div class="parent"&gt;
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+&lt;span class="red"&gt;&amp;lt;blockquote class="child rebel"&gt;
+  &amp;lt;p&gt;Don't talk to me!&amp;lt;/p&gt;
+&amp;lt;/blockquote&gt;&lt;/span&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;span class="child"&gt;
+&amp;lt;span class="parent child rebel"&gt;
+  &amp;lt;p&gt;Clean your room!&amp;lt;/p&gt;
+&amp;lt;/span&gt;
+&amp;lt;/span&gt;
+
+&amp;lt;p&gt;End of households&amp;lt;/p&gt;
+
+&amp;lt;/body&gt;
+&lt;/pre&gt;
+]
+
+---
+
+count: false
+
+.pull-left[
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS selector
+
+&lt;table class="gray" style="width:98%;margin-left:10px;margin-right:10px;"&gt;
+&lt;td class="remark-code" valign="top"&gt;.classname&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with the attribute &lt;span class="remark-code" style="font-size:16pt"&gt;class="classname"&lt;/span&gt;. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code" valign="top"&gt;.c1.c2&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with &lt;em&gt;both&lt;/em&gt; &lt;span class="remark-code" style="font-size:16pt"&gt;c1&lt;/span&gt; and &lt;span class="remark-code" style="font-size:16pt"&gt;c2&lt;/span&gt; within its class attribute. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class="remark-code" valign="top"&gt;.c1 .c2&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with  class &lt;span class="remark-code" style="font-size:16pt"&gt;c2&lt;/span&gt; that is a descendant of an element with class &lt;span class="remark-code" style="font-size:16pt"&gt;c1&lt;/span&gt;. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="red"&gt;
+&lt;td class="remark-code" valign="top"&gt;#p1&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with the attribute &lt;span class="remark-code" style="font-size:16pt"&gt;id="p1"&lt;/span&gt;. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+]
+.pull-right[
+&lt;pre style="font-size: 13pt"&gt;
+&amp;lt;body&gt;
+&amp;lt;h1&gt;This is a sample html&amp;lt;/h1&gt;
+
+&amp;lt;blockquote&gt;
+&amp;lt;p&gt;Maybe stories are just data with a soul.&amp;lt;/p&gt;
+&amp;lt;footer&gt;—Brene Brown&amp;lt;/footer&gt;
+&amp;lt;/blockquote&gt;
+
+&lt;span class="red"&gt;&amp;lt;div id="p1" class="parent"&gt;
+Hmm
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+How are you?
+&amp;lt;div class="child nice"&gt;
+  &amp;lt;p&gt;Hello!&amp;lt;/p&gt;
+&amp;lt;/div&gt;
+&amp;lt;/div&gt;&lt;/span&gt;
+
+&amp;lt;p&gt;Household 1&amp;lt;/p&gt;
+
+lt;div class="parent"&gt;
+&amp;lt;p&gt;Hi!&amp;lt;/p&gt;
+&amp;&amp;lt;blockquote class="child rebel"&gt;
+  &amp;lt;p&gt;Don't talk to me!&amp;lt;/p&gt;
+&amp;lt;/blockquote&gt;
+&amp;lt;/div&gt;
+
+&amp;lt;span class="child"&gt;
+&amp;lt;span class="parent child rebel"&gt;
+  &amp;lt;p&gt;Clean your room!&amp;lt;/p&gt;
+&amp;lt;/span&gt;
+&amp;lt;/span&gt;
+
+&amp;lt;p&gt;End of households&amp;lt;/p&gt;
+
+&amp;lt;/body&gt;
+&lt;/pre&gt;
+]
+
+&lt;div style="position:absolute;top:10px;left:900px;width:300px;background-color:white;border:1px solid black;font-size:16pt;padding:2px;"&gt;
+&lt;i class="fas fa-exclamation-triangle"&gt;&lt;/i&gt; Unlike &lt;code style="font-size:16pt"&gt;class&lt;/code&gt;, you can only have one &lt;code style="font-size:16pt"&gt;id&lt;/code&gt; value and must be unique in the whole HTML document.
+&lt;/div&gt;
+
+---
+
+## &lt;i class='fab fa-js-square yellow'&gt;&lt;/i&gt; JavaScript (JS)*
+
+* JS is a programming language and enable interactive components in HTML documents.
+* 2 ways to insert JS into a HTML document:
+  + **internally** by defining within `&lt;script&gt;` element:
+  ```html
+  &lt;script&gt;
+  document.getElementById("p1").innerHTML = "content";
+  &lt;/script&gt;
+  ```
+  + **externally** by using the `src` attribute to refer to the external file:
+  ```html
+  &lt;script src="js/myjs.js"&gt;&lt;/script&gt;
+  ```
+
+---
+
+class: inverse middle
+
+## Web scraping 🕸
 
 ---
 

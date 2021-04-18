@@ -351,7 +351,999 @@ h1 {
 
 ---
 
+count: false
+
+.pull-left[
 ## <i class="fab fa-css3-alt blue"></i> CSS selector
+
+<table class="gray" style="width:98%;margin-left:10px;margin-right:10px;">
+<tr class="red">
+<td class="remark-code">* </td><td>&nbsp;&nbsp;</td><td>selects all elements</td>
+</tr>
+<tr>
+<td class="remark-code">div</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> elements</td>
+</tr>
+<tr>
+<td class="remark-code">div, p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> and <span class="remark-code" style="font-size:16pt">&lt;p></span> elements</td>
+</tr>
+<tr>
+<td class="remark-code">div p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> within <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div > p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> one level deep in <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr valign="top">
+<td class="remark-code">div + p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> immediately after a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div ~ p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> preceded by a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+</table>
+]
+.pull-right[
+<pre style="font-size: 13pt;" class="red">
+&lt;body>
+&lt;h1>This is a sample html&lt;/h1>
+
+&lt;blockquote>
+&lt;p>Maybe stories are just data with a soul.&lt;/p>
+&lt;footer>—Brene Brown&lt;/footer>
+&lt;/blockquote>
+
+&lt;div id="p1" class="parent">
+Hmm
+&lt;p>Hi!&lt;/p>
+How are you? 
+&lt;div class="child nice">
+  &lt;p>Hello!&lt;/p>
+&lt;/div>
+&lt;/div>
+
+&lt;p>Household 1&lt;/p>
+
+&lt;div class="parent">
+&lt;p>Hi!&lt;/p>
+&lt;blockquote class="child rebel">
+  &lt;p>Don't talk to me!&lt;/p>
+&lt;/blockquote>
+&lt;/div>
+
+&lt;span class="child">
+&lt;span class="parent child rebel">
+  &lt;p>Clean your room!&lt;/p>
+&lt;/span>
+&lt;/span>
+
+&lt;p>End of households&lt;/p>
+
+&lt;/body>
+</pre>
+]
+
+---
+
+count: false
+
+.pull-left[
+## <i class="fab fa-css3-alt blue"></i> CSS selector
+
+<table class="gray" style="width:98%;margin-left:10px;margin-right:10px;">
+<tr >
+<td class="remark-code">* </td><td>&nbsp;&nbsp;</td><td>selects all elements</td>
+</tr>
+<tr class="red">
+<td class="remark-code">div</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> elements</td>
+</tr>
+<tr>
+<td class="remark-code">div, p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> and <span class="remark-code" style="font-size:16pt">&lt;p></span> elements</td>
+</tr>
+<tr>
+<td class="remark-code">div p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> within <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div > p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> one level deep in <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr valign="top">
+<td class="remark-code">div + p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> immediately after a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div ~ p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> preceded by a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+</table>
+]
+.pull-right[
+<pre style="font-size: 13pt">
+&lt;body>
+&lt;h1>This is a sample html&lt;/h1>
+
+&lt;blockquote>
+&lt;p>Maybe stories are just data with a soul.&lt;/p>
+&lt;footer>—Brene Brown&lt;/footer>
+&lt;/blockquote>
+
+<span class="red">&lt;div id="p1" class="parent">
+Hmm
+&lt;p>Hi!&lt;/p>
+How are you? 
+&lt;div class="child nice">
+  &lt;p>Hello!&lt;/p>
+&lt;/div>
+&lt;/div></span>
+
+&lt;p>Household 1&lt;/p>
+
+<span class="red">&lt;div class="parent">
+&lt;p>Hi!&lt;/p>
+&lt;blockquote class="child rebel">
+  &lt;p>Don't talk to me!&lt;/p>
+&lt;/blockquote>
+&lt;/div></span>
+
+&lt;span class="child">
+&lt;span class="parent child rebel">
+  &lt;p>Clean your room!&lt;/p>
+&lt;/span>
+&lt;/span>
+
+&lt;p>End of households&lt;/p>
+
+&lt;/body>
+</pre>
+]
+
+---
+
+count: false
+
+.pull-left[
+## <i class="fab fa-css3-alt blue"></i> CSS selector
+
+<table class="gray" style="width:98%;margin-left:10px;margin-right:10px;">
+<tr >
+<td class="remark-code">* </td><td>&nbsp;&nbsp;</td><td>selects all elements</td>
+</tr>
+<tr class="red">
+<td class="remark-code">blockquote</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;blockquote></span> elements</td>
+</tr>
+<tr>
+<td class="remark-code">div, p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> and <span class="remark-code" style="font-size:16pt">&lt;p></span> elements</td>
+</tr>
+<tr>
+<td class="remark-code">div p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> within <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div > p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> one level deep in <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr valign="top">
+<td class="remark-code">div + p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> immediately after a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div ~ p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> preceded by a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+</table>
+]
+.pull-right[
+<pre style="font-size: 13pt">
+&lt;body>
+&lt;h1>This is a sample html&lt;/h1>
+
+<span class="red">&lt;blockquote>
+&lt;p>Maybe stories are just data with a soul.&lt;/p>
+&lt;footer>—Brene Brown&lt;/footer>
+&lt;/blockquote></span>
+
+&lt;div id="p1" class="parent">
+Hmm
+&lt;p>Hi!&lt;/p>
+How are you? 
+&lt;div class="child nice">
+  &lt;p>Hello!&lt;/p>
+&lt;/div>
+&lt;/div>
+
+&lt;p>Household 1&lt;/p>
+
+&lt;div class="parent">
+&lt;p>Hi!&lt;/p>
+&lt;blockquote class="child rebel">
+  &lt;p>Don't talk to me!&lt;/p>
+&lt;/blockquote>
+&lt;/div>
+
+&lt;span class="child">
+&lt;span class="parent child rebel">
+  &lt;p>Clean your room!&lt;/p>
+&lt;/span>
+&lt;/span>
+
+&lt;p>End of households&lt;/p>
+
+&lt;/body>
+</pre>
+]
+
+---
+
+count: false
+
+.pull-left[
+## <i class="fab fa-css3-alt blue"></i> CSS selector
+
+<table class="gray" style="width:98%;margin-left:10px;margin-right:10px;">
+<tr >
+<td class="remark-code">* </td><td>&nbsp;&nbsp;</td><td>selects all elements</td>
+</tr>
+<tr>
+<td class="remark-code">div</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> elements</td>
+</tr>
+<tr class="red">
+<td class="remark-code">div, p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> and <span class="remark-code" style="font-size:16pt">&lt;p></span> elements</td>
+</tr>
+<tr>
+<td class="remark-code">div p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> within <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div > p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> one level deep in <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr valign="top">
+<td class="remark-code">div + p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> immediately after a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div ~ p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> preceded by a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+</table>
+]
+.pull-right[
+<pre style="font-size: 13pt">
+&lt;body>
+&lt;h1>This is a sample html&lt;/h1>
+
+&lt;blockquote>
+<span class="red">&lt;p>Maybe stories are just data with a soul.&lt;/p></span>
+&lt;footer>—Brene Brown&lt;/footer>
+&lt;/blockquote>
+
+<span class="red">&lt;div id="p1" class="parent">
+Hmm
+&lt;p>Hi!&lt;/p>
+How are you? 
+&lt;div class="child nice">
+  &lt;p>Hello!&lt;/p>
+&lt;/div>
+&lt;/div></span>
+
+<span class="red">&lt;p>Household 1&lt;/p></span>
+
+<span class="red">&lt;div class="parent">
+&lt;p>Hi!&lt;/p>
+&lt;blockquote class="child rebel">
+  &lt;p>Don't talk to me!&lt;/p>
+&lt;/span>
+&lt;/div></span>
+
+&lt;span class="child">
+&lt;span class="parent child rebel">
+  <span class="red">&lt;p>Clean your room!&lt;/p></span>
+&lt;/span>
+&lt;/span>
+
+<span class="red">&lt;p>End of households&lt;/p></span>
+
+&lt;/body>
+</pre>
+]
+
+---
+
+count: false
+
+.pull-left[
+## <i class="fab fa-css3-alt blue"></i> CSS selector
+
+<table class="gray" style="width:98%;margin-left:10px;margin-right:10px;">
+<tr >
+<td class="remark-code">* </td><td>&nbsp;&nbsp;</td><td>selects all elements</td>
+</tr>
+<tr>
+<td class="remark-code">div</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> elements</td>
+</tr>
+<tr>
+<td class="remark-code">div, p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> and <span class="remark-code" style="font-size:16pt">&lt;p></span> elements</td>
+</tr>
+<tr class="red">
+<td class="remark-code">div p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> within <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div > p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> one level deep in <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr valign="top">
+<td class="remark-code">div + p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> immediately after a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div ~ p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> preceded by a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+</table>
+]
+.pull-right[
+<pre style="font-size: 13pt">
+&lt;body>
+&lt;h1>This is a sample html&lt;/h1>
+
+&lt;blockquote>
+&lt;p>Maybe stories are just data with a soul.&lt;/p>
+&lt;footer>—Brene Brown&lt;/footer>
+&lt;/blockquote>
+
+&lt;div id="p1" class="parent">
+Hmm
+<span class="red">&lt;p>Hi!&lt;/p></span>
+How are you? 
+&lt;div class="child nice">
+  <span class="red">&lt;p>Hello!&lt;/p></span>
+&lt;/div>
+&lt;/div>
+
+&lt;p>Household 1&lt;/p>
+
+&lt;div class="parent">
+<span class="red">&lt;p>Hi!&lt;/p></span>
+&lt;blockquote class="child rebel">
+  <span class="red">&lt;p>Don't talk to me!&lt;/p></span>
+&lt;/blockquote>
+&lt;/div>
+
+&lt;span class="child">
+&lt;span class="parent child rebel">
+  &lt;p>Clean your room!&lt;/p>
+&lt;/span>
+&lt;/span>
+
+&lt;p>End of households&lt;/p>
+
+&lt;/body>
+</pre>
+]
+
+---
+
+count: false
+
+.pull-left[
+## <i class="fab fa-css3-alt blue"></i> CSS selector
+
+<table class="gray" style="width:98%;margin-left:10px;margin-right:10px;">
+<tr >
+<td class="remark-code">* </td><td>&nbsp;&nbsp;</td><td>selects all elements</td>
+</tr>
+<tr>
+<td class="remark-code">div</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> elements</td>
+</tr>
+<tr>
+<td class="remark-code">div, p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> and <span class="remark-code" style="font-size:16pt">&lt;p></span> elements</td>
+</tr>
+<tr class="red">
+<td class="remark-code">p div</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> within <span class="remark-code" style="font-size:16pt">&lt;p></span></td>
+</tr>
+<tr>
+<td class="remark-code">div > p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> one level deep in <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr valign="top">
+<td class="remark-code">div + p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> immediately after a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div ~ p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> preceded by a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+</table>
+]
+.pull-right[
+<pre style="font-size: 13pt">
+&lt;body>
+&lt;h1>This is a sample html&lt;/h1>
+
+&lt;blockquote>
+&lt;p>Maybe stories are just data with a soul.&lt;/p>
+&lt;footer>—Brene Brown&lt;/footer>
+&lt;/blockquote>
+
+&lt;div id="p1" class="parent">
+Hmm
+&lt;p>Hi!&lt;/p>
+How are you? 
+&lt;div class="child nice">
+  &lt;p>Hello!&lt;/p>
+&lt;/div>
+&lt;/div>
+
+&lt;p>Household 1&lt;/p>
+
+&lt;div class="parent">
+&lt;p>Hi!&lt;/p>
+&lt;blockquote class="child rebel">
+  &lt;p>Don't talk to me!&lt;/p>
+&lt;/blockquote>
+&lt;/div>
+
+&lt;span class="child">
+&lt;span class="parent child rebel">
+  &lt;p>Clean your room!&lt;/p>
+&lt;/span>
+&lt;/span>
+
+&lt;p>End of households&lt;/p>
+
+&lt;/body>
+</pre>
+]
+
+---
+
+count: false
+
+.pull-left[
+## <i class="fab fa-css3-alt blue"></i> CSS selector
+
+<table class="gray" style="width:98%;margin-left:10px;margin-right:10px;">
+<tr >
+<td class="remark-code">* </td><td>&nbsp;&nbsp;</td><td>selects all elements</td>
+</tr>
+<tr>
+<td class="remark-code">div</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> elements</td>
+</tr>
+<tr>
+<td class="remark-code">div, p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> and <span class="remark-code" style="font-size:16pt">&lt;p></span> elements</td>
+</tr>
+<tr >
+<td class="remark-code">div p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> within <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr class="red">
+<td class="remark-code">div > p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> one level deep in <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr valign="top">
+<td class="remark-code">div + p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> immediately after a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div ~ p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> preceded by a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+</table>
+]
+.pull-right[
+<pre style="font-size: 13pt">
+&lt;body>
+&lt;h1>This is a sample html&lt;/h1>
+
+&lt;blockquote>
+&lt;p>Maybe stories are just data with a soul.&lt;/p>
+&lt;footer>—Brene Brown&lt;/footer>
+&lt;/blockquote>
+
+&lt;div id="p1" class="parent">
+Hmm
+<span class="red">&lt;p>Hi!&lt;/p></span>
+How are you? 
+&lt;div class="child nice">
+  <span class="red">&lt;p>Hello!&lt;/p></span>
+&lt;/div>
+&lt;/div>
+
+&lt;p>Household 1&lt;/p>
+
+&lt;div class="parent">
+<span class="red">&lt;p>Hi!&lt;/p></span>
+&lt;blockquote class="child rebel">
+  &lt;p>Don't talk to me!&lt;/p>
+&lt;/blockquote>
+&lt;/div>
+
+&lt;span class="child">
+&lt;span class="parent child rebel">
+  &lt;p>Clean your room!&lt;/p>
+&lt;/span>
+&lt;/span>
+
+&lt;p>End of households&lt;/p>
+
+&lt;/body>
+</pre>
+]
+
+<div style="position:absolute;top:10px;left:900px;width:300px;background-color:white;border:1px solid black;font-size:16pt;padding:2px;">
+<i class="fas fa-exclamation-triangle"></i> Ignores inline elements like <code>span</code>, <code>i</code>, <code>b</code>,...
+</div>
+
+
+---
+
+count: false
+
+.pull-left[
+## <i class="fab fa-css3-alt blue"></i> CSS selector
+
+<table class="gray" style="width:98%;margin-left:10px;margin-right:10px;">
+<tr >
+<td class="remark-code">* </td><td>&nbsp;&nbsp;</td><td>selects all elements</td>
+</tr>
+<tr>
+<td class="remark-code">div</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> elements</td>
+</tr>
+<tr>
+<td class="remark-code">div, p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> and <span class="remark-code" style="font-size:16pt">&lt;p></span> elements</td>
+</tr>
+<tr >
+<td class="remark-code">div p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> within <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div > p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> one level deep in <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr  valign="top" class="red">
+<td class="remark-code">div + p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> immediately after a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div ~ p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> preceded by a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+</table>
+]
+.pull-right[
+<pre style="font-size: 13pt">
+&lt;body>
+&lt;h1>This is a sample html&lt;/h1>
+
+&lt;blockquote>
+&lt;p>Maybe stories are just data with a soul.&lt;/p>
+&lt;footer>—Brene Brown&lt;/footer>
+&lt;/blockquote>
+
+&lt;div id="p1" class="parent">
+Hmm
+&lt;p>Hi!&lt;/p>
+How are you? 
+&lt;div class="child nice">
+  &lt;p>Hello!&lt;/p>
+&lt;/div>
+&lt;/div>
+
+<span class="red">&lt;p>Household 1&lt;/p></span>
+
+&lt;div class="parent">
+&lt;p>Hi!&lt;/p>
+&lt;blockquote class="child rebel">
+  &lt;p>Don't talk to me!&lt;/p>
+&lt;/blockquote>
+&lt;/div>
+
+&lt;span class="child">
+&lt;span class="parent child rebel">
+  <span class="red">&lt;p>Clean your room!&lt;/p></span>
+&lt;/span>
+&lt;/span>
+
+&lt;p>End of households&lt;/p>
+
+&lt;/body>
+</pre>
+]
+
+<div style="position:absolute;top:10px;left:900px;width:300px;background-color:white;border:1px solid black;font-size:16pt;padding:2px;">
+<i class="fas fa-exclamation-triangle"></i> Ignores inline elements like <code>span</code>, <code>i</code>, <code>b</code>,...
+</div>
+
+---
+
+count: false
+
+.pull-left[
+## <i class="fab fa-css3-alt blue"></i> CSS selector
+
+<table class="gray" style="width:98%;margin-left:10px;margin-right:10px;">
+<tr >
+<td class="remark-code">* </td><td>&nbsp;&nbsp;</td><td>selects all elements</td>
+</tr>
+<tr>
+<td class="remark-code">div</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> elements</td>
+</tr>
+<tr>
+<td class="remark-code">div, p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;div></span> and <span class="remark-code" style="font-size:16pt">&lt;p></span> elements</td>
+</tr>
+<tr >
+<td class="remark-code">div p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> within <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div > p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> one level deep in <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr>
+<td class="remark-code">div + p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> immediately after a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+<tr class="red">
+<td class="remark-code">div ~ p</td><td>&nbsp;&nbsp;</td><td>selects all <span class="remark-code" style="font-size:16pt">&lt;p></span> preceded by a <span class="remark-code" style="font-size:16pt">&lt;div></span></td>
+</tr>
+</table>
+]
+.pull-right[
+<pre style="font-size: 13pt">
+&lt;body>
+&lt;h1>This is a sample html&lt;/h1>
+
+&lt;blockquote>
+&lt;p>Maybe stories are just data with a soul.&lt;/p>
+&lt;footer>—Brene Brown&lt;/footer>
+&lt;/blockquote>
+
+&lt;div id="p1" class="parent">
+Hmm
+&lt;p>Hi!&lt;/p>
+How are you? 
+&lt;div class="child nice">
+  &lt;p>Hello!&lt;/p>
+&lt;/div>
+&lt;/div>
+
+<span class="red">&lt;p>Household 1&lt;/p></span>
+
+&lt;div class="parent">
+&lt;p>Hi!&lt;/p>
+&lt;blockquote class="child rebel">
+  &lt;p>Don't talk to me!&lt;/p>
+&lt;/blockquote>
+&lt;/div>
+
+&lt;span class="child">
+&lt;span class="parent child rebel">
+  <span class="red">&lt;p>Clean your room!&lt;/p></span>
+&lt;/span>
+&lt;/span>
+
+<span class="red">&lt;p>End of households&lt;/p></span>
+
+&lt;/body>
+</pre>
+]
+
+---
+
+count: false
+
+.pull-left[
+## <i class="fab fa-css3-alt blue"></i> CSS selector
+
+<table class="gray" style="width:98%;margin-left:10px;margin-right:10px;">
+<tr>
+<td class="remark-code" valign="top">.classname</td><td>&nbsp;&nbsp;</td><td>selects all elements with the attribute <span class="remark-code" style="font-size:16pt">class="classname"</span>. </td>
+</tr>
+<tr>
+<td class="remark-code" valign="top">.c1.c2</td><td>&nbsp;&nbsp;</td><td>selects all elements with <em>both</em> <span class="remark-code" style="font-size:16pt">c1</span> and <span class="remark-code" style="font-size:16pt">c2</span> within its class attribute. </td>
+</tr>
+<tr>
+<td class="remark-code" valign="top">.c1 .c2</td><td>&nbsp;&nbsp;</td><td>selects all elements with  class <span class="remark-code" style="font-size:16pt">c2</span> that is a descendant of an element with class <span class="remark-code" style="font-size:16pt">c1</span>. </td>
+</tr>
+<tr>
+<td class="remark-code" valign="top">#idname</td><td>&nbsp;&nbsp;</td><td>selects all elements with the attribute <span class="remark-code" style="font-size:16pt">id="idname"</span>. </td>
+</tr>
+</table>
+
+<div style="position:absolute;top:10px;left:900px;width:300px;background-color:white;border:1px solid black;font-size:16pt;padding:2px;">
+<i class="fas fa-exclamation-triangle"></i> Note some offspring do not inherit class from their parents.
+</div>
+]
+.pull-right[
+<pre style="font-size: 13pt">
+&lt;body>
+&lt;h1>This is a sample html&lt;/h1>
+
+&lt;blockquote>
+&lt;p>Maybe stories are just data with a soul.&lt;/p>
+&lt;footer>—Brene Brown&lt;/footer>
+&lt;/blockquote>
+
+&lt;div id="p1" class="parent">
+Hmm
+&lt;p>Hi!&lt;/p>
+How are you? 
+&lt;div class="child nice">
+  &lt;p>Hello!&lt;/p>
+&lt;/div>
+&lt;/div>
+
+&lt;p>Household 1&lt;/p>
+
+&lt;div class="parent">
+&lt;p>Hi!&lt;/p>
+&lt;blockquote class="child rebel">
+  &lt;p>Don't talk to me!&lt;/p>
+&lt;/blockquote>
+&lt;/div>
+
+&lt;span class="child">
+&lt;span class="parent child rebel"></span>
+  &lt;p>Clean your room!&lt;/p>
+&lt;/span></span>
+&lt;/span>
+
+&lt;p>End of households&lt;/p>
+
+&lt;/body>
+</pre>
+]
+
+---
+
+count: false
+
+.pull-left[
+## <i class="fab fa-css3-alt blue"></i> CSS selector
+
+<table class="gray" style="width:98%;margin-left:10px;margin-right:10px;">
+<tr class="red">
+<td class="remark-code" valign="top">.parent</td><td>&nbsp;&nbsp;</td><td>selects all elements with the attribute <span class="remark-code" style="font-size:16pt">class="parent"</span>. </td>
+</tr>
+<tr>
+<td class="remark-code" valign="top">.c1.c2</td><td>&nbsp;&nbsp;</td><td>selects all elements with <em>both</em> <span class="remark-code" style="font-size:16pt">c1</span> and <span class="remark-code" style="font-size:16pt">c2</span> within its class attribute. </td>
+</tr>
+<tr>
+<td class="remark-code" valign="top">.c1 .c2</td><td>&nbsp;&nbsp;</td><td>selects all elements with  class <span class="remark-code" style="font-size:16pt">c2</span> that is a descendant of an element with class <span class="remark-code" style="font-size:16pt">c1</span>. </td>
+</tr>
+<tr>
+<td class="remark-code" valign="top">#idname</td><td>&nbsp;&nbsp;</td><td>selects all elements with the attribute <span class="remark-code" style="font-size:16pt">id="idname"</span>. </td>
+</tr>
+</table>
+
+<div style="position:absolute;top:10px;left:900px;width:300px;background-color:white;border:1px solid black;font-size:16pt;padding:2px;">
+<i class="fas fa-exclamation-triangle"></i> Note some offspring do not inherit class from their parents.
+</div>
+]
+.pull-right[
+<pre style="font-size: 13pt">
+&lt;body>
+&lt;h1>This is a sample html&lt;/h1>
+
+&lt;blockquote>
+&lt;p>Maybe stories are just data with a soul.&lt;/p>
+&lt;footer>—Brene Brown&lt;/footer>
+&lt;/blockquote>
+
+<span class="red">&lt;div id="p1" class="parent">
+Hmm
+&lt;p>Hi!&lt;/p>
+How are you? 
+&lt;div class="child nice">
+  &lt;p>Hello!&lt;/p>
+&lt;/div>
+&lt;/div></span>
+
+&lt;p>Household 1&lt;/p>
+
+<span class="red">&lt;div class="parent">
+&lt;p>Hi!&lt;/p>
+&lt;blockquote class="child rebel">
+  &lt;p>Don't talk to me!&lt;/p>
+&lt;/blockquote>
+&lt;/div></span>
+
+&lt;span class="child">
+<span class="red">&lt;span class="parent child rebel"></span>
+  &lt;p>Clean your room!&lt;/p>
+<span class="red">&lt;/span></span>
+&lt;/span>
+
+&lt;p>End of households&lt;/p>
+
+&lt;/body>
+</pre>
+]
+
+---
+
+count: false
+
+.pull-left[
+## <i class="fab fa-css3-alt blue"></i> CSS selector
+
+<table class="gray" style="width:98%;margin-left:10px;margin-right:10px;">
+<td class="remark-code" valign="top">.classname</td><td>&nbsp;&nbsp;</td><td>selects all elements with the attribute <span class="remark-code" style="font-size:16pt">class="classname"</span>. </td>
+</tr>
+<tr class="red">
+<td class="remark-code" valign="top">.child.rebel</td><td>&nbsp;&nbsp;</td><td>selects all elements with <em>both</em> <span class="remark-code" style="font-size:16pt">child</span> and <span class="remark-code" style="font-size:16pt">rebel</span> within its class attribute. </td>
+</tr>
+<tr>
+<td class="remark-code" valign="top">.c1 .c2</td><td>&nbsp;&nbsp;</td><td>selects all elements with  class <span class="remark-code" style="font-size:16pt">c2</span> that is a descendant of an element with class <span class="remark-code" style="font-size:16pt">c1</span>. </td>
+</tr>
+<tr>
+<td class="remark-code" valign="top">#idname</td><td>&nbsp;&nbsp;</td><td>selects all elements with the attribute <span class="remark-code" style="font-size:16pt">id="idname"</span>. </td>
+</tr>
+</table>
+]
+.pull-right[
+<pre style="font-size: 13pt">
+&lt;body>
+&lt;h1>This is a sample html&lt;/h1>
+
+&lt;blockquote>
+&lt;p>Maybe stories are just data with a soul.&lt;/p>
+&lt;footer>—Brene Brown&lt;/footer>
+&lt;/blockquote>
+
+&lt;div id="p1" class="parent">
+Hmm
+&lt;p>Hi!&lt;/p>
+How are you?
+&lt;div class="child nice">
+  &lt;p>Hello!&lt;/p>
+&lt;/div>
+&lt;/div>
+
+&lt;p>Household 1&lt;/p>
+
+&lt;div class="parent">
+&lt;p>Hi!&lt;/p>
+<span class="red">&lt;blockquote class="child rebel">
+  &lt;p>Don't talk to me!&lt;/p>
+&lt;/blockquote></span>
+&lt;/div>
+
+&lt;span class="child">
+<span class="red">&lt;span class="parent child rebel"></span>
+  &lt;p>Clean your room!&lt;/p>
+<span class="red">&lt;/span></span>
+&lt;/span>
+
+&lt;p>End of households&lt;/p>
+
+&lt;/body>
+</pre>
+]
+
+---
+
+count: false
+
+.pull-left[
+## <i class="fab fa-css3-alt blue"></i> CSS selector
+
+<table class="gray" style="width:98%;margin-left:10px;margin-right:10px;">
+<tr>
+<td class="remark-code" valign="top">.classname</td><td>&nbsp;&nbsp;</td><td>selects all elements with the attribute <span class="remark-code" style="font-size:16pt">class="classname"</span>. </td>
+</tr>
+<tr>
+<td class="remark-code" valign="top">.c1.c2</td><td>&nbsp;&nbsp;</td><td>selects all elements with <em>both</em> <span class="remark-code" style="font-size:16pt">c1</span> and <span class="remark-code" style="font-size:16pt">c2</span> within its class attribute. </td>
+</tr>
+<tr class="red">
+<td class="remark-code" valign="top">.parent .rebel</td><td>&nbsp;&nbsp;</td><td>selects all elements with  class <span class="remark-code" style="font-size:16pt">rebel</span> that is a descendant of an element with class <span class="remark-code" style="font-size:16pt">parent</span>. </td>
+</tr>
+<tr>
+<td class="remark-code" valign="top">#idname</td><td>&nbsp;&nbsp;</td><td>selects all elements with the attribute <span class="remark-code" style="font-size:16pt">id="idname"</span>. </td>
+</tr>
+</table>
+]
+.pull-right[
+<pre style="font-size: 13pt">
+&lt;body>
+&lt;h1>This is a sample html&lt;/h1>
+
+&lt;blockquote>
+&lt;p>Maybe stories are just data with a soul.&lt;/p>
+&lt;footer>—Brene Brown&lt;/footer>
+&lt;/blockquote>
+
+&lt;div id="p1" class="parent">
+Hmm
+&lt;p>Hi!&lt;/p>
+How are you?
+&lt;div class="child nice">
+  &lt;p>Hello!&lt;/p>
+&lt;/div>
+&lt;/div>
+
+&lt;p>Household 1&lt;/p>
+
+lt;div class="parent">
+&lt;p>Hi!&lt;/p>
+<span class="red">&lt;blockquote class="child rebel">
+  &lt;p>Don't talk to me!&lt;/p>
+&lt;/blockquote></span>
+&lt;/div>
+
+&lt;span class="child">
+&lt;span class="parent child rebel">
+  &lt;p>Clean your room!&lt;/p>
+&lt;/span>
+&lt;/span>
+
+&lt;p>End of households&lt;/p>
+
+&lt;/body>
+</pre>
+]
+
+---
+
+count: false
+
+.pull-left[
+## <i class="fab fa-css3-alt blue"></i> CSS selector
+
+<table class="gray" style="width:98%;margin-left:10px;margin-right:10px;">
+<td class="remark-code" valign="top">.classname</td><td>&nbsp;&nbsp;</td><td>selects all elements with the attribute <span class="remark-code" style="font-size:16pt">class="classname"</span>. </td>
+</tr>
+<tr>
+<td class="remark-code" valign="top">.c1.c2</td><td>&nbsp;&nbsp;</td><td>selects all elements with <em>both</em> <span class="remark-code" style="font-size:16pt">c1</span> and <span class="remark-code" style="font-size:16pt">c2</span> within its class attribute. </td>
+</tr>
+<tr>
+<td class="remark-code" valign="top">.c1 .c2</td><td>&nbsp;&nbsp;</td><td>selects all elements with  class <span class="remark-code" style="font-size:16pt">c2</span> that is a descendant of an element with class <span class="remark-code" style="font-size:16pt">c1</span>. </td>
+</tr>
+<tr class="red">
+<td class="remark-code" valign="top">#p1</td><td>&nbsp;&nbsp;</td><td>selects all elements with the attribute <span class="remark-code" style="font-size:16pt">id="p1"</span>. </td>
+</tr>
+</table>
+]
+.pull-right[
+<pre style="font-size: 13pt">
+&lt;body>
+&lt;h1>This is a sample html&lt;/h1>
+
+&lt;blockquote>
+&lt;p>Maybe stories are just data with a soul.&lt;/p>
+&lt;footer>—Brene Brown&lt;/footer>
+&lt;/blockquote>
+
+<span class="red">&lt;div id="p1" class="parent">
+Hmm
+&lt;p>Hi!&lt;/p>
+How are you?
+&lt;div class="child nice">
+  &lt;p>Hello!&lt;/p>
+&lt;/div>
+&lt;/div></span>
+
+&lt;p>Household 1&lt;/p>
+
+lt;div class="parent">
+&lt;p>Hi!&lt;/p>
+&&lt;blockquote class="child rebel">
+  &lt;p>Don't talk to me!&lt;/p>
+&lt;/blockquote>
+&lt;/div>
+
+&lt;span class="child">
+&lt;span class="parent child rebel">
+  &lt;p>Clean your room!&lt;/p>
+&lt;/span>
+&lt;/span>
+
+&lt;p>End of households&lt;/p>
+
+&lt;/body>
+</pre>
+]
+
+<div style="position:absolute;top:10px;left:900px;width:300px;background-color:white;border:1px solid black;font-size:16pt;padding:2px;">
+<i class="fas fa-exclamation-triangle"></i> Unlike <code style="font-size:16pt">class</code>, you can only have one <code style="font-size:16pt">id</code> value and must be unique in the whole HTML document.
+</div>
+
+---
+
+## <i class='fab fa-js-square yellow'></i> JavaScript (JS)*
+
+* JS is a programming language and enable interactive components in HTML documents.
+* 2 ways to insert JS into a HTML document:
+  + **internally** by defining within `<script>` element:
+  ```html
+  <script>
+  document.getElementById("p1").innerHTML = "content";
+  </script>
+  ```
+  + **externally** by using the `src` attribute to refer to the external file:
+  ```html
+  <script src="js/myjs.js"></script>
+  ```
+
+---
+
+class: inverse middle
+
+## Web scraping `r emo::ji("spider_web")`
 
 ---
 
