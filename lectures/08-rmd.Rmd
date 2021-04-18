@@ -68,7 +68,7 @@ class: inverse middle center
 <img src="img/new-rmd.png" width="60%">]
 ]
 .pull-right[
-````markdow
+````markdown
 ---
 title: "STATS220 R Markdown demo"
 author: "Earo Wang"
@@ -77,16 +77,19 @@ output: html_document
 ---
 
 ```{r setup, include = FALSE}`r ''`
-knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+opts_knit$set(root.dir = here::here())
+opts_chunk$set(echo = TRUE)
 ```
 
 ## R Markdown
 
 You can embed an R code chunk like this:
 
-```{r mpg, message = FALSE}`r ''`
+```{r gapminder, message = FALSE}`r ''`
 library(tidyverse)
-mpg
+gp <- read_rds("data/gapminder.rds")
+gp
 ```
 
 See <http://rmarkdown.rstudio.com>.
@@ -100,7 +103,7 @@ See <http://rmarkdown.rstudio.com>.
 YAML is commonly used for configuration files, and starts and ends with
 `---`
 
-````markdow
+````markdown
 ``r 'r'` lubridate::today()`
 ````
 `r emo::ji("arrow_up")` inline executable R code
@@ -117,7 +120,7 @@ tinytex::install_tinytex()
 ]
 ]
 .pull-right[
-````markdow
+````markdown
 *---
 *title: "STATS220 R Markdown demo"
 *author: "Earo Wang"
@@ -126,16 +129,19 @@ tinytex::install_tinytex()
 *---
 
 ```{r setup, include = FALSE}`r ''`
-knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+opts_knit$set(root.dir = here::here())
+opts_chunk$set(echo = TRUE)
 ```
 
 ## R Markdown
 
 You can embed an R code chunk like this:
 
-```{r mpg, message = FALSE}`r ''`
+```{r gapminder, message = FALSE}`r ''`
 library(tidyverse)
-mpg
+gp <- read_rds("data/gapminder.rds")
+gp
 ```
 
 See <http://rmarkdown.rstudio.com>.
@@ -146,9 +152,11 @@ See <http://rmarkdown.rstudio.com>.
 
 .pull-left[
 ## R chunk for global settings
-````markdow
+````markdown
 ```{r setup, include = FALSE}`r ''`
-knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+opts_knit$set(root.dir = here::here())
+opts_chunk$set(echo = TRUE)
 ```
 ````
 `r emo::ji("arrow_up")` executable R chunk
@@ -158,7 +166,7 @@ knitr::opts_chunk$set(echo = TRUE)
 * `echo`: display source code or not
 ]
 .pull-right[
-````markdow
+````markdown
 ---
 title: "STATS220 R Markdown demo"
 author: "Earo Wang"
@@ -167,16 +175,19 @@ output: html_document
 ---
 
 *```{r setup, include = FALSE}`r ''`
-*knitr::opts_chunk$set(echo = TRUE)
+*library(knitr)
+*opts_knit$set(root.dir = here::here())
+*opts_chunk$set(echo = TRUE)
 *```
 
 ## R Markdown
 
 You can embed an R code chunk like this:
 
-```{r mpg, message = FALSE}`r ''`
+```{r gapminder, message = FALSE}`r ''`
 library(tidyverse)
-mpg
+gp <- read_rds("data/gapminder.rds")
+gp
 ```
 
 See <http://rmarkdown.rstudio.com>.
@@ -194,7 +205,7 @@ See <http://rmarkdown.rstudio.com>.
 .center[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/knitr.png" width="240px">]
 ]
 .pull-right[
-````markdow
+````markdown
 ---
 title: "STATS220 R Markdown demo"
 author: "Earo Wang"
@@ -203,16 +214,19 @@ output: html_document
 ---
 
 ```{r setup, include = FALSE}`r ''`
-knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+opts_knit$set(root.dir = here::here())
+opts_chunk$set(echo = TRUE)
 ```
 
 *## R Markdown
 
 *You can embed an R code chunk like this:
 
-```{r mpg, message = FALSE}`r ''`
+```{r gapminder, message = FALSE}`r ''`
 library(tidyverse)
-mpg
+gp <- read_rds("data/gapminder.rds")
+gp
 ```
 
 *See <http://rmarkdown.rstudio.com>.
@@ -230,7 +244,7 @@ library(tidyverse)
 ```
 ]
 .pull-right[
-````markdow
+````markdown
 ---
 title: "STATS220 R Markdown demo"
 author: "Earo Wang"
@@ -239,16 +253,19 @@ output: html_document
 ---
 
 ```{r setup, include = FALSE}`r ''`
-knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+opts_knit$set(root.dir = here::here())
+opts_chunk$set(echo = TRUE)
 ```
 
 ## R Markdown
 
 You can embed an R code chunk like this:
 
-*```{r mpg, message = FALSE}`r ''`
+*```{r gapminder, message = FALSE}`r ''`
 *library(tidyverse)
-*mpg
+*gp <- read_rds("data/gapminder.rds")
+*gp
 *```
 
 See <http://rmarkdown.rstudio.com>.
@@ -268,7 +285,6 @@ See <http://rmarkdown.rstudio.com>.
 3. `rmarkdown::render("demo.Rmd")`
 ]
 .pull-right[
-<br>
 <img src="img/demo-rmd-render.png", style = "box-shadow: 3px 5px 3px 1px #00000080;", width="100%">
 ]
 
@@ -276,7 +292,7 @@ See <http://rmarkdown.rstudio.com>.
 
 ````r
 ```{r scatterplot, fig.align = "center", fig.width = 4.5, fig.height = 4}`r ''`
-ggplot(mpg, aes(displ, cty)) +
+ggplot(gp, aes(gdpPercap, gdpPercap)) +
   geom_point()
 ```
 ````
@@ -289,7 +305,7 @@ ggplot(mpg, aes(displ, cty)) +
 * `fig.width`/`fig.height`
 * [other figure options](https://yihui.org/knitr/options/#plots)
 
-**Good practice**: naming your chunk!
+**Good practice**: naming every single chunk!
 ]
 .pull-right[
 <img src="https://itsalocke.com/blog/img/namer-oh-no.png" width="100%">
@@ -299,10 +315,23 @@ ggplot(mpg, aes(displ, cty)) +
 
 ---
 
+```{css, echo = FALSE}
+table {
+  margin: auto;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;
+  font-size: 22px;
+}
+table thead th { border-bottom: 1px solid #ddd; }
+th, td { padding: 5px; }
+thead, tfoot, tr:nth-child(even) { background: #eee; }
+```
+
+
 ````r
 ```{r lm, echo = FALSE, cache = TRUE}`r ''`
-fit <- lm(cty ~ ., data = mpg)
-knitr::kable(coef(summary(fit)))
+fit <- lm(lifeExp ~ gdpPercap, data = gp)
+kable(coef(summary(fit)))
 ```
 ````
 
@@ -312,9 +341,17 @@ knitr::kable(coef(summary(fit)))
 * `echo`: overwrites the global setting
 * `cache`: evaluate once and skip for the future
 
-`kable()` generates a very simple table.
+`kable()` generates a very simple table. `r emo::ji("arrow_right")`
 ]
 .pull-right[
+```{r gapminder, echo = FALSE}
+gp <- read_rds("data/gapminder.rds")
+```
+<br>
+```{r lm, echo = FALSE}
+fit <- lm(lifeExp ~ gdpPercap, data = gp)
+kable(coef(summary(fit)))
+```
 ]
 
 ---
@@ -373,6 +410,14 @@ SELECT * FROM pisa WHERE year = 2018
 
 ```{r r-pisa, echo = FALSE}
 tibble::as_tibble(pisa18)
+```
+
+---
+
+## Beyond <i class="fab fa-r-project"></i>: language engines
+
+```{r eng}
+names(knitr::knit_engines$get())
 ```
 
 ---

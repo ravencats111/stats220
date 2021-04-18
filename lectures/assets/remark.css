@@ -84,6 +84,7 @@ ul li li:before {
 .green { color: #1fb27f; }
 .yellow { color: #faca07; }
 .brown {color: #a84d18; }
+.gray {color: #525252; }
 
 .rotate-45 {transform: rotate(45deg); }
 .large { font-size: 120%; }

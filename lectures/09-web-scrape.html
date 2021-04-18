@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STATS 220</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="assets/remark.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STATS 220
+## Web scraping🌐
+
+---
+
+
+class: inverse middle
+
+
+
+
+
+## Web technology &lt;i class="fab fa-html5 orange"&gt;&lt;/i&gt; &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; &lt;i class='fab fa-js-square yellow'&gt;&lt;/i&gt;
+
+---
+
+class: middle
+
+## World Wide Web (WWW) 
+
+WWW (or the **Web**) is the information system where documents (web pages) are identified by Uniform Resource Locators (**URL**s)
+
+A web page consists of:
+* &lt;i class="fab fa-html5 orange"&gt;&lt;/i&gt; **HTML** provides the basic structure of the web page
+* &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; **CSS** controls the look of the web page (optional)
+* &lt;i class='fab fa-js-square yellow'&gt;&lt;/i&gt;&lt;/span&gt; **JS** is a programming language that can modify the behaviour of elements of the web page (optional) 
+
+---
+
+## &lt;i class="fab fa-html5 orange"&gt;&lt;/i&gt;&lt;/span&gt; Hypertext Markup Language (HTML)
+
+* with the extension `.html`.
+* rendered using a web browser via an URL.
+* text files that follows a special syntax that alerts web browsers how to render it.
+
+.pull-left[
+As seen via a web browser
+]
+.pull-right[
+As seen via a text editor
+]
+
+---
+
+## &lt;i class="fab fa-html5 orange"&gt;&lt;/i&gt; HTML structure
+
+```html
+&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+&lt;!--This is a comment and ignored by web client.--&gt;
+&lt;head&gt;
+  &lt;!--This section contains web page metadata.--&gt;
+  &lt;title&gt;STATS 220 Data Technology&lt;/title&gt;
+  &lt;meta name="author" content="Earo Wang"&gt;
+  &lt;link rel="stylesheet" href="css/styles.css"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;!--This section contains what you want to display on your web page.--&gt;
+&lt;h1&gt;I'm a first level header&lt;/h1&gt;
+&lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+```
+
+---
+
+## &lt;i class="fab fa-html5 orange"&gt;&lt;/i&gt; HTML syntax
+
+.center[`&lt;span style="color:blue;"&gt;Author content&lt;/span&gt;` &lt;i class="fas fa-arrow-right"&gt;&lt;/i&gt; &lt;span style="color:blue;"&gt;Author content&lt;/span&gt;]
+
+&lt;table style="width:100%"&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;start tag:&lt;/td&gt;&lt;td&gt;&lt;span class="remark-code" style="font-size:16pt"&gt;&lt;span class="red"&gt;&amp;lt;span style="color:blue;"&amp;gt;&lt;/span&gt;&lt;span class="gray"&gt;Author content&amp;lt;/span&amp;gt;&lt;/span&gt;&lt;/span&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;end tag: &lt;/td&gt;&lt;td&gt; &lt;span class="remark-code" style="font-size:16pt"&gt;&lt;span class="gray"&gt;&amp;lt;span style="color:blue;"&amp;gt;Author content&lt;span class="red"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;&lt;/span&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;content: &lt;/td&gt;&lt;td&gt; &lt;span class="remark-code" style="font-size:16pt"&gt;&lt;span class="gray"&gt;&amp;lt;span style="color:blue;"&amp;gt;&lt;/span&gt;&lt;span class="red"&gt;Author content&lt;/span&gt;&lt;span class="gray"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;&lt;/span&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;element name: &lt;/td&gt;&lt;td&gt; &lt;span class="remark-code" style="font-size:16pt"&gt;&lt;span class="gray"&gt;&amp;lt;&lt;/span&gt;&lt;span class="red"&gt;span&lt;/span&gt;&lt;span class="gray"&gt; style="color:blue;"&amp;gt;Author content&amp;lt;/span&amp;gt;&lt;/span&gt;&lt;/span&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;attribute: &lt;/td&gt;&lt;td&gt; &lt;span class="remark-code" style="font-size:16pt"&gt;&lt;span class="gray"&gt;&amp;lt;span &lt;span class="red"&gt;style="color:blue;"&lt;/span&gt;&lt;span class="gray"&gt;&amp;gt;Author content&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;attribute name: &lt;/td&gt;&lt;td&gt; &lt;span class="remark-code" style="font-size:16pt"&gt;&lt;span class="gray"&gt;&amp;lt;span &lt;span class="red"&gt;style&lt;/span&gt;&lt;span class="gray"&gt;="color:blue;"&amp;gt;Author content&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;attribute value: &lt;/td&gt;&lt;td&gt; &lt;span class="remark-code" style="font-size:16pt"&gt;&lt;span class="gray"&gt;&amp;lt;span style=&lt;/span&gt;&lt;span class="red"&gt;"color:blue;"&lt;/span&gt;&lt;span class="gray"&gt;&amp;gt;Author content&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;hr&gt;
+
+.center[Not all HTML tags have an end tag:]
+
+.center[
+&lt;span style="font-size:18pt;"&gt;`&lt;img height="40px" src="https://tinyurl.com/rlogo-svg"&gt;`&lt;/span&gt; &lt;i class="fas fa-arrow-right"&gt;&lt;/i&gt; &lt;img height="40px" src="https://tinyurl.com/rlogo-svg"&gt;
+]
+
+---
+
+## &lt;i class="fab fa-html5 orange"&gt;&lt;/i&gt; HTML elements
+
+&lt;table style="width:100%"&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;block element:&lt;/td&gt;&lt;td&gt;&lt;span class="remark-code red" style="font-size:16pt"&gt;&amp;lt;div&gt;&lt;span class="gray"&gt;content&lt;/span&gt;&amp;lt;/div&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;inline element:&lt;/td&gt;&lt;td&gt;&lt;span class="remark-code red" style="font-size:16pt"&gt;&amp;lt;span&gt;&lt;span class="gray"&gt;content&lt;/span&gt;&amp;lt;/span&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;paragraph:&lt;/td&gt;&lt;td&gt;&lt;span class="remark-code red" style="font-size:16pt"&gt;&amp;lt;p&gt;&lt;span class="gray"&gt;content&lt;/span&gt;&amp;lt;/p&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;header level 1:&lt;/td&gt;&lt;td&gt;&lt;span class="remark-code red" style="font-size:16pt"&gt;&amp;lt;h1&gt;&lt;span class="gray"&gt;content&lt;/span&gt;&amp;lt;/h1&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;header level 2:&lt;/td&gt;&lt;td&gt;&lt;span class="remark-code red" style="font-size:16pt"&gt;&amp;lt;h2&gt;&lt;span class="gray"&gt;content&lt;/span&gt;&amp;lt;/h2&gt;&lt;/span&gt;&lt;/td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;italic:&lt;/td&gt;&lt;td&gt;&lt;span class="remark-code red" style="font-size:16pt"&gt;&amp;lt;i&gt;&lt;span class="gray"&gt;content&lt;/span&gt;&amp;lt;/i&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;emphasised text:&lt;/td&gt;&lt;td&gt;&lt;span class="remark-code red" style="font-size:16pt"&gt;&amp;lt;em&gt;&lt;span class="gray"&gt;content&lt;/span&gt;&amp;lt;/em&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;strong importance:&lt;/td&gt;&lt;td&gt;&lt;span class="remark-code red" style="font-size:16pt"&gt;&amp;lt;strong&gt;&lt;span class="gray"&gt;content&lt;/span&gt;&amp;lt;/strong&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;link:&lt;/td&gt;&lt;td&gt;&lt;span class="remark-code red" style="font-size:16pt"&gt;&amp;lt;a href="https://stats220.earo.me/"&gt;&lt;span class="gray"&gt;content&lt;/span&gt;&amp;lt;/a&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td valign="top" style="text-align:right;padding-right:30px;"&gt;unordered list:&lt;/td&gt;&lt;td&gt;&lt;span class="remark-code red" style="font-size:16pt"&gt;&amp;lt;ul&gt;&lt;br&gt;&amp;lt;li&gt;&lt;span class="gray"&gt;item 1&lt;/span&gt;&amp;lt;/li&gt;&lt;Br&gt;&amp;lt;li&gt;&lt;span class="gray"&gt;item 2&lt;/span&gt;&amp;lt;/li&gt;&lt;Br&gt;&amp;lt;/ul&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+???
+
+How these are rendered to the browser depends on the browser default style values, style attribute or CSS...
+
+---
+
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; Cascading Style Sheet (CSS)
+
+* with the extension `.css`
+* 3 ways to style elements in HTML:
+  * **inline** by using the `style` attribute inside HTML start tag:
+  &lt;center&gt;
+  &lt;span class="remark-code gray" style="font-size:14pt;"&gt;&amp;lt;h1 &lt;span class="red"&gt;style="color:blue;"&lt;/span&gt;&gt;Blue Header&amp;lt;/h1&gt;&lt;/span&gt;
+  &lt;/center&gt;
+  + **externally** by using the `&lt;link&gt;` element:
+  &lt;center&gt;
+  &lt;span class="remark-code red" style="font-size:14pt;"&gt;&amp;lt;link rel="stylesheet" href="styles.css"&gt;&lt;/span&gt;
+  &lt;/center&gt;
+  + **internally** by defining within `&lt;style&gt;` element:
+
+&lt;div style="margin-left:35%; width:350px;"&gt;
+```html
+&lt;style type="text/css"&gt;
+h1 { color: blue; }
+&lt;/style&gt;
+```
+&lt;/div&gt;
+By convention, the `&lt;style&gt;` and `&lt;link&gt;` elements tend to go into the `&lt;head&gt;` section of the HTML document.
+
+---
+
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS syntax
+
+.pull-left[
+```html
+&lt;style type="text/css"&gt;
+h1 { color: blue; }
+&lt;/style&gt;
+&lt;h1&gt;This is a header&lt;/h1&gt;
+```
+]
+
+&lt;div style="margin-left:55%; width:350px;"&gt;
+&lt;br&gt;
+&lt;h2 style="color:blue"&gt;This is a header&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;table style="width:100%"&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;selector:&lt;/td&gt;&lt;td&gt;&lt;span class="remark-code" style="font-size:16pt"&gt;&lt;span class="red"&gt;h1&lt;/span&gt;&lt;span class="gray"&gt; { color: blue; }&lt;/span&gt;&lt;/span&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;property:&lt;/td&gt;&lt;td&gt;&lt;span class="remark-code gray" style="font-size:16pt;"&gt;h1 { &lt;span class="red"&gt;color: blue;&lt;/span&gt; }&lt;/span&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;property name:&lt;/td&gt;&lt;td&gt;&lt;span class="remark-code gray" style="font-size:16pt;"&gt;h1 { &lt;span class="red"&gt;color&lt;/span&gt;: blue; } &lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;property value:&lt;/td&gt;&lt;td&gt;&lt;span class="remark-code gray" style="font-size:16pt;"&gt;h1 { color: &lt;span class="red"&gt;blue&lt;/span&gt;; } &lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+.pull-left[
+You may have multiple properties for a single selector.➡️
+]
+.pull-right[
+```css
+h1 {
+  color: blue;
+  font-size: 16pt;
+}
+```
+]
+
+---
+
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS properties
+
+&lt;center&gt;
+&lt;div class="remark-code"&gt;&amp;lt;div&gt; Sample text &amp;lt;/div&gt;&lt;/div&gt;
+&lt;/center&gt;
+&lt;br&gt;
+
+&lt;table style="width:100%"&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;background color:&lt;/td&gt;
+&lt;td&gt;&lt;span class="remark-code gray" style="font-size:16pt"&gt;div { &lt;span class="red"&gt;background-color: yellow;&lt;/span&gt; }&lt;/span&gt; &lt;/td&gt;
+&lt;td&gt;
+&lt;div style="background-color: yellow;"&gt;Sample text&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;text color:&lt;/td&gt;
+&lt;td&gt;&lt;span class="remark-code gray" style="font-size:16pt"&gt;div { &lt;span class="red"&gt;color: purple;&lt;/span&gt; }&lt;/span&gt; &lt;/td&gt;
+&lt;td&gt;
+&lt;div style="color: purple;"&gt;Sample text&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;border:&lt;/td&gt;
+&lt;td&gt;&lt;span class="remark-code gray" style="font-size:16pt"&gt;div { &lt;span class="red"&gt;border: 1px dashed brown;&lt;/span&gt; }&lt;/span&gt; &lt;/td&gt;
+&lt;td&gt;
+&lt;div style="border: 1px dashed brown;"&gt;Sample text&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;left border only:&lt;/td&gt;
+&lt;td&gt;&lt;span class="remark-code gray" style="font-size:16pt"&gt;div { &lt;span class="red"&gt;border-left: 10px solid pink;&lt;/span&gt; }&lt;/span&gt; &lt;/td&gt;
+&lt;td&gt;
+&lt;div style="border-left: 10px solid pink;"&gt;Sample text&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align:right;padding-right:30px;"&gt;text size:&lt;/td&gt;
+&lt;td&gt;&lt;span class="remark-code gray" style="font-size:16pt"&gt;div { &lt;span class="red"&gt;font-size: 10pt;&lt;/span&gt; }&lt;/span&gt; &lt;/td&gt;
+&lt;td&gt;
+&lt;div style="font-size:10pt;"&gt;Sample text&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td valign="top" style="text-align:right;padding-right:30px;"&gt;padding:&lt;/td&gt;
+&lt;td  valign="top"&gt;&lt;span class="remark-code gray" style="font-size:16pt"&gt;div { background-color: yellow; &lt;br&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;nbsp;&lt;span class="red"&gt;padding: 10px;&lt;/span&gt; }&lt;/span&gt; &lt;/td&gt;
+&lt;td&gt;
+&lt;div style="background-color: yellow;padding:10px;"&gt;Sample text&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td valign="top" style="text-align:right;padding-right:30px;"&gt;margin:&lt;/td&gt;
+&lt;td  valign="top"&gt;&lt;span class="remark-code gray" style="font-size:16pt"&gt;div { background-color: yellow; &lt;br&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;nbsp;&lt;span class="red"&gt;margin: 10px;&lt;/span&gt; }&lt;/span&gt; &lt;/td&gt;
+&lt;td&gt;
+&lt;div style="background-color: yellow;margin:10px;"&gt;Sample text&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+---
+
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS properties
+
+&lt;center&gt;
+&lt;div class="remark-code"&gt;&amp;lt;div&gt; Sample text &amp;lt;/div&gt;&lt;/div&gt;
+&lt;/center&gt;
+&lt;br&gt;
+
+&lt;table style="width:100%"&gt;
+&lt;tr&gt;
+&lt;td valign="top" style="text-align:right;padding-right:30px;"&gt;center align text:&lt;/td&gt;
+&lt;td  valign="top"&gt;&lt;span class="remark-code gray" style="font-size:16pt"&gt;div { background-color: yellow; &lt;br&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;nbsp;padding-top: 20px;&lt;br&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;nbsp;&lt;span class="red"&gt;text-align: center;&lt;/span&gt; }&lt;/span&gt; &lt;/td&gt;
+&lt;td&gt;
+&lt;div style="background-color: yellow;text-align: center;padding-top: 20px;"&gt;Sample text&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td valign="top" style="text-align:right;padding-right:30px;"&gt;font family:&lt;/td&gt;
+&lt;td  valign="top"&gt;&lt;span class="remark-code gray" style="font-size:16pt"&gt;div { &lt;span class="red"&gt;font-family: Marker Felt, times;&lt;/span&gt; }&lt;/span&gt; &lt;/td&gt;
+&lt;td&gt;
+&lt;div style="font-family: Marker Felt, times;"&gt;Sample text&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td valign="top" style="text-align:right;padding-right:30px;"&gt;strike:&lt;/td&gt;
+&lt;td  valign="top"&gt;&lt;span class="remark-code gray" style="font-size:16pt"&gt;div { &lt;span class="red"&gt;text-decoration: line-through;&lt;/span&gt; }&lt;/span&gt; &lt;/td&gt;
+&lt;td&gt;
+&lt;div style="text-decoration: line-through;"&gt;Sample text&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td valign="top" style="text-align:right;padding-right:30px;"&gt;underline:&lt;/td&gt;
+&lt;td  valign="top"&gt;&lt;span class="remark-code gray" style="font-size:16pt"&gt;div { &lt;span class="red"&gt;text-decoration: underline;&lt;/span&gt; }&lt;/span&gt; &lt;/td&gt;
+&lt;td&gt;
+&lt;div style="text-decoration: underline;"&gt;Sample text&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td valign="top" style="text-align:right;padding-right:30px;"&gt;opacity:&lt;/td&gt;
+&lt;td  valign="top"&gt;&lt;span class="remark-code gray" style="font-size:16pt"&gt;div { &lt;span class="red"&gt;opacity: 0.3&lt;/span&gt; }&lt;/span&gt; &lt;/td&gt;
+&lt;td&gt;
+&lt;div style="opacity: 0.3;"&gt;Sample text&lt;/div&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+---
+
+## &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; CSS selector
+
+---
+
+## Reading
+
+.pull-left[
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px"&gt;](https://r4ds.had.co.nz)]
+]
+.pull-right[
+* [R Markdown](https://r4ds.had.co.nz/r-markdown.html)
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

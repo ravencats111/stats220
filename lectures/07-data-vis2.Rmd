@@ -108,7 +108,7 @@ read_chunk('R/07-data-vis2.R')
 
 ---
 
-## Position vs angle .small[.green[]]
+## Position vs angle .small[.green[position > angle]]
 
 .pull-left[
 ```{r "fill-country2", ref.label = "fill-country", fig.width = 4, fig.height = 4, echo = FALSE}
@@ -121,7 +121,7 @@ read_chunk('R/07-data-vis2.R')
 
 ---
 
-## Absolute vs relative positions .small[.green[]]
+## Absolute vs relative positions .small[.green[absolute > relative]]
 
 .pull-left[
 ```{r fill-country3, ref.label = "fill-country", fig.width = 4, fig.height = 4, echo = FALSE}

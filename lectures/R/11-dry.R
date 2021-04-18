@@ -28,3 +28,7 @@ covid19 <- covid19_raw %>%
   summarise(confirmed = sum(confirmed, na.rm = TRUE)) %>% 
   ungroup() %>% 
   drop_na(country_region)
+
+# across
+# function
+# for-loop
