@@ -7,6 +7,6 @@ obj: "objs/obj05"
 r: "05-fcts-dates.R"
 rmd: "05-fcts-dates.Rmd"
 pdf: "05-fcts-dates.pdf"
-lab:
+lab: "labs/lab05"
 sol:
 ---

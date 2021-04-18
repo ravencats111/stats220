@@ -239,10 +239,11 @@ h1 {
 
 ## <i class="fab fa-css3-alt blue"></i> CSS properties
 
-<center>
-<div class="remark-code">&lt;div> Sample text &lt;/div></div>
-</center>
-<br>
+.center[
+```html
+<div>Sample text</div>
+```
+]
 
 <table style="width:100%">
 <tr>
@@ -302,10 +303,11 @@ h1 {
 
 ## <i class="fab fa-css3-alt blue"></i> CSS properties
 
-<center>
-<div class="remark-code">&lt;div> Sample text &lt;/div></div>
-</center>
-<br>
+.center[
+```html
+<div>Sample text</div>
+```
+]
 
 <table style="width:100%">
 <tr>
