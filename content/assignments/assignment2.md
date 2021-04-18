@@ -216,7 +216,10 @@ Generate a side-by-side boxplot to demonstrate the differences of trip
 durations across age groups coloured by user types. (**NOTE:** you need
 to modify labels of this plot.)
 
-You should end up with a **ggplot** called `p3`.
+You should end up with a **ggplot** called `p3`, with
+
+* labeling `"Age Group"` to x axis
+* labeling `"Trip in minutes (on log10)"` to y axis
 
 ``` r
 p3
