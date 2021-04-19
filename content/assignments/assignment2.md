@@ -7,6 +7,15 @@ layout: page
 title: Assignment 2
 ---
 
+---
+layout: page
+output:
+  md_document:
+    preserve_yaml: true
+    variant: gfm
+title: Assignment 2
+---
+
 This assignment is **due 23:59 Friday 30 April (NZST)**.
 
 -   You should submit an R file (i.e. file extension `.R`) containing R
@@ -218,8 +227,8 @@ to modify labels of this plot.)
 
 You should end up with a **ggplot** called `p3`, with
 
-* labeling `"Age Group"` to x axis
-* labeling `"Trip in minutes (on log10)"` to y axis
+-   labeling `"Age Group"` to x axis
+-   labeling `"Trip in minutes (on log10)"` to y axis
 
 ``` r
 p3
@@ -322,7 +331,7 @@ p5
 Present the following pivot table that counts the number of trips by
 upper-tail user’s types and age groups. **Upper-tail users are defined
 as the ones who ride for longer periods than 90% of users of the same
-age group.**
+age group.** (**NOTE:** the column headers of `user_behaviours`)
 
 You should end up with a **tibble** called `user_behaviours`.
 

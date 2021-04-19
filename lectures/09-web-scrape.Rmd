@@ -1354,6 +1354,7 @@ class: inverse middle
 
 .pull-left[
 * what you see
+rvest v1.0.0
 ]
 .pull-right[
 * what it is
