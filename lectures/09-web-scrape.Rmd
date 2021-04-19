@@ -32,6 +32,10 @@ opts_chunk$set(
 xaringanExtra::use_panelset()
 ```
 
+```{r external, include = FALSE, cache = FALSE}
+read_chunk('R/09-web-scrape.R')
+```
+
 ## Web technology <i class="fab fa-html5 orange"></i> <i class="fab fa-css3-alt blue"></i> <i class='fab fa-js-square yellow'></i>
 
 ---
@@ -1023,10 +1027,6 @@ count: false
 <td class="remark-code" valign="top">#idname</td><td>&nbsp;&nbsp;</td><td>selects all elements with the attribute <span class="remark-code" style="font-size:16pt">id="idname"</span>. </td>
 </tr>
 </table>
-
-<div style="position:absolute;top:10px;left:900px;width:300px;background-color:white;border:1px solid black;font-size:16pt;padding:2px;">
-<i class="fas fa-exclamation-triangle"></i> Note some offspring do not inherit class from their parents.
-</div>
 ]
 .pull-right[
 <pre style="font-size: 13pt">
@@ -1344,6 +1344,116 @@ lt;div class="parent">
 class: inverse middle
 
 ## Web scraping `r emo::ji("spider_web")`
+
+---
+
+* Developer tool
+* CSS selectors: https://selectorgadget.com/
+
+---
+
+.pull-left[
+* what you see
+]
+.pull-right[
+* what it is
+```{r read-html}
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+```{r html-el}
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+```{r html-nm}
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+```{r html-child}
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+```{r html-child-nm}
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+```{r html-attr}
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+```{r html-url}
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+```{r html-el-i}
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+```{r html-text}
+```
+]
+
+---
+
+class: inverse middle
+
+## REST API
 
 ---
 

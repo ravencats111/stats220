@@ -24,6 +24,8 @@ class: inverse middle
 
 
 
+
+
 ## Web technology &lt;i class="fab fa-html5 orange"&gt;&lt;/i&gt; &lt;i class="fab fa-css3-alt blue"&gt;&lt;/i&gt; &lt;i class='fab fa-js-square yellow'&gt;&lt;/i&gt;
 
 ---
@@ -1015,10 +1017,6 @@ count: false
 &lt;td class="remark-code" valign="top"&gt;#idname&lt;/td&gt;&lt;td&gt;&amp;nbsp;&amp;nbsp;&lt;/td&gt;&lt;td&gt;selects all elements with the attribute &lt;span class="remark-code" style="font-size:16pt"&gt;id="idname"&lt;/span&gt;. &lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;
-
-&lt;div style="position:absolute;top:10px;left:900px;width:300px;background-color:white;border:1px solid black;font-size:16pt;padding:2px;"&gt;
-&lt;i class="fas fa-exclamation-triangle"&gt;&lt;/i&gt; Note some offspring do not inherit class from their parents.
-&lt;/div&gt;
 ]
 .pull-right[
 &lt;pre style="font-size: 13pt"&gt;
@@ -1336,6 +1334,221 @@ lt;div class="parent"&gt;
 class: inverse middle
 
 ## Web scraping 🕸
+
+---
+
+* Developer tool
+* CSS selectors: https://selectorgadget.com/
+
+---
+
+.pull-left[
+* what you see
+]
+.pull-right[
+* what it is
+
+```r
+library(rvest)
+home &lt;- "https://stats220.earo.me"
+stats220 &lt;- read_html(home)
+stats220
+```
+
+```
+#&gt; {html_document}
+#&gt; &lt;html&gt;
+#&gt; [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
+#&gt; [2] &lt;body&gt;\n\n    &lt;header class="site-header"&gt;&lt;nav class="navbar navbar-defau ...
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+
+```r
+stats220 %&gt;% 
+  html_element(".navbar-right")
+```
+
+```
+#&gt; {html_node}
+#&gt; &lt;ul class="nav navbar-nav navbar-right"&gt;
+#&gt; [1] &lt;li&gt;&lt;a href="/pages/info/"&gt;&lt;i class="fas fa-info-circle"&gt;&lt;/i&gt; Info&lt;/a&gt;&lt;/li&gt;
+#&gt; [2] &lt;li&gt;&lt;a href="/pages/data/"&gt;&lt;i class="fas fa-database"&gt;&lt;/i&gt; Data&lt;/a&gt;&lt;/li&gt;
+#&gt; [3] &lt;li class="dropdown"&gt;\n          &lt;a href="#" class="dropdown-toggle" data ...
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+
+```r
+stats220 %&gt;% 
+  html_element(".navbar-right") %&gt;% 
+  html_name()
+```
+
+```
+#&gt; [1] "ul"
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+
+```r
+stats220 %&gt;% 
+  html_element(".navbar-right") %&gt;% 
+  html_children()
+```
+
+```
+#&gt; {xml_nodeset (3)}
+#&gt; [1] &lt;li&gt;&lt;a href="/pages/info/"&gt;&lt;i class="fas fa-info-circle"&gt;&lt;/i&gt; Info&lt;/a&gt;&lt;/li&gt;
+#&gt; [2] &lt;li&gt;&lt;a href="/pages/data/"&gt;&lt;i class="fas fa-database"&gt;&lt;/i&gt; Data&lt;/a&gt;&lt;/li&gt;
+#&gt; [3] &lt;li class="dropdown"&gt;\n          &lt;a href="#" class="dropdown-toggle" data ...
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+
+```r
+stats220 %&gt;% 
+  html_element(".navbar-right") %&gt;% 
+  html_children() %&gt;%
+  html_name()
+```
+
+```
+#&gt; [1] "li" "li" "li"
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+
+```r
+stats220 %&gt;% 
+  html_element(".navbar-right") %&gt;% 
+  html_elements("a") %&gt;% 
+  html_attr("href")
+```
+
+```
+#&gt; [1] "/pages/info/"                  "/pages/data/"                 
+#&gt; [3] "#"                             "/assignments/assignment1/"    
+#&gt; [5] "/assignments/assignment2/"     "404.html"                     
+#&gt; [7] "/assignments/assignment1-sol/"
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+
+```r
+stats220 %&gt;% 
+  html_element(".navbar-right") %&gt;% 
+  html_elements("a") %&gt;% 
+  html_attr("href") %&gt;% 
+  url_absolute(home)
+```
+
+```
+#&gt; [1] "https://stats220.earo.me/pages/info/"                 
+#&gt; [2] "https://stats220.earo.me/pages/data/"                 
+#&gt; [3] "https://stats220.earo.me#"                            
+#&gt; [4] "https://stats220.earo.me/assignments/assignment1/"    
+#&gt; [5] "https://stats220.earo.me/assignments/assignment2/"    
+#&gt; [6] "https://stats220.earo.me/404.html"                    
+#&gt; [7] "https://stats220.earo.me/assignments/assignment1-sol/"
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+
+```r
+stats220 %&gt;% 
+  html_element(".navbar-right") %&gt;% 
+  html_elements("i")
+```
+
+```
+#&gt; {xml_nodeset (7)}
+#&gt; [1] &lt;i class="fas fa-info-circle"&gt;&lt;/i&gt;
+#&gt; [2] &lt;i class="fas fa-database"&gt;&lt;/i&gt;
+#&gt; [3] &lt;i class="fas fa-laptop-code"&gt;&lt;/i&gt;
+#&gt; [4] &lt;i class="fas fa-laptop-code"&gt;&lt;/i&gt;
+#&gt; [5] &lt;i class="fas fa-laptop-code"&gt;&lt;/i&gt;
+#&gt; [6] &lt;i class="fas fa-laptop-code"&gt;&lt;/i&gt;
+#&gt; [7] &lt;i class="fas fa-key"&gt;&lt;/i&gt;
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+
+```r
+stats220 %&gt;% 
+  html_element(".navbar-right") %&gt;% 
+  html_children() %&gt;%
+  html_text2()
+```
+
+```
+#&gt; [1] "Info"                                                              
+#&gt; [2] "Data"                                                              
+#&gt; [3] "Assignment\nAssignment 1\nAssignment 2\nAssignment 3\nAssignment 1"
+```
+]
+
+---
+
+class: inverse middle
+
+## REST API
 
 ---
 

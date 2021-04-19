@@ -1,54 +1,65 @@
 # CSS selectors: https://selectorgadget.com/
-library(rvest)
 
-stats220 <- read_html("https://stats220.earo.me")
+## ---- read-html
+library(rvest)
+home <- "https://stats220.earo.me"
+stats220 <- read_html(home)
 stats220
 
+## ---- html-el
 stats220 %>% 
   html_element(".navbar-right")
 
+## ---- html-nm
 stats220 %>% 
   html_element(".navbar-right") %>% 
   html_name()
 
+## ---- html-child
 stats220 %>% 
   html_element(".navbar-right") %>% 
   html_children()
 
+## ---- html-child-nm
 stats220 %>% 
   html_element(".navbar-right") %>% 
   html_children() %>%
   html_name()
 
+## ---- html-attr
 stats220 %>% 
   html_element(".navbar-right") %>% 
   html_elements("a") %>% 
-  html_attr("href") # relative path
+  html_attr("href")
 
+## ---- html-url
 stats220 %>% 
   html_element(".navbar-right") %>% 
   html_elements("a") %>% 
   html_attr("href") %>% 
-  url_absolute("https://stats220.earo.me") # absolute path
+  url_absolute(home)
 
+## ---- html-el-i
 stats220 %>% 
   html_element(".navbar-right") %>% 
   html_elements("i")
 
+## ---- html-text
 stats220 %>% 
   html_element(".navbar-right") %>% 
   html_children() %>%
   html_text2()
 
+## ---- dl
 stats220 %>% 
   html_elements(".panel-body .btn") %>% 
   html_attr("href") %>% 
-  url_absolute("https://stats220.earo.me")
+  url_absolute(home)
 
 stats220_urls <- stats220 %>% 
   html_elements(".panel-body .btn") %>% 
   html_attr("href") %>% 
-  url_absolute("https://stats220.earo.me")
+  url_absolute(home)
 
 pdf_urls <- stats220_urls[stringr::str_detect(stats220_urls, "pdf")]
 pdf_ursl %>% 
