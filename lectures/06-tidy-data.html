@@ -33,6 +33,15 @@ background-size: 100% 100%
 
 .green[.footnote[image sources: Upsplash]]
 
+???
+
+* each piece is a scalar, a vector, a tibble, a list
+* each piece is vector functions or table functions
+* bc they are standard and consistent blocks,
+* ensemble them to a simple mario, or complex nintendo
+* so far you worked with several datasets now,
+* hopefully you find a pattern is using these dplyr verbs in different ways to solve various problems.
+
 ---
 
 background-image: url("img/what-you-think-about-ds.png")
@@ -50,6 +59,8 @@ background-size: contain
 
 ???
 
+* 80% on modelling
+
 ---
 
 background-image: url("img/what-ds-in-reality.png")
@@ -61,6 +72,7 @@ background-size: contain
 
 ???
 
+* 80% on cleaning
 * it's invaluable to know the data pipeline: how data collected and organised
 * covid19, different def for each country in the early stage
 
@@ -78,13 +90,21 @@ background-size: contain
 #&gt; 1 9-Mar-94               NA Four Wedd… 52700832       242895809          4500000
 #&gt; 2 18-Oct-06              NA 51 Birch …    84689           84689           350000
 *#&gt; 3 1963-01-01             NA 55 Days a… 10000000        10000000         17000000
-#&gt; 4 &lt;NA&gt;                   NA Drei              0               0          7200000
+*#&gt; 4 &lt;NA&gt;                   NA Drei              0               0          7200000
 #&gt; 5 16-Jan-98              NA The Dress     16556           16556          2650000
 #&gt; # … with 10 more variables: MPAA_Rating &lt;chr&gt;, Running_Time_min &lt;int&gt;,
 #&gt; #   Distributor &lt;chr&gt;, Source &lt;chr&gt;, Major_Genre &lt;chr&gt;, Creative_Type &lt;chr&gt;,
 #&gt; #   Director &lt;chr&gt;, Rotten_Tomatoes_Rating &lt;int&gt;, IMDB_Rating &lt;dbl&gt;,
 #&gt; #   IMDB_Votes &lt;int&gt;
 ```
+
+???
+
+* all data you've seen so far are tidy, but tidy doesn't mean clean.
+* how I would clean this data: 
+* either google Drei release year, and corresponding GDP
+* or replace GDP with NA
+* Gross are suspicious
 
 ---
 
@@ -122,14 +142,21 @@ background-size: contain
 
 ???
 
+* week 4, when we try to join them, we see how country names are encoded differently.
 * Data cleaning is laborious, and highly dependent on the data itself.
 * No golden standards or principles to guide how to clean data.
+* reason about the cleaning steps (intuition, common sense, business context)
+* principles to get tidy data.
 
 ---
 
 class: middle inverse
 
 # Tidy data describes a standard way of storing data in .blue[a consistent format].
+
+???
+
+* tidy data is about data format, instead of caring the data values.
 
 ---
 
@@ -159,7 +186,7 @@ tb
 #&gt; #   f_5564 &lt;dbl&gt;, f_65 &lt;dbl&gt;, f_u &lt;dbl&gt;
 ```
 
-<div class="countdown" id="timer_6079089f" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<div class="countdown" id="timer_607f69e6" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -181,7 +208,7 @@ class: center
 ???
 
 * which rep does `tb` resemble?
-* which rep is easier to work with?
+* which rep is easier to work with? depends on the question, wide -&gt; suitable for summary table
 
 ---
 
@@ -190,10 +217,11 @@ background-size: contain
 
 ???
 
+* In database, this is schema.
 * Tidy data principles are a rephrase of third norm in a database schema design.
-&lt;https://en.wikipedia.org/wiki/Third_normal_form&gt;
-
+&lt;https://en.wikipedia.org/wiki/Third_normal_form&gt;, to data scientists.
 * tidy data is for human consumption.
+* Tabular data is column-oriented format
 
 ---
 
@@ -210,21 +238,22 @@ background-size: contain
 * one set of consistent tools for different datasets
 * easier for automation and iteration
 
-.footnote[credit: Illustrations from the Openscapes blog [Tidy Data for reproducibility, efficiency, and collaboration](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst]
+.footnote[reference: Illustrations from the Openscapes blog [Tidy Data for reproducibility, efficiency, and collaboration](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst]
 
 ???
 
 * To work with messy data, every time you need to switch to different gears
 * learn new tools that just works for that specific dataset
-* It's much more pleasant to work with tidy data, 
-* spent less flighting with different tools, focus more on data analyis bc one set of consistent tools
+* It's much more pleasant to work with tidy data, help you to build a good taste of data analysis
+* spent less flighting with different tools, focus more on data analysis bc one set of consistent tools
 * the {tidyverse} philosophy to work with the tidy data structures
-* Tabular data is column-oriented format
+* build automatic workflow for analysis, feed different data sets.
 
 ---
 
-class: middle
+## .center[Get data into tidy format]
 
+&lt;br&gt;
 .pull-right[
 .center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="240px"&gt;](http://tidyr.tidyverse.org)]
 ]
@@ -277,6 +306,10 @@ class: middle
 </table>
 ]
 
+???
+
+* missing verbs not exactly a pair
+
 ---
 
 .pull-left[
@@ -328,6 +361,14 @@ class: middle
 ```
 ]
 
+???
+
+* the `tb` data is messy data, rows and columns
+* obs and variables
+* working with tidy data, we know obs: the number of cases by sex and age groups over years at country level
+* messy in a way that column names should be values, stored in cells.
+* what steps needed to get to this tidy format.
+
 ---
 
 .left-column[
@@ -347,7 +388,7 @@ tb %&gt;%
 ```
 
 ```
-#&gt; # A tibble: 115,380 x 4
+*#&gt; # A tibble: 115,380 x 4
 #&gt;   iso2   year sex_age cases
 #&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
 #&gt; 1 AD     1989 m_04       NA
@@ -359,6 +400,10 @@ tb %&gt;%
 #&gt; # … with 115,374 more rows
 ```
 ]
+
+???
+
+* messy: store two variables into one column 
 
 ---
 
@@ -441,7 +486,9 @@ tb_tidy &lt;- tb %&gt;%
 
 ???
 
-demo on `direction`
+* how to impute missing data is dependent on data context. For cross-sectional, average and build a regression model to predict
+* fill by direction
+* demo on `direction`
 
 ---
 
@@ -461,7 +508,7 @@ background-size: 10%
 
 ```r
 tb_tidy %&gt;% 
-  nest(data = year:cases)
+  nest(data = -iso2)
 ```
 
 ```
@@ -480,6 +527,8 @@ tb_tidy %&gt;%
 
 ???
 
+* tibble is a list, recursive structure
+* we can put a list into a tibble
 * complex objs in tibble
 
 ---
@@ -489,7 +538,7 @@ tb_tidy %&gt;%
 
 ```r
 tb_fit &lt;- tb_tidy %&gt;% 
-  nest(data = year:cases) %&gt;% 
+  nest(data = -iso2) %&gt;% 
   mutate( # map() for week 11
     model = map(data, ~ lm(cases ~ year + sex + age, data = .)),
     r2 = map_dbl(model, ~ broom::glance(.)$r.squared)
@@ -551,7 +600,7 @@ tb_fit_pre %&gt;%
 
 ???
 
-* direct labeling instead of &gt;200 country labels underneath
+* direct labeling instead of &gt; 200 country labels underneath
 
 ---
 
@@ -580,7 +629,7 @@ aklweather
 #&gt; # … with 2,968 more rows
 ```
 
-<div class="countdown" id="timer_60790804" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<div class="countdown" id="timer_607f67c7" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -830,7 +879,7 @@ akl_prcp
 &gt; 1. Why do I fill `0` to missing `prcp`, instead of leaving `NA` as is?
 &gt; 2. Why do I calculate monthly cumulative precipitations?
 
-<div class="countdown" id="timer_60790884" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
+<div class="countdown" id="timer_607f67a0" style="top:0;right:0;font-size:48px;" data-warnwhen="0">
 <code class="countdown-time"><span class="countdown-digits minutes">00</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">30</span></code>
 </div>
 

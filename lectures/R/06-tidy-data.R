@@ -51,11 +51,11 @@ tb_tidy
 
 ## ---- tb-nest
 tb_tidy %>% 
-  nest(data = year:cases)
+  nest(data = -iso2)
 
 ## ---- tb-mod
 tb_fit <- tb_tidy %>% 
-  nest(data = year:cases) %>% 
+  nest(data = -iso2) %>% 
   mutate( # map() for week 11
     model = map(data, ~ lm(cases ~ year + sex + age, data = .)),
     r2 = map_dbl(model, ~ broom::glance(.)$r.squared)

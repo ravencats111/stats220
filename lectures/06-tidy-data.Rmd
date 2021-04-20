@@ -27,6 +27,15 @@ background-size: 100% 100%
 
 .green[.footnote[image sources: Upsplash]]
 
+???
+
+* each piece is a scalar, a vector, a tibble, a list
+* each piece is vector functions or table functions
+* bc they are standard and consistent blocks,
+* ensemble them to a simple mario, or complex nintendo
+* so far you worked with several datasets now,
+* hopefully you find a pattern is using these dplyr verbs in different ways to solve various problems.
+
 ---
 
 background-image: url("img/what-you-think-about-ds.png")
@@ -38,7 +47,7 @@ options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE,
   tibble.width = 60, tibble.print_min = 6)
 opts_chunk$set(
   echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
-  fig.path = 'figure/', cache.path = 'cache/', cache = FALSE, fig.retina = 3,
+  fig.path = 'figure/', cache.path = 'cache/', cache = TRUE, fig.retina = 3,
   fig.align = 'center', fig.width = 4.5, fig.height = 4, fig.show = 'hold',
   dpi = 120
 )
@@ -58,6 +67,8 @@ read_chunk('R/06-tidy-data.R')
 
 ???
 
+* 80% on modelling
+
 ---
 
 background-image: url("img/what-ds-in-reality.png")
@@ -69,6 +80,7 @@ background-size: contain
 
 ???
 
+* 80% on cleaning
 * it's invaluable to know the data pipeline: how data collected and organised
 * covid19, different def for each country in the early stage
 
@@ -80,6 +92,14 @@ background-size: contain
 
 ```{r movies, echo = FALSE, highlight.output = 6:7}
 ```
+
+???
+
+* all data you've seen so far are tidy, but tidy doesn't mean clean.
+* how I would clean this data: 
+* either google Drei release year, and corresponding GDP
+* or replace GDP with NA
+* Gross are suspicious
 
 ---
 
@@ -100,14 +120,21 @@ background-size: contain
 
 ???
 
+* week 4, when we try to join them, we see how country names are encoded differently.
 * Data cleaning is laborious, and highly dependent on the data itself.
 * No golden standards or principles to guide how to clean data.
+* reason about the cleaning steps (intuition, common sense, business context)
+* principles to get tidy data.
 
 ---
 
 class: middle inverse
 
 # Tidy data describes a standard way of storing data in .blue[a consistent format].
+
+???
+
+* tidy data is about data format, instead of caring the data values.
 
 ---
 
@@ -144,7 +171,7 @@ class: center
 ???
 
 * which rep does `tb` resemble?
-* which rep is easier to work with?
+* which rep is easier to work with? depends on the question, wide -> suitable for summary table
 
 ---
 
@@ -153,10 +180,11 @@ background-size: contain
 
 ???
 
+* In database, this is schema.
 * Tidy data principles are a rephrase of third norm in a database schema design.
-<https://en.wikipedia.org/wiki/Third_normal_form>
-
+<https://en.wikipedia.org/wiki/Third_normal_form>, to data scientists.
 * tidy data is for human consumption.
+* Tabular data is column-oriented format
 
 ---
 
@@ -173,21 +201,22 @@ background-size: contain
 * one set of consistent tools for different datasets
 * easier for automation and iteration
 
-.footnote[credit: Illustrations from the Openscapes blog [Tidy Data for reproducibility, efficiency, and collaboration](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst]
+.footnote[reference: Illustrations from the Openscapes blog [Tidy Data for reproducibility, efficiency, and collaboration](https://www.openscapes.org/blog/2020/10/12/tidy-data/) by Julia Lowndes and Allison Horst]
 
 ???
 
 * To work with messy data, every time you need to switch to different gears
 * learn new tools that just works for that specific dataset
-* It's much more pleasant to work with tidy data, 
-* spent less flighting with different tools, focus more on data analyis bc one set of consistent tools
+* It's much more pleasant to work with tidy data, help you to build a good taste of data analysis
+* spent less flighting with different tools, focus more on data analysis bc one set of consistent tools
 * the {tidyverse} philosophy to work with the tidy data structures
-* Tabular data is column-oriented format
+* build automatic workflow for analysis, feed different data sets.
 
 ---
 
-class: middle
+## .center[Get data into tidy format]
 
+<br>
 .pull-right[
 .center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="240px">](http://tidyr.tidyverse.org)]
 ]
@@ -213,6 +242,10 @@ tidyr %>%
 ```
 ]
 
+???
+
+* missing verbs not exactly a pair
+
 ---
 
 .pull-left[
@@ -234,6 +267,14 @@ print(tb, width = 36)
 ```
 ]
 
+???
+
+* the `tb` data is messy data, rows and columns
+* obs and variables
+* working with tidy data, we know obs: the number of cases by sex and age groups over years at country level
+* messy in a way that column names should be values, stored in cells.
+* what steps needed to get to this tidy format.
+
 ---
 
 .left-column[
@@ -242,9 +283,13 @@ print(tb, width = 36)
 ]
 .right-column[
 * `pivot_longer()` a wider-format data
-```{r tb-pivot}
+```{r tb-pivot, highlight.output = 1}
 ```
 ]
+
+???
+
+* messy: store two variables into one column 
 
 ---
 
@@ -288,7 +333,9 @@ print(tb, width = 36)
 
 ???
 
-demo on `direction`
+* how to impute missing data is dependent on data context. For cross-sectional, average and build a regression model to predict
+* fill by direction
+* demo on `direction`
 
 ---
 
@@ -311,6 +358,8 @@ background-size: 10%
 
 ???
 
+* tibble is a list, recursive structure
+* we can put a list into a tibble
 * complex objs in tibble
 
 ---
@@ -344,7 +393,7 @@ background-size: 10%
 
 ???
 
-* direct labeling instead of >200 country labels underneath
+* direct labeling instead of > 200 country labels underneath
 
 ---
 
