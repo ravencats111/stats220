@@ -78,7 +78,7 @@ background-size: contain
 
 .brown[.center[The `movies` data is tidy but not clean.]]
 
-```{r movies, echo = FALSE, highlight.output = 6}
+```{r movies, echo = FALSE, highlight.output = 6:7}
 ```
 
 ---
