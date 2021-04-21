@@ -7,15 +7,6 @@ layout: page
 title: Assignment 2
 ---
 
----
-layout: page
-output:
-  md_document:
-    preserve_yaml: true
-    variant: gfm
-title: Assignment 2
----
-
 This assignment is **due 23:59 Friday 30 April (NZST)**.
 
 -   You should submit an R file (i.e. file extension `.R`) containing R
