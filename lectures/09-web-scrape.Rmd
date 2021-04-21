@@ -22,7 +22,7 @@ options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE,
   tibble.width = 60, tibble.print_min = 6)
 opts_chunk$set(
   echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
-  fig.path = 'figure/', cache.path = 'cache/', cache = TRUE, fig.retina = 3,
+  fig.path = 'figure/', cache.path = 'cache/', cache = FALSE, fig.retina = 3,
   fig.align = 'center', fig.width = 4.5, fig.height = 4, fig.show = 'hold',
   dpi = 120
 )
@@ -1452,9 +1452,129 @@ rvest v1.0.0
 
 ---
 
+```{r html-info}
+```
+
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+```{r html-h3}
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+```{r html-id}
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+```{r html-table}
+```
+]
+
+---
+
+.pull-left[
+* screenshot
+]
+.pull-right[
+* what it is
+```{r links}
+```
+]
+
+---
+
+```{r pdf-links}
+```
+
+```{r pdf-links-dl, eval = FALSE}
+```
+
+---
+
 class: inverse middle
 
 ## REST API
+
+---
+
+## [Github REST API](https://docs.github.com/en/rest)
+
+* Each URL is called a **request**.
+* The data sent back to you is called an HTTP **response** that consists of headers and a body.
+
+The root-endpoint of Github's API is <https://api.github.com>.
+
+```{r root-endpoint, highlight.output = 2:5}
+```
+
+---
+
+## Methods
+
+---
+
+The **path** determines the resource you’re requesting for.
+
+https://docs.github.com/en/rest/reference/repos#get-a-repository
+
+```
+GET /repos/{owner}/{repo}
+```
+
+
+```{r endpoint}
+```
+
+---
+
+## Parse the response
+
+```{r content-type}
+```
+
+---
+
+## Status code
+
+```{r status}
+```
+
+.footnote[<https://en.wikipedia.org/wiki/List_of_HTTP_status_codes>]
+
+---
+
+```{r commits}
+```
+
+---
+
+```{r commits-dttm}
+```
+
+---
+
+## Managing secrets
+
+```r
+usethis::edit_r_environ()
+```
 
 ---
 
