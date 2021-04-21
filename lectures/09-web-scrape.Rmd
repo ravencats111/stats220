@@ -1238,7 +1238,7 @@ How are you?
 
 &lt;p>Household 1&lt;/p>
 
-lt;div class="parent">
+&lt;div class="parent">
 &lt;p>Hi!&lt;/p>
 <span class="red">&lt;blockquote class="child rebel">
   &lt;p>Don't talk to me!&lt;/p>
@@ -1299,9 +1299,9 @@ How are you?
 
 &lt;p>Household 1&lt;/p>
 
-lt;div class="parent">
+&lt;div class="parent">
 &lt;p>Hi!&lt;/p>
-&&lt;blockquote class="child rebel">
+&lt;blockquote class="child rebel">
   &lt;p>Don't talk to me!&lt;/p>
 &lt;/blockquote>
 &lt;/div>
