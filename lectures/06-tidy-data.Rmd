@@ -283,7 +283,7 @@ print(tb, width = 36)
 ]
 .right-column[
 * `pivot_longer()` a wider-format data
-```{r tb-pivot, highlight.output = 1}
+```{r tb-pivot, highlight.output = 1:2}
 ```
 ]
 
@@ -411,7 +411,7 @@ Auckland weather data from GHCND (`data/ghcnd/ghcnd-akl.csv`):
 
 ???
 
-The `value` column contains multiple types of measurements.
+* The `value` column contains multiple types of measurements.
 
 ---
 
@@ -438,6 +438,7 @@ The `value` column contains multiple types of measurements.
 ???
 
 * demo on `read_csv2()`
+* daily weather information in Auckland
 * temp values unbelievably large?
 
 ---
@@ -461,7 +462,7 @@ The `value` column contains multiple types of measurements.
 ]
 .right-column[
 * `pivot_wider()` a longer-format data
-```{r akl-pivot}
+```{r akl-pivot, highlight.output = 1:2}
 ```
 ]
 
@@ -491,6 +492,10 @@ The `value` column contains multiple types of measurements.
 ```
 ]
 
+???
+
+tedious to type
+
 ---
 
 .left-column[
@@ -502,9 +507,28 @@ The `value` column contains multiple types of measurements.
 ]
 .right-column[
 * `complete()` data with missing combinations of data
-```{r akl-complete, highlight.output = 7}
+```{r akl-complete, highlight.output = 1}
 ```
 ]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](http://tidyr.tidyverse.org)]
+### - calibrate
+### - pivot
+### - rename
+### - complete
+]
+.right-column[
+* implicit missing records before
+```{r akl-missing}
+```
+]
+
+???
+
+implicit bf, explicit after `complete()`
 
 ---
 
@@ -523,13 +547,19 @@ The `value` column contains multiple types of measurements.
 
 ---
 
+`r countdown::countdown(minutes = 0, seconds = 30, font_size = "48px", bottom = 0, left = 0)`
+
+.pull-left[
 ## Your turn
 
-<br>
 > 1. Why do I fill `0` to missing `prcp`, instead of leaving `NA` as is?
 > 2. Why do I calculate monthly cumulative precipitations?
+]
 
-`r countdown::countdown(minutes = 0, seconds = 30, font_size = "48px", top = 0)`
+.pull-right[
+```{r akl-rainfall-na}
+```
+]
 
 ???
 

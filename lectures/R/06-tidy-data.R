@@ -120,10 +120,17 @@ aklweather_tidy %>%
   complete(date = full_seq(
     ymd(c("2019-01-01", "2021-04-01")), 1))
 
-## ---- akl-rainfall-na
+## ---- akl-missing
 aklweather_tidy %>% 
   complete(date = full_seq(
     ymd(c("2019-01-01", "2021-04-01")), 1)) %>% 
+  anti_join(aklweather_tidy) #<<
+
+## ---- akl-rainfall-na
+aklweather_tidy %>% 
+  complete(date = full_seq(
+    ymd(c("2019-01-01", "2021-04-01")), 
+    1)) %>% 
   filter(is.na(prcp))
 
 ## ---- akl-rainfall
