@@ -58,12 +58,15 @@ A web page consists of:
 * with the extension `.html`.
 * rendered using a web browser via an URL.
 * text files that follows a special syntax that alerts web browsers how to render it.
-
 .pull-left[
-As seen via a web browser
+.center[**via a web browser**
+<img src = "img/browser-220.png", width = "100%"></img>
+]
 ]
 .pull-right[
-As seen via a text editor
+.center[**via a text editor**
+<img src = "img/code-220.png", width = "100%"></img>
+]
 ]
 
 ---
