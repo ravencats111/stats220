@@ -1526,7 +1526,13 @@ The root-endpoint of Github's API is <https://api.github.com>.
 
 ---
 
-## Methods
+## HTTP methods
+
+* .brown[`GET`] to **retrieve** resource data/information only, and NO change in state of the resource
+* .brown[`POST`] to **create** new subordinate resources, e.g. upload a file
+* .brown[`PUT`] to **update/replace** an existing resource in its entirety
+* .brown[`DELETE`] to **delete** resources
+* .brown[`PATCH`] to make **partial update** on a resource (not all browsers support `PATCH`)
 
 ---
 
@@ -1560,20 +1566,16 @@ GET /repos/{owner}/{repo}
 
 ---
 
-```{r commits}
+## Auckland Transport Open GIS Data
+
+<https://data-atgis.opendata.arcgis.com/datasets/bus-stop?geometry=173.281%2C-37.229%2C176.247%2C-36.459>
+
+```{r bus-stop}
 ```
 
 ---
 
-```{r commits-dttm}
-```
-
----
-
-## Managing secrets
-
-```r
-usethis::edit_r_environ()
+```{r bus-stop-plot}
 ```
 
 ---
@@ -1581,8 +1583,10 @@ usethis::edit_r_environ()
 ## Reading
 
 .pull-left[
-.center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
-]
+.center[
+<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/rvest.png" width="240px">
+]]
 .pull-right[
-* [R Markdown](https://r4ds.had.co.nz/r-markdown.html)
+* [Get started with {rvest}](https://rvest.tidyverse.org/articles/rvest.html)
+* [{httr} quickstart guide](https://httr.r-lib.org/articles/quickstart.html)
 ]

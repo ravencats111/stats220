@@ -98,17 +98,24 @@ content(resp)
 
 ## ---- status
 status_code(resp)
-http_status(200)
-http_status(404)
+http_status(200) # OK
+http_status(201) # CREATED
+http_status(204) # NO CONTENT
+http_status(400) # BAD REQUEST
+http_status(404) # NOT FOUND
 
-## ---- commits
-path_commits <- "/repos/STATS-UOA/stats220/commits"
-resp_commits <- GET(modify_url(endpoint, path = path_commits))
-dat <- content(resp_commits)
-dat
+## ---- bus-stop
+endpoint <- "https://services2.arcgis.com"
+path <- "/JkPEgZJGxhSjYOo0/arcgis/rest/services/BusService/FeatureServer/0/"
+query <- "query?where=1%3D1&outFields=*&outSR=4326&f=geojson"
+bus_url <- parse_url(paste0(endpoint, path, query))
+resp <- GET(bus_url)
+dat <- content(resp)
 
-## ---- commits-dttm
-library(lubridate)
+## ---- bus-stop-plot
 library(tidyverse)
-dttm_chr <- map_chr(dat, ~ .$commit$committer$date)
-as_datetime(dttm_chr, tz = "Pacific/Auckland")
+library(geojsonsf)
+library(sf)
+bus_sf <- geojson_sf(dat)
+ggplot() +
+  geom_sf(data = bus_sf, pch = 1, colour = "#3182bd")
