@@ -1,57 +1,50 @@
-# CSS selectors: https://selectorgadget.com/
-
 ## ---- read-html
 library(rvest)
-home <- "https://stats220.earo.me"
-stats220 <- read_html(home)
+course <- "https://stats220.earo.me"
+stats220 <- read_html(course)
 stats220
 
 ## ---- html-el
-stats220 %>% 
+navbar <- stats220 %>% 
   html_element(".navbar-right")
+navbar
 
 ## ---- html-nm
-stats220 %>% 
-  html_element(".navbar-right") %>% 
+navbar %>% 
   html_name()
 
 ## ---- html-child
-stats220 %>% 
-  html_element(".navbar-right") %>% 
+navbar %>% 
   html_children()
 
 ## ---- html-child-nm
-stats220 %>% 
-  html_element(".navbar-right") %>% 
+navbar %>% 
   html_children() %>%
   html_name()
 
+## ---- html-text
+navbar %>% 
+  html_children() %>%
+  html_text2()
+
 ## ---- html-attr
-stats220 %>% 
-  html_element(".navbar-right") %>% 
+navbar %>% 
   html_elements("a") %>% 
   html_attr("href")
 
 ## ---- html-url
-stats220 %>% 
-  html_element(".navbar-right") %>% 
+navbar %>% 
   html_elements("a") %>% 
   html_attr("href") %>% 
-  url_absolute(home)
+  url_absolute(course)
 
 ## ---- html-el-i
-stats220 %>% 
-  html_element(".navbar-right") %>% 
+navbar %>% 
   html_elements("i")
 
-## ---- html-text
-stats220 %>% 
-  html_element(".navbar-right") %>% 
-  html_children() %>%
-  html_text2()
-
 ## ---- html-info
-stats220_info <- read_html("https://stats220.earo.me/pages/info/")
+stats220_info <- read_html(
+  "https://stats220.earo.me/pages/info/")
 
 ## ---- html-h3
 stats220_info %>% 
@@ -71,16 +64,18 @@ stats220_info %>%
 ## ---- links
 stats220_urls <- stats220 %>% 
   html_elements(".panel-body .btn") %>% 
-  html_attr("href") %>% 
-  url_absolute(home)
+  html_attr("href")
 stats220_urls
 
 ## ---- pdf-links
-(pdf_urls <- stats220_urls[stringr::str_detect(stats220_urls, "pdf")])
+library(stringr) # manipulate strings in week 10
+(pdf_urls <- stats220_urls[str_detect(stats220_urls, "pdf")])
 
 ## ---- pdf-links-dl
-pdf_ursl %>% 
-  map(download.file)
+pdf_files <- str_remove(pdf_urls, "/")
+map2(
+  url_absolute(pdf_urls), pdf_files,
+  ~ download.file(url = .x, destfile = .y))
 
 ## ---- root-endpoint
 library(httr)
@@ -89,19 +84,27 @@ GET(endpoint)
 
 ## ---- endpoint
 path <- "/repos/STATS-UOA/stats220"
-resp <- GET(modify_url(endpoint, path = path))
+resp <- GET(modify_url(endpoint, 
+  path = path))
 resp
 
-## ---- content-type
+## ---- http-type
 http_type(resp)
+
+## ---- content
 content(resp)
 
 ## ---- status
 status_code(resp)
+
+## ---- status-lst1
 http_status(200) # OK
-http_status(201) # CREATED
+http_status(201) # Created
 http_status(204) # NO CONTENT
+
+## ---- status-lst2
 http_status(400) # BAD REQUEST
+http_status(403) # Forbidden
 http_status(404) # NOT FOUND
 
 ## ---- bus-stop
@@ -110,12 +113,13 @@ path <- "/JkPEgZJGxhSjYOo0/arcgis/rest/services/BusService/FeatureServer/0/"
 query <- "query?where=1%3D1&outFields=*&outSR=4326&f=geojson"
 bus_url <- parse_url(paste0(endpoint, path, query))
 resp <- GET(bus_url)
-dat <- content(resp)
+cnt <- geojson::as.geojson(content(resp))
+cnt
 
 ## ---- bus-stop-plot
 library(tidyverse)
-library(geojsonsf)
 library(sf)
-bus_sf <- geojson_sf(dat)
+bus_sf <- geojsonsf::geojson_sf(cnt)
 ggplot() +
-  geom_sf(data = bus_sf, pch = 1, colour = "#3182bd")
+  geom_sf(data = bus_sf, pch = 1, 
+    colour = "#3182bd")

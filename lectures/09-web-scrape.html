@@ -1340,66 +1340,74 @@ class: inverse middle
 
 ---
 
-* Developer tool
-* CSS selectors: https://selectorgadget.com/
 
----
 
 .pull-left[
-* what you see
-rvest v1.0.0
+.center[&lt;img src = "img/browser-220.png", width = "90%"&gt;&lt;/img&gt;]
 ]
 .pull-right[
-* what it is
+Use {rvest} `&gt;= v1.0.0` (if not, update)
+
+&lt;img src="img/rvest.png" width="100%"&gt;
 
 ```r
 library(rvest)
-home &lt;- "https://stats220.earo.me"
-stats220 &lt;- read_html(home)
+course &lt;- "https://stats220.earo.me"
+stats220 &lt;- read_html(course)
 stats220
 ```
 
 ```
 #&gt; {html_document}
 #&gt; &lt;html&gt;
-#&gt; [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
-#&gt; [2] &lt;body&gt;\n\n    &lt;header class="site-header"&gt;&lt;nav class="navbar navbar-defau ...
+#&gt; [1] &lt;head&gt;\n&lt;meta http-equiv="Content ...
+#&gt; [2] &lt;body&gt;\n\n    &lt;header class="site ...
 ```
 ]
 
 ---
 
 .pull-left[
-* screenshot
+## &lt;i class="fas fa-search-plus"&gt;&lt;/i&gt; Inspect elements
+&lt;br&gt;
+&lt;br&gt;
+.center[&lt;img src = "img/rvest/developer-tool.png", width = "90%"&gt;&lt;/img&gt;]
 ]
 .pull-right[
-* what it is
+## &lt;i class="fas fa-puzzle-piece"&gt;&lt;/i&gt; [CSS selectors](https://selectorgadget.com/)
+&lt;br&gt;
+&lt;br&gt;
+.center[&lt;img src = "img/rvest/css-selector.png", width = "90%"&gt;&lt;/img&gt;]
+]
+
+---
+
+.pull-left[
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.center[&lt;img src = "img/rvest/navbar-right.png", width = "90%"&gt;&lt;/img&gt;]
+]
+.pull-right[
+`html_element()` select element
 
 ```r
-stats220 %&gt;% 
+navbar &lt;- stats220 %&gt;% 
   html_element(".navbar-right")
+navbar
 ```
 
 ```
 #&gt; {html_node}
 #&gt; &lt;ul class="nav navbar-nav navbar-right"&gt;
-#&gt; [1] &lt;li&gt;&lt;a href="/pages/info/"&gt;&lt;i class="fas fa-info-circle"&gt;&lt;/i&gt; Info&lt;/a&gt;&lt;/li&gt;
-#&gt; [2] &lt;li&gt;&lt;a href="/pages/data/"&gt;&lt;i class="fas fa-database"&gt;&lt;/i&gt; Data&lt;/a&gt;&lt;/li&gt;
-#&gt; [3] &lt;li class="dropdown"&gt;\n          &lt;a href="#" class="dropdown-toggle" data ...
+#&gt; [1] &lt;li&gt;&lt;a href="/pages/info/"&gt;&lt;i cla ...
+#&gt; [2] &lt;li&gt;&lt;a href="/pages/data/"&gt;&lt;i cla ...
+#&gt; [3] &lt;li class="dropdown"&gt;\n           ...
 ```
-]
-
----
-
-.pull-left[
-* screenshot
-]
-.pull-right[
-* what it is
+`html_name()` get element name
 
 ```r
-stats220 %&gt;% 
-  html_element(".navbar-right") %&gt;% 
+navbar %&gt;% 
   html_name()
 ```
 
@@ -1411,36 +1419,29 @@ stats220 %&gt;%
 ---
 
 .pull-left[
-* screenshot
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.center[&lt;img src = "img/rvest/navbar-right.png", width = "90%"&gt;&lt;/img&gt;]
 ]
 .pull-right[
-* what it is
+`html_children()` get element children
 
 ```r
-stats220 %&gt;% 
-  html_element(".navbar-right") %&gt;% 
+navbar %&gt;% 
   html_children()
 ```
 
 ```
 #&gt; {xml_nodeset (3)}
-#&gt; [1] &lt;li&gt;&lt;a href="/pages/info/"&gt;&lt;i class="fas fa-info-circle"&gt;&lt;/i&gt; Info&lt;/a&gt;&lt;/li&gt;
-#&gt; [2] &lt;li&gt;&lt;a href="/pages/data/"&gt;&lt;i class="fas fa-database"&gt;&lt;/i&gt; Data&lt;/a&gt;&lt;/li&gt;
-#&gt; [3] &lt;li class="dropdown"&gt;\n          &lt;a href="#" class="dropdown-toggle" data ...
+#&gt; [1] &lt;li&gt;&lt;a href="/pages/info/"&gt;&lt;i cla ...
+#&gt; [2] &lt;li&gt;&lt;a href="/pages/data/"&gt;&lt;i cla ...
+#&gt; [3] &lt;li class="dropdown"&gt;\n           ...
 ```
-]
-
----
-
-.pull-left[
-* screenshot
-]
-.pull-right[
-* what it is
+`html_name()` get element name
 
 ```r
-stats220 %&gt;% 
-  html_element(".navbar-right") %&gt;% 
+navbar %&gt;% 
   html_children() %&gt;%
   html_name()
 ```
@@ -1453,40 +1454,54 @@ stats220 %&gt;%
 ---
 
 .pull-left[
-* screenshot
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.center[&lt;img src = "img/rvest/navbar-right.png", width = "90%"&gt;&lt;/img&gt;]
 ]
 .pull-right[
-* what it is
+`html_text2()` get element text
 
 ```r
-stats220 %&gt;% 
-  html_element(".navbar-right") %&gt;% 
+navbar %&gt;% 
+  html_children() %&gt;%
+  html_text2()
+```
+
+```
+#&gt; [1] "Info"                                                              
+#&gt; [2] "Data"                                                              
+#&gt; [3] "Assignment\nAssignment 1\nAssignment 2\nAssignment 3\nAssignment 1"
+```
+`html_attr()` get element attributes
+
+```r
+navbar %&gt;% 
   html_elements("a") %&gt;% 
   html_attr("href")
 ```
 
 ```
-#&gt; [1] "/pages/info/"                  "/pages/data/"                 
-#&gt; [3] "#"                             "/assignments/assignment1/"    
-#&gt; [5] "/assignments/assignment2/"     "404.html"                     
+#&gt; [1] "/pages/info/"                 
+#&gt; [2] "/pages/data/"                 
+#&gt; [3] "#"                            
+#&gt; [4] "/assignments/assignment1/"    
+#&gt; [5] "/assignments/assignment2/"    
+#&gt; [6] "404.html"                     
 #&gt; [7] "/assignments/assignment1-sol/"
 ```
 ]
 
 ---
 
-.pull-left[
-* screenshot
-]
-.pull-right[
-* what it is
+## `url_absolute()`: turn relative urls to absolute urls
+
 
 ```r
-stats220 %&gt;% 
-  html_element(".navbar-right") %&gt;% 
+navbar %&gt;% 
   html_elements("a") %&gt;% 
   html_attr("href") %&gt;% 
-  url_absolute(home)
+  url_absolute(course)
 ```
 
 ```
@@ -1498,19 +1513,20 @@ stats220 %&gt;%
 #&gt; [6] "https://stats220.earo.me/404.html"                    
 #&gt; [7] "https://stats220.earo.me/assignments/assignment1-sol/"
 ```
-]
 
 ---
 
 .pull-left[
-* screenshot
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.center[&lt;img src = "img/rvest/navbar-right.png", width = "90%"&gt;&lt;/img&gt;]
 ]
 .pull-right[
-* what it is
+`html_elements()` select elements
 
 ```r
-stats220 %&gt;% 
-  html_element(".navbar-right") %&gt;% 
+navbar %&gt;% 
   html_elements("i")
 ```
 
@@ -1524,43 +1540,24 @@ stats220 %&gt;%
 #&gt; [6] &lt;i class="fas fa-laptop-code"&gt;&lt;/i&gt;
 #&gt; [7] &lt;i class="fas fa-key"&gt;&lt;/i&gt;
 ```
+⬆️ [fontawesome](http://fontawesome.com) icons
+
 ]
 
 ---
 
 .pull-left[
-* screenshot
-]
-.pull-right[
-* what it is
-
-```r
-stats220 %&gt;% 
-  html_element(".navbar-right") %&gt;% 
-  html_children() %&gt;%
-  html_text2()
-```
-
-```
-#&gt; [1] "Info"                                                              
-#&gt; [2] "Data"                                                              
-#&gt; [3] "Assignment\nAssignment 1\nAssignment 2\nAssignment 3\nAssignment 1"
-```
-]
-
----
+&lt;br&gt;
 
 
 ```r
-stats220_info &lt;- read_html("https://stats220.earo.me/pages/info/")
+stats220_info &lt;- read_html(
+  "https://stats220.earo.me/pages/info/")
 ```
-
-
-.pull-left[
-* screenshot
+.center[&lt;img src = "img/rvest/info-h3.png", width = "90%"&gt;&lt;/img&gt;]
 ]
 .pull-right[
-* what it is
+select all `&lt;h3&gt;` elements
 
 ```r
 stats220_info %&gt;% 
@@ -1569,17 +1566,10 @@ stats220_info %&gt;%
 ```
 
 ```
-#&gt; [1] "Timetable" "Software"  "Textbook"  "Reading"   "Credits"
+#&gt; [1] "Timetable" "Software"  "Textbook" 
+#&gt; [4] "Reading"   "Credits"
 ```
-]
-
----
-
-.pull-left[
-* screenshot
-]
-.pull-right[
-* what it is
+select `#timetable` id
 
 ```r
 stats220_info %&gt;% 
@@ -1595,10 +1585,13 @@ stats220_info %&gt;%
 ---
 
 .pull-left[
-* screenshot
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.center[&lt;img src = "img/rvest/info-table.png", width = "90%"&gt;&lt;/img&gt;]
 ]
 .pull-right[
-* what it is
+select the first `&lt;table&gt;` element
 
 ```r
 stats220_info %&gt;% 
@@ -1623,95 +1616,95 @@ stats220_info %&gt;%
 
 ---
 
-.pull-left[
-* screenshot
-]
-.pull-right[
-* what it is
+## Download pdf slides at once
+
 
 ```r
 stats220_urls &lt;- stats220 %&gt;% 
   html_elements(".panel-body .btn") %&gt;% 
-  html_attr("href") %&gt;% 
-  url_absolute(home)
+  html_attr("href")
 stats220_urls
 ```
 
 ```
-#&gt;  [1] "https://stats220.earo.me/objs/obj01"          
-#&gt;  [2] "https://stats220.earo.me/R/01-intro.R"        
-#&gt;  [3] "https://stats220.earo.me/01-intro.Rmd"        
-#&gt;  [4] "https://stats220.earo.me/01-intro.pdf"        
-#&gt;  [5] "https://stats220.earo.me/labs/lab01"          
-#&gt;  [6] "https://stats220.earo.me/labs/lab01-sol"      
-#&gt;  [7] "https://stats220.earo.me/objs/obj02"          
-#&gt;  [8] "https://stats220.earo.me/R/02-import-export.R"
-#&gt;  [9] "https://stats220.earo.me/02-import-export.Rmd"
-#&gt; [10] "https://stats220.earo.me/02-import-export.pdf"
-#&gt; [11] "https://stats220.earo.me/labs/lab02"          
-#&gt; [12] "https://stats220.earo.me/labs/lab02-sol"      
-#&gt; [13] "https://stats220.earo.me/objs/obj03"          
-#&gt; [14] "https://stats220.earo.me/R/03-data-vis.R"     
-#&gt; [15] "https://stats220.earo.me/03-data-vis.Rmd"     
-#&gt; [16] "https://stats220.earo.me/03-data-vis.pdf"     
-#&gt; [17] "https://stats220.earo.me/labs/lab03"          
-#&gt; [18] "https://stats220.earo.me/labs/lab03-sol"      
-#&gt; [19] "https://stats220.earo.me/objs/obj04"          
-#&gt; [20] "https://stats220.earo.me/R/04-data-wrangle.R" 
-#&gt; [21] "https://stats220.earo.me/04-data-wrangle.Rmd" 
-#&gt; [22] "https://stats220.earo.me/04-data-wrangle.pdf" 
-#&gt; [23] "https://stats220.earo.me/labs/lab04"          
-#&gt; [24] "https://stats220.earo.me/labs/lab04-sol"      
-#&gt; [25] "https://stats220.earo.me/objs/obj05"          
-#&gt; [26] "https://stats220.earo.me/R/05-fcts-dates.R"   
-#&gt; [27] "https://stats220.earo.me/05-fcts-dates.Rmd"   
-#&gt; [28] "https://stats220.earo.me/05-fcts-dates.pdf"   
-#&gt; [29] "https://stats220.earo.me/labs/lab05"          
-#&gt; [30] "https://stats220.earo.me/objs/obj06"          
-#&gt; [31] "https://stats220.earo.me/R/06-tidy-data.R"    
-#&gt; [32] "https://stats220.earo.me/06-tidy-data.Rmd"    
-#&gt; [33] "https://stats220.earo.me/06-tidy-data.pdf"    
-#&gt; [34] "https://stats220.earo.me/"                    
-#&gt; [35] "https://stats220.earo.me/R/07-data-vis2.R"    
-#&gt; [36] "https://stats220.earo.me/07-data-vis2.Rmd"    
-#&gt; [37] "https://stats220.earo.me/"                    
-#&gt; [38] "https://stats220.earo.me/R/"                  
-#&gt; [39] "https://stats220.earo.me/"                    
-#&gt; [40] "https://stats220.earo.me/"                    
-#&gt; [41] "https://stats220.earo.me/R/"                  
-#&gt; [42] "https://stats220.earo.me/"                    
-#&gt; [43] "https://stats220.earo.me/"                    
-#&gt; [44] "https://stats220.earo.me/R/"                  
-#&gt; [45] "https://stats220.earo.me/"                    
-#&gt; [46] "https://stats220.earo.me/"                    
-#&gt; [47] "https://stats220.earo.me/R/"                  
-#&gt; [48] "https://stats220.earo.me/"                    
-#&gt; [49] "https://stats220.earo.me/"                    
-#&gt; [50] "https://stats220.earo.me/R/"                  
-#&gt; [51] "https://stats220.earo.me/"
+#&gt;  [1] "/objs/obj01"          
+#&gt;  [2] "/R/01-intro.R"        
+#&gt;  [3] "/01-intro.Rmd"        
+#&gt;  [4] "/01-intro.pdf"        
+#&gt;  [5] "/labs/lab01"          
+#&gt;  [6] "/labs/lab01-sol"      
+#&gt;  [7] "/objs/obj02"          
+#&gt;  [8] "/R/02-import-export.R"
+#&gt;  [9] "/02-import-export.Rmd"
+#&gt; [10] "/02-import-export.pdf"
+#&gt; [11] "/labs/lab02"          
+#&gt; [12] "/labs/lab02-sol"      
+#&gt; [13] "/objs/obj03"          
+#&gt; [14] "/R/03-data-vis.R"     
+#&gt; [15] "/03-data-vis.Rmd"     
+#&gt; [16] "/03-data-vis.pdf"     
+#&gt; [17] "/labs/lab03"          
+#&gt; [18] "/labs/lab03-sol"      
+#&gt; [19] "/objs/obj04"          
+#&gt; [20] "/R/04-data-wrangle.R" 
+#&gt; [21] "/04-data-wrangle.Rmd" 
+#&gt; [22] "/04-data-wrangle.pdf" 
+#&gt; [23] "/labs/lab04"          
+#&gt; [24] "/labs/lab04-sol"      
+#&gt; [25] "/objs/obj05"          
+#&gt; [26] "/R/05-fcts-dates.R"   
+#&gt; [27] "/05-fcts-dates.Rmd"   
+#&gt; [28] "/05-fcts-dates.pdf"   
+#&gt; [29] "/labs/lab05"          
+#&gt; [30] "/objs/obj06"          
+#&gt; [31] "/R/06-tidy-data.R"    
+#&gt; [32] "/06-tidy-data.Rmd"    
+#&gt; [33] "/06-tidy-data.pdf"    
+#&gt; [34] "/"                    
+#&gt; [35] "/R/07-data-vis2.R"    
+#&gt; [36] "/07-data-vis2.Rmd"    
+#&gt; [37] "/"                    
+#&gt; [38] "/R/"                  
+#&gt; [39] "/"                    
+#&gt; [40] "/"                    
+#&gt; [41] "/R/"                  
+#&gt; [42] "/"                    
+#&gt; [43] "/"                    
+#&gt; [44] "/R/"                  
+#&gt; [45] "/"                    
+#&gt; [46] "/"                    
+#&gt; [47] "/R/"                  
+#&gt; [48] "/"                    
+#&gt; [49] "/"                    
+#&gt; [50] "/R/"                  
+#&gt; [51] "/"
 ```
-]
 
 ---
 
-
-```r
-(pdf_urls &lt;- stats220_urls[stringr::str_detect(stats220_urls, "pdf")])
-```
-
-```
-#&gt; [1] "https://stats220.earo.me/01-intro.pdf"        
-#&gt; [2] "https://stats220.earo.me/02-import-export.pdf"
-#&gt; [3] "https://stats220.earo.me/03-data-vis.pdf"     
-#&gt; [4] "https://stats220.earo.me/04-data-wrangle.pdf" 
-#&gt; [5] "https://stats220.earo.me/05-fcts-dates.pdf"   
-#&gt; [6] "https://stats220.earo.me/06-tidy-data.pdf"
-```
+## Download pdf slides at once
 
 
 ```r
-pdf_ursl %&gt;% 
-  map(download.file)
+library(stringr) # manipulate strings in week 10
+(pdf_urls &lt;- stats220_urls[str_detect(stats220_urls, "pdf")])
+```
+
+```
+#&gt; [1] "/01-intro.pdf"        
+#&gt; [2] "/02-import-export.pdf"
+#&gt; [3] "/03-data-vis.pdf"     
+#&gt; [4] "/04-data-wrangle.pdf" 
+#&gt; [5] "/05-fcts-dates.pdf"   
+#&gt; [6] "/06-tidy-data.pdf"
+```
+
+
+```r
+pdf_files &lt;- str_remove(pdf_urls, "/")
+map2(
+  url_absolute(pdf_urls), pdf_files,
+  ~ download.file(url = .x, destfile = .y))
 ```
 
 ---
@@ -1722,43 +1715,47 @@ class: inverse middle
 
 ---
 
-## [Github REST API](https://docs.github.com/en/rest)
+## &lt;i class="fab fa-github"&gt;&lt;/i&gt; [Github REST API](https://docs.github.com/en/rest)
 
+.pull-left[
 * Each URL is called a **request**.
 * The data sent back to you is called an HTTP **response** that consists of headers and a body.
 
 The root-endpoint of Github's API is &lt;https://api.github.com&gt;.
-
 
 ```r
 library(httr)
 endpoint &lt;- "https://api.github.com"
 GET(endpoint)
 ```
+]
+.pull-right[
 
 ```
 #&gt; Response [https://api.github.com]
-*#&gt;   Date: 2021-04-22 03:45
+*#&gt;   Date: 2021-04-23 09:15
 *#&gt;   Status: 200
 *#&gt;   Content-Type: application/json; charset=utf-8
 *#&gt;   Size: 2.31 kB
 #&gt; {
-#&gt;   "current_user_url": "https://api.github.com/user",
-#&gt;   "current_user_authorizations_html_url": "https://github.com/settings/connec...
-#&gt;   "authorizations_url": "https://api.github.com/authorizations",
-#&gt;   "code_search_url": "https://api.github.com/search/code?q={query}{&amp;page,per_...
-#&gt;   "commit_search_url": "https://api.github.com/search/commits?q={query}{&amp;page...
-#&gt;   "emails_url": "https://api.github.com/user/emails",
-#&gt;   "emojis_url": "https://api.github.com/emojis",
-#&gt;   "events_url": "https://api.github.com/events",
-#&gt;   "feeds_url": "https://api.github.com/feeds",
+#&gt;   "current_user_url": "https://api.gi...
+#&gt;   "current_user_authorizations_html_u...
+#&gt;   "authorizations_url": "https://api....
+#&gt;   "code_search_url": "https://api.git...
+#&gt;   "commit_search_url": "https://api.g...
+#&gt;   "emails_url": "https://api.github.c...
+#&gt;   "emojis_url": "https://api.github.c...
+#&gt;   "events_url": "https://api.github.c...
+#&gt;   "feeds_url": "https://api.github.co...
 #&gt; ...
 ```
+]
 
 ---
 
 ## HTTP methods
 
+&lt;br&gt;
 * .brown[`GET`] to **retrieve** resource data/information only, and NO change in state of the resource
 * .brown[`POST`] to **create** new subordinate resources, e.g. upload a file
 * .brown[`PUT`] to **update/replace** an existing resource in its entirety
@@ -1767,45 +1764,48 @@ GET(endpoint)
 
 ---
 
+## Path
+
+.pull-left[
 The **path** determines the resource you’re requesting for.
 
-https://docs.github.com/en/rest/reference/repos#get-a-repository
-
-```
-GET /repos/{owner}/{repo}
-```
-
-
+[`GET /repos/{owner}/{repo}`](https://docs.github.com/en/rest/reference/repos#get-a-repository
+)
 
 ```r
 path &lt;- "/repos/STATS-UOA/stats220"
-resp &lt;- GET(modify_url(endpoint, path = path))
+resp &lt;- GET(modify_url(endpoint, 
+  path = path))
 resp
 ```
+]
+.pull-right[
 
 ```
 #&gt; Response [https://api.github.com/repos/STATS-UOA/stats220]
-#&gt;   Date: 2021-04-22 03:45
+#&gt;   Date: 2021-04-23 09:15
 #&gt;   Status: 200
 #&gt;   Content-Type: application/json; charset=utf-8
 #&gt;   Size: 6.41 kB
 #&gt; {
 #&gt;   "id": 242031925,
-#&gt;   "node_id": "MDEwOlJlcG9zaXRvcnkyNDIwMzE5MjU=",
+#&gt;   "node_id": "MDEwOlJlcG9zaXRvcnkyNDI...
 #&gt;   "name": "stats220",
 #&gt;   "full_name": "STATS-UOA/stats220",
 #&gt;   "private": false,
 #&gt;   "owner": {
 #&gt;     "login": "STATS-UOA",
 #&gt;     "id": 62915494,
-#&gt;     "node_id": "MDEyOk9yZ2FuaXphdGlvbjYyOTE1NDk0",
+#&gt;     "node_id": "MDEyOk9yZ2FuaXphdGlvb...
 #&gt; ...
 ```
+]
 
 ---
 
 ## Parse the response
 
+.pull-left[
 
 ```r
 http_type(resp)
@@ -1814,6 +1814,14 @@ http_type(resp)
 ```
 #&gt; [1] "application/json"
 ```
+
+Content type of a response
+* `"image/png"`
+* `"application/text"`
+* `"application/csv"`
+* `...`
+]
+.pull-right[
 
 ```r
 content(resp)
@@ -2015,10 +2023,10 @@ content(resp)
 #&gt; [1] "2020-02-21T01:53:12Z"
 #&gt; 
 #&gt; $updated_at
-#&gt; [1] "2021-04-22T01:12:33Z"
+#&gt; [1] "2021-04-22T10:55:45Z"
 #&gt; 
 #&gt; $pushed_at
-#&gt; [1] "2021-04-22T01:12:31Z"
+#&gt; [1] "2021-04-22T10:55:42Z"
 #&gt; 
 #&gt; $git_url
 #&gt; [1] "git://github.com/STATS-UOA/stats220.git"
@@ -2036,7 +2044,7 @@ content(resp)
 #&gt; [1] "https://stats220.earo.me"
 #&gt; 
 #&gt; $size
-#&gt; [1] 133459
+#&gt; [1] 134859
 #&gt; 
 #&gt; $stargazers_count
 #&gt; [1] 3
@@ -2157,6 +2165,7 @@ content(resp)
 #&gt; $subscribers_count
 #&gt; [1] 1
 ```
+]
 
 ---
 
@@ -2171,88 +2180,30 @@ status_code(resp)
 #&gt; [1] 200
 ```
 
+&lt;br&gt;
+
+.pull-left[
+
 ```r
 http_status(200) # OK
-```
-
-```
-#&gt; $category
-#&gt; [1] "Success"
-#&gt; 
-#&gt; $reason
-#&gt; [1] "OK"
-#&gt; 
-#&gt; $message
-#&gt; [1] "Success: (200) OK"
-```
-
-```r
-http_status(201) # CREATED
-```
-
-```
-#&gt; $category
-#&gt; [1] "Success"
-#&gt; 
-#&gt; $reason
-#&gt; [1] "Created"
-#&gt; 
-#&gt; $message
-#&gt; [1] "Success: (201) Created"
-```
-
-```r
+http_status(201) # Created
 http_status(204) # NO CONTENT
 ```
-
-```
-#&gt; $category
-#&gt; [1] "Success"
-#&gt; 
-#&gt; $reason
-#&gt; [1] "No Content"
-#&gt; 
-#&gt; $message
-#&gt; [1] "Success: (204) No Content"
-```
+]
+.pull-right[
 
 ```r
 http_status(400) # BAD REQUEST
-```
-
-```
-#&gt; $category
-#&gt; [1] "Client error"
-#&gt; 
-#&gt; $reason
-#&gt; [1] "Bad Request"
-#&gt; 
-#&gt; $message
-#&gt; [1] "Client error: (400) Bad Request"
-```
-
-```r
+http_status(403) # Forbidden
 http_status(404) # NOT FOUND
 ```
-
-```
-#&gt; $category
-#&gt; [1] "Client error"
-#&gt; 
-#&gt; $reason
-#&gt; [1] "Not Found"
-#&gt; 
-#&gt; $message
-#&gt; [1] "Client error: (404) Not Found"
-```
+]
 
 .footnote[&lt;https://en.wikipedia.org/wiki/List_of_HTTP_status_codes&gt;]
 
 ---
 
-## Auckland Transport Open GIS Data
-
-&lt;https://data-atgis.opendata.arcgis.com/datasets/bus-stop?geometry=173.281%2C-37.229%2C176.247%2C-36.459&gt;
+## Auckland Transport Open GIS Data: [bus stop](https://data-atgis.opendata.arcgis.com/datasets/bus-stop?geometry=173.281%2C-37.229%2C176.247%2C-36.459)
 
 
 ```r
@@ -2261,28 +2212,49 @@ path &lt;- "/JkPEgZJGxhSjYOo0/arcgis/rest/services/BusService/FeatureServer/0/"
 query &lt;- "query?where=1%3D1&amp;outFields=*&amp;outSR=4326&amp;f=geojson"
 bus_url &lt;- parse_url(paste0(endpoint, path, query))
 resp &lt;- GET(bus_url)
-dat &lt;- content(resp)
+cnt &lt;- geojson::as.geojson(content(resp))
+cnt
+```
+
+```
+#&gt; &lt;geojson&gt; 
+#&gt;   type:  FeatureCollection 
+#&gt;   features (n): 1000 
+#&gt;   features (geometry / length) [first 5]:
+#&gt;     Point / 2
+#&gt;     Point / 2
+#&gt;     Point / 2
+#&gt;     Point / 2
+#&gt;     Point / 2
 ```
 
 ---
 
+class: middle
+
+.pull-left[
 
 ```r
 library(tidyverse)
-library(geojsonsf)
 library(sf)
-bus_sf &lt;- geojson_sf(dat)
+bus_sf &lt;- geojsonsf::geojson_sf(cnt)
 ggplot() +
-  geom_sf(data = bus_sf, pch = 1, colour = "#3182bd")
+  geom_sf(data = bus_sf, pch = 1, 
+    colour = "#3182bd")
 ```
 
-&lt;img src="figure/bus-stop-plot-1.png" width="540" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="figure/bus-stop-plot2-1.png" width="540" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 
 ## Reading
 
 .pull-left[
+&lt;br&gt;
+&lt;br&gt;
 .center[
 &lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/rvest.png" width="240px"&gt;
 ]]

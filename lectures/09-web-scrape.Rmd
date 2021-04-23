@@ -1350,17 +1350,17 @@ class: inverse middle
 
 ---
 
-* Developer tool
-* CSS selectors: https://selectorgadget.com/
-
----
+```{r opts0, echo = FALSE}
+op <- options(width = 40)
+```
 
 .pull-left[
-* what you see
-rvest v1.0.0
+.center[<img src = "img/browser-220.png", width = "90%"></img>]
 ]
 .pull-right[
-* what it is
+Use {rvest} `>= v1.0.0` (if not, update)
+
+<img src="img/rvest.png" width="100%">
 ```{r read-html}
 ```
 ]
@@ -1368,21 +1368,31 @@ rvest v1.0.0
 ---
 
 .pull-left[
-* screenshot
+## <i class="fas fa-search-plus"></i> Inspect elements
+<br>
+<br>
+.center[<img src = "img/rvest/developer-tool.png", width = "90%"></img>]
 ]
 .pull-right[
-* what it is
-```{r html-el}
-```
+## <i class="fas fa-puzzle-piece"></i> [CSS selectors](https://selectorgadget.com/)
+<br>
+<br>
+.center[<img src = "img/rvest/css-selector.png", width = "90%"></img>]
 ]
 
 ---
 
 .pull-left[
-* screenshot
+<br>
+<br>
+<br>
+.center[<img src = "img/rvest/navbar-right.png", width = "90%"></img>]
 ]
 .pull-right[
-* what it is
+`html_element()` select element
+```{r html-el}
+```
+`html_name()` get element name
 ```{r html-nm}
 ```
 ]
@@ -1390,21 +1400,16 @@ rvest v1.0.0
 ---
 
 .pull-left[
-* screenshot
+<br>
+<br>
+<br>
+.center[<img src = "img/rvest/navbar-right.png", width = "90%"></img>]
 ]
 .pull-right[
-* what it is
+`html_children()` get element children
 ```{r html-child}
 ```
-]
-
----
-
-.pull-left[
-* screenshot
-]
-.pull-right[
-* what it is
+`html_name()` get element name
 ```{r html-child-nm}
 ```
 ]
@@ -1412,69 +1417,57 @@ rvest v1.0.0
 ---
 
 .pull-left[
-* screenshot
+<br>
+<br>
+<br>
+.center[<img src = "img/rvest/navbar-right.png", width = "90%"></img>]
 ]
 .pull-right[
-* what it is
+`html_text2()` get element text
+```{r html-text}
+```
+`html_attr()` get element attributes
 ```{r html-attr}
 ```
 ]
 
 ---
 
-.pull-left[
-* screenshot
-]
-.pull-right[
-* what it is
+## `url_absolute()`: turn relative urls to absolute urls
+
 ```{r html-url}
 ```
-]
 
 ---
 
 .pull-left[
-* screenshot
+<br>
+<br>
+<br>
+.center[<img src = "img/rvest/navbar-right.png", width = "90%"></img>]
 ]
 .pull-right[
-* what it is
+`html_elements()` select elements
 ```{r html-el-i}
 ```
+`r emo::ji("arrow_up")` [fontawesome](http://fontawesome.com) icons
+
 ]
 
 ---
 
 .pull-left[
-* screenshot
-]
-.pull-right[
-* what it is
-```{r html-text}
-```
-]
-
----
+<br>
 
 ```{r html-info}
 ```
-
-
-.pull-left[
-* screenshot
+.center[<img src = "img/rvest/info-h3.png", width = "90%"></img>]
 ]
 .pull-right[
-* what it is
+select all `<h3>` elements
 ```{r html-h3}
 ```
-]
-
----
-
-.pull-left[
-* screenshot
-]
-.pull-right[
-* what it is
+select `#timetable` id
 ```{r html-id}
 ```
 ]
@@ -1482,26 +1475,27 @@ rvest v1.0.0
 ---
 
 .pull-left[
-* screenshot
+<br>
+<br>
+<br>
+.center[<img src = "img/rvest/info-table.png", width = "90%"></img>]
 ]
 .pull-right[
-* what it is
+select the first `<table>` element
 ```{r html-table}
 ```
 ]
 
 ---
 
-.pull-left[
-* screenshot
-]
-.pull-right[
-* what it is
+## Download pdf slides at once
+
 ```{r links}
 ```
-]
 
 ---
+
+## Download pdf slides at once
 
 ```{r pdf-links}
 ```
@@ -1517,20 +1511,26 @@ class: inverse middle
 
 ---
 
-## [Github REST API](https://docs.github.com/en/rest)
+## <i class="fab fa-github"></i> [Github REST API](https://docs.github.com/en/rest)
 
+.pull-left[
 * Each URL is called a **request**.
 * The data sent back to you is called an HTTP **response** that consists of headers and a body.
 
 The root-endpoint of Github's API is <https://api.github.com>.
-
-```{r root-endpoint, highlight.output = 2:5}
+```{r root-endpoint, eval = FALSE}
 ```
+]
+.pull-right[
+```{r ref.label = "root-endpoint", echo = FALSE, highlight.output = 2:5}
+```
+]
 
 ---
 
 ## HTTP methods
 
+<br>
 * .brown[`GET`] to **retrieve** resource data/information only, and NO change in state of the resource
 * .brown[`POST`] to **create** new subordinate resources, e.g. upload a file
 * .brown[`PUT`] to **update/replace** an existing resource in its entirety
@@ -1539,24 +1539,39 @@ The root-endpoint of Github's API is <https://api.github.com>.
 
 ---
 
+## Path
+
+.pull-left[
 The **path** determines the resource you’re requesting for.
 
-https://docs.github.com/en/rest/reference/repos#get-a-repository
-
+[`GET /repos/{owner}/{repo}`](https://docs.github.com/en/rest/reference/repos#get-a-repository
+)
+```{r endpoint, eval = FALSE}
 ```
-GET /repos/{owner}/{repo}
+]
+.pull-right[
+```{r ref.label = "endpoint", echo = FALSE}
 ```
-
-
-```{r endpoint}
-```
+]
 
 ---
 
 ## Parse the response
 
-```{r content-type}
+.pull-left[
+```{r http-type}
 ```
+
+Content type of a response
+* `"image/png"`
+* `"application/text"`
+* `"application/csv"`
+* `...`
+]
+.pull-right[
+```{r content}
+```
+]
 
 ---
 
@@ -1565,27 +1580,47 @@ GET /repos/{owner}/{repo}
 ```{r status}
 ```
 
+<br>
+
+.pull-left[
+```{r status-lst1, eval = FALSE}
+```
+]
+.pull-right[
+```{r status-lst2, eval = FALSE}
+```
+]
+
 .footnote[<https://en.wikipedia.org/wiki/List_of_HTTP_status_codes>]
 
 ---
 
-## Auckland Transport Open GIS Data
-
-<https://data-atgis.opendata.arcgis.com/datasets/bus-stop?geometry=173.281%2C-37.229%2C176.247%2C-36.459>
+## Auckland Transport Open GIS Data: [bus stop](https://data-atgis.opendata.arcgis.com/datasets/bus-stop?geometry=173.281%2C-37.229%2C176.247%2C-36.459)
 
 ```{r bus-stop}
 ```
 
 ---
 
-```{r bus-stop-plot}
+class: middle
+
+.pull-left[
+```{r bus-stop-plot, eval = FALSE}
 ```
+
+]
+.pull-right[
+```{r bus-stop-plot2, ref.label = "bus-stop-plot", echo = FALSE}
+```
+]
 
 ---
 
 ## Reading
 
 .pull-left[
+<br>
+<br>
 .center[
 <img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/rvest.png" width="240px">
 ]]
