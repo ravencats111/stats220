@@ -25,3 +25,4 @@ A list of datasets (`data/`) used in the course:
 * [`tb.csv`](https://raw.githubusercontent.com/STATS-UOA/stats220/master/lectures/data/tb.csv) Tuberculosis data from WHO
 * [`ghcnd/ghcnd-akl.csv`](https://raw.githubusercontent.com/STATS-UOA/stats220/master/lectures/data/ghcnd/ghcnd-akl.csv) Auckland daily temperatures and precipitations, sourced from [Global Historical Climatology Network Daily](https://www.ncdc.noaa.gov/ghcnd-data-access)
 * [`covid19-daily-cases.csv`](https://raw.githubusercontent.com/STATS-UOA/stats220/master/lectures/data/covid19-daily-cases.csv) COVID-19 daily confirmed cases, sourced from [the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://github.com/CSSEGISandData/COVID-19)
+* [`domestic-trips.csv`](https://raw.githubusercontent.com/STATS-UOA/stats220/master/lectures/data/domestic-trips.csv) Australian domestic overnight trips, sourced from [Tourism Research Australia](https://www.tra.gov.au)
