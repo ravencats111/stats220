@@ -7,7 +7,7 @@ layout: page
 title: Lab 05
 ---
 
-This lab exercise is **due 23:59 Monday 26 April (NZDT)**.
+This lab exercise is **due 23:59 Monday 26 April (NZST)**.
 
 -   You should submit an R file (i.e. file extension `.R`) containing R
     code that assigns **the appropriate values** to **the appropriate

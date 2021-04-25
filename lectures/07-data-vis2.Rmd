@@ -167,16 +167,11 @@ class: inverse middle
 <br>
 ```{r gg-palette, eval = FALSE}
 ```
-in {ggplot2}, `scale_[aes]_[datatype]()` for custom scales.
 ]
 .pull-right[
 ```{r gg-palette2, ref.label = "gg-palette", echo = FALSE}
 ```
 ]
-
-???
-
-* `scale_[aes]_[datatype]()` to change the default scales
 
 ---
 
@@ -215,6 +210,18 @@ in {ggplot2}, `scale_[aes]_[datatype]()` for custom scales.
 * `colorspace::hcl_color_picker()`
 .center[<img src = "img/hcl.png", height = "320px"></img>]
 ]
+
+---
+
+## ggplot2 scales
+
+in {ggplot2}, `scale_[aes]_[datatype]()` for custom scales.
+
+a table for sets of scales
+
+???
+
+* `scale_[aes]_[datatype]()` to change the default scales
 
 ---
 
@@ -511,6 +518,20 @@ log(0) -> Inf
 ]
 ]
 ]
+
+---
+
+{scales}
+
+---
+
+class: inverse middle
+
+## Interactive graphics
+
+---
+
+`plotly::ggplotly()`
 
 ---
 
