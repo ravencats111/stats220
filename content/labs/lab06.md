@@ -24,7 +24,7 @@ This lab exercise is **due 23:59 Monday 03 May (NZST)**.
 
 ------------------------------------------------------------------------
 
-In this lab exercise, you are going to tidy `domestic-steps.csv` that
+In this lab exercise, you are going to tidy `domestic-trips.csv` that
 contains quarterly overnight trips from 1998 Q1 to 2016 Q4 across
 Australia. You shall use the following code snippet (and **include them
 upfront in your R file**) for this lab session:

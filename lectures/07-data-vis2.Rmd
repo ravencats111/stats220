@@ -213,9 +213,11 @@ class: inverse middle
 
 ---
 
-## ggplot2 scales
+## Scales
 
-in {ggplot2}, `scale_[aes]_[datatype]()` for custom scales.
+* Control how data is mapped to perceptual properties, and produce guides (axes and legends) which allow us to read the plot.
+* Important parameters: name, breaks & labels, limits.
+* Naming scheme: `scale_[aes]_[datatype]()`
 
 a table for sets of scales
 
