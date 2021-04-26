@@ -6,6 +6,15 @@
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
     <link rel="stylesheet" href="assets/remark.css" type="text/css" />
   </head>
   <body>
@@ -114,6 +123,79 @@ class: inverse middle
 
 ## Colour matters
 
+--
+
+### .blue[1.] Colour space
+### .blue[2.] Colour blindness
+
+---
+
+class: middle
+
+## 3 ways to represent colour space
+
+1. RGB
+2. HSV/HSL
+3. HCL .small[.green[for humans]]
+
+---
+
+## RGB
+
+* Red *(0-255)*: amount of .red[red] light
+* Green *(0-255)*: amount of .green[green] light
+* Blue *(0-255)*: amount of .blue[blue] light
+
+.center[&lt;img src="img/rgb-viz-1.svg" width="60%"&gt;]
+
+.footnote[image credit: Claus O. Wilke]
+
+---
+
+## HSV
+
+* Hue *(0-360)*: hue of the color
+* Saturation *(0-1)*: colorfulness relative to the brightness of the color
+* Value *(0-1)*: subjective perception of amount of light emitted
+
+.center[&lt;img src="img/hsv-viz-1.svg" width="70%"&gt;]
+
+.footnote[image credit: Claus O. Wilke]
+
+---
+
+## HSL
+
+* Hue *(0-360)*: hue of the color
+* Lightness *(0-1)*: brightness relative to the brightness of a illuminated white
+* Saturation *(0-1)*: colorfulness relative to the brightness of the color
+
+.center[&lt;img src="img/hls-viz-1.svg" width="70%"&gt;]
+
+.footnote[image credit: Claus O. Wilke]
+
+---
+
+## HCL .small[.green[aka polar LUV]]
+
+* Hue *(0-360)*: hue of the color
+* Chroma *(0-180)*: degree of vividness of a color
+* Luminance *(0-100)*: amount of light emitted
+
+.center[&lt;img src="img/cl-planes-1.svg" width="60%"&gt;]
+
+.footnote[image credit: Claus O. Wilke]
+
+---
+
+class: middle
+
+## 3 types of colour palettes
+
+1. Qualitative
+2. Sequential
+3. Diverging
+
 ---
 
 ## Qualitative palettes .small[.green[for categorical data with no particular ordering]]
@@ -127,7 +209,7 @@ colorspace::hcl_palettes("Qualitative", plot = TRUE, n = 7)
 
 ---
 
-## Sequential palettes .small[.green[for ordered data from low to high]]
+## Sequential palettes .small[.green[for ordered data from high to low]]
 
 
 ```r
@@ -164,15 +246,10 @@ time_use %&gt;%
   labs(y = "") +
   theme(legend.position = "bottom")
 ```
-in {ggplot2}, `scale_[aes]_[datatype]()` for custom scales.
 ]
 .pull-right[
 &lt;img src="figure/gg-palette2-1.png" width="540" style="display: block; margin: auto;" /&gt;
 ]
-
-???
-
-* `scale_[aes]_[datatype]()` to change the default scales
 
 ---
 
@@ -216,12 +293,31 @@ time_use %&gt;%
 
 .pull-left[
 * `colorspace::hclwizard()`
+
 .center[&lt;img src = "img/wizard.png", height = "320px"&gt;&lt;/img&gt;]
 ]
 .pull-right[
 * `colorspace::hcl_color_picker()`
+
 .center[&lt;img src = "img/hcl.png", height = "320px"&gt;&lt;/img&gt;]
 ]
+
+---
+
+class: middle
+
+## Scales
+
+* Control how data is mapped to perceptual properties, and produce guides (axes and legends) which allow us to read the plot.
+* Important arguments: `breaks`, `labels`, and `limits`.
+* Naming scheme: `scale_[aes]_[datatype]()`
+
+---
+
+<div id="htmlwidget-86afd2f3d6934fd9d0ed" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-86afd2f3d6934fd9d0ed">{"x":{"filter":"none","data":[["scale_alpha, scale_alpha_continuous, scale_alpha_binned, scale_alpha_discrete","scale_x_binned, scale_y_binned","scale_colour_brewer, scale_fill_brewer, scale_colour_distiller, scale_fill_distiller","scale_colour_continuous, scale_fill_continuous, scale_colour_binned, scale_fill_binned","scale_colour_discrete, scale_fill_discrete","scale_x_continuous, scale_y_continuous, scale_x_log10, scale_y_log10","scale_x_date, scale_y_date, scale_x_datetime, scale_y_datetime","scale_x_discrete, scale_y_discrete","scale_colour_gradient, scale_fill_gradient, scale_colour_gradient2, scale_fill_gradient2","scale_colour_grey, scale_fill_grey, scale_color_grey","scale_colour_hue, scale_fill_hue, scale_color_discrete, scale_color_hue","scale_colour_identity, scale_fill_identity, scale_shape_identity, scale_linetype_identity","scale_linetype, scale_linetype_binned, scale_linetype_continuous, scale_linetype_discrete","scale_colour_manual, scale_fill_manual, scale_size_manual, scale_shape_manual","scale_shape, scale_shape_binned, scale_shape_discrete, scale_shape_ordinal","scale_size, scale_size_continuous, scale_radius, scale_size_binned","scale_colour_steps, scale_colour_steps2, scale_colour_stepsn, scale_fill_steps","scale_type","scale_colour_viridis_d, scale_fill_viridis_d, scale_colour_viridis_c, scale_fill_viridis_c"],["Alpha transparency scales","Positional scales for binning continuous data (x &amp; y)","Sequential, diverging and qualitative colour scales from colorbrewer.org","Continuous and binned colour scales","Discrete colour scales","Position scales for continuous data (x &amp; y)","Position scales for date/time data","Position scales for discrete data","Gradient colour scales","Sequential grey colour scales","Evenly spaced colours for discrete data","Use values without scaling","Scale for line patterns","Create your own discrete scale","Scales for shapes, aka glyphs","Scales for area or radius","Binned gradient colour scales","Determine default scale type","Viridis colour scales from viridisLite"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>scale<\/th>\n      <th>Description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tp","ordering":false,"pageLength":5,"width":"80%","order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+???
 
 ---
 
@@ -236,6 +332,23 @@ class: inverse middle
 ]
 .right-column[
 &lt;blockquote class="twitter-tweet"&gt;&lt;p lang="en" dir="ltr"&gt;&lt;a href="https://twitter.com/hashtag/MakingOf?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#MakingOf&lt;/a&gt; of last week&amp;#39;s &lt;a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;amp;ref_src=twsrc%5Etfw"&gt;#TidyTuesday&lt;/a&gt; plot &lt;a href="https://t.co/Jsg41id5Nw"&gt;https://t.co/Jsg41id5Nw&lt;/a&gt; &lt;a href="https://t.co/dP6tSrjHy0"&gt;pic.twitter.com/dP6tSrjHy0&lt;/a&gt;&lt;/p&gt;&amp;mdash; Georgios Karamanis (@geokaramanis) &lt;a href="https://twitter.com/geokaramanis/status/1374066377879908358?ref_src=twsrc%5Etfw"&gt;March 22, 2021&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+]
+
+---
+
+class: middle
+
+.pull-left[
+## .center[Exploratory data visualisation]
+
+* For **internal use** only. Need to be able to create rapidly because your first attempt will never be the most revealing.
+* Iteration is crucial for developing multiple displays of your data.
+]
+.pull-right[
+## .center[Communication graphics]
+
+* When you **communicate** your findings, you need to spend much time polishing your graphics to eliminate distractions and focus on the storytelling.
+* Iteration is crucial to ensure all the bits and pieces works well: labels, color choices, tick marks...
 ]
 
 ---
@@ -620,6 +733,24 @@ p_nz +
 ]
 ]
 ]
+
+---
+
+class: inverse middle
+
+## Interactive graphics
+
+---
+
+## Easily turn ggplot2 into [plotly](https://plotly-r.com)
+
+
+```r
+library(plotly)
+*ggplotly(p_nz)
+```
+
+.center[&lt;iframe src="plotly.html" width="800" height="500" seamless="seamless" frameBorder="0"&gt; &lt;/iframe&gt;]
 
 ---
 

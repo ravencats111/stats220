@@ -23,7 +23,7 @@ options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE,
   tibble.width = 60, tibble.print_min = 6)
 opts_chunk$set(
   echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
-  fig.path = 'figure/', cache.path = 'cache/', cache = FALSE, fig.retina = 3,
+  fig.path = 'figure/', cache.path = 'cache/', cache = TRUE, fig.retina = 3,
   fig.align = 'center', fig.width = 4.5, fig.height = 4, fig.show = 'hold',
   dpi = 120
 )
@@ -138,6 +138,79 @@ class: inverse middle
 
 ## Colour matters
 
+--
+
+### .blue[1.] Colour space
+### .blue[2.] Colour blindness
+
+---
+
+class: middle
+
+## 3 ways to represent colour space
+
+1. RGB
+2. HSV/HSL
+3. HCL .small[.green[for humans]]
+
+---
+
+## RGB
+
+* Red *(0-255)*: amount of .red[red] light
+* Green *(0-255)*: amount of .green[green] light
+* Blue *(0-255)*: amount of .blue[blue] light
+
+.center[<img src="img/rgb-viz-1.svg" width="60%">]
+
+.footnote[image credit: Claus O. Wilke]
+
+---
+
+## HSV
+
+* Hue *(0-360)*: hue of the color
+* Saturation *(0-1)*: colorfulness relative to the brightness of the color
+* Value *(0-1)*: subjective perception of amount of light emitted
+
+.center[<img src="img/hsv-viz-1.svg" width="70%">]
+
+.footnote[image credit: Claus O. Wilke]
+
+---
+
+## HSL
+
+* Hue *(0-360)*: hue of the color
+* Lightness *(0-1)*: brightness relative to the brightness of a illuminated white
+* Saturation *(0-1)*: colorfulness relative to the brightness of the color
+
+.center[<img src="img/hls-viz-1.svg" width="70%">]
+
+.footnote[image credit: Claus O. Wilke]
+
+---
+
+## HCL .small[.green[aka polar LUV]]
+
+* Hue *(0-360)*: hue of the color
+* Chroma *(0-180)*: degree of vividness of a color
+* Luminance *(0-100)*: amount of light emitted
+
+.center[<img src="img/cl-planes-1.svg" width="60%">]
+
+.footnote[image credit: Claus O. Wilke]
+
+---
+
+class: middle
+
+## 3 types of colour palettes
+
+1. Qualitative
+2. Sequential
+3. Diverging
+
 ---
 
 ## Qualitative palettes .small[.green[for categorical data with no particular ordering]]
@@ -147,7 +220,7 @@ class: inverse middle
 
 ---
 
-## Sequential palettes .small[.green[for ordered data from low to high]]
+## Sequential palettes .small[.green[for ordered data from high to low]]
 
 ```{r colorspace-s, fig.height = 4, fig.width = 8.5}
 ```
@@ -204,26 +277,45 @@ class: inverse middle
 
 .pull-left[
 * `colorspace::hclwizard()`
+
 .center[<img src = "img/wizard.png", height = "320px"></img>]
 ]
 .pull-right[
 * `colorspace::hcl_color_picker()`
+
 .center[<img src = "img/hcl.png", height = "320px"></img>]
 ]
 
 ---
 
+class: middle
+
 ## Scales
 
 * Control how data is mapped to perceptual properties, and produce guides (axes and legends) which allow us to read the plot.
-* Important parameters: name, breaks & labels, limits.
+* Important arguments: `breaks`, `labels`, and `limits`.
 * Naming scheme: `scale_[aes]_[datatype]()`
 
-a table for sets of scales
+---
+
+```{r scales, echo = FALSE}
+scales <- help.search("^scale_", package = "ggplot2")
+scales$matches %>% 
+  select(Entry, Title) %>% 
+  group_by(Title) %>% 
+  mutate(col = paste0("C", 1:n())) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = col, values_from = Entry) %>% 
+  mutate(scale = paste(C1, C2, C3, C4, sep = ", "),
+         scale = gsub(", NA", "", scale)) %>% 
+  select(scale, Title) %>% 
+  DT::datatable(colnames = c("scale", "Description"),
+                rownames = FALSE,
+                options = list(dom = 'tp', ordering=FALSE, pageLength = 5,
+                               width = "80%")) 
+```
 
 ???
-
-* `scale_[aes]_[datatype]()` to change the default scales
 
 ---
 
@@ -238,6 +330,23 @@ class: inverse middle
 ]
 .right-column[
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/MakingOf?src=hash&amp;ref_src=twsrc%5Etfw">#MakingOf</a> of last week&#39;s <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> plot <a href="https://t.co/Jsg41id5Nw">https://t.co/Jsg41id5Nw</a> <a href="https://t.co/dP6tSrjHy0">pic.twitter.com/dP6tSrjHy0</a></p>&mdash; Georgios Karamanis (@geokaramanis) <a href="https://twitter.com/geokaramanis/status/1374066377879908358?ref_src=twsrc%5Etfw">March 22, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+]
+
+---
+
+class: middle
+
+.pull-left[
+## .center[Exploratory data visualisation]
+
+* For **internal use** only. Need to be able to create rapidly because your first attempt will never be the most revealing.
+* Iteration is crucial for developing multiple displays of your data.
+]
+.pull-right[
+## .center[Communication graphics]
+
+* When you **communicate** your findings, you need to spend much time polishing your graphics to eliminate distractions and focus on the storytelling.
+* Iteration is crucial to ensure all the bits and pieces works well: labels, color choices, tick marks...
 ]
 
 ---
@@ -523,17 +632,18 @@ log(0) -> Inf
 
 ---
 
-{scales}
-
----
-
 class: inverse middle
 
 ## Interactive graphics
 
 ---
 
-`plotly::ggplotly()`
+## Easily turn ggplot2 into [plotly](https://plotly-r.com)
+
+```{r plotly, eval = FALSE}
+```
+
+.center[<iframe src="plotly.html" width="800" height="500" seamless="seamless" frameBorder="0"> </iframe>]
 
 ---
 

@@ -213,3 +213,7 @@ p_nz +
   theme(
     plot.title.position = "plot", 
     plot.background = element_rect(fill = "#FFF1E0"))
+
+## ---- plotly
+library(plotly)
+ggplotly(p_nz) #<<
