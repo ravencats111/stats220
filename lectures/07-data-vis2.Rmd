@@ -643,7 +643,7 @@ class: inverse middle
 ```{r plotly, eval = FALSE}
 ```
 
-.center[<iframe src="plotly.html" width="800" height="500" seamless="seamless" frameBorder="0"> </iframe>]
+.center[<iframe src="figure/plotly.html" width="800" height="500" seamless="seamless" frameBorder="0"> </iframe>]
 
 ---
 

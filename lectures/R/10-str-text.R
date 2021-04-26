@@ -1,19 +1,33 @@
+## ---- str-eg
 library(tidyverse) # library(stringr)
+string <- "lzDHk3orange2o5ghte"
+string
+fruit <- c("cherry", "banana")
+fruit
 
-string <- c("lzGDHgldkh3orange2o5ghte")
+## ---- str-c
+c(string, fruit)
+str_c(string, fruit, sep = ", ")
+str_c(string, fruit, collapse = ", ")
 
-# fixed string
-# Determine which strings match a pattern.
+## ---- str-detect
 str_detect(string, "orange")
-# Find the positions of matches.
-str_locate(string, "orange")
-str_sub(string, 12, 17)
-# Extract the content of matches.
-str_extract(string, "orange")
-# Replace matches with new values.
-str_replace(string, "orange", "apple")
+str_detect(fruit, "orange")
 
-# regular expressions, regex/regexp
+## ---- str-locate
+str_locate(string, "orange")
+str_locate(fruit, "orange")
+
+## ---- str-extract
+str_sub(string, 7, 12)
+str_extract(string, "orange")
+str_extract(fruit, "orange")
+
+## ---- str-replace
+str_replace(string, "orange", "apple")
+str_replace(fruit, "orange", "apple")
+
+## ---- regex
 # metacharacter
 # a lowercase letter will select any of the things it stands for (so \\d selects any digit, while \\s will select any blank space)
 # an uppercase letter will select everything BUT that thing (so \\D doesn’t select digits, \\S will erase blank spaces, and so on)
