@@ -46,6 +46,11 @@ read_chunk('R/07-data-vis2.R')
 ### .blue[3.] Position vs angle
 ### .blue[4.] Colour matters
 
+???
+
+* how human perceive a plot
+* given the same amount of info from plots, which data type help us to perceive more accurate info
+
 ---
 
 ## Preattentive processing
@@ -69,6 +74,11 @@ read_chunk('R/07-data-vis2.R')
 ```
 ]
 
+???
+
+* Have you noticed there are unusual data points? Can you locate them?
+* how about this one?
+
 ---
 
 ## Preattentive processing .small[.green[colour > form (shape)]]
@@ -88,6 +98,12 @@ read_chunk('R/07-data-vis2.R')
 ```
 ]
 
+???
+
+* Which plot helps you to distinguish the data points?
+* Which plot consumes your least attention?
+* viewers can sense certain features, b/f our mind starts to pay attention to any specific objs. 
+
 ---
 
 ## Proximity .small[.green[Make easy comparisons by grouping elements together]]
@@ -96,15 +112,19 @@ read_chunk('R/07-data-vis2.R')
 ```
 
 .pull-left[
-* compare time use in categories by country
+* compare time use by categories within each country
 ```{r fill-cat, fig.width = 4, fig.height = 4, echo = FALSE}
 ```
 ]
 .pull-right[
-* compare time use in countries by category
+* compare time use by countries within each category
 ```{r fill-country, fig.width = 4, fig.height = 4, echo = FALSE}
 ```
 ]
+
+???
+
+* left: it's not easy to compare how much time spent on sleep across countries
 
 ---
 
@@ -117,7 +137,14 @@ read_chunk('R/07-data-vis2.R')
 .pull-right[
 ```{r angle, fig.width = 4, fig.height = 4, echo = FALSE}
 ```
+.center[Pie charts are BAD`r emo::ji("bangbang")`]
 ]
+
+???
+
+* "Other" and "Sleep", can u easily perceive these subtle differences from the pie charts?
+* But
+* A bar chart or dot chart is a preferable way of displaying this type of data.
 
 ---
 
@@ -131,6 +158,12 @@ read_chunk('R/07-data-vis2.R')
 ```{r rel-pos, fig.width = 4, fig.height = 4, echo = FALSE}
 ```
 ]
+
+???
+
+* absolute -> share the same base line. we compare their heights
+* right: 100% bar chart. its much harder to compare NZ to others, bc NZ is rel.
+* The eye is good at judging abs and bad at judging relative.
 
 ---
 
@@ -169,8 +202,8 @@ class: middle
 
 ## HSV
 
-* Hue *(0-360)*: hue of the color
-* Saturation *(0-1)*: colorfulness relative to the brightness of the color
+* Hue *(0-360)*: hue of the colour
+* Saturation *(0-1)*: colourfulness relative to the brightness of the colour
 * Value *(0-1)*: subjective perception of amount of light emitted
 
 .center[<img src="img/hsv-viz-1.svg" width="70%">]
@@ -181,9 +214,9 @@ class: middle
 
 ## HSL
 
-* Hue *(0-360)*: hue of the color
+* Hue *(0-360)*: hue of the colour
 * Lightness *(0-1)*: brightness relative to the brightness of a illuminated white
-* Saturation *(0-1)*: colorfulness relative to the brightness of the color
+* Saturation *(0-1)*: colourfulness relative to the brightness of the colour
 
 .center[<img src="img/hls-viz-1.svg" width="70%">]
 
@@ -193,8 +226,8 @@ class: middle
 
 ## HCL .small[.green[aka polar LUV]]
 
-* Hue *(0-360)*: hue of the color
-* Chroma *(0-180)*: degree of vividness of a color
+* Hue *(0-360)*: hue of the colour
+* Chroma *(0-180)*: degree of vividness of a colour
 * Luminance *(0-100)*: amount of light emitted
 
 .center[<img src="img/cl-planes-1.svg" width="60%">]

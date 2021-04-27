@@ -44,6 +44,11 @@ class: inverse middle
 ### .blue[3.] Position vs angle
 ### .blue[4.] Colour matters
 
+???
+
+* how human perceive a plot
+* given the same amount of info from plots, which data type help us to perceive more accurate info
+
 ---
 
 ## Preattentive processing
@@ -64,6 +69,11 @@ class: inverse middle
 &lt;img src="figure/colour-1.png" width="276" style="display: block; margin: auto;" /&gt;
 ]
 
+???
+
+* Have you noticed there are unusual data points? Can you locate them?
+* how about this one?
+
 ---
 
 ## Preattentive processing .small[.green[colour &gt; form (shape)]]
@@ -80,6 +90,12 @@ class: inverse middle
 &lt;img src="figure/colour2-1.png" width="276" style="display: block; margin: auto;" /&gt;
 ]
 
+???
+
+* Which plot helps you to distinguish the data points?
+* Which plot consumes your least attention?
+* viewers can sense certain features, b/f our mind starts to pay attention to any specific objs. 
+
 ---
 
 ## Proximity .small[.green[Make easy comparisons by grouping elements together]]
@@ -87,13 +103,17 @@ class: inverse middle
 
 
 .pull-left[
-* compare time use in categories by country
+* compare time use by categories within each country
 &lt;img src="figure/fill-cat-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
-* compare time use in countries by category
+* compare time use by countries within each category
 &lt;img src="figure/fill-country-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
+
+???
+
+* left: it's not easy to compare how much time spent on sleep across countries
 
 ---
 
@@ -104,7 +124,14 @@ class: inverse middle
 ]
 .pull-right[
 &lt;img src="figure/angle-1.png" width="480" style="display: block; margin: auto;" /&gt;
+.center[Pie charts are BAD‼️]
 ]
+
+???
+
+* "Other" and "Sleep", can u easily perceive these subtle differences from the pie charts?
+* But
+* A bar chart or dot chart is a preferable way of displaying this type of data.
 
 ---
 
@@ -116,6 +143,12 @@ class: inverse middle
 .pull-right[
 &lt;img src="figure/rel-pos-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
+
+???
+
+* absolute -&gt; share the same base line. we compare their heights
+* right: 100% bar chart. its much harder to compare NZ to others, bc NZ is rel.
+* The eye is good at judging abs and bad at judging relative.
 
 ---
 
@@ -154,8 +187,8 @@ class: middle
 
 ## HSV
 
-* Hue *(0-360)*: hue of the color
-* Saturation *(0-1)*: colorfulness relative to the brightness of the color
+* Hue *(0-360)*: hue of the colour
+* Saturation *(0-1)*: colourfulness relative to the brightness of the colour
 * Value *(0-1)*: subjective perception of amount of light emitted
 
 .center[&lt;img src="img/hsv-viz-1.svg" width="70%"&gt;]
@@ -166,9 +199,9 @@ class: middle
 
 ## HSL
 
-* Hue *(0-360)*: hue of the color
+* Hue *(0-360)*: hue of the colour
 * Lightness *(0-1)*: brightness relative to the brightness of a illuminated white
-* Saturation *(0-1)*: colorfulness relative to the brightness of the color
+* Saturation *(0-1)*: colourfulness relative to the brightness of the colour
 
 .center[&lt;img src="img/hls-viz-1.svg" width="70%"&gt;]
 
@@ -178,8 +211,8 @@ class: middle
 
 ## HCL .small[.green[aka polar LUV]]
 
-* Hue *(0-360)*: hue of the color
-* Chroma *(0-180)*: degree of vividness of a color
+* Hue *(0-360)*: hue of the colour
+* Chroma *(0-180)*: degree of vividness of a colour
 * Luminance *(0-100)*: amount of light emitted
 
 .center[&lt;img src="img/cl-planes-1.svg" width="60%"&gt;]
@@ -750,7 +783,7 @@ library(plotly)
 *ggplotly(p_nz)
 ```
 
-.center[&lt;iframe src="plotly.html" width="800" height="500" seamless="seamless" frameBorder="0"&gt; &lt;/iframe&gt;]
+.center[&lt;iframe src="figure/plotly.html" width="800" height="500" seamless="seamless" frameBorder="0"&gt; &lt;/iframe&gt;]
 
 ---
 
