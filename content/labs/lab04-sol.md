@@ -4,7 +4,7 @@ output:
     preserve_yaml: true
     variant: gfm
 layout: page
-title: Lab 04
+title: Lab 04 Solution
 ---
 
 This lab exercise is **due 23:59 Wednesday 7 April (NZST)**.
