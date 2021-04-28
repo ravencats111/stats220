@@ -1,5 +1,3 @@
-# Preattentive processing
-
 ## ---- t-shape
 library(tidyverse)
 set.seed(220)
@@ -30,13 +28,12 @@ ggplot(tbl_pre, aes(x, y)) +
   scale_color_manual(values = c("black", "#e6550d")) +
   theme(axis.text = element_blank(), axis.ticks = element_blank())
 
-# Proximity
-
 ## ---- time-use
 time_use <- readxl::read_xlsx("data/time-use-oecd.xlsx") %>% 
   rename_with(janitor::make_clean_names) %>% 
   filter(country %in% c("Australia", "New Zealand", "USA")) %>% 
-  mutate(category = fct_lump(category, n = 5, w = time_minutes)) %>% 
+  mutate(category = fct_lump(category, n = 5, w = time_minutes, 
+    other_level = "Misc")) %>% 
   group_by(country, category) %>% 
   summarise(time_minutes = sum(time_minutes)) %>% 
   ungroup() %>% 
@@ -58,8 +55,6 @@ time_use %>%
   scale_fill_viridis_d() +
   labs(y = "") +
   theme(legend.position = "bottom")
-
-# Position vs angle
 
 ## ---- angle
 time_use %>% 
@@ -85,7 +80,20 @@ time_use %>%
   scale_fill_viridis_d() +
   theme(legend.position = "bottom")
 
-# Colour matters
+## ---- time-use-bad
+readxl::read_xlsx("data/time-use-oecd.xlsx") %>% 
+  rename_with(janitor::make_clean_names) %>% 
+  filter(country %in% c("Australia", "New Zealand", "USA")) %>% 
+  group_by(country, category) %>% 
+  summarise(time_minutes = sum(time_minutes)) %>% 
+  ungroup() %>% 
+  mutate(category = fct_reorder(category, time_minutes)) %>% 
+  ggplot(aes(country, time_minutes)) +
+  geom_col(aes(fill = category), position = "dodge") +
+  guides(fill = guide_legend(nrow = 4)) +
+  labs(y = "") +
+  theme(legend.position = "bottom")
+
 ## ---- colorspace-q
 colorspace::hcl_palettes("Qualitative", plot = TRUE, n = 7)
 

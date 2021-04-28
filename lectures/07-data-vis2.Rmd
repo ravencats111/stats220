@@ -173,14 +173,15 @@ class: inverse middle
 
 --
 
-### .blue[1.] Colour space
-### .blue[2.] Colour blindness
+### .blue[1.] Colour spaces
+### .blue[2.] Colour scales
+### .blue[3.] Colour blindness
 
 ---
 
 class: middle
 
-## 3 ways to represent colour space
+## 3 ways to represent colour spaces
 
 1. RGB
 2. HSV/HSL
@@ -197,6 +198,10 @@ class: middle
 .center[<img src="img/rgb-viz-1.svg" width="60%">]
 
 .footnote[image credit: Claus O. Wilke]
+
+???
+
+* for computer & screen
 
 ---
 
@@ -234,11 +239,39 @@ class: middle
 
 .footnote[image credit: Claus O. Wilke]
 
+???
+
+HCL: perceptually-based and device-independent
+
+---
+
+## Encoding too much
+
+```{r time-use-bad, echo = FALSE, fig.height = 5, fig.width = 8}
+```
+
+???
+
+* default ggplot2 colour scales -> not colour blind friendly
+* more than 7 qualitative colours, matching colours to categories are cumbersome
+* colour can be effective tool to enhance
+* choose colour wisely
+
 ---
 
 class: middle
 
-## 3 types of colour palettes
+## Colour scales
+
+.large[.green[**3**]] fundamental use cases for colours in data visualisations:
+
+1. use colour to distinguish groups of data from each other
+2. use colour to represent data values
+3. use colour to highlight
+
+<hr>
+
+.large[.green[**3**]] types of colour palettes .small[[ColorBrewer](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3)]
 
 1. Qualitative
 2. Sequential
@@ -246,10 +279,16 @@ class: middle
 
 ---
 
-## Qualitative palettes .small[.green[for categorical data with no particular ordering]]
+## Qualitative palettes .small[.green[for categorical data with no intrinsic ordering]]
 
 ```{r colorspace-q, fig.height = 4}
 ```
+
+???
+
+* use colour to distinguish discrete items/groups, but doesn't give impression of an order
+* a finite set of specific colours that are chosen to look clearly distinct
+* no one single colour stands out relative to the others
 
 ---
 
@@ -258,12 +297,26 @@ class: middle
 ```{r colorspace-s, fig.height = 4, fig.width = 8.5}
 ```
 
+???
+
+* heatmap: used colour to represent data values, like temperature
+* representing continuous/ordered values
+* colours indicate which data values are larger or smaller
+* the diff bt colours shows the diff b/t data values
+* seq colour needs to be perceived to vary uniformly across its entire range by changing hues
+
 ---
 
 ## Diverging palettes .small[.green[for mid-range values and extremes at both ends]]
 
 ```{r colorspace-d, fig.height = 4, fig.width = 5}
 ```
+
+???
+
+* vis the deviation of data values in one of 2 directions rel to a neutral midpoint
+* a straightforward eg is vis +/- values
+* think of a diverging scale as joining 2 seq sales at a common midpoint
 
 ---
 
@@ -297,12 +350,24 @@ class: middle
 
 ## Colour-vision deficiency
 
-* Red-green color-vision deficiency is the most common
-.center[<img src = "https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/red-green-cvd-sim-1.png", width = 70%></img>]
-* Blue-green color-vision deficiency is rare but does occur
-.center[<img src = "https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/blue-green-cvd-sim-1.png", width = 70%></img>]
+.pull-left[
+.center[<img src = "https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/red-green-cvd-sim-1.png", width = 90%></img>]
+* Red-green colour-vision deficiency (deuteranomaly & protanomaly) is the most common.
+]
+.pull-right[
+.center[<img src = "https://clauswilke.com/dataviz/pitfalls_of_color_use_files/figure-html/blue-green-cvd-sim-1.png", width = 90%></img>]
+* Blue-green colour-vision deficiency (tritanomaly) is rare but does occur.
+]
 
-.footnote[image credit: Claus O. Wilke [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/)]
+<br>
+
+`r emo::ji("information")` *Approximately 8% of males and 0.5% of females suffer from some sort of color-vision deficiency.*
+
+.footnote[reference: Claus O. Wilke [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/)]
+
+???
+
+* A small prop of people with impaired colour vision have difficulty to distinguish certain types of colours
 
 ---
 
