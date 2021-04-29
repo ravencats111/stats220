@@ -180,7 +180,6 @@ covid19_rel %>%
 covid19_nz <- covid19_rel %>% 
   filter(country_region == "New Zealand")
 p_nz <- covid19_rel %>% 
-  filter(country_region != "New Zealand") %>% 
   ggplot(aes(x = days, y = confirmed, 
     group = country_region)) + #<<
   geom_line(colour = "grey", alpha = 0.5) +
