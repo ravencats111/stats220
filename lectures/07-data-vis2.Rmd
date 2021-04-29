@@ -770,5 +770,5 @@ class: inverse middle
 ]
 .pull-right[
 * [Graphics for communication](https://r4ds.had.co.nz/graphics-for-communication.html)
-* [BBC Visual and Data Journalism cookbook for R graphics](BBC Visual and Data Journalism cookbook for R graphics)
+* [BBC Visual and Data Journalism cookbook for R graphics](https://bbc.github.io/rcookbook/)
 ]
