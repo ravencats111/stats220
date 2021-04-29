@@ -45,6 +45,7 @@ read_chunk('R/10-str-text.R')
 ### - create
 ]
 .right-column[
+## Fixed pattern
 * Create strings with `'` or `"`
 ```{r str-eg}
 ```
@@ -58,6 +59,7 @@ read_chunk('R/10-str-text.R')
 ### - join
 ]
 .right-column[
+## Fixed pattern
 * Join strings
 ```{r str-c}
 ```
@@ -72,6 +74,7 @@ read_chunk('R/10-str-text.R')
 ### - detect
 ]
 .right-column[
+## Fixed pattern
 * Determine which strings match a pattern
 ```{r str-detect}
 ```
@@ -87,6 +90,7 @@ read_chunk('R/10-str-text.R')
 ### - locate
 ]
 .right-column[
+## Fixed pattern
 * Find the positions of matches
 ```{r str-locate}
 ```
@@ -103,6 +107,7 @@ read_chunk('R/10-str-text.R')
 ### - extract
 ]
 .right-column[
+## Fixed pattern
 * Extract the content of matches
 ```{r str-extract}
 ```
@@ -120,6 +125,7 @@ read_chunk('R/10-str-text.R')
 ### - replace
 ]
 .right-column[
+## Fixed pattern
 * Replace matches with new values
 ```{r str-replace}
 ```
