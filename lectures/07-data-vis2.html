@@ -591,7 +591,6 @@ covid19 %&gt;%
 
 ```r
 covid19_rel &lt;- covid19 %&gt;% 
-* mutate(confirmed = na_if(confirmed, 0)) %&gt;%
   group_by(country_region) %&gt;% 
   mutate(days = as.numeric(date - min(date))) %&gt;% 
   ungroup()

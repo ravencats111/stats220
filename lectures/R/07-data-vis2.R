@@ -160,7 +160,6 @@ covid19 %>%
 
 ## ---- covid-rel
 covid19_rel <- covid19 %>% 
-  mutate(confirmed = na_if(confirmed, 0)) %>% #<<
   group_by(country_region) %>% 
   mutate(days = as.numeric(date - min(date))) %>% 
   ungroup()
