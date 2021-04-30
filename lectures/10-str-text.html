@@ -6,6 +6,9 @@
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <link href="libs/str_view/str_view.css" rel="stylesheet" />
+    <script src="libs/str_view-binding/str_view.js"></script>
     <link rel="stylesheet" href="assets/remark.css" type="text/css" />
   </head>
   <body>
@@ -36,7 +39,7 @@ class: inverse middle
 ]
 .right-column[
 ## Fixed pattern
-* Create strings with `'` or `"`
+Create strings with `'` or `"`
 
 ```r
 library(tidyverse) # library(stringr)
@@ -67,7 +70,7 @@ fruit
 ]
 .right-column[
 ## Fixed pattern
-* Join strings
+Join strings
 
 ```r
 c(string, fruit)
@@ -104,7 +107,7 @@ str_c(string, fruit, collapse = ", ")
 ]
 .right-column[
 ## Fixed pattern
-* Determine which strings match a pattern
+Determine which strings match a pattern
 
 ```r
 str_detect(string, "orange")
@@ -134,7 +137,7 @@ str_detect(fruit, "orange")
 ]
 .right-column[
 ## Fixed pattern
-* Find the positions of matches
+Find the positions of matches
 
 ```r
 str_locate(string, "orange")
@@ -168,7 +171,7 @@ str_locate(fruit, "orange")
 ]
 .right-column[
 ## Fixed pattern
-* Extract the content of matches
+Extract the content of matches
 
 ```r
 str_sub(string, 7, 12)
@@ -208,7 +211,7 @@ str_extract(fruit, "orange")
 ]
 .right-column[
 ## Fixed pattern
-* Replace matches with new values
+Replace matches with new values
 
 ```r
 str_replace(string, "orange", "apple")
@@ -231,8 +234,266 @@ str_replace(fruit, "orange", "apple")
 
 class: inverse middle
 
-## Regular expressions
-### (aka regex/regexp)
+## Regular expressions .blue[.small[.small[(aka regex/regexp)]]]
+### an extremely concise language for describing patterns
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%"&gt;](http://stringr.tidyverse.org)]
+### - dot
+]
+.right-column[
+## Regex
+`.` matches any character (except a newline)
+
+```r
+str_extract(string, "o....e")
+```
+
+```
+#&gt; [1] "orange"
+```
+
+```r
+str_extract_all(string, "o....e")
+```
+
+```
+#&gt; [[1]]
+#&gt; [1] "orange" "o5ghte"
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%"&gt;](http://stringr.tidyverse.org)]
+### - dot
+### - qualifier
+]
+.right-column[
+## Regex
+repeation
+
+```r
+str_extract_all(string, "o.{4}e")
+```
+
+```
+#&gt; [[1]]
+#&gt; [1] "orange" "o5ghte"
+```
+
+```r
+str_extract_all(string, "o.*e")
+```
+
+```
+#&gt; [[1]]
+#&gt; [1] "orange2o5ghte"
+```
+
+```r
+str_extract_all(string, "o.*?e")
+```
+
+```
+#&gt; [[1]]
+#&gt; [1] "orange" "o5ghte"
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%"&gt;](http://stringr.tidyverse.org)]
+### - dot
+### - qualifier
+]
+.right-column[
+## Regex
+repeation
++ `?`: 0 or 1
++ `+`: 1 or more
++ `*`: 0 or more
++ `{n}`: exactly n
++ `{n,}`: n or more
++ `{,m}`: at most m
++ `{n,m}`: between n and m
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%"&gt;](http://stringr.tidyverse.org)]
+### - dot
+### - qualifier
+### - escape
+]
+.right-column[
+## Regex
+if `.` matches any character, how to match a literal `"."`?
+* use the backslash `\` to escape special behaviour `\.`
+* `\` is also used as an escape symbol in strings
+* end up using .brown[`"\\\\."`] to create the regular expression `\.`
+
+```r
+str_view_all(string, "o\\.{4}e")
+```
+
+<div id="htmlwidget-b086150fbb129ada7255" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b086150fbb129ada7255">{"x":{"html":"<ul>\n  <li>lzDHk3orange2o5ghte<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+
+```r
+str_view_all("a.b.c", "\\.")
+```
+
+<div id="htmlwidget-ae640ce387af7acc1700" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ae640ce387af7acc1700">{"x":{"html":"<ul>\n  <li>a<span class='match'>.<\/span>b<span class='match'>.<\/span>c<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%"&gt;](http://stringr.tidyverse.org)]
+### - dot
+### - qualifier
+### - escape
+### - meta
+]
+.right-column[
+## Regex
+* `\d`: matches any digit.
+* `\s`: matches any whitespace (e.g. space, tab `\t`, newline `\n`).
+* `[abc]`: matches a, b, or c.
+
+```r
+str_view_all(string, "\\d")
+```
+
+<div id="htmlwidget-fea5ae7e3df55319d215" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fea5ae7e3df55319d215">{"x":{"html":"<ul>\n  <li>lzDHk<span class='match'>3<\/span>orange<span class='match'>2<\/span>o<span class='match'>5<\/span>ghte<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+
+```r
+str_view_all(string, "[0-9]")
+```
+
+<div id="htmlwidget-41e30a17b54cccb5be1c" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-41e30a17b54cccb5be1c">{"x":{"html":"<ul>\n  <li>lzDHk<span class='match'>3<\/span>orange<span class='match'>2<\/span>o<span class='match'>5<\/span>ghte<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+]
+
+???
+
+* a lowercase letter will select any of the things it stands for (so `\d` selects any digit, while `\s` will select any blank space)
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%"&gt;](http://stringr.tidyverse.org)]
+### - dot
+### - qualifier
+### - escape
+### - meta
+]
+.right-column[
+## Regex
+* `\D`: matches anything except digits.
+* `\S`: matches anything except whitespaces.
+* `[^abc]`: matches anything except a, b, or c.
+
+```r
+str_view_all(string, "\\D")
+```
+
+<div id="htmlwidget-ef68dc35ed5603b72513" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ef68dc35ed5603b72513">{"x":{"html":"<ul>\n  <li><span class='match'>l<\/span><span class='match'>z<\/span><span class='match'>D<\/span><span class='match'>H<\/span><span class='match'>k<\/span>3<span class='match'>o<\/span><span class='match'>r<\/span><span class='match'>a<\/span><span class='match'>n<\/span><span class='match'>g<\/span><span class='match'>e<\/span>2<span class='match'>o<\/span>5<span class='match'>g<\/span><span class='match'>h<\/span><span class='match'>t<\/span><span class='match'>e<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+
+```r
+str_view_all(string, "[^0-9]")
+```
+
+<div id="htmlwidget-e6e7e0aa8c357905f906" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e6e7e0aa8c357905f906">{"x":{"html":"<ul>\n  <li><span class='match'>l<\/span><span class='match'>z<\/span><span class='match'>D<\/span><span class='match'>H<\/span><span class='match'>k<\/span>3<span class='match'>o<\/span><span class='match'>r<\/span><span class='match'>a<\/span><span class='match'>n<\/span><span class='match'>g<\/span><span class='match'>e<\/span>2<span class='match'>o<\/span>5<span class='match'>g<\/span><span class='match'>h<\/span><span class='match'>t<\/span><span class='match'>e<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+]
+
+???
+
+* an uppercase letter will select everything BUT that thing (so `\D` doesn’t select digits, `\S` will erase blank spaces, and so on)
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%"&gt;](http://stringr.tidyverse.org)]
+### - dot
+### - qualifier
+### - escape
+### - meta
+### - POSIX
+]
+.right-column[
+## Regex
+* `[:digit:]`: matches any digit.
+* `[:space:]`: matches any whitespace.
+* `[:alpha:]`: matches any alphabetic character.
+* more on [?base::regex](https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html)
+
+```r
+str_view_all(string, "[:digit:]")
+```
+
+<div id="htmlwidget-e29a42acc7d54d748365" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e29a42acc7d54d748365">{"x":{"html":"<ul>\n  <li>lzDHk<span class='match'>3<\/span>orange<span class='match'>2<\/span>o<span class='match'>5<\/span>ghte<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+
+```r
+str_view_all(string, "[:alpha:]")
+```
+
+<div id="htmlwidget-0fdf91ee24e060142788" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0fdf91ee24e060142788">{"x":{"html":"<ul>\n  <li><span class='match'>l<\/span><span class='match'>z<\/span><span class='match'>D<\/span><span class='match'>H<\/span><span class='match'>k<\/span>3<span class='match'>o<\/span><span class='match'>r<\/span><span class='match'>a<\/span><span class='match'>n<\/span><span class='match'>g<\/span><span class='match'>e<\/span>2<span class='match'>o<\/span>5<span class='match'>g<\/span><span class='match'>h<\/span><span class='match'>t<\/span><span class='match'>e<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%"&gt;](http://stringr.tidyverse.org)]
+### - dot
+### - qualifier
+### - escape
+### - meta
+### - POSIX
+### - anchor
+]
+.right-column[
+## Regex
+* `^` matches the start of the string.
+* `$` matches the end of the string.
+
+```r
+str_view_all(fruit, "a")
+```
+
+<div id="htmlwidget-30c96b6a7bbb02f01294" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-30c96b6a7bbb02f01294">{"x":{"html":"<ul>\n  <li>cherry<\/li>\n  <li>b<span class='match'>a<\/span>n<span class='match'>a<\/span>n<span class='match'>a<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+.pull-left[
+
+```r
+str_view_all(fruit, "a$")
+```
+
+<div id="htmlwidget-8ed9b762a35ec54ba291" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8ed9b762a35ec54ba291">{"x":{"html":"<ul>\n  <li>cherry<\/li>\n  <li>banan<span class='match'>a<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+]
+.pull-right[
+
+```r
+str_view_all(fruit, "^a")
+```
+
+<div id="htmlwidget-9d736b78cc7bbcef3ac0" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9d736b78cc7bbcef3ac0">{"x":{"html":"<ul>\n  <li>cherry<\/li>\n  <li>banana<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+]
+]
 
 ---
 

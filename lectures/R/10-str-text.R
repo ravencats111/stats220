@@ -27,43 +27,41 @@ str_extract(fruit, "orange")
 str_replace(string, "orange", "apple")
 str_replace(fruit, "orange", "apple")
 
-## ---- regex
-# metacharacter
-# a lowercase letter will select any of the things it stands for (so \\d selects any digit, while \\s will select any blank space)
-# an uppercase letter will select everything BUT that thing (so \\D doesn’t select digits, \\S will erase blank spaces, and so on)
-# Split a string based on a match.
-str_split(string, "\\d") # metacharacter
-str_split(string, "[:digit:]") # POSIX class
-str_view(string, "\\d")
-str_split(string, "\\D")
-
+## ---- str-dot
 str_extract(string, "o....e")
 str_extract_all(string, "o....e")
-# Quantifiers
+
+## ---- str-q
 str_extract_all(string, "o.{4}e")
-str_extract_all(string, "o\\D{4}e")
-str_view_all(string, "o\\D{4}e")
-# *: as many times as it shows up
 str_extract_all(string, "o.*e")
 str_extract_all(string, "o.*?e")
-str_view_all(string, "o.*?e")
 
-gapminder <- read_rds("data/gapminder.rds")
-countries <- levels(gapminder$country)
+## ---- escape
+str_view_all(string, "o\\.{4}e")
+str_view_all("a.b.c", "\\.")
 
-str_subset(countries, "i.a")
-# Anchors can be included to express where the expression must occur within the string. The ^ indicates the beginning of string and $ indicates the end.
-# Characters with special meaning
-str_subset(countries, "i.a$")
+## ---- meta
+str_view_all(string, "\\d")
+str_view_all(string, "[0-9]")
 
-# Character classes
-# one of the characters in the class
-str_subset(countries, pattern = "[nls]ia$")
-# use ^ to negate the class
-str_subset(countries, pattern = "[^nls]ia$")
-str_subset(countries, pattern = "[:punct:]")
+## ---- meta-upper
+str_view_all(string, "\\D")
+str_view_all(string, "[^0-9]")
 
+## ---- posix
+str_view_all(string, "[:digit:]")
+str_view_all(string, "[:alpha:]")
 
+## ---- anchor
+str_view_all(fruit, "a")
+
+## ---- anchor-end
+str_view_all(fruit, "a$")
+
+## ---- anchor-start
+str_view_all(fruit, "^a")
+
+## ---- text
 text <- c("This will be an uncertain time for us my love",
           "I can hear the echo of your voice in my head",
           "Singing my love",

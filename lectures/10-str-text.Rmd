@@ -22,7 +22,7 @@ options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE,
   tibble.width = 60, tibble.print_min = 6)
 opts_chunk$set(
   echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
-  fig.path = 'figure/', cache.path = 'cache/', cache = TRUE, fig.retina = 3,
+  fig.path = 'figure/', cache.path = 'cache/', cache = FALSE, fig.retina = 3,
   fig.align = 'center', fig.width = 4.5, fig.height = 4, fig.show = 'hold',
   dpi = 120
 )
@@ -46,7 +46,7 @@ read_chunk('R/10-str-text.R')
 ]
 .right-column[
 ## Fixed pattern
-* Create strings with `'` or `"`
+Create strings with `'` or `"`
 ```{r str-eg}
 ```
 ]
@@ -60,7 +60,7 @@ read_chunk('R/10-str-text.R')
 ]
 .right-column[
 ## Fixed pattern
-* Join strings
+Join strings
 ```{r str-c}
 ```
 ]
@@ -75,7 +75,7 @@ read_chunk('R/10-str-text.R')
 ]
 .right-column[
 ## Fixed pattern
-* Determine which strings match a pattern
+Determine which strings match a pattern
 ```{r str-detect}
 ```
 ]
@@ -91,7 +91,7 @@ read_chunk('R/10-str-text.R')
 ]
 .right-column[
 ## Fixed pattern
-* Find the positions of matches
+Find the positions of matches
 ```{r str-locate}
 ```
 ]
@@ -108,7 +108,7 @@ read_chunk('R/10-str-text.R')
 ]
 .right-column[
 ## Fixed pattern
-* Extract the content of matches
+Extract the content of matches
 ```{r str-extract}
 ```
 ]
@@ -126,7 +126,7 @@ read_chunk('R/10-str-text.R')
 ]
 .right-column[
 ## Fixed pattern
-* Replace matches with new values
+Replace matches with new values
 ```{r str-replace}
 ```
 ]
@@ -135,8 +135,163 @@ read_chunk('R/10-str-text.R')
 
 class: inverse middle
 
-## Regular expressions
-### (aka regex/regexp)
+## Regular expressions .blue[.small[.small[(aka regex/regexp)]]]
+### an extremely concise language for describing patterns
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
+### - dot
+]
+.right-column[
+## Regex
+`.` matches any character (except a newline)
+```{r str-dot}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
+### - dot
+### - qualifier
+]
+.right-column[
+## Regex
+repeation
+```{r str-q}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
+### - dot
+### - qualifier
+]
+.right-column[
+## Regex
+repeation
++ `?`: 0 or 1
++ `+`: 1 or more
++ `*`: 0 or more
++ `{n}`: exactly n
++ `{n,}`: n or more
++ `{,m}`: at most m
++ `{n,m}`: between n and m
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
+### - dot
+### - qualifier
+### - escape
+]
+.right-column[
+## Regex
+if `.` matches any character, how to match a literal `"."`?
+* use the backslash `\` to escape special behaviour `\.`
+* `\` is also used as an escape symbol in strings
+* end up using .brown[`"\\\\."`] to create the regular expression `\.`
+```{r escape}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
+### - dot
+### - qualifier
+### - escape
+### - meta
+]
+.right-column[
+## Regex
+* `\d`: matches any digit.
+* `\s`: matches any whitespace (e.g. space, tab `\t`, newline `\n`).
+* `[abc]`: matches a, b, or c.
+```{r meta}
+```
+]
+
+???
+
+* a lowercase letter will select any of the things it stands for (so `\d` selects any digit, while `\s` will select any blank space)
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
+### - dot
+### - qualifier
+### - escape
+### - meta
+]
+.right-column[
+## Regex
+* `\D`: matches anything except digits.
+* `\S`: matches anything except whitespaces.
+* `[^abc]`: matches anything except a, b, or c.
+```{r meta-upper}
+```
+]
+
+???
+
+* an uppercase letter will select everything BUT that thing (so `\D` doesn’t select digits, `\S` will erase blank spaces, and so on)
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
+### - dot
+### - qualifier
+### - escape
+### - meta
+### - POSIX
+]
+.right-column[
+## Regex
+* `[:digit:]`: matches any digit.
+* `[:space:]`: matches any whitespace.
+* `[:alpha:]`: matches any alphabetic character.
+* more on [?base::regex](https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html)
+```{r posix}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
+### - dot
+### - qualifier
+### - escape
+### - meta
+### - POSIX
+### - anchor
+]
+.right-column[
+## Regex
+* `^` matches the start of the string.
+* `$` matches the end of the string.
+```{r anchor}
+```
+.pull-left[
+```{r anchor-end}
+```
+]
+.pull-right[
+```{r anchor-start}
+```
+]
+]
 
 ---
 
