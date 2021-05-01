@@ -30,7 +30,7 @@ to `data/` under your `Rproj` folder.
     the Rmd due to some missing packages, install these packages on your
     computer.
 -   **NO marks will be given to the submission that cannot be reproduced
-    on instructor’s machine.**
+    on the hosted runner.**
 -   **Show and place all relevant source code, output, and narratives to
     the appropriate sections; otherwise, marks will be deducted.**
 -   Set each figure’s size appropriately for clear presentation.
@@ -74,9 +74,9 @@ to get a polished one for the purpose of **communication**. For example,
 -   add informative titles and labels
 -   apply appropriate scales if needed
 -   use colour-blind friendly colours if needed
--   highlight something of interest
+-   highlight something of interest, etc.
 
-### Curiosity \[5 pts\] ([grading rubric](http://stat405.had.co.nz/homework/rubric.pdf))
+### Curiosity \[5 pts\]
 
 1.  Create **a publication-ready plot** that has NOT been seen in
     Assignment 1 and 2, in the meantime reveals some new insights about
@@ -99,3 +99,6 @@ to get a polished one for the purpose of **communication**. For example,
 
 -   Interactive graphics are NOT acceptable.
 -   DO NOT share any of your ideas on Piazza.
+-   Hadley Wickham’s ([grading
+    rubric](http://stat405.had.co.nz/homework/rubric.pdf)) will be
+    adapted for grading this section.
