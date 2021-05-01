@@ -79,8 +79,8 @@ to get a polished one for the purpose of **communication**. For example,
 ### Curiosity \[5 pts\]
 
 1.  Create **a publication-ready plot** that has NOT been seen in
-    Assignment 1 and 2, in the meantime reveals some new insights about
-    the data. Provide a description of:
+    Assignment 1 and 2, in the meantime reveals some **new insights**
+    about the data. Provide a description of:
 
     -   what question you had in mind motivated this plot;
     -   what you found interesting from this plot.
@@ -98,7 +98,7 @@ to get a polished one for the purpose of **communication**. For example,
 **NOTE:**
 
 -   Interactive graphics are NOT acceptable.
--   DO NOT share any of your ideas on Piazza.
+-   DO NOT share any of your ideas on Piazza or other venues.
 -   Hadley Wickham’s ([grading
     rubric](http://stat405.had.co.nz/homework/rubric.pdf)) will be
     adapted for grading this section.
