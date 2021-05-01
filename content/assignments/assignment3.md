@@ -13,6 +13,7 @@ This assignment is **due 23:59 Friday 28 May (NZST)**.
 -   You should submit your Rmd file on Canvas.
 -   Late assignments are NOT accepted unless prior arrangement for
     medical/compassionate reasons.
+-   Your submission should NOT contain any plagiarism.
 
 ------------------------------------------------------------------------
 
@@ -24,18 +25,18 @@ download `2018-citibike-tripdata.csv`
 [here](https://github.com/STATS-UOA/stats220/releases/download/v1.0/2018-citibike-tripdata.csv)
 to `data/` under your `Rproj` folder.
 
--   You MUST use the Rmd template provided [(download from here)](). If
-    you fail to compile the Rmd due to some missing packages, install
-    these packages on your computer.
+-   You MUST use the Rmd template provided. Download the template
+    [here]() and save it to your `Rproj` folder. If you fail to compile
+    the Rmd due to some missing packages, install these packages on your
+    computer.
 -   NO marks will be given to the submission that cannot be reproduced
     on instructor’s machine.
--   NO interactive graphics will be accepted.
 -   Show and place all relevant source code, output, and narratives to
     the appropriate sections; otherwise, marks will be deducted.
 -   Set each figure’s size appropriately for clear presentation.
--   If you use other data sets to enrich the exploration, please fill
-    [the Google form]() and upload your data. Make sure that all data
-    files are placed under the `data/` folder.
+-   If you use other sources of data to enrich the exploration, please
+    fill [the Google form]() and upload your data. Make sure that all
+    data files are placed under the `data/` folder.
 
 ### ➡️ [Citi Bike NYC offical website](http://citibikenyc.com)
 
@@ -72,9 +73,12 @@ to get a polished one for the purpose of **communication**.
 
 ### Curiosity \[5 pts\] ([grading rubric](http://stat405.had.co.nz/homework/rubric.pdf))
 
-1.  Create **a publication-ready plot** that hasn’t been seen in
-    Assignment 1 and 2, in the meantime reveals something interesting
-    and meaningful about the data. Provide a description of:
+-   Interactive graphics are NOT acceptable.
+-   DO NOT share any of your ideas on Piazza.
+
+1.  Create **a publication-ready plot** that has NOT been seen in
+    Assignment 1 and 2, in the meantime reveals some new insights about
+    the data. Provide a description of:
 
     -   what question you had in mind motivated this plot;
     -   what you found interesting from this plot.
@@ -82,7 +86,7 @@ to get a polished one for the purpose of **communication**.
         down to demonstrate that you have done more than just the
         obvious. Provide your code in the “Appendix” section.
 
-2.  Summarise what you learnt from this data in general. Try and weave
+2.  Summarise what you learned from this data in general. Try and weave
     your findings together into a consistent story.
 
 3.  Reflect on other questions that the exploration raised, and what you
