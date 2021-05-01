@@ -69,12 +69,10 @@ without any reference.)
 ### Polishing \[1 pts\]
 
 Pick one plot (or its variants) from Assignment 2, and make improvements
-to get a polished one for the purpose of **communication**.
+to get a polished one for the purpose of **communication**. For example,
+add informative titles and labels, or use colour-blind friendly colours.
 
 ### Curiosity \[5 pts\] ([grading rubric](http://stat405.had.co.nz/homework/rubric.pdf))
-
--   Interactive graphics are NOT acceptable.
--   DO NOT share any of your ideas on Piazza.
 
 1.  Create **a publication-ready plot** that has NOT been seen in
     Assignment 1 and 2, in the meantime reveals some new insights about
@@ -92,3 +90,8 @@ to get a polished one for the purpose of **communication**.
 3.  Reflect on other questions that the exploration raised, and what you
     would do next in terms of further questions or ways to investigate
     the data.
+
+**NOTE:**
+
+-   Interactive graphics are NOT acceptable.
+-   DO NOT share any of your ideas on Piazza.
