@@ -38,7 +38,7 @@ to `data/` under your `Rproj` folder.
     fill [the Google form]() and upload your data. Make sure that all
     data files are placed under the `data/` folder.
 
-### <i class="fas fa-biking"></i> [Citi Bike NYC offical website](http://citibikenyc.com)
+### [Citi <i class="fas fa-biking"></i> NYC offical website](http://citibikenyc.com)
 
 ### Web scraping \[3 pts\]
 
