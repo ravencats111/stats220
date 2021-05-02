@@ -26,9 +26,9 @@ download `2018-citibike-tripdata.csv`
 to `data/` under your `Rproj` folder.
 
 -   **You should use the Rmd template provided.** Download the template
-    [here]() and save it to your `Rproj` folder. If you fail to compile
-    the Rmd due to some missing packages, install these packages on your
-    computer.
+    [<i class="fas fa-download"></i>]() and save it to your `Rproj`
+    folder. If you fail to compile the Rmd due to some missing packages,
+    install these packages on your computer.
 -   **NO marks will be given to the submission that cannot be reproduced
     on the hosted runner.**
 -   **Show and place all relevant source code, output, and narratives to
@@ -61,8 +61,8 @@ as **an HTML table**.
 ### Q2: Self-criticism \[1 pts\]
 
 Your instructor unintentionally made an inferior decision, while
-designing Assignment 2 Question 4. The decision didn’t do any harm to
-the analysis, but it could certainly be improved if doing adequate
+designing Assignment 2 Question 4. This decision didn’t do any harm to
+the analysis, but it could certainly be improved by more adequate
 research about the Citi bike data. Point out what the issue is, and
 provide reference to support your argument. (**NOTE:** NO marks given
 for pointing out the issue alone without any reference.)
@@ -100,7 +100,8 @@ to get a polished one for the purpose of **communication**. For example,
 **NOTE:**
 
 -   Interactive graphics are NOT acceptable.
--   DO NOT share any of your ideas on Piazza or other venues.
--   Hadley Wickham’s ([grading
-    rubric](http://stat405.had.co.nz/homework/rubric.pdf)) will be
+-   DO NOT share any of your ideas on Piazza or other venues, or ask if
+    this would be okay or that would be okay.
+-   Hadley Wickham’s [grading
+    rubric](http://stat405.had.co.nz/homework/rubric.pdf) will be
     adapted for marking this section.
