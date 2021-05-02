@@ -41,8 +41,9 @@ We'll use a collection of R packages called [`tidyverse`](https://www.tidyverse.
 
 ### Reading
 
-* [Introduction to Data Science](https://rafalab.github.io/dsbook/) by Rafael A. Irizarry
 * [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) by Claus O. Wilke
+* [Text Mining with R](https://www.tidytextmining.com) by Julia Silge & David Robinson
+* [Tidyverse Skills for Data Science](https://jhudatascience.org/tidyversecourse/) by Carrie Wright, Shannon E. Ellis, Stephanie C. Hicks and Roger D. Peng
 
 ### Credits
 

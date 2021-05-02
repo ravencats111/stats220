@@ -77,7 +77,7 @@ to get a polished one for the purpose of **communication**. For example,
 -   use colour-blind friendly colours if needed
 -   highlight something of interest, etc.
 
-### Q4: Curiosity \[5 pts\]
+### Q4: Exploration \[5 pts\]
 
 1.  Create at least **one publication-ready plot** that have NOT been
     seen in Assignment 1 and 2, in the meantime reveal some **new
