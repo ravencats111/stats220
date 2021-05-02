@@ -341,8 +341,8 @@ See &lt;http://rmarkdown.rstudio.com&gt;.
 
 ````r
 ```{r scatterplot, fig.align = "center", fig.width = 4.5, fig.height = 4}
-ggplot(gp, aes(gdpPercap, gdpPercap)) +
-  geom_point()
+ggplot(gp, aes(gdpPercap, lifeExp)) +
+  geom_point() + scale_x_log10()
 ```
 ````
 
@@ -354,8 +354,8 @@ ggplot(gp, aes(gdpPercap, gdpPercap)) +
 
 ````r
 ```{r scatterplot, fig.align = "center", fig.width = 4.5, fig.height = 4}
-ggplot(gp, aes(gdpPercap, gdpPercap)) +
-  geom_point()
+ggplot(gp, aes(gdpPercap, lifeExp)) +
+  geom_point() + scale_x_log10()
 ```
 ````
 
@@ -379,8 +379,8 @@ ggplot(gp, aes(gdpPercap, gdpPercap)) +
 
 ````r
 ```{r show-code, ref.label = "scatterplot", eval = FALSE}
-ggplot(gp, aes(gdpPercap, gdpPercap)) +
-  geom_point()
+ggplot(gp, aes(gdpPercap, lifeExp)) +
+  geom_point() + scale_x_log10()
 ```
 ````
 
@@ -413,7 +413,7 @@ thead, tfoot, tr:nth-child(even) { background: #eee; }
 
 ````r
 ```{r lm, echo = FALSE, cache = TRUE}
-fit &lt;- lm(lifeExp ~ gdpPercap, data = gp)
+fit &lt;- lm(lifeExp ~ log10(gdpPercap), data = gp)
 kable(coef(summary(fit)))
 ```
 ````
@@ -431,10 +431,10 @@ kable(coef(summary(fit)))
 &lt;br&gt;
 &lt;br&gt;
 
-|            |   Estimate| Std. Error|   t value| Pr(&gt;&amp;#124;t&amp;#124;)|
-|:-----------|----------:|----------:|---------:|------------------:|
-|(Intercept) | 53.9555609|  0.3149949| 171.29025|                  0|
-|gdpPercap   |  0.0007649|  0.0000258|  29.65766|                  0|
+|                 |  Estimate| Std. Error|   t value| Pr(&gt;&amp;#124;t&amp;#124;)|
+|:----------------|---------:|----------:|---------:|------------------:|
+|(Intercept)      | -9.100889|  1.2276738| -7.413117|                  0|
+|log10(gdpPercap) | 19.353423|  0.3425372| 56.500206|                  0|
 ]
 
 ---

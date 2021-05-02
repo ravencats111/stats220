@@ -351,8 +351,8 @@ See <http://rmarkdown.rstudio.com>.
 
 ````r
 ```{r scatterplot, fig.align = "center", fig.width = 4.5, fig.height = 4}`r ''`
-ggplot(gp, aes(gdpPercap, gdpPercap)) +
-  geom_point()
+ggplot(gp, aes(gdpPercap, lifeExp)) +
+  geom_point() + scale_x_log10()
 ```
 ````
 
@@ -362,16 +362,16 @@ gp <- read_rds("data/gapminder.rds")
 ```
 
 ```{r rmd-scatterplot, fig.align = "center", fig.width = 4.5, fig.height = 4, echo = FALSE}
-ggplot(gp, aes(gdpPercap, gdpPercap)) +
-  geom_point()
+ggplot(gp, aes(gdpPercap, lifeExp)) +
+  geom_point() + scale_x_log10()
 ```
 
 ---
 
 ````r
 ```{r scatterplot, fig.align = "center", fig.width = 4.5, fig.height = 4}`r ''`
-ggplot(gp, aes(gdpPercap, gdpPercap)) +
-  geom_point()
+ggplot(gp, aes(gdpPercap, lifeExp)) +
+  geom_point() + scale_x_log10()
 ```
 ````
 
@@ -395,8 +395,8 @@ ggplot(gp, aes(gdpPercap, gdpPercap)) +
 
 ````r
 ```{r show-code, ref.label = "scatterplot", eval = FALSE}`r ''`
-ggplot(gp, aes(gdpPercap, gdpPercap)) +
-  geom_point()
+ggplot(gp, aes(gdpPercap, lifeExp)) +
+  geom_point() + scale_x_log10()
 ```
 ````
 
@@ -430,7 +430,7 @@ thead, tfoot, tr:nth-child(even) { background: #eee; }
 
 ````r
 ```{r lm, echo = FALSE, cache = TRUE}`r ''`
-fit <- lm(lifeExp ~ gdpPercap, data = gp)
+fit <- lm(lifeExp ~ log10(gdpPercap), data = gp)
 kable(coef(summary(fit)))
 ```
 ````
@@ -450,7 +450,7 @@ gp <- read_rds("data/gapminder.rds")
 <br>
 <br>
 ```{r lm, echo = FALSE}
-fit <- lm(lifeExp ~ gdpPercap, data = gp)
+fit <- lm(lifeExp ~ log10(gdpPercap), data = gp)
 kable(coef(summary(fit)))
 ```
 ]
