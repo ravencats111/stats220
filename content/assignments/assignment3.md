@@ -25,7 +25,7 @@ download `2018-citibike-tripdata.csv`
 [here](https://github.com/STATS-UOA/stats220/releases/download/v1.0/2018-citibike-tripdata.csv)
 to `data/` under your `Rproj` folder.
 
--   **You MUST use the Rmd template provided.** Download the template
+-   **You should use the Rmd template provided.** Download the template
     [here]() and save it to your `Rproj` folder. If you fail to compile
     the Rmd due to some missing packages, install these packages on your
     computer.
@@ -40,7 +40,7 @@ to `data/` under your `Rproj` folder.
 
 ### [Citi <i class="fas fa-biking"></i> NYC offical website](http://citibikenyc.com)
 
-### Web scraping \[3 pts\]
+### Q1: Web scraping \[3 pts\]
 
 [<img src="/figures/citibike-plan.png" width="840" style="display: block; margin: auto;" />](https://www.citibikenyc.com/pricing)
 
@@ -58,15 +58,16 @@ as **an HTML table**.
 
 {{</table>}}
 
-### Self-criticism \[1 pts\]
+### Q2: Self-criticism \[1 pts\]
 
-Your instructor unintentionally made a minor mistake when designing
-Assignment 2 Question 4, due to inadequate research on the Citi bike
-data. Point out what the issue is, and provide reference to support your
-argument. (**NOTE:** NO marks given for pointing out the issue alone
-without any reference.)
+Your instructor unintentionally made an inferior decision, while
+designing Assignment 2 Question 4. The decision didn’t do any harm to
+the analysis, but it could certainly be improved if doing adequate
+research about the Citi bike data. Point out what the issue is, and
+provide reference to support your argument. (**NOTE:** NO marks given
+for pointing out the issue alone without any reference.)
 
-### Polishing \[1 pts\]
+### Q3: Polishing \[1 pts\]
 
 Pick one plot (or its variants) from Assignment 2, and make improvements
 to get a polished one for the purpose of **communication**. For example,
@@ -76,11 +77,12 @@ to get a polished one for the purpose of **communication**. For example,
 -   use colour-blind friendly colours if needed
 -   highlight something of interest, etc.
 
-### Curiosity \[5 pts\]
+### Q4: Curiosity \[5 pts\]
 
 1.  Create **a publication-ready plot** that has NOT been seen in
     Assignment 1 and 2, in the meantime reveals some **new insights**
-    about the data. Provide a description of:
+    (i.e. interesting and meaningful) about the data. Provide a
+    description of:
 
     -   what question you had in mind motivated this plot;
     -   what you found interesting from this plot.
@@ -101,4 +103,4 @@ to get a polished one for the purpose of **communication**. For example,
 -   DO NOT share any of your ideas on Piazza or other venues.
 -   Hadley Wickham’s ([grading
     rubric](http://stat405.had.co.nz/homework/rubric.pdf)) will be
-    adapted for grading this section.
+    adapted for marking this section.

@@ -297,15 +297,355 @@ if `.` matches any character, how to match a literal `"."`?
 
 class: inverse middle
 
-## Text analysis
+## Text mining
+
+---
+
+## `r emo::ji("musical_score")` Waiting for the Sun `r emo::ji("sun")`
+
+```{r text}
+```
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - tokenise
+]
+.right-column[
+## Unigram
+```{r unnest-words}
+```
+]
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - tokenise
+]
+.right-column[
+## Unigram
+```{r unnest-words-count}
+```
+.brown[how often we see each word in this corpus]
+]
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - tokenise
+]
+.right-column[
+```{r unnest-chrs}
+```
+]
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - tokenise
+]
+.right-column[
+## N-gram
+```{r unnest-ngrams}
+```
+]
+
+---
+
+background-image: url(img/acnh-rstats.jpg)
+background-size: contain
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+]
+.right-column[
+## Sentiment analysis
+<br>
+<br>
+<img src="https://www.tidytextmining.com/images/tmwr_0201.png" width="100%">
+.footnote[image credit: [Text Mining with R](https://www.tidytextmining.com/sentiment.html)]
+]
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - import
+]
+.right-column[
+## sentiment analysis
+```{r acnh}
+```
+]
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - import
+### - glimpse
+]
+.right-column[
+## grade distribution
+```{r acnh-grade, fig.height = 3.5}
+```
+]
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - import
+### - glimpse
+]
+.right-column[
+## positive vs negative reviews
+.pull-left[
+```{r acnh-max}
+```
+]
+.pull-right[
+```{r acnh-min, eval = FALSE}
+```
+```{r slides-min, echo = FALSE}
+user_reviews %>% 
+  slice_min(grade, 
+    with_ties = FALSE) %>% 
+  pull(text) %>% 
+  str_wrap(width = 30) %>% 
+  cat()
+```
+]
+]
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - import
+### - glimpse
+### - tokenise
+]
+.right-column[
+## clean a bit from web scraping ...
+```{r acnh-token}
+```
+]
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - import
+### - glimpse
+### - tokenise
+### - vis
+]
+.right-column[
+## distribution of words per review
+```{r acnh-hist, fig.height = 3.5}
+```
+]
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - import
+### - glimpse
+### - tokenise
+### - vis
+### - stop words
+]
+.right-column[
+## the most common words
+```{r acnh-count}
+```
+]
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - import
+### - glimpse
+### - tokenise
+### - vis
+### - stop words
+]
+.right-column[
+## lexicon
+.pull-left[
+```{r stop-words}
+```
+]
+.pull-right[
+1. In computing, stop words are words which are filtered out before or after processing of natural language data (text).
+2. They usually refer to the most common words in a language, but there is not a single list of stop words used by all natural language processing tools.
+]
+]
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - import
+### - glimpse
+### - tokenise
+### - vis
+### - stop words
+]
+.right-column[
+## remove stop words
+```{r stop-words-rm}
+```
+]
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - import
+### - glimpse
+### - tokenise
+### - vis
+### - stop words
+### - count
+]
+.right-column[
+## the most common words
+.panelset[
+
+.panel[.panel-name[Plot]
+
+```{r stop-words-smart, echo = FALSE, fig.width = 6}
+```
+
+.panel[.panel-name[Code]
+
+```{r ref.label = "stop-words-smart", eval = FALSE}
+```
+]
+]
+]
+]
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - import
+### - glimpse
+### - tokenise
+### - vis
+### - stop words
+### - count
+### - sentiments
+]
+.right-column[
+## sentiment lexicons
+.pull-left[
+```{r sentiments-l}
+```
+]
+.pull-right[
+```{r sentiments-r}
+```
+]
+]
+
+???
+
+One way to analyze the sentiment of a text is to consider the text as a combination of its individual words and the sentiment content of the whole text as the sum of the sentiment content of the individual words
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - import
+### - glimpse
+### - tokenise
+### - vis
+### - stop words
+### - count
+### - sentiments
+]
+.right-column[
+## sentiment lexicons
+```{r sentiments}
+```
+]
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - import
+### - glimpse
+### - tokenise
+### - vis
+### - stop words
+### - count
+### - sentiments
+]
+.right-column[
+## join sentiments
+```{r join-sentiments}
+```
+]
+
+???
+
+why I use `inner_join()` here
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - import
+### - glimpse
+### - tokenise
+### - vis
+### - stop words
+### - count
+### - sentiments
+### - vis
+]
+.right-column[
+## visualise sentiments
+
+.panelset[
+
+.panel[.panel-name[Plot]
+
+```{r plot-sentiments, echo = FALSE, fig.width = 6}
+```
+
+.panel[.panel-name[Code]
+
+```{r ref.label = "plot-sentiments", eval = FALSE}
+```
+]
+]
+]
+]
 
 ---
 
 ## Reading
 
 .pull-left[
-.center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
+.center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="380px">](https://r4ds.had.co.nz)]
+* [Strings](https://r4ds.had.co.nz/strings.html)
+* [{stringr} cheatsheet](https://github.com/rstudio/cheatsheets/blob/master/strings.pdf)
 ]
 .pull-right[
-* [Strings](https://r4ds.had.co.nz/strings.html)
+.center[[<img src="https://www.tidytextmining.com/images/cover.png" height="380px">](https://www.tidytextmining.com/index.html)]
+* [Sentiment analysis with tidy data](https://www.tidytextmining.com/sentiment.html)
 ]
