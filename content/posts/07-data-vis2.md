@@ -7,6 +7,6 @@ slides: "07-data-vis2.html"
 r: "07-data-vis2.R"
 rmd: "07-data-vis2.Rmd"
 pdf: "07-data-vis2.pdf"
-lab:
+lab: "labs/lab07"
 sol:
 ---
