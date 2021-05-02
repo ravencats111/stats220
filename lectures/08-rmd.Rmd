@@ -14,6 +14,8 @@ output:
       countIncrementalSlides: false
 ---
 
+class: middle
+
 ```{r initial, echo = FALSE, cache = FALSE, results = 'hide'}
 library(knitr)
 options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE, 
@@ -30,17 +32,39 @@ opts_chunk$set(
 xaringanExtra::use_panelset()
 ```
 
-## Reproducible reporting
+.pull-left[
+.center[
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/rmarkdown.png" width="26%">](https://rmarkdown.rstudio.com)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/blogdown.png" width="26%">](https://bookdown.org/yihui/blogdown/)
+
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/bookdown.png" width="26%">](http://bookdown.org)
+[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/xaringan.png" width="26%">](http://slides.yihui.org/xaringan/)
+]
+]
+.pull-right[
+## .center[Dynamic documents]
+
+* Combine code, rendered output (such as figures), and prose
+* Reproduce your analyses
+* Collaborate and share code with others
+* Communicate your results with others
+]
+
+???
+
+* graphics for communication
+* keep learning communication
+* Rmd: a tool for integrating prose, code, and results
 
 ---
 
 class: inverse middle center
 
-# .large[.large[.large[<i class="fab fa-r-project"></i>]]] + .large[.large[.large[<i class="fab fa-markdown"></i>]]]
+# .large[.large[.large[<i class="fab fa-r-project"></i>]]] + .large[.large[.large[.blue[<i class="fab fa-markdown"></i>]]]]
 
 ---
 
-## Markdown <i class="fab fa-markdown"></i> `.md`
+## Markdown .blue[<i class="fab fa-markdown"></i>] `.md`
 
 * Created by [John Gruber](https://daringfireball.net/projects/markdown/) & [Aaron Swartz](http://www.aaronsw.com) in 2004
 * A lightweight .brown[markup language] to add formatting elements to plain-text documents, contrasting to WYSIWYG
@@ -56,7 +80,42 @@ class: inverse middle center
 
 ---
 
-## <i class="fab fa-markdown"></i> Basic syntax
+class: center middle
+
+## .blue[<i class="fab fa-markdown"></i>] Basic syntax
+
+<img src="img/md-syntax.png">
+
+More on [Markdown syntax](https://www.markdownguide.org/basic-syntax/)
+
+```{r md-syntax, echo = FALSE, eval = FALSE}
+library(gt)
+tibble::tribble(
+  ~ md, ~ rendered,
+  "`## Heading level 2`", "## Heading level 2",
+  "`**bold**`", "**bold**",
+  "`*italic*`", "*italic*",
+  "\\`inline code\\`", "`inline code`",
+  "`* apple`\n\n`* orange`",  "* apple\n * orange",
+  "`1. first`\n\n`2. second`", "1. first\n 2. second",
+  "`<http://stats220.earo.me>`", "<http://stats220.earo.me>",
+  "`[stats220](http://stats220.earo.me)`", "[stats220](http://stats220.earo.me)"
+) %>% 
+  gt() %>% 
+  fmt_markdown(everything()) %>% 
+  cols_label(
+    md = md("**Markdown**"),
+    rendered = md("**Rendered Output**")
+  )
+  as_raw_html()
+```
+
+---
+
+class: inverse
+
+background-image: url(https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-blanks/rmarkdown_wizards_blank.png)
+background-size: 100% 100%
 
 ---
 
@@ -297,6 +356,25 @@ ggplot(gp, aes(gdpPercap, gdpPercap)) +
 ```
 ````
 
+```{r rmd-gapminder, message = FALSE, echo = FALSE}
+library(tidyverse)
+gp <- read_rds("data/gapminder.rds")
+```
+
+```{r rmd-scatterplot, fig.align = "center", fig.width = 4.5, fig.height = 4, echo = FALSE}
+ggplot(gp, aes(gdpPercap, gdpPercap)) +
+  geom_point()
+```
+
+---
+
+````r
+```{r scatterplot, fig.align = "center", fig.width = 4.5, fig.height = 4}`r ''`
+ggplot(gp, aes(gdpPercap, gdpPercap)) +
+  geom_point()
+```
+````
+
 .pull-left[
 ## Chunk options
 
@@ -311,6 +389,28 @@ ggplot(gp, aes(gdpPercap, gdpPercap)) +
 <img src="https://itsalocke.com/blog/img/namer-oh-no.png" width="100%">
 <img src="https://itsalocke.com/blog/img/namer-yaaasss.png" width="100%">
 .footnote[image credit: Maelle Salmon]
+]
+
+---
+
+````r
+```{r show-code, ref.label = "scatterplot", eval = FALSE}`r ''`
+ggplot(gp, aes(gdpPercap, gdpPercap)) +
+  geom_point()
+```
+````
+
+.pull-left[
+## Reuse chunks by reference
+
+* `ref.label`: labels of the chunks from which the code of the current chunk is inherited
+* `eval`: evaluate the code chunk
+
+**Good practice**: naming every single chunk!
+]
+.pull-right[
+```{r right-plot, ref.label = "rmd-scatterplot", echo = FALSE, fig.height = 3.5, fig.width = 4}
+```
 ]
 
 ---
@@ -341,12 +441,13 @@ kable(coef(summary(fit)))
 * `echo`: overwrites the global setting
 * `cache`: evaluate once and skip for the future
 
-`kable()` generates a very simple table. `r emo::ji("arrow_right")`
+`kable()` generates a very simple HTML table. `r emo::ji("arrow_right")`
 ]
 .pull-right[
 ```{r gapminder, echo = FALSE}
 gp <- read_rds("data/gapminder.rds")
 ```
+<br>
 <br>
 ```{r lm, echo = FALSE}
 fit <- lm(lifeExp ~ gdpPercap, data = gp)
@@ -429,4 +530,5 @@ names(knitr::knit_engines$get())
 ]
 .pull-right[
 * [R Markdown](https://r4ds.had.co.nz/r-markdown.html)
+* [R Markdown formats](https://r4ds.had.co.nz/r-markdown-formats.html)
 ]

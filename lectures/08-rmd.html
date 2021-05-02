@@ -18,21 +18,45 @@ class: center, middle, inverse, title-slide
 ---
 
 
+class: middle
 
 
 
 
-## Reproducible reporting
+
+.pull-left[
+.center[
+[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/rmarkdown.png" width="26%"&gt;](https://rmarkdown.rstudio.com)
+[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/blogdown.png" width="26%"&gt;](https://bookdown.org/yihui/blogdown/)
+
+[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/bookdown.png" width="26%"&gt;](http://bookdown.org)
+[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/xaringan.png" width="26%"&gt;](http://slides.yihui.org/xaringan/)
+]
+]
+.pull-right[
+## .center[Dynamic documents]
+
+* Combine code, rendered output (such as figures), and prose
+* Reproduce your analyses
+* Collaborate and share code with others
+* Communicate your results with others
+]
+
+???
+
+* graphics for communication
+* keep learning communication
+* Rmd: a tool for integrating prose, code, and results
 
 ---
 
 class: inverse middle center
 
-# .large[.large[.large[&lt;i class="fab fa-r-project"&gt;&lt;/i&gt;]]] + .large[.large[.large[&lt;i class="fab fa-markdown"&gt;&lt;/i&gt;]]]
+# .large[.large[.large[&lt;i class="fab fa-r-project"&gt;&lt;/i&gt;]]] + .large[.large[.large[.blue[&lt;i class="fab fa-markdown"&gt;&lt;/i&gt;]]]]
 
 ---
 
-## Markdown &lt;i class="fab fa-markdown"&gt;&lt;/i&gt; `.md`
+## Markdown .blue[&lt;i class="fab fa-markdown"&gt;&lt;/i&gt;] `.md`
 
 * Created by [John Gruber](https://daringfireball.net/projects/markdown/) &amp; [Aaron Swartz](http://www.aaronsw.com) in 2004
 * A lightweight .brown[markup language] to add formatting elements to plain-text documents, contrasting to WYSIWYG
@@ -48,7 +72,22 @@ class: inverse middle center
 
 ---
 
-## &lt;i class="fab fa-markdown"&gt;&lt;/i&gt; Basic syntax
+class: center middle
+
+## .blue[&lt;i class="fab fa-markdown"&gt;&lt;/i&gt;] Basic syntax
+
+&lt;img src="img/md-syntax.png"&gt;
+
+More on [Markdown syntax](https://www.markdownguide.org/basic-syntax/)
+
+
+
+---
+
+class: inverse
+
+background-image: url(https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-blanks/rmarkdown_wizards_blank.png)
+background-size: 100% 100%
 
 ---
 
@@ -242,7 +281,7 @@ library(tidyverse)
 
 ```
 #&gt; ✔ ggplot2 3.3.3     ✔ purrr   0.3.4
-#&gt; ✔ tibble  3.1.0     ✔ dplyr   1.0.5
+#&gt; ✔ tibble  3.1.1     ✔ dplyr   1.0.5
 #&gt; ✔ tidyr   1.1.3     ✔ stringr 1.4.0
 #&gt; ✔ readr   1.4.0     ✔ forcats 0.5.1
 ```
@@ -307,6 +346,19 @@ ggplot(gp, aes(gdpPercap, gdpPercap)) +
 ```
 ````
 
+
+
+&lt;img src="figure/rmd-scatterplot-1.png" width="540" style="display: block; margin: auto;" /&gt;
+
+---
+
+````r
+```{r scatterplot, fig.align = "center", fig.width = 4.5, fig.height = 4}
+ggplot(gp, aes(gdpPercap, gdpPercap)) +
+  geom_point()
+```
+````
+
 .pull-left[
 ## Chunk options
 
@@ -321,6 +373,27 @@ ggplot(gp, aes(gdpPercap, gdpPercap)) +
 &lt;img src="https://itsalocke.com/blog/img/namer-oh-no.png" width="100%"&gt;
 &lt;img src="https://itsalocke.com/blog/img/namer-yaaasss.png" width="100%"&gt;
 .footnote[image credit: Maelle Salmon]
+]
+
+---
+
+````r
+```{r show-code, ref.label = "scatterplot", eval = FALSE}
+ggplot(gp, aes(gdpPercap, gdpPercap)) +
+  geom_point()
+```
+````
+
+.pull-left[
+## Reuse chunks by reference
+
+* `ref.label`: labels of the chunks from which the code of the current chunk is inherited
+* `eval`: evaluate the code chunk
+
+**Good practice**: naming every single chunk!
+]
+.pull-right[
+&lt;img src="figure/right-plot-1.png" width="480" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -351,10 +424,11 @@ kable(coef(summary(fit)))
 * `echo`: overwrites the global setting
 * `cache`: evaluate once and skip for the future
 
-`kable()` generates a very simple table. ➡️
+`kable()` generates a very simple HTML table. ➡️
 ]
 .pull-right[
 
+&lt;br&gt;
 &lt;br&gt;
 
 |            |   Estimate| Std. Error|   t value| Pr(&gt;&amp;#124;t&amp;#124;)|
@@ -464,6 +538,7 @@ names(knitr::knit_engines$get())
 ]
 .pull-right[
 * [R Markdown](https://r4ds.had.co.nz/r-markdown.html)
+* [R Markdown formats](https://r4ds.had.co.nz/r-markdown-formats.html)
 ]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
