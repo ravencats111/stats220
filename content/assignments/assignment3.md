@@ -79,10 +79,10 @@ to get a polished one for the purpose of **communication**. For example,
 
 ### Q4: Curiosity \[5 pts\]
 
-1.  Create **a publication-ready plot** that has NOT been seen in
-    Assignment 1 and 2, in the meantime reveals some **new insights**
-    (i.e. interesting and meaningful) about the data. Provide a
-    description of:
+1.  Create at least **one publication-ready plot** that have NOT been
+    seen in Assignment 1 and 2, in the meantime reveal some **new
+    insights** (i.e. interesting and meaningful) about the data. Provide
+    a description of:
 
     -   what question you had in mind motivated this plot;
     -   what you found interesting from this plot.
