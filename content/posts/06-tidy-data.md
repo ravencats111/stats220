@@ -8,5 +8,5 @@ r: "06-tidy-data.R"
 rmd: "06-tidy-data.Rmd"
 pdf: "06-tidy-data.pdf"
 lab: "labs/lab06"
-sol:
+sol: "labs/lab06-sol"
 ---
