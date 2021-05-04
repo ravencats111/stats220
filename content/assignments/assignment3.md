@@ -1,9 +1,9 @@
 ---
-output: 
+layout: page
+output:
   md_document:
     preserve_yaml: true
     variant: gfm
-layout: page
 title: Assignment 3
 ---
 
@@ -58,14 +58,14 @@ as **an HTML table**.
 
 {{</table>}}
 
-### Q2: Self-criticism \[1 pts\]
+### Q2: Critique \[1 pts\]
 
-Your instructor unintentionally made an inferior decision, while
-designing Assignment 2 Question 4. This decision didn’t do any harm to
-the analysis, but it could certainly be improved by more adequate
-research about the Citi bike data. Point out what the issue is, and
-provide reference to support your argument. (**NOTE:** NO marks given
-for pointing out the issue alone without any reference.)
+Your instructor deliberately introduced a decision mistake to Assignment
+2 Question 4. This decision didn’t do any harm to the analysis, but it
+could certainly be improved by more adequate research about the Citi
+bike data. Point out what the issue is, and provide reference to support
+your argument. (**NOTE:** NO marks given for pointing out the issue
+alone without any reference.)
 
 ### Q3: Polishing \[1 pts\]
 
@@ -100,8 +100,8 @@ to get a polished one for the purpose of **communication**. For example,
 **NOTE:**
 
 -   Interactive graphics are NOT acceptable.
--   DO NOT share any of your ideas on Piazza or other venues, or ask if
-    this would be okay or that would be okay.
+-   DO NOT share any of your ideas or explorations on Piazza or other
+    venues.
 
 **Grading rubric:**
 
@@ -117,7 +117,7 @@ to get a polished one for the purpose of **communication**. For example,
     <tr>
       <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p>Outstanding<br>(5)</p>
 </div></td>
-      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p>Intense exploration and evidence of many trials and failures. You have looked at the data in many different ways before coming to your final answer.<br>You have gone beyond what was asked: additional research from other sources used to help understand/explain findings.<br>You suggest multiple explanations for a given finding, and use multiple tools to explore surprising results. You present one or two as the most plausible, but have allowed for the possibility that you are wrong.<br>You don't blindly accept perceived wisdom, but challenge preconceived notions and come up with interesting new ways of testing them.</p>
+      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p>Intense exploration and evidence of many trials and failures (e.g. demonstrations of some dead ends). You have looked at the data in many different ways before coming to your final answer.<br>You have gone beyond what was asked: additional research from other sources (e.g. web scraping for membership price) used to help understand/explain findings.<br>You suggest multiple explanations for a given finding, and use multiple approaches to explore surprising results. You present one or two as the most plausible, but have allowed for the possibility that you are wrong.<br>You don't blindly accept perceived wisdom (e.g. collecting more contextual information), but challenge preconceived notions and come up with interesting new ways of testing them.</p>
 </div></td>
     </tr>
     <tr>
