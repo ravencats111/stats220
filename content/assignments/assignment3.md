@@ -26,17 +26,20 @@ download `2018-citibike-tripdata.csv`
 to `data/` under your `Rproj` folder.
 
 -   **You should use the Rmd template provided.** Download the template
-    [<i class="fas fa-download"></i>]() and save it to your `Rproj`
-    folder. If you fail to compile the Rmd due to some missing packages,
-    install these packages on your computer.
+    [<i class="fas fa-download"></i>](https://github.com/STATS-UOA/stats220/releases/download/v3.0/a3-template.Rmd)
+    and save it to your `Rproj` folder. If you fail to compile the Rmd
+    due to some missing packages, install these packages on your
+    computer.
 -   **NO marks will be given to the submission that cannot be reproduced
     on the hosted runner.**
 -   **Show and place all relevant source code, output, and narratives to
     the appropriate sections; otherwise, marks will be deducted.**
 -   Set each figure’s size appropriately for clear presentation.
 -   If you use other sources of data to enrich the exploration, please
-    fill [the Google form]() and upload your data. Make sure that all
-    data files are placed under the `data/` folder.
+    fill [the Google
+    form](https://docs.google.com/forms/d/1Vf3T6_fkG9vrLuFFZzQ7tHGea9Zxga3wZX6C1V5f02g/edit?usp=sharing)
+    and upload your data. Make sure that all data files are placed under
+    the `data/` folder.
 
 ### [Citi <i class="fas fa-biking"></i> NYC offical website](http://citibikenyc.com)
 
@@ -62,10 +65,10 @@ as **an HTML table**.
 
 Your instructor deliberately introduced a decision mistake to Assignment
 2 Question 4. This decision didn’t do any harm to the analysis, but it
-could certainly be improved by more adequate research about the Citi
-bike data. Point out what the issue is, and provide reference to support
-your argument. (**NOTE:** NO marks given for pointing out the issue
-alone without any reference.)
+could certainly be improved to better fit the context by more adequate
+research about the Citi bike data. Point out what the issue is, and
+provide reference to support your argument. (**NOTE:** NO marks given
+for pointing out the issue alone without any reference.)
 
 ### Q3: Polishing \[1 pts\]
 
@@ -141,7 +144,7 @@ to get a polished one for the purpose of **communication**. For example,
     <tr>
       <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p>Inadequate<br>(1)</p>
 </div></td>
-      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p>Questions are simple, and there is no evidence of exploration. You have not come up with your own questions of the data, but relied on those discussed in assignments.<br>Findings accepted uncritically. Leaps of logic without justification.You have not thought about how to do better next time.</p>
+      <td style="padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: left;"><div class='gt_from_md'><p>Questions are simple, and there is no evidence of exploration. You have not come up with your own questions of the data, but relied on those discussed in assignments.<br>Findings accepted uncritically.<br>Leaps of logic without justification.<br>You have not thought about how to do better next time.</p>
 </div></td>
     </tr>
   </tbody>
