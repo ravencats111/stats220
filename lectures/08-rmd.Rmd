@@ -531,4 +531,6 @@ names(knitr::knit_engines$get())
 .pull-right[
 * [R Markdown](https://r4ds.had.co.nz/r-markdown.html)
 * [R Markdown formats](https://r4ds.had.co.nz/r-markdown-formats.html)
+* [R Markdown cheat sheet](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf?_ga=2.253787336.159731575.1620189500-118347454.1620189500)
+* [R Markdown reference guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf?_ga=2.253787336.159731575.1620189500-118347454.1620189500)
 ]
