@@ -395,6 +395,7 @@ ggplot(gp, aes(gdpPercap, lifeExp)) +
 .pull-right[
 <img src="https://itsalocke.com/blog/img/namer-oh-no.png" width="100%">
 <img src="https://itsalocke.com/blog/img/namer-yaaasss.png" width="100%">
+
 .footnote[image credit: Maelle Salmon]
 ]
 
@@ -402,8 +403,6 @@ ggplot(gp, aes(gdpPercap, lifeExp)) +
 
 ````r
 ```{r show-code, ref.label = "scatterplot", eval = FALSE}`r ''`
-ggplot(gp, aes(gdpPercap, lifeExp)) +
-  geom_point() + scale_x_log10()
 ```
 ````
 
