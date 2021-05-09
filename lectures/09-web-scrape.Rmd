@@ -38,6 +38,8 @@ read_chunk('R/09-web-scrape.R')
 
 ## Web technology <i class="fab fa-html5 orange"></i> <i class="fab fa-css3-alt blue"></i> <i class='fab fa-js-square yellow'></i>
 
+.footnote[I thank [Dr Emi Tanaka](https://emitanaka.org/about.html) for this part, adapted from her "Communicating with Data" course.]
+
 ---
 
 class: middle
@@ -77,21 +79,25 @@ A web page consists of:
 <!DOCTYPE html>
 
 <html>
-<!--This is a comment and ignored by web client.-->
-<head>
-  <!--This section contains web page metadata.-->
-  <title>STATS 220 Data Technology</title>
-  <meta name="author" content="Earo Wang">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
+  <!--This is a comment and ignored by web client.-->
+  <head>
+    <!--This section contains web page metadata.-->
+    <title>STATS 220 Data Technology</title>
+    <meta name="author" content="Earo Wang">
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
 
-<body>
-<!--This section contains what you want to display on your web page.-->
-<h1>I'm a first level header</h1>
-<p>This is a paragraph.</p>
-</body>
+  <body>
+    <!--This section contains what you want to display on your web page.-->
+    <h1>I'm a first level header</h1>
+    <p>This is a paragraph.</p>
+  </body>
 </html>
 ```
+
+???
+
+servr::httd() to serve
 
 ---
 
@@ -389,7 +395,6 @@ count: false
 ]
 .pull-right[
 <pre style="font-size: 13pt;" class="red">
-&lt;body>
 &lt;h1>This is a sample html&lt;/h1>
 
 &lt;blockquote>
@@ -423,7 +428,6 @@ How are you?
 
 &lt;p>End of households&lt;/p>
 
-&lt;/body>
 </pre>
 ]
 
@@ -460,7 +464,6 @@ count: false
 ]
 .pull-right[
 <pre style="font-size: 13pt">
-&lt;body>
 &lt;h1>This is a sample html&lt;/h1>
 
 &lt;blockquote>
@@ -494,7 +497,6 @@ How are you?
 
 &lt;p>End of households&lt;/p>
 
-&lt;/body>
 </pre>
 ]
 
@@ -531,7 +533,6 @@ count: false
 ]
 .pull-right[
 <pre style="font-size: 13pt">
-&lt;body>
 &lt;h1>This is a sample html&lt;/h1>
 
 <span class="red">&lt;blockquote>
@@ -565,7 +566,6 @@ How are you?
 
 &lt;p>End of households&lt;/p>
 
-&lt;/body>
 </pre>
 ]
 
@@ -603,7 +603,6 @@ count: false
 ]
 .pull-right[
 <pre style="font-size: 13pt">
-&lt;body>
 &lt;h1>This is a sample html&lt;/h1>
 
 &lt;blockquote>
@@ -637,7 +636,6 @@ How are you?
 
 <span class="red">&lt;p>End of households&lt;/p></span>
 
-&lt;/body>
 </pre>
 ]
 
@@ -675,7 +673,6 @@ count: false
 ]
 .pull-right[
 <pre style="font-size: 13pt">
-&lt;body>
 &lt;h1>This is a sample html&lt;/h1>
 
 &lt;blockquote>
@@ -709,7 +706,6 @@ How are you?
 
 &lt;p>End of households&lt;/p>
 
-&lt;/body>
 </pre>
 ]
 
@@ -747,7 +743,6 @@ count: false
 ]
 .pull-right[
 <pre style="font-size: 13pt">
-&lt;body>
 &lt;h1>This is a sample html&lt;/h1>
 
 &lt;blockquote>
@@ -781,7 +776,6 @@ How are you?
 
 &lt;p>End of households&lt;/p>
 
-&lt;/body>
 </pre>
 ]
 
@@ -819,7 +813,6 @@ count: false
 ]
 .pull-right[
 <pre style="font-size: 13pt">
-&lt;body>
 &lt;h1>This is a sample html&lt;/h1>
 
 &lt;blockquote>
@@ -853,7 +846,6 @@ How are you?
 
 &lt;p>End of households&lt;/p>
 
-&lt;/body>
 </pre>
 ]
 
@@ -896,7 +888,6 @@ count: false
 ]
 .pull-right[
 <pre style="font-size: 13pt">
-&lt;body>
 &lt;h1>This is a sample html&lt;/h1>
 
 &lt;blockquote>
@@ -930,7 +921,6 @@ How are you?
 
 &lt;p>End of households&lt;/p>
 
-&lt;/body>
 </pre>
 ]
 
@@ -971,7 +961,6 @@ count: false
 ]
 .pull-right[
 <pre style="font-size: 13pt">
-&lt;body>
 &lt;h1>This is a sample html&lt;/h1>
 
 &lt;blockquote>
@@ -1005,7 +994,6 @@ How are you?
 
 <span class="red">&lt;p>End of households&lt;/p></span>
 
-&lt;/body>
 </pre>
 ]
 
@@ -1033,7 +1021,6 @@ count: false
 ]
 .pull-right[
 <pre style="font-size: 13pt">
-&lt;body>
 &lt;h1>This is a sample html&lt;/h1>
 
 &lt;blockquote>
@@ -1067,7 +1054,6 @@ How are you?
 
 &lt;p>End of households&lt;/p>
 
-&lt;/body>
 </pre>
 ]
 
@@ -1099,7 +1085,6 @@ count: false
 ]
 .pull-right[
 <pre style="font-size: 13pt">
-&lt;body>
 &lt;h1>This is a sample html&lt;/h1>
 
 &lt;blockquote>
@@ -1133,7 +1118,6 @@ How are you?
 
 &lt;p>End of households&lt;/p>
 
-&lt;/body>
 </pre>
 ]
 
@@ -1160,7 +1144,6 @@ count: false
 ]
 .pull-right[
 <pre style="font-size: 13pt">
-&lt;body>
 &lt;h1>This is a sample html&lt;/h1>
 
 &lt;blockquote>
@@ -1194,7 +1177,6 @@ How are you?
 
 &lt;p>End of households&lt;/p>
 
-&lt;/body>
 </pre>
 ]
 
@@ -1222,7 +1204,6 @@ count: false
 ]
 .pull-right[
 <pre style="font-size: 13pt">
-&lt;body>
 &lt;h1>This is a sample html&lt;/h1>
 
 &lt;blockquote>
@@ -1256,7 +1237,6 @@ How are you?
 
 &lt;p>End of households&lt;/p>
 
-&lt;/body>
 </pre>
 ]
 
@@ -1283,7 +1263,6 @@ count: false
 ]
 .pull-right[
 <pre style="font-size: 13pt">
-&lt;body>
 &lt;h1>This is a sample html&lt;/h1>
 
 &lt;blockquote>
@@ -1317,7 +1296,6 @@ How are you?
 
 &lt;p>End of households&lt;/p>
 
-&lt;/body>
 </pre>
 ]
 
@@ -1355,7 +1333,7 @@ op <- options(width = 40)
 ```
 
 .pull-left[
-.center[<img src = "img/browser-220.png", width = "90%"></img>]
+.center[<img src = "img/browser-220.png", width = "90%", style = "box-shadow: 3px 5px 3px 1px #00000080;"></img>]
 ]
 .pull-right[
 Use {rvest} `>= v1.0.0` (if not, update)
@@ -1371,13 +1349,13 @@ Use {rvest} `>= v1.0.0` (if not, update)
 ## <i class="fas fa-search-plus"></i> Inspect elements
 <br>
 <br>
-.center[<img src = "img/rvest/developer-tool.png", width = "90%"></img>]
+.center[<img src = "img/rvest/developer-tool.png", width = "90%", style = "box-shadow: 3px 5px 3px 1px #00000080;"></img>]
 ]
 .pull-right[
 ## <i class="fas fa-puzzle-piece"></i> [CSS selectors](https://selectorgadget.com/)
 <br>
 <br>
-.center[<img src = "img/rvest/css-selector.png", width = "90%"></img>]
+.center[<img src = "img/rvest/css-selector.png", width = "90%", style = "box-shadow: 3px 5px 3px 1px #00000080;"></img>]
 ]
 
 ---
@@ -1386,7 +1364,7 @@ Use {rvest} `>= v1.0.0` (if not, update)
 <br>
 <br>
 <br>
-.center[<img src = "img/rvest/navbar-right.png", width = "90%"></img>]
+.center[<img src = "img/rvest/navbar-right.png", width = "90%", style = "box-shadow: 3px 5px 3px 1px #00000080;"></img>]
 ]
 .pull-right[
 `html_element()` select element
@@ -1403,7 +1381,7 @@ Use {rvest} `>= v1.0.0` (if not, update)
 <br>
 <br>
 <br>
-.center[<img src = "img/rvest/navbar-right.png", width = "90%"></img>]
+.center[<img src = "img/rvest/navbar-right.png", width = "90%", style = "box-shadow: 3px 5px 3px 1px #00000080;"></img>]
 ]
 .pull-right[
 `html_children()` get element children
@@ -1420,7 +1398,7 @@ Use {rvest} `>= v1.0.0` (if not, update)
 <br>
 <br>
 <br>
-.center[<img src = "img/rvest/navbar-right.png", width = "90%"></img>]
+.center[<img src = "img/rvest/navbar-right.png", width = "90%", style = "box-shadow: 3px 5px 3px 1px #00000080;"></img>]
 ]
 .pull-right[
 `html_text2()` get element text
@@ -1444,7 +1422,7 @@ Use {rvest} `>= v1.0.0` (if not, update)
 <br>
 <br>
 <br>
-.center[<img src = "img/rvest/navbar-right.png", width = "90%"></img>]
+.center[<img src = "img/rvest/navbar-right.png", width = "90%", style = "box-shadow: 3px 5px 3px 1px #00000080;"></img>]
 ]
 .pull-right[
 `html_elements()` select elements
@@ -1461,7 +1439,7 @@ Use {rvest} `>= v1.0.0` (if not, update)
 
 ```{r html-info}
 ```
-.center[<img src = "img/rvest/info-h3.png", width = "90%"></img>]
+.center[<img src = "img/rvest/info-h3.png", width = "90%", style = "box-shadow: 3px 5px 3px 1px #00000080;"></img>]
 ]
 .pull-right[
 select all `<h3>` elements
@@ -1478,13 +1456,18 @@ select `#timetable` id
 <br>
 <br>
 <br>
-.center[<img src = "img/rvest/info-table.png", width = "90%"></img>]
+.center[<img src = "img/rvest/info-table.png", width = "90%", style = "box-shadow: 3px 5px 3px 1px #00000080;"></img>]
 ]
 .pull-right[
 select the first `<table>` element
 ```{r html-table}
 ```
 ]
+
+???
+
+* table on the web primarily for presentation purpose, not data storage
+* isn't clean from web scraping
 
 ---
 
