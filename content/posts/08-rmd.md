@@ -7,6 +7,6 @@ slides: "08-rmd.html"
 r: "08-rmd.R"
 rmd: "08-rmd.Rmd"
 pdf: "08-rmd.pdf"
-lab:
+lab: "labs/lab08"
 sol:
 ---
