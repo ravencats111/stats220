@@ -73,8 +73,8 @@ library(stringr) # manipulate strings in week 10
 
 ## ---- pdf-links-dl
 pdf_files <- str_remove(pdf_urls, "/")
-map2( # below for week 11
-  url_absolute(pdf_urls), pdf_files,
+purrr::walk2( # below for week 11
+  url_absolute(pdf_urls, course), pdf_files,
   ~ download.file(url = .x, destfile = .y))
 
 ## ---- root-endpoint

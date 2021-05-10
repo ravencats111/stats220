@@ -1658,18 +1658,19 @@ stats220_urls
 #&gt; [43] "/R/08-rmd.R"          
 #&gt; [44] "/08-rmd.Rmd"          
 #&gt; [45] "/08-rmd.pdf"          
-#&gt; [46] "/"                    
-#&gt; [47] "/R/"                  
-#&gt; [48] "/"                    
-#&gt; [49] "/"                    
-#&gt; [50] "/R/"                  
-#&gt; [51] "/"                    
+#&gt; [46] "/labs/lab08"          
+#&gt; [47] "/objs/obj09"          
+#&gt; [48] "/R/09-web-scrape.R"   
+#&gt; [49] "/09-web-scrape.Rmd"   
+#&gt; [50] "/"                    
+#&gt; [51] "/R/"                  
 #&gt; [52] "/"                    
-#&gt; [53] "/R/"                  
-#&gt; [54] "/"                    
+#&gt; [53] "/"                    
+#&gt; [54] "/R/"                  
 #&gt; [55] "/"                    
-#&gt; [56] "/R/"                  
-#&gt; [57] "/"
+#&gt; [56] "/"                    
+#&gt; [57] "/R/"                  
+#&gt; [58] "/"
 ```
 
 ---
@@ -1696,8 +1697,8 @@ library(stringr) # manipulate strings in week 10
 
 ```r
 pdf_files &lt;- str_remove(pdf_urls, "/")
-map2( # below for week 11
-  url_absolute(pdf_urls), pdf_files,
+purrr::walk2( # below for week 11
+  url_absolute(pdf_urls, course), pdf_files,
   ~ download.file(url = .x, destfile = .y))
 ```
 
@@ -1727,7 +1728,7 @@ GET(endpoint)
 
 ```
 #&gt; Response [https://api.github.com]
-*#&gt;   Date: 2021-05-09 05:18
+*#&gt;   Date: 2021-05-10 08:45
 *#&gt;   Status: 200
 *#&gt;   Content-Type: application/json; charset=utf-8
 *#&gt;   Size: 2.31 kB
@@ -1777,7 +1778,7 @@ resp
 
 ```
 #&gt; Response [https://api.github.com/repos/STATS-UOA/stats220]
-#&gt;   Date: 2021-05-09 05:18
+#&gt;   Date: 2021-05-10 08:45
 #&gt;   Status: 200
 #&gt;   Content-Type: application/json; charset=utf-8
 #&gt;   Size: 6.41 kB
@@ -2017,10 +2018,10 @@ content(resp)
 #&gt; [1] "2020-02-21T01:53:12Z"
 #&gt; 
 #&gt; $updated_at
-#&gt; [1] "2021-05-06T23:39:59Z"
+#&gt; [1] "2021-05-09T23:08:11Z"
 #&gt; 
 #&gt; $pushed_at
-#&gt; [1] "2021-05-06T23:39:56Z"
+#&gt; [1] "2021-05-09T23:08:08Z"
 #&gt; 
 #&gt; $git_url
 #&gt; [1] "git://github.com/STATS-UOA/stats220.git"
@@ -2038,7 +2039,7 @@ content(resp)
 #&gt; [1] "https://stats220.earo.me"
 #&gt; 
 #&gt; $size
-#&gt; [1] 163718
+#&gt; [1] 164390
 #&gt; 
 #&gt; $stargazers_count
 #&gt; [1] 4
