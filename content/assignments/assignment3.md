@@ -103,7 +103,7 @@ to get a polished one for the purpose of **communication**. For example,
 
 **NOTE:**
 
--   Interactive graphics are NOT acceptable.
+-   Interactive graphics are NOT accepted.
 -   DO NOT share any of your ideas or explorations on Piazza or other
     venues.
 

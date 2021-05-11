@@ -6,7 +6,7 @@ obj: "objs/obj09"
 slides: "09-web-scrape.html"
 r: "09-web-scrape.R"
 rmd: "09-web-scrape.Rmd"
-pdf:
+pdf: "09-web-scrape.pdf"
 lab:
 sol:
 ---
