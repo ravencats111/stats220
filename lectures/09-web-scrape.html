@@ -80,14 +80,18 @@ A web page consists of:
   &lt;body&gt;
     &lt;!--This section contains what you want to display on your web page.--&gt;
     &lt;h1&gt;I'm a first level header&lt;/h1&gt;
-    &lt;p&gt;This is a paragraph.&lt;/p&gt;
+    &lt;p&gt;This is a &lt;b&gt;paragraph&lt;/b&gt;.&lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;
 ```
 
 ???
 
-servr::httd() to serve
+* servr::httd() to serve
+* HTML: hier str: elements (`&lt;tags&gt;`) and optional attributes, and contents
+* &gt; 100 elements: each html page must have `&lt;head&gt;` and `&lt;body&gt;`. (rich format -&gt; md)
+* block tags: h1, p
+* inline tags: bold a
 
 ---
 
@@ -1662,15 +1666,16 @@ stats220_urls
 #&gt; [47] "/objs/obj09"          
 #&gt; [48] "/R/09-web-scrape.R"   
 #&gt; [49] "/09-web-scrape.Rmd"   
-#&gt; [50] "/"                    
-#&gt; [51] "/R/"                  
-#&gt; [52] "/"                    
+#&gt; [50] "/09-web-scrape.pdf"   
+#&gt; [51] "/"                    
+#&gt; [52] "/R/"                  
 #&gt; [53] "/"                    
-#&gt; [54] "/R/"                  
-#&gt; [55] "/"                    
+#&gt; [54] "/"                    
+#&gt; [55] "/R/"                  
 #&gt; [56] "/"                    
-#&gt; [57] "/R/"                  
-#&gt; [58] "/"
+#&gt; [57] "/"                    
+#&gt; [58] "/R/"                  
+#&gt; [59] "/"
 ```
 
 ---
@@ -1691,7 +1696,8 @@ library(stringr) # manipulate strings in week 10
 #&gt; [5] "/05-fcts-dates.pdf"   
 #&gt; [6] "/06-tidy-data.pdf"    
 #&gt; [7] "/07-data-vis2.pdf"    
-#&gt; [8] "/08-rmd.pdf"
+#&gt; [8] "/08-rmd.pdf"          
+#&gt; [9] "/09-web-scrape.pdf"
 ```
 
 
@@ -1728,7 +1734,7 @@ GET(endpoint)
 
 ```
 #&gt; Response [https://api.github.com]
-*#&gt;   Date: 2021-05-10 08:45
+*#&gt;   Date: 2021-05-12 00:20
 *#&gt;   Status: 200
 *#&gt;   Content-Type: application/json; charset=utf-8
 *#&gt;   Size: 2.31 kB
@@ -1778,7 +1784,7 @@ resp
 
 ```
 #&gt; Response [https://api.github.com/repos/STATS-UOA/stats220]
-#&gt;   Date: 2021-05-10 08:45
+#&gt;   Date: 2021-05-12 00:20
 #&gt;   Status: 200
 #&gt;   Content-Type: application/json; charset=utf-8
 #&gt;   Size: 6.41 kB
@@ -2018,10 +2024,10 @@ content(resp)
 #&gt; [1] "2020-02-21T01:53:12Z"
 #&gt; 
 #&gt; $updated_at
-#&gt; [1] "2021-05-09T23:08:11Z"
+#&gt; [1] "2021-05-11T23:22:45Z"
 #&gt; 
 #&gt; $pushed_at
-#&gt; [1] "2021-05-09T23:08:08Z"
+#&gt; [1] "2021-05-11T23:22:42Z"
 #&gt; 
 #&gt; $git_url
 #&gt; [1] "git://github.com/STATS-UOA/stats220.git"
@@ -2039,7 +2045,7 @@ content(resp)
 #&gt; [1] "https://stats220.earo.me"
 #&gt; 
 #&gt; $size
-#&gt; [1] 164390
+#&gt; [1] 164407
 #&gt; 
 #&gt; $stargazers_count
 #&gt; [1] 4

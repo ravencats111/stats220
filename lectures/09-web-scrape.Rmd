@@ -90,14 +90,18 @@ A web page consists of:
   <body>
     <!--This section contains what you want to display on your web page.-->
     <h1>I'm a first level header</h1>
-    <p>This is a paragraph.</p>
+    <p>This is a <b>paragraph</b>.</p>
   </body>
 </html>
 ```
 
 ???
 
-servr::httd() to serve
+* servr::httd() to serve
+* HTML: hier str: elements (`<tags>`) and optional attributes, and contents
+* > 100 elements: each html page must have `<head>` and `<body>`. (rich format -> md)
+* block tags: h1, p
+* inline tags: bold a
 
 ---
 
