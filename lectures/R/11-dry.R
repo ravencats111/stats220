@@ -1,24 +1,34 @@
+library(lubridate)
 library(tidyverse)
 
-covid_0301 <- read_csv("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/03-01-2020.csv")
+covid_0301 <- read_csv("https://github.com/cssegisanddata/covid-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/03-01-2020.csv")
 covid_0302 <- read_csv("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/03-02-2020.csv")
 covid_0303 <- read_csv("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/03-03-2020.csv")
-covid_0304 <- read_csv("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/03-04-2020.csv")
-covid_0305 <- read_csv("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/03-05-2020.csv")
+covid_03 <- bind_rows(covid_0301, covid_0302, covid_0303)
+covid_03
 
-library(lubridate)
-dates <- seq(mdy("03-01-2020"), by = 1, length.out = 92)
-dates_chr <- format(dates, "%m-%d-%Y")
-urls <- glue::glue("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/{dates_chr}.csv")
+covid_1231 <- read_csv("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/12-31-2020.csv")
+covid_1231
 
-covid19_raw <- map_dfr(
-  urls, # `Last_Update`/`Last Update`
-  function(.x) {
-    data <- read_csv(.x, 
-      col_types = cols(Last_Update = "_", `Last Update` = "_"))
-    rename_with(data, janitor::make_clean_names)
-  },
-  .id = "id")
+make_url <- function(date) {
+  date_chr <- format(date, "%m-%d-%Y")
+  setNames(glue::glue("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/{date_chr}.csv"),
+  date_chr)
+}
+
+dates <- seq(mdy("03-01-2020"), mdy("12-31-2020"), by = 1)
+urls <- make_url(dates)
+head(urls, 3)
+tail(urls, 3)
+
+read_covid19 <- function(url) {
+  # `Last_Update`/`Last Update`
+  data <- read_csv(url, 
+    col_types = cols(Last_Update = "_", `Last Update` = "_"))
+  rename_with(data, janitor::make_clean_names)
+}
+
+covid19_raw <- map_dfr(urls, read_covid19, .id = "date")
 date_tbl <- tibble(id = as.character(seq_along(dates)), date = dates)
 
 covid19 <- covid19_raw %>% 
