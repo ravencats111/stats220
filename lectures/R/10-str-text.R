@@ -61,6 +61,29 @@ str_view_all(fruit, "a$")
 ## ---- anchor-start
 str_view_all(fruit, "^a")
 
+## ---- gapminder
+gapminder <- read_rds("data/gapminder.rds") %>% 
+  group_by(country) %>% 
+  slice_tail() %>% 
+  ungroup()
+gapminder
+
+## ---- gapminder-dot
+gapminder %>% 
+  filter(str_detect(country, "i.a"))
+
+## ---- gapminder-anchor
+gapminder %>% 
+  filter(str_detect(country, "i.a$"))
+
+## ---- gapminder-handcls
+gapminder %>% 
+  filter(str_detect(country, "[nls]ia$"))
+
+## ---- gapminder-negate
+gapminder %>% 
+  filter(str_detect(country, "[^nls]ia$"))
+
 ## ---- text
 lyrics <- c("This will be an uncertain time for us my love",
             "I can hear the echo of your voice in my head",

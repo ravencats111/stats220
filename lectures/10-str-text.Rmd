@@ -297,6 +297,70 @@ if `.` matches any character, how to match a literal `"."`?
 
 class: inverse middle
 
+## Working with strings in a tibble
+
+---
+
+.left-column[
+## Gapminder
+]
+.right-column[
+```{r gapminder}
+```
+]
+
+---
+
+.left-column[
+## Gapminder
+]
+.right-column[
+* .brown[`"i.a"`] matches “ina”, “ica”, “ita”, and more.
+
+```{r gapminder-dot}
+```
+]
+
+---
+
+.left-column[
+## Gapminder
+]
+.right-column[
+* .brown[`"i.a$"`] matches **the end** of “ina”, “ica”, “ita”, and more.
+
+```{r gapminder-anchor}
+```
+]
+
+---
+
+.left-column[
+## Gapminder
+]
+.right-column[
+* .brown[`"[nls]ia$"`] matches `ia` at the end of the country name, preceded by one of the characters in the class given inside `[]`.
+
+```{r gapminder-handcls}
+```
+]
+
+---
+
+.left-column[
+## Gapminder
+]
+.right-column[
+* .brown[`"[^nls]ia$"`] matches `ia` at the end of the country name, preceded by anything but one of the characters in the class given inside `[]`.
+
+```{r gapminder-negate}
+```
+]
+
+---
+
+class: inverse middle
+
 ## Text mining
 
 ---
@@ -313,7 +377,7 @@ class: inverse middle
 ### - tokenise
 ]
 .right-column[
-## Unigram
+## unigram
 ```{r unnest-words}
 ```
 ]
@@ -325,7 +389,7 @@ class: inverse middle
 ### - tokenise
 ]
 .right-column[
-## Unigram
+## unigram
 ```{r unnest-words-count}
 ```
 .brown[how often we see each word in this corpus]
@@ -338,6 +402,7 @@ class: inverse middle
 ### - tokenise
 ]
 .right-column[
+## letters
 ```{r unnest-chrs}
 ```
 ]
@@ -349,7 +414,7 @@ class: inverse middle
 ### - tokenise
 ]
 .right-column[
-## N-gram
+## n-gram
 ```{r unnest-ngrams}
 ```
 ]
@@ -365,7 +430,7 @@ background-size: contain
 .center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
 ]
 .right-column[
-## Sentiment analysis
+## sentiment analysis
 <br>
 <br>
 <img src="https://www.tidytextmining.com/images/tmwr_0201.png" width="100%">
