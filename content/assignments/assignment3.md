@@ -32,7 +32,7 @@ to `data/` under your `Rproj` folder.
     computer.
 -   **NO marks will be given to the submission that cannot be reproduced
     on the hosted runner.**
-*   Marking is based on the rendered document, instead of the Rmd file.
+-   Marking is based on the rendered document, instead of the Rmd file.
 -   **Show and place all relevant source code, output, and narratives to
     the appropriate sections; otherwise, marks will be deducted.**
 -   Set each figure’s size appropriately for clear presentation.
