@@ -1,0 +1,4029 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STATS 220</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="assets/remark.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STATS 220
+## Don’t repeat yourself 🐈
+
+---
+
+
+class: middle
+
+
+
+
+
+
+
+&lt;img src="https://rstudio-education.github.io/tidyverse-cookbook/images/data-science-workflow.png" width="100%"&gt;
+
+---
+
+class: center
+
+## Case study: batch download and process COVID-19 data
+
+[&lt;img src="img/jhu-covid19.png" width="100%"&gt;](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports)
+
+---
+
+## Keep calm, and import CSVs one by one
+
+
+```r
+library(tidyverse) # library(purrr)
+covid_0301 &lt;- read_csv("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/03-01-2020.csv")
+covid_0302 &lt;- read_csv("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/03-02-2020.csv")
+covid_0303 &lt;- read_csv("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/03-03-2020.csv")
+(covid_03 &lt;- bind_rows(covid_0301, covid_0302, covid_0303))
+```
+
+```
+#&gt; # A tibble: 420 x 8
+#&gt;   `Province/State` `Country/Region` `Last Update`      
+#&gt;   &lt;chr&gt;            &lt;chr&gt;            &lt;dttm&gt;             
+#&gt; 1 Hubei            Mainland China   2020-03-01 10:13:19
+#&gt; 2 &lt;NA&gt;             South Korea      2020-03-01 23:43:03
+#&gt; 3 &lt;NA&gt;             Italy            2020-03-01 23:23:02
+#&gt; 4 Guangdong        Mainland China   2020-03-01 14:13:18
+#&gt; 5 Henan            Mainland China   2020-03-01 14:13:18
+#&gt; 6 Zhejiang         Mainland China   2020-03-01 10:13:33
+#&gt; # … with 414 more rows, and 5 more variables:
+#&gt; #   Confirmed &lt;dbl&gt;, Deaths &lt;dbl&gt;, Recovered &lt;dbl&gt;,
+#&gt; #   Latitude &lt;dbl&gt;, Longitude &lt;dbl&gt;
+```
+
+---
+
+## Data is changing
+
+
+```r
+covid_1231 &lt;- read_csv("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/12-31-2020.csv")
+covid_1231
+```
+
+```
+#&gt; # A tibble: 3,980 x 14
+#&gt;    FIPS Admin2 Province_State Country_Region     
+#&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt;              
+#&gt; 1    NA &lt;NA&gt;   &lt;NA&gt;           Afghanistan        
+#&gt; 2    NA &lt;NA&gt;   &lt;NA&gt;           Albania            
+#&gt; 3    NA &lt;NA&gt;   &lt;NA&gt;           Algeria            
+#&gt; 4    NA &lt;NA&gt;   &lt;NA&gt;           Andorra            
+#&gt; 5    NA &lt;NA&gt;   &lt;NA&gt;           Angola             
+#&gt; 6    NA &lt;NA&gt;   &lt;NA&gt;           Antigua and Barbuda
+#&gt; # … with 3,974 more rows, and 10 more variables:
+#&gt; #   Last_Update &lt;dttm&gt;, Lat &lt;dbl&gt;, Long_ &lt;dbl&gt;,
+#&gt; #   Confirmed &lt;dbl&gt;, Deaths &lt;dbl&gt;, Recovered &lt;dbl&gt;,
+#&gt; #   Active &lt;dbl&gt;, Combined_Key &lt;chr&gt;, Incident_Rate &lt;dbl&gt;,
+#&gt; #   Case_Fatality_Ratio &lt;dbl&gt;
+```
+
+---
+
+class: middle
+
+## What are the repeated patterns?
+
+1. everyday different URLs
+2. read each csv file into R
+3. non-standardised column names
+
+## DRY: automate the common tasks above
+
+---
+
+## .large[.large[.brown[1]]] generate a sequence of urls 
+
+
+```r
+make_url &lt;- function(date) {
+  date_chr &lt;- format(date, "%m-%d-%Y")
+  setNames(glue::glue("https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/{date_chr}.csv"),
+  date_chr)
+}
+```
+
+.large[.brown[**3**]] key steps to creating a custom function:
+
+1. pick a **name** for the function, e.g. `make_url`.
+2. list the inputs, or **arguments**, to the function inside `function`, e.g. `date`.
+3. place the code you have developed in **body** of the function, a `{` block that immediately follows `function(...)`.
+
+---
+
+## Test `make_url()`: does it return what we expected?
+
+
+```r
+library(lubridate)
+dates &lt;- seq(mdy("03-01-2020"), mdy("12-31-2020"), by = 1)
+urls &lt;- make_url(dates)
+head(urls, 2)
+```
+
+```
+#&gt; https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/03-01-2020.csv
+#&gt; https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/03-02-2020.csv
+```
+
+```r
+tail(urls, 2)
+```
+
+```
+#&gt; https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/12-30-2020.csv
+#&gt; https://github.com/CSSEGISandData/COVID-19/raw/master/csse_covid_19_data/csse_covid_19_daily_reports/12-31-2020.csv
+```
+
+---
+
+## .large[.large[.brown[2 &amp; 3]]] read data and standardise column names
+
+
+```r
+read_covid19 &lt;- function(url) {
+  data &lt;- read_csv(url, 
+    col_types = cols(Last_Update = "_", `Last Update` = "_"))
+  rename_with(data, janitor::make_clean_names)
+}
+read_covid19(urls[1])
+```
+
+```
+#&gt; # A tibble: 126 x 7
+#&gt;   province_state country_region confirmed deaths recovered
+#&gt;   &lt;chr&gt;          &lt;chr&gt;              &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 Hubei          Mainland China     66907   2761     31536
+#&gt; 2 &lt;NA&gt;           South Korea         3736     17        30
+#&gt; 3 &lt;NA&gt;           Italy               1694     34        83
+#&gt; 4 Guangdong      Mainland China      1349      7      1016
+#&gt; 5 Henan          Mainland China      1272     22      1198
+#&gt; 6 Zhejiang       Mainland China      1205      1      1046
+#&gt; # … with 120 more rows, and 2 more variables:
+#&gt; #   latitude &lt;dbl&gt;, longitude &lt;dbl&gt;
+```
+
+---
+
+class: inverse middle
+
+## Functional programming
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+## comes to rescue
+]
+.right-column[
+## Copy-and-pasting
+
+
+```r
+covid19_csv1 &lt;- read_covid19(urls[1])
+covid19_csv2 &lt;- read_covid19(urls[2])
+covid19_csv3 &lt;- read_covid19(urls[2])
+covid19_csv4 &lt;- read_covid19(urls[4])
+covid19_csv5 &lt;- read_covid19(urls[5])
+covid19_csv6 &lt;- read_covid19(urls[6])
+covid19_csv6 &lt;- read_covid19(urls[7])
+covid19_csv8 &lt;- read_covid19(urls[8])
+covid19_csv9 &lt;- read_covid19(urls[9])
+```
+
+When it's gonna end? 😭
+&lt;hr&gt;
+Reducing duplication is **iteration**, which helps you when you need to do the same thing to multiple inputs.
+]
+
+???
+
+introduce typos/errors, when just simply copy and paste
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+### - `map()`
+]
+.right-column[
+`map(.x, .f, ...)` for every element of .brown[`.x`], apply .brown[`.f`]
+* always returns a list 
+
+```r
+covid19_lst &lt;- map(urls, read_covid19)
+covid19_lst[[length(covid19_lst)]]
+```
+
+```
+#&gt; # A tibble: 3,980 x 13
+#&gt;    fips admin2 province_state country_region      lat   long
+#&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt;             &lt;dbl&gt;  &lt;dbl&gt;
+#&gt; 1    NA &lt;NA&gt;   &lt;NA&gt;           Afghanistan        33.9  67.7 
+#&gt; 2    NA &lt;NA&gt;   &lt;NA&gt;           Albania            41.2  20.2 
+#&gt; 3    NA &lt;NA&gt;   &lt;NA&gt;           Algeria            28.0   1.66
+#&gt; 4    NA &lt;NA&gt;   &lt;NA&gt;           Andorra            42.5   1.52
+#&gt; 5    NA &lt;NA&gt;   &lt;NA&gt;           Angola            -11.2  17.9 
+#&gt; 6    NA &lt;NA&gt;   &lt;NA&gt;           Antigua and Barb…  17.1 -61.8 
+#&gt; # … with 3,974 more rows, and 7 more variables:
+#&gt; #   confirmed &lt;dbl&gt;, deaths &lt;dbl&gt;, recovered &lt;dbl&gt;,
+#&gt; #   active &lt;dbl&gt;, combined_key &lt;chr&gt;, incident_rate &lt;dbl&gt;,
+#&gt; #   case_fatality_ratio &lt;dbl&gt;
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+### - `map()`
+]
+.right-column[
+`.f` takes a function, formula, or vector.
+* If a **function**, it is used as is.
+* If a **formula**, e.g. `~ .x + 2`, it is converted to a function. There are three ways to refer to the arguments:
+  + For a single argument function, use `.`
+  + For a two argument function, use `.x` and `.y`
+  + For more arguments, use `..1`, `..2`, `..3` etc
+
+
+```r
+covid19_lst &lt;- map(urls, read_covid19)
+covid19_lst &lt;- map(urls, ~ read_covid19(.x))
+covid19_lst &lt;- map(urls, function(.x) read_covid19(.x))
+```
+]
+
+---
+
+count: false
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+### - `map()`
+]
+.right-column[
+&lt;img src = "img/minis-list.png", width = 30%, style = "position:absolute; top: 2.5%; left: 25.5%; box-shadow: 3px 5px 3px 1px #00000080;"&gt;&lt;/img&gt;
+.footnote[image credit: Jenny Bryan]
+]
+
+---
+
+count: false
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+### - `map()`
+]
+.right-column[
+&lt;img src = "img/minis-list.png", width = 30%, style = "position:absolute; top: 2.5%; left: 25.5%; box-shadow: 3px 5px 3px 1px #00000080;"&gt;&lt;/img&gt;
+&lt;img src = "img/minis-x.png", width = 30%, style = "position:absolute; top: 20.5%; left: 65.5%; box-shadow: 3px 5px 3px 1px #00000080;"&gt;&lt;/img&gt;
+.footnote[image credit: Jenny Bryan]
+]
+
+---
+
+count: false
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+### - `map()`
+]
+.right-column[
+&lt;img src = "img/minis-list.png", width = 30%, style = "position:absolute; top: 2.5%; left: 25.5%; box-shadow: 3px 5px 3px 1px #00000080;"&gt;&lt;/img&gt;
+&lt;img src = "img/minis-x.png", width = 30%, style = "position:absolute; top: 20.5%; left: 65.5%; box-shadow: 3px 5px 3px 1px #00000080;"&gt;&lt;/img&gt;
+&lt;img src = "img/minis-map.png", width = 30%, style = "position:absolute; top: 50.5%; left: 30.5%; box-shadow: 3px 5px 3px 1px #00000080;"&gt;&lt;/img&gt;
+.footnote[image credit: Jenny Bryan]
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+### - `map()`
+]
+.right-column[
+## Bind multiple tibbles by row
+
+```r
+bind_rows(covid19_lst)
+```
+
+
+```
+#&gt; # A tibble: 1,069,141 x 16
+#&gt;   province_state country_region confirmed deaths recovered
+#&gt;   &lt;chr&gt;          &lt;chr&gt;              &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 Hubei          Mainland China     66907   2761     31536
+#&gt; 2 &lt;NA&gt;           South Korea         3736     17        30
+#&gt; 3 &lt;NA&gt;           Italy               1694     34        83
+#&gt; 4 Guangdong      Mainland China      1349      7      1016
+#&gt; 5 Henan          Mainland China      1272     22      1198
+#&gt; 6 Zhejiang       Mainland China      1205      1      1046
+#&gt; # … with 1,069,135 more rows, and 11 more variables:
+#&gt; #   latitude &lt;dbl&gt;, longitude &lt;dbl&gt;, fips &lt;dbl&gt;,
+#&gt; #   admin2 &lt;chr&gt;, lat &lt;dbl&gt;, long &lt;dbl&gt;, active &lt;dbl&gt;,
+#&gt; #   combined_key &lt;chr&gt;, incidence_rate &lt;dbl&gt;,
+#&gt; #   case_fatality_ratio &lt;dbl&gt;, incident_rate &lt;dbl&gt;
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+### - `map()`
+]
+.right-column[
+## Hmm, where are the dates?
+
+```r
+bind_rows(covid19_lst)
+```
+
+
+```
+#&gt; # A tibble: 1,069,141 x 16
+#&gt;   province_state country_region confirmed deaths recovered
+#&gt;   &lt;chr&gt;          &lt;chr&gt;              &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 Hubei          Mainland China     66907   2761     31536
+#&gt; 2 &lt;NA&gt;           South Korea         3736     17        30
+#&gt; 3 &lt;NA&gt;           Italy               1694     34        83
+#&gt; 4 Guangdong      Mainland China      1349      7      1016
+#&gt; 5 Henan          Mainland China      1272     22      1198
+#&gt; 6 Zhejiang       Mainland China      1205      1      1046
+#&gt; # … with 1,069,135 more rows, and 11 more variables:
+#&gt; #   latitude &lt;dbl&gt;, longitude &lt;dbl&gt;, fips &lt;dbl&gt;,
+#&gt; #   admin2 &lt;chr&gt;, lat &lt;dbl&gt;, long &lt;dbl&gt;, active &lt;dbl&gt;,
+#&gt; #   combined_key &lt;chr&gt;, incidence_rate &lt;dbl&gt;,
+#&gt; #   case_fatality_ratio &lt;dbl&gt;, incident_rate &lt;dbl&gt;
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+### - `map()`
+### - `map2()`
+]
+.right-column[
+`map2(.x, .y, .f)` for every element of .brown[`.x`] and .brown[`.y`], apply .brown[`.f`]
+
+```r
+*covid19_lst &lt;- map2(urls, dates,
+  ~ read_covid19(.x) %&gt;% mutate(date = .y))
+bind_rows(covid19_lst)
+```
+
+
+```
+#&gt; # A tibble: 1,069,141 x 17
+#&gt;   province_state country_region confirmed deaths recovered
+#&gt;   &lt;chr&gt;          &lt;chr&gt;              &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 Hubei          Mainland China     66907   2761     31536
+#&gt; 2 &lt;NA&gt;           South Korea         3736     17        30
+#&gt; 3 &lt;NA&gt;           Italy               1694     34        83
+#&gt; 4 Guangdong      Mainland China      1349      7      1016
+#&gt; 5 Henan          Mainland China      1272     22      1198
+#&gt; 6 Zhejiang       Mainland China      1205      1      1046
+#&gt; # … with 1,069,135 more rows, and 12 more variables:
+#&gt; #   latitude &lt;dbl&gt;, longitude &lt;dbl&gt;, fips &lt;dbl&gt;,
+#&gt; #   admin2 &lt;chr&gt;, lat &lt;dbl&gt;, long &lt;dbl&gt;, active &lt;dbl&gt;,
+#&gt; #   combined_key &lt;chr&gt;, incidence_rate &lt;dbl&gt;,
+#&gt; #   case_fatality_ratio &lt;dbl&gt;, incident_rate &lt;dbl&gt;,
+#&gt; #   date &lt;date&gt;
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+### - `map()`
+### - `map2()`
+### - `map_dfr()`
+]
+.right-column[
+`map_*()` is a variant of `map()` that returns an output in the indicated type. `map_dfr()` returns data frames by row-binding.
+
+```r
+covid19_raw &lt;- map_dfr(urls, read_covid19, .id = "date")
+covid19_raw
+```
+
+
+```
+#&gt; # A tibble: 1,069,141 x 17
+#&gt;   date       province_state country_region confirmed deaths
+#&gt;   &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;              &lt;dbl&gt;  &lt;dbl&gt;
+#&gt; 1 03-01-2020 Hubei          Mainland China     66907   2761
+#&gt; 2 03-01-2020 &lt;NA&gt;           South Korea         3736     17
+#&gt; 3 03-01-2020 &lt;NA&gt;           Italy               1694     34
+#&gt; 4 03-01-2020 Guangdong      Mainland China      1349      7
+#&gt; 5 03-01-2020 Henan          Mainland China      1272     22
+#&gt; 6 03-01-2020 Zhejiang       Mainland China      1205      1
+#&gt; # … with 1,069,135 more rows, and 12 more variables:
+#&gt; #   recovered &lt;dbl&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,
+#&gt; #   fips &lt;dbl&gt;, admin2 &lt;chr&gt;, lat &lt;dbl&gt;, long &lt;dbl&gt;,
+#&gt; #   active &lt;dbl&gt;, combined_key &lt;chr&gt;, incidence_rate &lt;dbl&gt;,
+#&gt; #   case_fatality_ratio &lt;dbl&gt;, incident_rate &lt;dbl&gt;
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+### - `map()`
+### - `map2()`
+### - `map_dfr()`
+### - `map_*()`
+]
+.right-column[
+`map()` variants
+* `map(.x, .f)` maps over 1 argument returns a list
+* `map_dbl(.x, .f)` returns a double vector
+* `map_chr(.x, .f)` returns a character vector
+* `map_lgl(.x, .f)` returns a logical vector
+* `map_dfr(.x, .f)` returns a data frame created by row-binding
+* `map_dfc(.x, .f)` returns a data frame created by col-binding
+&lt;hr&gt;
+* `map2_*(.x, .y, .f)` maps over 2 arguments
+* `pmap_*(.l, .f)` maps over &gt; 2 arguments
+]
+
+---
+
+class: middle inverse
+
+## Apply a function .brown[`across()`] multiple columns
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="60%"&gt;](https://dplyr.tidyverse.org)]
+]
+.right-column[
+## Wrangle a bit
+
+
+```r
+covid19_bystate &lt;- covid19_raw %&gt;% 
+  select(date, country_region:recovered) %&gt;% 
+  mutate(
+    date = mdy(date),
+    country_region = case_when(
+      country_region == "Korea, South" ~ "South Korea",
+      country_region == "Mainland China" ~ "China",
+      TRUE ~ country_region)
+  )
+covid19_bystate
+```
+
+```
+#&gt; # A tibble: 1,069,141 x 5
+#&gt;   date       country_region confirmed deaths recovered
+#&gt;   &lt;date&gt;     &lt;chr&gt;              &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 2020-03-01 China              66907   2761     31536
+#&gt; 2 2020-03-01 South Korea         3736     17        30
+#&gt; 3 2020-03-01 Italy               1694     34        83
+#&gt; 4 2020-03-01 China               1349      7      1016
+#&gt; 5 2020-03-01 China               1272     22      1198
+#&gt; 6 2020-03-01 China               1205      1      1046
+#&gt; # … with 1,069,135 more rows
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="60%"&gt;](https://dplyr.tidyverse.org)]
+]
+.right-column[
+
+```r
+covid19_byregion &lt;- covid19_bystate %&gt;% 
+  group_by(country_region, date) %&gt;% 
+  summarise(
+*   confirmed = sum(confirmed, na.rm = TRUE),
+*   deaths = sum(deaths, na.rm = TRUE),
+*   recovered = sum(recovered, na.rm = TRUE)
+  ) %&gt;% 
+  mutate(
+*   new_confirmed = confirmed - lag(confirmed, na.rm = TRUE),
+*   new_deaths = deaths - lag(deaths, na.rm = TRUE),
+*   new_recovered = recovered - lag(recovered, na.rm = TRUE)
+  ) %&gt;% 
+  ungroup()
+```
+Don't wanna type 😭, but I typed...
+]
+
+---
+
+## Make friends with `across()`
+
+.pull-left[
+
+```r
+covid19_byregion &lt;- covid19_bystate %&gt;% 
+  group_by(country_region, date) %&gt;% 
+  summarise(
+*   across(
+*     confirmed:recovered,
+*     sum, na.rm = TRUE)
+  ) %&gt;% 
+  mutate(
+*   across(
+*     confirmed:recovered,
+*     ~ .x - lag(.x, na.rm = TRUE),
+*     .names = "new_{.col}")
+  ) %&gt;% 
+  ungroup()
+```
+]
+.pull-right[
+
+```r
+covid19_byregion &lt;- covid19_bystate %&gt;% 
+  group_by(country_region, date) %&gt;% 
+  summarise(
+*   across(
+*     where(is.numeric),
+*     sum, na.rm = TRUE)
+  ) %&gt;% 
+  mutate(
+*   across(
+*     where(is.numeric),
+*     ~ .x - lag(.x, na.rm = TRUE),
+*     .names = "new_{.col}")
+  ) %&gt;% 
+  ungroup()
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="60%"&gt;](https://dplyr.tidyverse.org)]
+]
+.right-column[
+
+```r
+covid19_byregion
+```
+
+```
+#&gt; # A tibble: 56,107 x 8
+#&gt;   country_region date       confirmed deaths recovered
+#&gt;   &lt;chr&gt;          &lt;date&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 Afghanistan    2020-03-01         1      0         0
+#&gt; 2 Afghanistan    2020-03-02         1      0         0
+#&gt; 3 Afghanistan    2020-03-03         2      0         0
+#&gt; 4 Afghanistan    2020-03-04         4      0         0
+#&gt; 5 Afghanistan    2020-03-05         4      0         0
+#&gt; 6 Afghanistan    2020-03-06         4      0         0
+#&gt; # … with 56,101 more rows, and 3 more variables:
+#&gt; #   new_confirmed &lt;dbl&gt;, new_deaths &lt;dbl&gt;,
+#&gt; #   new_recovered &lt;dbl&gt;
+```
+]
+
+---
+
+background-image:url(img/lst-col.png)
+background-position: 90% 60%
+background-size: 10%
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%"&gt;](https://tidyr.tidyverse.org)]
+]
+.right-column[
+`nest()` multiple columns into a .brown[list-column]
+
+```r
+covid19_lstcol &lt;- covid19_byregion %&gt;% 
+  nest(data = -country_region)
+covid19_lstcol
+```
+
+```
+#&gt; # A tibble: 236 x 2
+#&gt;   country_region      data                  
+#&gt;   &lt;chr&gt;               &lt;list&gt;                
+#&gt; 1 Afghanistan         &lt;tibble[,7] [306 × 7]&gt;
+#&gt; 2 Albania             &lt;tibble[,7] [298 × 7]&gt;
+#&gt; 3 Algeria             &lt;tibble[,7] [306 × 7]&gt;
+#&gt; 4 Andorra             &lt;tibble[,7] [305 × 7]&gt;
+#&gt; 5 Angola              &lt;tibble[,7] [287 × 7]&gt;
+#&gt; 6 Antigua and Barbuda &lt;tibble[,7] [294 × 7]&gt;
+#&gt; # … with 230 more rows
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+]
+.right-column[
+## Look inside the list-column
+
+```r
+covid19_au &lt;- covid19_lstcol$data[[10]]
+covid19_au
+```
+
+```
+#&gt; # A tibble: 306 x 7
+#&gt;   date       confirmed deaths recovered new_confirmed
+#&gt;   &lt;date&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+#&gt; 1 2020-03-01        27      1        11            NA
+#&gt; 2 2020-03-02        30      1        11             3
+#&gt; 3 2020-03-03        39      1        11             9
+#&gt; 4 2020-03-04        52      2        11            13
+#&gt; 5 2020-03-05        55      2        21             3
+#&gt; 6 2020-03-06        60      2        21             5
+#&gt; # … with 300 more rows, and 2 more variables:
+#&gt; #   new_deaths &lt;dbl&gt;, new_recovered &lt;dbl&gt;
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+]
+.right-column[
+## Fit regression models and extract slopes
+
+```r
+fit_au &lt;- lm(new_recovered ~ lag(new_confirmed, n = 14), 
+  data = covid19_au)
+fit_au
+```
+
+```
+#&gt; 
+#&gt; Call:
+#&gt; lm(formula = new_recovered ~ lag(new_confirmed, n = 14), data = covid19_au)
+#&gt; 
+#&gt; Coefficients:
+#&gt;                (Intercept)  lag(new_confirmed, n = 14)  
+#&gt;                    26.3548                      0.5299
+```
+
+```r
+slope_au &lt;- coef(fit_au)[2]
+slope_au
+```
+
+```
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5299203
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+]
+.right-column[
+## .brown[Fun]ction time
+
+
+```r
+extract_slope &lt;- function(data) {
+  fit &lt;- lm(new_recovered ~ lag(new_confirmed, n = 14), data)
+  coef(fit)[2]
+}
+```
+
+Oops, `map()` isn't happy. 🙁
+
+
+```r
+covid19_lstcol$data %&gt;% 
+  map(extract_slope)
+```
+
+```
+#&gt; Error in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+]
+.right-column[
+`safely()` apply functions over elements
+* returns a list of `result` and `error`
+
+```r
+safely_extract_slope &lt;- safely(extract_slope, 
+  otherwise = NA_real_)
+covid19_lstcol$data %&gt;% map(safely_extract_slope)
+```
+
+```
+#&gt; [[1]]
+#&gt; [[1]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6920523 
+#&gt; 
+#&gt; [[1]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[2]]
+#&gt; [[2]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6435756 
+#&gt; 
+#&gt; [[2]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[3]]
+#&gt; [[3]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5329582 
+#&gt; 
+#&gt; [[3]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[4]]
+#&gt; [[4]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5595175 
+#&gt; 
+#&gt; [[4]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[5]]
+#&gt; [[5]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5196389 
+#&gt; 
+#&gt; [[5]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[6]]
+#&gt; [[6]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7375993 
+#&gt; 
+#&gt; [[6]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[7]]
+#&gt; [[7]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8669078 
+#&gt; 
+#&gt; [[7]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[8]]
+#&gt; [[8]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8971555 
+#&gt; 
+#&gt; [[8]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[9]]
+#&gt; [[9]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[9]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[10]]
+#&gt; [[10]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5299203 
+#&gt; 
+#&gt; [[10]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[11]]
+#&gt; [[11]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9182422 
+#&gt; 
+#&gt; [[11]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[12]]
+#&gt; [[12]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9642226 
+#&gt; 
+#&gt; [[12]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[13]]
+#&gt; [[13]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2903094 
+#&gt; 
+#&gt; [[13]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[14]]
+#&gt; [[14]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[14]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[15]]
+#&gt; [[15]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8760548 
+#&gt; 
+#&gt; [[15]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[16]]
+#&gt; [[16]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8306039 
+#&gt; 
+#&gt; [[16]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[17]]
+#&gt; [[17]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1478383 
+#&gt; 
+#&gt; [[17]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[18]]
+#&gt; [[18]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   1.038319 
+#&gt; 
+#&gt; [[18]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[19]]
+#&gt; [[19]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 -0.1417372 
+#&gt; 
+#&gt; [[19]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[20]]
+#&gt; [[20]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.3760244 
+#&gt; 
+#&gt; [[20]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[21]]
+#&gt; [[21]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2665434 
+#&gt; 
+#&gt; [[21]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[22]]
+#&gt; [[22]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.075549 
+#&gt; 
+#&gt; [[22]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[23]]
+#&gt; [[23]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6108023 
+#&gt; 
+#&gt; [[23]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[24]]
+#&gt; [[24]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6446241 
+#&gt; 
+#&gt; [[24]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[25]]
+#&gt; [[25]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.491272 
+#&gt; 
+#&gt; [[25]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[26]]
+#&gt; [[26]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6540097 
+#&gt; 
+#&gt; [[26]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[27]]
+#&gt; [[27]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4138478 
+#&gt; 
+#&gt; [[27]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[28]]
+#&gt; [[28]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.573295 
+#&gt; 
+#&gt; [[28]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[29]]
+#&gt; [[29]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6704973 
+#&gt; 
+#&gt; [[29]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[30]]
+#&gt; [[30]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8998348 
+#&gt; 
+#&gt; [[30]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[31]]
+#&gt; [[31]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.05736442 
+#&gt; 
+#&gt; [[31]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[32]]
+#&gt; [[32]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5809416 
+#&gt; 
+#&gt; [[32]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[33]]
+#&gt; [[33]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1256359 
+#&gt; 
+#&gt; [[33]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[34]]
+#&gt; [[34]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1167159 
+#&gt; 
+#&gt; [[34]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[35]]
+#&gt; [[35]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9418862 
+#&gt; 
+#&gt; [[35]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[36]]
+#&gt; [[36]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[36]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[37]]
+#&gt; [[37]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[37]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[38]]
+#&gt; [[38]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2580678 
+#&gt; 
+#&gt; [[38]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[39]]
+#&gt; [[39]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4058524 
+#&gt; 
+#&gt; [[39]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[40]]
+#&gt; [[40]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[40]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[41]]
+#&gt; [[41]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4110214 
+#&gt; 
+#&gt; [[41]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[42]]
+#&gt; [[42]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8410514 
+#&gt; 
+#&gt; [[42]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[43]]
+#&gt; [[43]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6855367 
+#&gt; 
+#&gt; [[43]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[44]]
+#&gt; [[44]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1374103 
+#&gt; 
+#&gt; [[44]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[45]]
+#&gt; [[45]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2689623 
+#&gt; 
+#&gt; [[45]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[46]]
+#&gt; [[46]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5826228 
+#&gt; 
+#&gt; [[46]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[47]]
+#&gt; [[47]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   1.004124 
+#&gt; 
+#&gt; [[47]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[48]]
+#&gt; [[48]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6459742 
+#&gt; 
+#&gt; [[48]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[49]]
+#&gt; [[49]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8822818 
+#&gt; 
+#&gt; [[49]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[50]]
+#&gt; [[50]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[50]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[51]]
+#&gt; [[51]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7600437 
+#&gt; 
+#&gt; [[51]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[52]]
+#&gt; [[52]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[52]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[53]]
+#&gt; [[53]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.01675946 
+#&gt; 
+#&gt; [[53]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[54]]
+#&gt; [[54]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[54]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[55]]
+#&gt; [[55]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9635528 
+#&gt; 
+#&gt; [[55]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[56]]
+#&gt; [[56]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   1.049798 
+#&gt; 
+#&gt; [[56]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[57]]
+#&gt; [[57]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                         NA 
+#&gt; 
+#&gt; [[57]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[58]]
+#&gt; [[58]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5009491 
+#&gt; 
+#&gt; [[58]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[59]]
+#&gt; [[59]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1780097 
+#&gt; 
+#&gt; [[59]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[60]]
+#&gt; [[60]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6290575 
+#&gt; 
+#&gt; [[60]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[61]]
+#&gt; [[61]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[61]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[62]]
+#&gt; [[62]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.05348175 
+#&gt; 
+#&gt; [[62]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[63]]
+#&gt; [[63]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2492007 
+#&gt; 
+#&gt; [[63]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[64]]
+#&gt; [[64]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5076202 
+#&gt; 
+#&gt; [[64]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[65]]
+#&gt; [[65]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.01289268 
+#&gt; 
+#&gt; [[65]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[66]]
+#&gt; [[66]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1628999 
+#&gt; 
+#&gt; [[66]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[67]]
+#&gt; [[67]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8211096 
+#&gt; 
+#&gt; [[67]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[68]]
+#&gt; [[68]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6890107 
+#&gt; 
+#&gt; [[68]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[69]]
+#&gt; [[69]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4747831 
+#&gt; 
+#&gt; [[69]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[70]]
+#&gt; [[70]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[70]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[71]]
+#&gt; [[71]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1370787 
+#&gt; 
+#&gt; [[71]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[72]]
+#&gt; [[72]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8498793 
+#&gt; 
+#&gt; [[72]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[73]]
+#&gt; [[73]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.02613858 
+#&gt; 
+#&gt; [[73]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[74]]
+#&gt; [[74]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[74]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[75]]
+#&gt; [[75]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4039257 
+#&gt; 
+#&gt; [[75]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[76]]
+#&gt; [[76]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2783185 
+#&gt; 
+#&gt; [[76]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[77]]
+#&gt; [[77]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[77]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[78]]
+#&gt; [[78]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8992036 
+#&gt; 
+#&gt; [[78]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[79]]
+#&gt; [[79]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.748486 
+#&gt; 
+#&gt; [[79]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[80]]
+#&gt; [[80]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4874482 
+#&gt; 
+#&gt; [[80]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[81]]
+#&gt; [[81]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[81]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[82]]
+#&gt; [[82]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9351811 
+#&gt; 
+#&gt; [[82]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[83]]
+#&gt; [[83]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[83]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[84]]
+#&gt; [[84]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.02809673 
+#&gt; 
+#&gt; [[84]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[85]]
+#&gt; [[85]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[85]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[86]]
+#&gt; [[86]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[86]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[87]]
+#&gt; [[87]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8144507 
+#&gt; 
+#&gt; [[87]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[88]]
+#&gt; [[88]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[88]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[89]]
+#&gt; [[89]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2512326 
+#&gt; 
+#&gt; [[89]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[90]]
+#&gt; [[90]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.01763243 
+#&gt; 
+#&gt; [[90]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[91]]
+#&gt; [[91]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5299206 
+#&gt; 
+#&gt; [[91]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[92]]
+#&gt; [[92]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4224714 
+#&gt; 
+#&gt; [[92]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[93]]
+#&gt; [[93]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.01196319 
+#&gt; 
+#&gt; [[93]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[94]]
+#&gt; [[94]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2954188 
+#&gt; 
+#&gt; [[94]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[95]]
+#&gt; [[95]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[95]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[96]]
+#&gt; [[96]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[96]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[97]]
+#&gt; [[97]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4821869 
+#&gt; 
+#&gt; [[97]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[98]]
+#&gt; [[98]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7901768 
+#&gt; 
+#&gt; [[98]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[99]]
+#&gt; [[99]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8979504 
+#&gt; 
+#&gt; [[99]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[100]]
+#&gt; [[100]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9487975 
+#&gt; 
+#&gt; [[100]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[101]]
+#&gt; [[101]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7877892 
+#&gt; 
+#&gt; [[101]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[102]]
+#&gt; [[102]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[102]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[103]]
+#&gt; [[103]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8682548 
+#&gt; 
+#&gt; [[103]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[104]]
+#&gt; [[104]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2087615 
+#&gt; 
+#&gt; [[104]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[105]]
+#&gt; [[105]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8144906 
+#&gt; 
+#&gt; [[105]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[106]]
+#&gt; [[106]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7282967 
+#&gt; 
+#&gt; [[106]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[107]]
+#&gt; [[107]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5431636 
+#&gt; 
+#&gt; [[107]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[108]]
+#&gt; [[108]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8678327 
+#&gt; 
+#&gt; [[108]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[109]]
+#&gt; [[109]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[109]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[110]]
+#&gt; [[110]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   1.177228 
+#&gt; 
+#&gt; [[110]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[111]]
+#&gt; [[111]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1624997 
+#&gt; 
+#&gt; [[111]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[112]]
+#&gt; [[112]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7411408 
+#&gt; 
+#&gt; [[112]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[113]]
+#&gt; [[113]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.02179744 
+#&gt; 
+#&gt; [[113]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[114]]
+#&gt; [[114]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9123329 
+#&gt; 
+#&gt; [[114]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[115]]
+#&gt; [[115]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1588501 
+#&gt; 
+#&gt; [[115]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[116]]
+#&gt; [[116]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.0223889 
+#&gt; 
+#&gt; [[116]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[117]]
+#&gt; [[117]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9392607 
+#&gt; 
+#&gt; [[117]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[118]]
+#&gt; [[118]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7137065 
+#&gt; 
+#&gt; [[118]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[119]]
+#&gt; [[119]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1059572 
+#&gt; 
+#&gt; [[119]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[120]]
+#&gt; [[120]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1280151 
+#&gt; 
+#&gt; [[120]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[121]]
+#&gt; [[121]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7095778 
+#&gt; 
+#&gt; [[121]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[122]]
+#&gt; [[122]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8902059 
+#&gt; 
+#&gt; [[122]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[123]]
+#&gt; [[123]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8601565 
+#&gt; 
+#&gt; [[123]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[124]]
+#&gt; [[124]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.933333 
+#&gt; 
+#&gt; [[124]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[125]]
+#&gt; [[125]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[125]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[126]]
+#&gt; [[126]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[126]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[127]]
+#&gt; [[127]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7684239 
+#&gt; 
+#&gt; [[127]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[128]]
+#&gt; [[128]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2407153 
+#&gt; 
+#&gt; [[128]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[129]]
+#&gt; [[129]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8741184 
+#&gt; 
+#&gt; [[129]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[130]]
+#&gt; [[130]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8370697 
+#&gt; 
+#&gt; [[130]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[131]]
+#&gt; [[131]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4458898 
+#&gt; 
+#&gt; [[131]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[132]]
+#&gt; [[132]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8722886 
+#&gt; 
+#&gt; [[132]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[133]]
+#&gt; [[133]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.01612903 
+#&gt; 
+#&gt; [[133]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[134]]
+#&gt; [[134]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[134]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[135]]
+#&gt; [[135]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7781136 
+#&gt; 
+#&gt; [[135]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[136]]
+#&gt; [[136]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4789353 
+#&gt; 
+#&gt; [[136]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[137]]
+#&gt; [[137]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[137]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[138]]
+#&gt; [[138]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5295625 
+#&gt; 
+#&gt; [[138]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[139]]
+#&gt; [[139]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8784718 
+#&gt; 
+#&gt; [[139]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[140]]
+#&gt; [[140]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4523111 
+#&gt; 
+#&gt; [[140]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[141]]
+#&gt; [[141]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.06500141 
+#&gt; 
+#&gt; [[141]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[142]]
+#&gt; [[142]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7416119 
+#&gt; 
+#&gt; [[142]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[143]]
+#&gt; [[143]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8947562 
+#&gt; 
+#&gt; [[143]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[144]]
+#&gt; [[144]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7780699 
+#&gt; 
+#&gt; [[144]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[145]]
+#&gt; [[145]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;               -0.003802281 
+#&gt; 
+#&gt; [[145]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[146]]
+#&gt; [[146]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   1.044826 
+#&gt; 
+#&gt; [[146]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[147]]
+#&gt; [[147]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9334443 
+#&gt; 
+#&gt; [[147]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[148]]
+#&gt; [[148]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                0.005462774 
+#&gt; 
+#&gt; [[148]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[149]]
+#&gt; [[149]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7127593 
+#&gt; 
+#&gt; [[149]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[150]]
+#&gt; [[150]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6934141 
+#&gt; 
+#&gt; [[150]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[151]]
+#&gt; [[151]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4480632 
+#&gt; 
+#&gt; [[151]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[152]]
+#&gt; [[152]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7526479 
+#&gt; 
+#&gt; [[152]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[153]]
+#&gt; [[153]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6662816 
+#&gt; 
+#&gt; [[153]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[154]]
+#&gt; [[154]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2028236 
+#&gt; 
+#&gt; [[154]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[155]]
+#&gt; [[155]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[155]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[156]]
+#&gt; [[156]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9219172 
+#&gt; 
+#&gt; [[156]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[157]]
+#&gt; [[157]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[157]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[158]]
+#&gt; [[158]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5813632 
+#&gt; 
+#&gt; [[158]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[159]]
+#&gt; [[159]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[159]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[160]]
+#&gt; [[160]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7849124 
+#&gt; 
+#&gt; [[160]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[161]]
+#&gt; [[161]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.0817926 
+#&gt; 
+#&gt; [[161]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[162]]
+#&gt; [[162]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7567328 
+#&gt; 
+#&gt; [[162]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[163]]
+#&gt; [[163]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4486768 
+#&gt; 
+#&gt; [[163]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[164]]
+#&gt; [[164]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9711064 
+#&gt; 
+#&gt; [[164]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[165]]
+#&gt; [[165]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8404479 
+#&gt; 
+#&gt; [[165]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[166]]
+#&gt; [[166]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8340365 
+#&gt; 
+#&gt; [[166]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[167]]
+#&gt; [[167]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[167]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[168]]
+#&gt; [[168]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   1.146428 
+#&gt; 
+#&gt; [[168]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[169]]
+#&gt; [[169]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[169]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[170]]
+#&gt; [[170]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[170]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[171]]
+#&gt; [[171]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[171]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[172]]
+#&gt; [[172]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[172]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[173]]
+#&gt; [[173]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[173]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[174]]
+#&gt; [[174]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9711078 
+#&gt; 
+#&gt; [[174]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[175]]
+#&gt; [[175]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9645341 
+#&gt; 
+#&gt; [[175]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[176]]
+#&gt; [[176]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[176]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[177]]
+#&gt; [[177]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1992464 
+#&gt; 
+#&gt; [[177]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[178]]
+#&gt; [[178]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[178]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[179]]
+#&gt; [[179]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.05725861 
+#&gt; 
+#&gt; [[179]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[180]]
+#&gt; [[180]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5481366 
+#&gt; 
+#&gt; [[180]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[181]]
+#&gt; [[181]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[181]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[182]]
+#&gt; [[182]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.05410779 
+#&gt; 
+#&gt; [[182]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[183]]
+#&gt; [[183]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;               -0.007462687 
+#&gt; 
+#&gt; [[183]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[184]]
+#&gt; [[184]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.3680185 
+#&gt; 
+#&gt; [[184]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[185]]
+#&gt; [[185]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.00138019 
+#&gt; 
+#&gt; [[185]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[186]]
+#&gt; [[186]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8943568 
+#&gt; 
+#&gt; [[186]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[187]]
+#&gt; [[187]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4699798 
+#&gt; 
+#&gt; [[187]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[188]]
+#&gt; [[188]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;               -0.001714412 
+#&gt; 
+#&gt; [[188]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[189]]
+#&gt; [[189]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.01177239 
+#&gt; 
+#&gt; [[189]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[190]]
+#&gt; [[190]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4459296 
+#&gt; 
+#&gt; [[190]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[191]]
+#&gt; [[191]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.741075 
+#&gt; 
+#&gt; [[191]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[192]]
+#&gt; [[192]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7394529 
+#&gt; 
+#&gt; [[192]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[193]]
+#&gt; [[193]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9754129 
+#&gt; 
+#&gt; [[193]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[194]]
+#&gt; [[194]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;               -0.004582951 
+#&gt; 
+#&gt; [[194]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[195]]
+#&gt; [[195]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1134682 
+#&gt; 
+#&gt; [[195]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[196]]
+#&gt; [[196]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8579614 
+#&gt; 
+#&gt; [[196]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[197]]
+#&gt; [[197]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7022731 
+#&gt; 
+#&gt; [[197]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[198]]
+#&gt; [[198]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;               0.0003349323 
+#&gt; 
+#&gt; [[198]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[199]]
+#&gt; [[199]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.01591102 
+#&gt; 
+#&gt; [[199]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[200]]
+#&gt; [[200]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.902218 
+#&gt; 
+#&gt; [[200]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[201]]
+#&gt; [[201]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[201]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[202]]
+#&gt; [[202]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2367338 
+#&gt; 
+#&gt; [[202]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[203]]
+#&gt; [[203]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6937724 
+#&gt; 
+#&gt; [[203]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[204]]
+#&gt; [[204]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;               8.226172e-05 
+#&gt; 
+#&gt; [[204]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[205]]
+#&gt; [[205]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7049068 
+#&gt; 
+#&gt; [[205]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[206]]
+#&gt; [[206]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4773192 
+#&gt; 
+#&gt; [[206]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[207]]
+#&gt; [[207]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[207]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[208]]
+#&gt; [[208]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[208]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[209]]
+#&gt; [[209]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2683079 
+#&gt; 
+#&gt; [[209]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[210]]
+#&gt; [[210]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.3773631 
+#&gt; 
+#&gt; [[210]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[211]]
+#&gt; [[211]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.09471127 
+#&gt; 
+#&gt; [[211]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[212]]
+#&gt; [[212]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.791494 
+#&gt; 
+#&gt; [[212]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[213]]
+#&gt; [[213]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[213]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[214]]
+#&gt; [[214]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[214]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[215]]
+#&gt; [[215]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9127807 
+#&gt; 
+#&gt; [[215]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[216]]
+#&gt; [[216]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6683978 
+#&gt; 
+#&gt; [[216]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[217]]
+#&gt; [[217]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4777528 
+#&gt; 
+#&gt; [[217]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[218]]
+#&gt; [[218]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.289256 
+#&gt; 
+#&gt; [[218]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[219]]
+#&gt; [[219]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.09288966 
+#&gt; 
+#&gt; [[219]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[220]]
+#&gt; [[220]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1472352 
+#&gt; 
+#&gt; [[220]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[221]]
+#&gt; [[221]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[221]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[222]]
+#&gt; [[222]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8942314 
+#&gt; 
+#&gt; [[222]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[223]]
+#&gt; [[223]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8124493 
+#&gt; 
+#&gt; [[223]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[224]]
+#&gt; [[224]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                0.001282686 
+#&gt; 
+#&gt; [[224]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[225]]
+#&gt; [[225]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   1.164049 
+#&gt; 
+#&gt; [[225]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[226]]
+#&gt; [[226]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 -0.7243288 
+#&gt; 
+#&gt; [[226]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[227]]
+#&gt; [[227]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9300546 
+#&gt; 
+#&gt; [[227]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[228]]
+#&gt; [[228]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                         NA 
+#&gt; 
+#&gt; [[228]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[229]]
+#&gt; [[229]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[229]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[230]]
+#&gt; [[230]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9314963 
+#&gt; 
+#&gt; [[230]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[231]]
+#&gt; [[231]]$result
+#&gt; [1] NA
+#&gt; 
+#&gt; [[231]]$error
+#&gt; &lt;simpleError in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): 0 (non-NA) cases&gt;
+#&gt; 
+#&gt; 
+#&gt; [[232]]
+#&gt; [[232]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.3004533 
+#&gt; 
+#&gt; [[232]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[233]]
+#&gt; [[233]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9587314 
+#&gt; 
+#&gt; [[233]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[234]]
+#&gt; [[234]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2780126 
+#&gt; 
+#&gt; [[234]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[235]]
+#&gt; [[235]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4839777 
+#&gt; 
+#&gt; [[235]]$error
+#&gt; NULL
+#&gt; 
+#&gt; 
+#&gt; [[236]]
+#&gt; [[236]]$result
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4202595 
+#&gt; 
+#&gt; [[236]]$error
+#&gt; NULL
+```
+]
+
+---
+
+## Pull out results
+
+.pull-left[
+
+```r
+covid19_lstcol$data %&gt;% 
+  map(safely_extract_slope) %&gt;% 
+  map("result")
+```
+
+```
+#&gt; [[1]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6920523 
+#&gt; 
+#&gt; [[2]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6435756 
+#&gt; 
+#&gt; [[3]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5329582 
+#&gt; 
+#&gt; [[4]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5595175 
+#&gt; 
+#&gt; [[5]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5196389 
+#&gt; 
+#&gt; [[6]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7375993 
+#&gt; 
+#&gt; [[7]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8669078 
+#&gt; 
+#&gt; [[8]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8971555 
+#&gt; 
+#&gt; [[9]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[10]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5299203 
+#&gt; 
+#&gt; [[11]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9182422 
+#&gt; 
+#&gt; [[12]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9642226 
+#&gt; 
+#&gt; [[13]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2903094 
+#&gt; 
+#&gt; [[14]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[15]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8760548 
+#&gt; 
+#&gt; [[16]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8306039 
+#&gt; 
+#&gt; [[17]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1478383 
+#&gt; 
+#&gt; [[18]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   1.038319 
+#&gt; 
+#&gt; [[19]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 -0.1417372 
+#&gt; 
+#&gt; [[20]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.3760244 
+#&gt; 
+#&gt; [[21]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2665434 
+#&gt; 
+#&gt; [[22]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.075549 
+#&gt; 
+#&gt; [[23]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6108023 
+#&gt; 
+#&gt; [[24]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6446241 
+#&gt; 
+#&gt; [[25]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.491272 
+#&gt; 
+#&gt; [[26]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6540097 
+#&gt; 
+#&gt; [[27]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4138478 
+#&gt; 
+#&gt; [[28]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.573295 
+#&gt; 
+#&gt; [[29]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6704973 
+#&gt; 
+#&gt; [[30]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8998348 
+#&gt; 
+#&gt; [[31]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.05736442 
+#&gt; 
+#&gt; [[32]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5809416 
+#&gt; 
+#&gt; [[33]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1256359 
+#&gt; 
+#&gt; [[34]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1167159 
+#&gt; 
+#&gt; [[35]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9418862 
+#&gt; 
+#&gt; [[36]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[37]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[38]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2580678 
+#&gt; 
+#&gt; [[39]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4058524 
+#&gt; 
+#&gt; [[40]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[41]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4110214 
+#&gt; 
+#&gt; [[42]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8410514 
+#&gt; 
+#&gt; [[43]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6855367 
+#&gt; 
+#&gt; [[44]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1374103 
+#&gt; 
+#&gt; [[45]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2689623 
+#&gt; 
+#&gt; [[46]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5826228 
+#&gt; 
+#&gt; [[47]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   1.004124 
+#&gt; 
+#&gt; [[48]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6459742 
+#&gt; 
+#&gt; [[49]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8822818 
+#&gt; 
+#&gt; [[50]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[51]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7600437 
+#&gt; 
+#&gt; [[52]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[53]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.01675946 
+#&gt; 
+#&gt; [[54]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[55]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9635528 
+#&gt; 
+#&gt; [[56]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   1.049798 
+#&gt; 
+#&gt; [[57]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                         NA 
+#&gt; 
+#&gt; [[58]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5009491 
+#&gt; 
+#&gt; [[59]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1780097 
+#&gt; 
+#&gt; [[60]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6290575 
+#&gt; 
+#&gt; [[61]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[62]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.05348175 
+#&gt; 
+#&gt; [[63]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2492007 
+#&gt; 
+#&gt; [[64]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5076202 
+#&gt; 
+#&gt; [[65]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.01289268 
+#&gt; 
+#&gt; [[66]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1628999 
+#&gt; 
+#&gt; [[67]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8211096 
+#&gt; 
+#&gt; [[68]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6890107 
+#&gt; 
+#&gt; [[69]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4747831 
+#&gt; 
+#&gt; [[70]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[71]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1370787 
+#&gt; 
+#&gt; [[72]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8498793 
+#&gt; 
+#&gt; [[73]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.02613858 
+#&gt; 
+#&gt; [[74]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[75]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4039257 
+#&gt; 
+#&gt; [[76]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2783185 
+#&gt; 
+#&gt; [[77]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[78]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8992036 
+#&gt; 
+#&gt; [[79]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.748486 
+#&gt; 
+#&gt; [[80]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4874482 
+#&gt; 
+#&gt; [[81]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[82]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9351811 
+#&gt; 
+#&gt; [[83]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[84]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.02809673 
+#&gt; 
+#&gt; [[85]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[86]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[87]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8144507 
+#&gt; 
+#&gt; [[88]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[89]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2512326 
+#&gt; 
+#&gt; [[90]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.01763243 
+#&gt; 
+#&gt; [[91]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5299206 
+#&gt; 
+#&gt; [[92]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4224714 
+#&gt; 
+#&gt; [[93]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.01196319 
+#&gt; 
+#&gt; [[94]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2954188 
+#&gt; 
+#&gt; [[95]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[96]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[97]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4821869 
+#&gt; 
+#&gt; [[98]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7901768 
+#&gt; 
+#&gt; [[99]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8979504 
+#&gt; 
+#&gt; [[100]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9487975 
+#&gt; 
+#&gt; [[101]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7877892 
+#&gt; 
+#&gt; [[102]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[103]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8682548 
+#&gt; 
+#&gt; [[104]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2087615 
+#&gt; 
+#&gt; [[105]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8144906 
+#&gt; 
+#&gt; [[106]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7282967 
+#&gt; 
+#&gt; [[107]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5431636 
+#&gt; 
+#&gt; [[108]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8678327 
+#&gt; 
+#&gt; [[109]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[110]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   1.177228 
+#&gt; 
+#&gt; [[111]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1624997 
+#&gt; 
+#&gt; [[112]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7411408 
+#&gt; 
+#&gt; [[113]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.02179744 
+#&gt; 
+#&gt; [[114]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9123329 
+#&gt; 
+#&gt; [[115]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1588501 
+#&gt; 
+#&gt; [[116]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.0223889 
+#&gt; 
+#&gt; [[117]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9392607 
+#&gt; 
+#&gt; [[118]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7137065 
+#&gt; 
+#&gt; [[119]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1059572 
+#&gt; 
+#&gt; [[120]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1280151 
+#&gt; 
+#&gt; [[121]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7095778 
+#&gt; 
+#&gt; [[122]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8902059 
+#&gt; 
+#&gt; [[123]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8601565 
+#&gt; 
+#&gt; [[124]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.933333 
+#&gt; 
+#&gt; [[125]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[126]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[127]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7684239 
+#&gt; 
+#&gt; [[128]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2407153 
+#&gt; 
+#&gt; [[129]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8741184 
+#&gt; 
+#&gt; [[130]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8370697 
+#&gt; 
+#&gt; [[131]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4458898 
+#&gt; 
+#&gt; [[132]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8722886 
+#&gt; 
+#&gt; [[133]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.01612903 
+#&gt; 
+#&gt; [[134]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[135]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7781136 
+#&gt; 
+#&gt; [[136]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4789353 
+#&gt; 
+#&gt; [[137]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[138]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5295625 
+#&gt; 
+#&gt; [[139]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8784718 
+#&gt; 
+#&gt; [[140]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4523111 
+#&gt; 
+#&gt; [[141]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.06500141 
+#&gt; 
+#&gt; [[142]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7416119 
+#&gt; 
+#&gt; [[143]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8947562 
+#&gt; 
+#&gt; [[144]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7780699 
+#&gt; 
+#&gt; [[145]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;               -0.003802281 
+#&gt; 
+#&gt; [[146]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   1.044826 
+#&gt; 
+#&gt; [[147]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9334443 
+#&gt; 
+#&gt; [[148]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                0.005462774 
+#&gt; 
+#&gt; [[149]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7127593 
+#&gt; 
+#&gt; [[150]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6934141 
+#&gt; 
+#&gt; [[151]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4480632 
+#&gt; 
+#&gt; [[152]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7526479 
+#&gt; 
+#&gt; [[153]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6662816 
+#&gt; 
+#&gt; [[154]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2028236 
+#&gt; 
+#&gt; [[155]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[156]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9219172 
+#&gt; 
+#&gt; [[157]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[158]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5813632 
+#&gt; 
+#&gt; [[159]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[160]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7849124 
+#&gt; 
+#&gt; [[161]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.0817926 
+#&gt; 
+#&gt; [[162]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7567328 
+#&gt; 
+#&gt; [[163]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4486768 
+#&gt; 
+#&gt; [[164]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9711064 
+#&gt; 
+#&gt; [[165]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8404479 
+#&gt; 
+#&gt; [[166]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8340365 
+#&gt; 
+#&gt; [[167]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[168]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   1.146428 
+#&gt; 
+#&gt; [[169]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[170]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[171]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[172]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[173]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[174]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9711078 
+#&gt; 
+#&gt; [[175]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9645341 
+#&gt; 
+#&gt; [[176]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[177]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1992464 
+#&gt; 
+#&gt; [[178]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[179]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.05725861 
+#&gt; 
+#&gt; [[180]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.5481366 
+#&gt; 
+#&gt; [[181]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[182]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.05410779 
+#&gt; 
+#&gt; [[183]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;               -0.007462687 
+#&gt; 
+#&gt; [[184]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.3680185 
+#&gt; 
+#&gt; [[185]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.00138019 
+#&gt; 
+#&gt; [[186]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8943568 
+#&gt; 
+#&gt; [[187]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4699798 
+#&gt; 
+#&gt; [[188]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;               -0.001714412 
+#&gt; 
+#&gt; [[189]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.01177239 
+#&gt; 
+#&gt; [[190]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4459296 
+#&gt; 
+#&gt; [[191]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.741075 
+#&gt; 
+#&gt; [[192]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7394529 
+#&gt; 
+#&gt; [[193]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9754129 
+#&gt; 
+#&gt; [[194]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;               -0.004582951 
+#&gt; 
+#&gt; [[195]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1134682 
+#&gt; 
+#&gt; [[196]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8579614 
+#&gt; 
+#&gt; [[197]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7022731 
+#&gt; 
+#&gt; [[198]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;               0.0003349323 
+#&gt; 
+#&gt; [[199]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                -0.01591102 
+#&gt; 
+#&gt; [[200]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.902218 
+#&gt; 
+#&gt; [[201]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[202]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2367338 
+#&gt; 
+#&gt; [[203]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6937724 
+#&gt; 
+#&gt; [[204]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;               8.226172e-05 
+#&gt; 
+#&gt; [[205]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.7049068 
+#&gt; 
+#&gt; [[206]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4773192 
+#&gt; 
+#&gt; [[207]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[208]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[209]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2683079 
+#&gt; 
+#&gt; [[210]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.3773631 
+#&gt; 
+#&gt; [[211]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.09471127 
+#&gt; 
+#&gt; [[212]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.791494 
+#&gt; 
+#&gt; [[213]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[214]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[215]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9127807 
+#&gt; 
+#&gt; [[216]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.6683978 
+#&gt; 
+#&gt; [[217]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4777528 
+#&gt; 
+#&gt; [[218]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   0.289256 
+#&gt; 
+#&gt; [[219]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 0.09288966 
+#&gt; 
+#&gt; [[220]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.1472352 
+#&gt; 
+#&gt; [[221]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[222]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8942314 
+#&gt; 
+#&gt; [[223]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.8124493 
+#&gt; 
+#&gt; [[224]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                0.001282686 
+#&gt; 
+#&gt; [[225]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                   1.164049 
+#&gt; 
+#&gt; [[226]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                 -0.7243288 
+#&gt; 
+#&gt; [[227]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9300546 
+#&gt; 
+#&gt; [[228]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                         NA 
+#&gt; 
+#&gt; [[229]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[230]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9314963 
+#&gt; 
+#&gt; [[231]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[232]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.3004533 
+#&gt; 
+#&gt; [[233]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.9587314 
+#&gt; 
+#&gt; [[234]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.2780126 
+#&gt; 
+#&gt; [[235]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4839777 
+#&gt; 
+#&gt; [[236]]
+#&gt; lag(new_confirmed, n = 14) 
+#&gt;                  0.4202595
+```
+]
+.pull-right[
+
+```r
+covid19_lstcol$data %&gt;% 
+  map(safely_extract_slope) %&gt;% 
+  map_dbl("result")
+```
+
+
+```
+#&gt;   [1]  6.920523e-01  6.435756e-01
+#&gt;   [3]  5.329582e-01  5.595175e-01
+#&gt;   [5]  5.196389e-01  7.375993e-01
+#&gt;   [7]  8.669078e-01  8.971555e-01
+#&gt;   [9]            NA  5.299203e-01
+#&gt;  [11]  9.182422e-01  9.642226e-01
+#&gt;  [13]  2.903094e-01            NA
+#&gt;  [15]  8.760548e-01  8.306039e-01
+#&gt;  [17]  1.478383e-01  1.038319e+00
+#&gt;  [19] -1.417372e-01  3.760244e-01
+#&gt;  [21]  2.665434e-01  7.554900e-02
+#&gt;  [23]  6.108023e-01  6.446241e-01
+#&gt;  [25]  4.912720e-01  6.540097e-01
+#&gt;  [27]  4.138478e-01  5.732950e-01
+#&gt;  [29]  6.704973e-01  8.998348e-01
+#&gt;  [31]  5.736442e-02  5.809416e-01
+#&gt;  [33]  1.256359e-01  1.167159e-01
+#&gt;  [35]  9.418862e-01            NA
+#&gt;  [37]            NA  2.580678e-01
+#&gt;  [39]  4.058524e-01            NA
+#&gt;  [41]  4.110214e-01  8.410514e-01
+#&gt;  [43]  6.855367e-01  1.374103e-01
+#&gt;  [45]  2.689623e-01  5.826228e-01
+#&gt;  [47]  1.004124e+00  6.459742e-01
+#&gt;  [49]  8.822818e-01            NA
+#&gt;  [51]  7.600437e-01            NA
+#&gt;  [53] -1.675946e-02            NA
+#&gt;  [55]  9.635528e-01  1.049798e+00
+#&gt;  [57]            NA  5.009491e-01
+#&gt;  [59]  1.780097e-01  6.290575e-01
+#&gt;  [61]            NA  5.348175e-02
+#&gt;  [63]  2.492007e-01  5.076202e-01
+#&gt;  [65] -1.289268e-02  1.628999e-01
+#&gt;  [67]  8.211096e-01  6.890107e-01
+#&gt;  [69]  4.747831e-01            NA
+#&gt;  [71]  1.370787e-01  8.498793e-01
+#&gt;  [73]  2.613858e-02            NA
+#&gt;  [75]  4.039257e-01  2.783185e-01
+#&gt;  [77]            NA  8.992036e-01
+#&gt;  [79]  7.484860e-01  4.874482e-01
+#&gt;  [81]            NA  9.351811e-01
+#&gt;  [83]            NA  2.809673e-02
+#&gt;  [85]            NA            NA
+#&gt;  [87]  8.144507e-01            NA
+#&gt;  [89]  2.512326e-01  1.763243e-02
+#&gt;  [91]  5.299206e-01  4.224714e-01
+#&gt;  [93] -1.196319e-02  2.954188e-01
+#&gt;  [95]            NA            NA
+#&gt;  [97]  4.821869e-01  7.901768e-01
+#&gt;  [99]  8.979504e-01  9.487975e-01
+#&gt; [101]  7.877892e-01            NA
+#&gt; [103]  8.682548e-01  2.087615e-01
+#&gt; [105]  8.144906e-01  7.282967e-01
+#&gt; [107]  5.431636e-01  8.678327e-01
+#&gt; [109]            NA  1.177228e+00
+#&gt; [111]  1.624997e-01  7.411408e-01
+#&gt; [113]  2.179744e-02  9.123329e-01
+#&gt; [115]  1.588501e-01  2.238890e-02
+#&gt; [117]  9.392607e-01  7.137065e-01
+#&gt; [119]  1.059572e-01  1.280151e-01
+#&gt; [121]  7.095778e-01  8.902059e-01
+#&gt; [123]  8.601565e-01  9.333330e-01
+#&gt; [125]            NA            NA
+#&gt; [127]  7.684239e-01  2.407153e-01
+#&gt; [129]  8.741184e-01  8.370697e-01
+#&gt; [131]  4.458898e-01  8.722886e-01
+#&gt; [133] -1.612903e-02            NA
+#&gt; [135]  7.781136e-01  4.789353e-01
+#&gt; [137]            NA  5.295625e-01
+#&gt; [139]  8.784718e-01  4.523111e-01
+#&gt; [141]  6.500141e-02  7.416119e-01
+#&gt; [143]  8.947562e-01  7.780699e-01
+#&gt; [145] -3.802281e-03  1.044826e+00
+#&gt; [147]  9.334443e-01  5.462774e-03
+#&gt; [149]  7.127593e-01  6.934141e-01
+#&gt; [151]  4.480632e-01  7.526479e-01
+#&gt; [153]  6.662816e-01  2.028236e-01
+#&gt; [155]            NA  9.219172e-01
+#&gt; [157]            NA  5.813632e-01
+#&gt; [159]            NA  7.849124e-01
+#&gt; [161]  8.179260e-02  7.567328e-01
+#&gt; [163]  4.486768e-01  9.711064e-01
+#&gt; [165]  8.404479e-01  8.340365e-01
+#&gt; [167]            NA  1.146428e+00
+#&gt; [169]            NA            NA
+#&gt; [171]            NA            NA
+#&gt; [173]            NA  9.711078e-01
+#&gt; [175]  9.645341e-01            NA
+#&gt; [177]  1.992464e-01            NA
+#&gt; [179]  5.725861e-02  5.481366e-01
+#&gt; [181]            NA -5.410779e-02
+#&gt; [183] -7.462687e-03  3.680185e-01
+#&gt; [185] -1.380190e-03  8.943568e-01
+#&gt; [187]  4.699798e-01 -1.714412e-03
+#&gt; [189] -1.177239e-02  4.459296e-01
+#&gt; [191]  7.410750e-01  7.394529e-01
+#&gt; [193]  9.754129e-01 -4.582951e-03
+#&gt; [195]  1.134682e-01  8.579614e-01
+#&gt; [197]  7.022731e-01  3.349323e-04
+#&gt; [199] -1.591102e-02  9.022180e-01
+#&gt; [201]            NA  2.367338e-01
+#&gt; [203]  6.937724e-01  8.226172e-05
+#&gt; [205]  7.049068e-01  4.773192e-01
+#&gt; [207]            NA            NA
+#&gt; [209]  2.683079e-01  3.773631e-01
+#&gt; [211]  9.471127e-02  7.914940e-01
+#&gt; [213]            NA            NA
+#&gt; [215]  9.127807e-01  6.683978e-01
+#&gt; [217]  4.777528e-01  2.892560e-01
+#&gt; [219]  9.288966e-02  1.472352e-01
+#&gt; [221]            NA  8.942314e-01
+#&gt; [223]  8.124493e-01  1.282686e-03
+#&gt; [225]  1.164049e+00 -7.243288e-01
+#&gt; [227]  9.300546e-01            NA
+#&gt; [229]            NA  9.314963e-01
+#&gt; [231]            NA  3.004533e-01
+#&gt; [233]  9.587314e-01  2.780126e-01
+#&gt; [235]  4.839777e-01  4.202595e-01
+```
+]
+
+---
+
+## Alternatively, `mutate()` with `map()` inside a tibble
+
+
+```r
+covid19_lstcol %&gt;% 
+  mutate(
+    slopes = map(data, safely_extract_slope) %&gt;% 
+      map_dbl("result"))
+```
+
+```
+#&gt; # A tibble: 236 x 3
+#&gt;   country_region      data                   slopes
+#&gt;   &lt;chr&gt;               &lt;list&gt;                  &lt;dbl&gt;
+#&gt; 1 Afghanistan         &lt;tibble[,7] [306 × 7]&gt;  0.692
+#&gt; 2 Albania             &lt;tibble[,7] [298 × 7]&gt;  0.644
+#&gt; 3 Algeria             &lt;tibble[,7] [306 × 7]&gt;  0.533
+#&gt; 4 Andorra             &lt;tibble[,7] [305 × 7]&gt;  0.560
+#&gt; 5 Angola              &lt;tibble[,7] [287 × 7]&gt;  0.520
+#&gt; 6 Antigua and Barbuda &lt;tibble[,7] [294 × 7]&gt;  0.738
+#&gt; # … with 230 more rows
+```
+
+---
+
+## Reading
+
+.pull-left[
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px"&gt;](https://r4ds.had.co.nz)]
+]
+.pull-right[
+* [Functions](https://r4ds.had.co.nz/functions.html)
+* [Iteration](https://r4ds.had.co.nz/iteration.html#the-map-functions)
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

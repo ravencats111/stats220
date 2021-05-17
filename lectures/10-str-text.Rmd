@@ -476,15 +476,7 @@ background-size: contain
 ```
 ]
 .pull-right[
-```{r acnh-min, eval = FALSE}
-```
-```{r slides-min, echo = FALSE}
-user_reviews %>% 
-  slice_min(grade, 
-    with_ties = FALSE) %>% 
-  pull(text) %>% 
-  str_wrap(width = 30) %>% 
-  cat()
+```{r acnh-min}
 ```
 ]
 ]

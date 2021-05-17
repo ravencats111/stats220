@@ -1,0 +1,450 @@
+---
+title: "STATS 220"
+subtitle: "Don't repeat yourself `r emo::ji('cat2')`"
+type: "lecture"
+date: ""
+output:
+  xaringan::moon_reader:
+    css: ["assets/remark.css"]
+    lib_dir: libs
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+class: middle
+
+```{r initial, echo = FALSE, cache = FALSE, results = 'hide'}
+library(knitr)
+options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE, 
+  tibble.width = 60, tibble.print_min = 6)
+opts_chunk$set(
+  echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
+  fig.path = 'figure/', cache.path = 'cache/', cache = TRUE, fig.retina = 3,
+  fig.align = 'center', fig.width = 4.5, fig.height = 4, fig.show = 'hold',
+  dpi = 120
+)
+```
+
+```{r xaringan-panelset, echo = FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r external, include = FALSE, cache = FALSE}
+read_chunk('R/11-dry.R')
+```
+
+<img src="https://rstudio-education.github.io/tidyverse-cookbook/images/data-science-workflow.png" width="100%">
+
+---
+
+class: center
+
+## Case study: batch download and process COVID-19 data
+
+[<img src="img/jhu-covid19.png" width="100%">](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports)
+
+---
+
+## Keep calm, and import CSVs one by one
+
+```{r covid-03}
+```
+
+---
+
+## Data is changing
+
+```{r covid-1231}
+```
+
+---
+
+class: middle
+
+## What are the repeated patterns?
+
+1. everyday different URLs
+2. read each csv file into R
+3. non-standardised column names
+
+## DRY: automate the common tasks above
+
+---
+
+## .large[.large[.brown[1]]] generate a sequence of urls 
+
+```{r make-url}
+```
+
+.large[.brown[**3**]] key steps to creating a custom function:
+
+1. pick a **name** for the function, e.g. `make_url`.
+2. list the inputs, or **arguments**, to the function inside `function`, e.g. `date`.
+3. place the code you have developed in **body** of the function, a `{` block that immediately follows `function(...)`.
+
+---
+
+## Test `make_url()`: does it return what we expected?
+
+```{r test-make-url}
+```
+
+---
+
+## .large[.large[.brown[2 & 3]]] read data and standardise column names
+
+```{r read-covid19}
+```
+
+---
+
+class: inverse middle
+
+## Functional programming
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+## comes to rescue
+]
+.right-column[
+## Copy-and-pasting
+
+```{r read-covid19-hand, eval = FALSE}
+```
+
+When it's gonna end? `r emo::ji("sob")`
+<hr>
+Reducing duplication is **iteration**, which helps you when you need to do the same thing to multiple inputs.
+]
+
+???
+
+introduce typos/errors, when just simply copy and paste
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+### - `map()`
+]
+.right-column[
+`map(.x, .f, ...)` for every element of .brown[`.x`], apply .brown[`.f`]
+* always returns a list 
+```{r map}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+### - `map()`
+]
+.right-column[
+`.f` takes a function, formula, or vector.
+* If a **function**, it is used as is.
+* If a **formula**, e.g. `~ .x + 2`, it is converted to a function. There are three ways to refer to the arguments:
+  + For a single argument function, use `.`
+  + For a two argument function, use `.x` and `.y`
+  + For more arguments, use `..1`, `..2`, `..3` etc
+
+```{r map-lamda, eval = FALSE}
+```
+]
+
+---
+
+count: false
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+### - `map()`
+]
+.right-column[
+<img src = "img/minis-list.png", width = 30%, style = "position:absolute; top: 2.5%; left: 25.5%; box-shadow: 3px 5px 3px 1px #00000080;"></img>
+.footnote[image credit: Jenny Bryan]
+]
+
+---
+
+count: false
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+### - `map()`
+]
+.right-column[
+<img src = "img/minis-list.png", width = 30%, style = "position:absolute; top: 2.5%; left: 25.5%; box-shadow: 3px 5px 3px 1px #00000080;"></img>
+<img src = "img/minis-x.png", width = 30%, style = "position:absolute; top: 20.5%; left: 65.5%; box-shadow: 3px 5px 3px 1px #00000080;"></img>
+.footnote[image credit: Jenny Bryan]
+]
+
+---
+
+count: false
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+### - `map()`
+]
+.right-column[
+<img src = "img/minis-list.png", width = 30%, style = "position:absolute; top: 2.5%; left: 25.5%; box-shadow: 3px 5px 3px 1px #00000080;"></img>
+<img src = "img/minis-x.png", width = 30%, style = "position:absolute; top: 20.5%; left: 65.5%; box-shadow: 3px 5px 3px 1px #00000080;"></img>
+<img src = "img/minis-map.png", width = 30%, style = "position:absolute; top: 50.5%; left: 30.5%; box-shadow: 3px 5px 3px 1px #00000080;"></img>
+.footnote[image credit: Jenny Bryan]
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+### - `map()`
+]
+.right-column[
+## Bind multiple tibbles by row
+```{r bind-rows, eval = FALSE}
+```
+
+```{r map-output, echo = FALSE}
+covid19_raw <- read_rds("data/covid19-raw.rds") 
+covid19_raw %>% select(-date)
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+### - `map()`
+]
+.right-column[
+## Hmm, where are the dates?
+```{r bind-rows, eval = FALSE}
+```
+
+```{r ref.label = "map-output", echo = FALSE}
+covid19_raw <- read_rds("data/covid19-raw.rds") 
+covid19_raw %>% select(-date)
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+### - `map()`
+### - `map2()`
+]
+.right-column[
+`map2(.x, .y, .f)` for every element of .brown[`.x`] and .brown[`.y`], apply .brown[`.f`]
+```{r map2, eval = FALSE}
+```
+
+```{r map2-output, echo = FALSE}
+covid19_raw %>% 
+  mutate(date = mdy(date)) %>% 
+  relocate(date, .after = last_col())
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+### - `map()`
+### - `map2()`
+### - `map_dfr()`
+]
+.right-column[
+`map_*()` is a variant of `map()` that returns an output in the indicated type. `map_dfr()` returns data frames by row-binding.
+```{r map-dfr, eval = FALSE}
+```
+
+```{r map-dfr-output, echo = FALSE}
+covid19_raw
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+### - `map()`
+### - `map2()`
+### - `map_dfr()`
+### - `map_*()`
+]
+.right-column[
+`map()` variants
+* `map(.x, .f)` maps over 1 argument returns a list
+* `map_dbl(.x, .f)` returns a double vector
+* `map_chr(.x, .f)` returns a character vector
+* `map_lgl(.x, .f)` returns a logical vector
+* `map_dfr(.x, .f)` returns a data frame created by row-binding
+* `map_dfc(.x, .f)` returns a data frame created by col-binding
+<hr>
+* `map2_*(.x, .y, .f)` maps over 2 arguments
+* `pmap_*(.l, .f)` maps over > 2 arguments
+]
+
+---
+
+class: middle inverse
+
+## Apply a function .brown[`across()`] multiple columns
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="60%">](https://dplyr.tidyverse.org)]
+]
+.right-column[
+## Wrangle a bit
+
+```{r clean-country}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="60%">](https://dplyr.tidyverse.org)]
+]
+.right-column[
+```{r manual-col}
+```
+Don't wanna type `r emo::ji("sob")`, but I typed...
+]
+
+---
+
+## Make friends with `across()`
+
+.pull-left[
+```{r across, eval = FALSE}
+```
+]
+.pull-right[
+```{r across-where, eval = FALSE}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="60%">](https://dplyr.tidyverse.org)]
+]
+.right-column[
+```{r covid19-byregion}
+```
+]
+
+---
+
+background-image:url(img/lst-col.png)
+background-position: 90% 60%
+background-size: 10%
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tidyr.png" width="60%">](https://tidyr.tidyverse.org)]
+]
+.right-column[
+`nest()` multiple columns into a .brown[list-column]
+```{r covid19-nest}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+]
+.right-column[
+## Look inside the list-column
+```{r covid19-au}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+]
+.right-column[
+## Fit regression models and extract slopes
+```{r covid19-au-fit}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+]
+.right-column[
+## .brown[Fun]ction time
+
+```{r extract-slope}
+```
+
+Oops, `map()` isn't happy. `r emo::ji("slightly_frowning_face")`
+
+```{r map-slope, error = TRUE}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+]
+.right-column[
+`safely()` apply functions over elements
+* returns a list of `result` and `error`
+```{r safely-slope}
+```
+]
+
+---
+
+## Pull out results
+
+.pull-left[
+```{r safely-result-lst}
+```
+]
+.pull-right[
+```{r safely-result-dbl, eval = FALSE}
+```
+
+```{r safely-result-dbl2, echo = FALSE}
+covid19_lstcol$data %>% 
+  map(safely_extract_slope) %>% 
+  map_dbl("result") %>% 
+  print(width = 40)
+```
+]
+
+---
+
+## Alternatively, `mutate()` with `map()` inside a tibble
+
+```{r mutate-map}
+```
+
+---
+
+## Reading
+
+.pull-left[
+.center[[<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px">](https://r4ds.had.co.nz)]
+]
+.pull-right[
+* [Functions](https://r4ds.had.co.nz/functions.html)
+* [Iteration](https://r4ds.had.co.nz/iteration.html#the-map-functions)
+]

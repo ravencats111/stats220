@@ -1,3 +1,4 @@
 data/BusService/
 data/pisa/
 data/ghcnd-stations.txt
+data/covid19-raw.rds

@@ -103,7 +103,11 @@ code {
   border-radius: 5px;
 }
 .remark-code, .remark-inline-code { font-family: 'Source Code Pro'; font-size: 80%; }
-.remark-code, .remark-code-line { font-family: 'Source Code Pro'; font-size: 82%; }
+.remark-code, .remark-code-line { 
+  font-family: 'Source Code Pro'; 
+  font-size: 82%; 
+  white-space: pre-wrap;
+}
 .remark-code-line-highlighted {
   background-color: #d0e4a9;
 }
