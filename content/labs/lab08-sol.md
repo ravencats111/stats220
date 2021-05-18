@@ -153,6 +153,8 @@ daily_aqi_cat %>%
 
 {{</table>}}
 
+> **SkyCity convention centre fire**
+
 ### Question 2 \[0.5 pts\]
 
 -   Present a heatmap that gives an overview of AQI in Auckland over the
@@ -195,3 +197,5 @@ daily_aqi_cat %>%
 ```
 
 <img src="/figures/lab08-q2-1.png" width="960" />
+
+> **Australian bushfires**
