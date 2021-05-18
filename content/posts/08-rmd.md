@@ -8,5 +8,5 @@ r: "08-rmd.R"
 rmd: "08-rmd.Rmd"
 pdf: "08-rmd.pdf"
 lab: "labs/lab08"
-sol:
+sol: "labs/lab08-sol"
 ---
