@@ -101,6 +101,14 @@ class: middle
 
 ---
 
+## Why .brown[fun]ction
+
+* Modularise the code to make it easier to understand the logic.
+* Generalise the code to make it resuable later.
+* Reduce the duplication and make it less error-prone.
+
+---
+
 class: inverse middle
 
 ## Functional programming
