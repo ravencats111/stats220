@@ -5,7 +5,7 @@ type: "lecture"
 date: ""
 output:
   xaringan::moon_reader:
-    css: ["assets/remark.css"]
+    css: ["assets/remark.css", "assets/code-wrap.css"]
     lib_dir: libs
     nature:
       ratio: 16:9
