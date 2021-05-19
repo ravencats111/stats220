@@ -138,11 +138,15 @@ class: inverse middle
 ## Regular expressions .blue[.small[.small[(aka regex/regexp)]]]
 ### an extremely concise language for describing patterns
 
+???
+
+Frequently your string tasks cannot be expressed in terms of a fixed string, but can be described in terms of a pattern. Regular expressions, aka "regexes", are the standard way to specify these patterns.
+
 ---
 
 .left-column[
 .center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
-### - dot
+### - period
 ]
 .right-column[
 ## Regex
@@ -155,26 +159,31 @@ class: inverse middle
 
 .left-column[
 .center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
-### - dot
+### - period
 ### - qualifier
 ]
 .right-column[
 ## Regex
-repeation
+repetition
 ```{r str-q}
 ```
 ]
+
+???
+
+`*` always looks for the longest string it can find.
+* to make it select the shortest string instead, add `?` after the `*`.
 
 ---
 
 .left-column[
 .center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
-### - dot
+### - period
 ### - qualifier
 ]
 .right-column[
 ## Regex
-repeation
+repetition
 + `?`: 0 or 1
 + `+`: 1 or more
 + `*`: 0 or more
@@ -188,7 +197,7 @@ repeation
 
 .left-column[
 .center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
-### - dot
+### - period
 ### - qualifier
 ### - escape
 ]
@@ -206,29 +215,30 @@ if `.` matches any character, how to match a literal `"."`?
 
 .left-column[
 .center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
-### - dot
+### - period
 ### - qualifier
 ### - escape
 ### - meta
 ]
 .right-column[
 ## Regex
-* `\d`: matches any digit.
+* `\d`: matches any digit. *(metacharacter)*
 * `\s`: matches any whitespace (e.g. space, tab `\t`, newline `\n`).
-* `[abc]`: matches a, b, or c.
+* `[abc]`: matches a, b, or c. *(make character classes by hand)*
 ```{r meta}
 ```
 ]
 
 ???
 
+* Character classes are usually given inside square brackets, `[]` but a few come up so often that we have a metacharacter for them, such as `\d` for a single digit.
 * a lowercase letter will select any of the things it stands for (so `\d` selects any digit, while `\s` will select any blank space)
 
 ---
 
 .left-column[
 .center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
-### - dot
+### - period
 ### - qualifier
 ### - escape
 ### - meta
@@ -250,7 +260,7 @@ if `.` matches any character, how to match a literal `"."`?
 
 .left-column[
 .center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
-### - dot
+### - period
 ### - qualifier
 ### - escape
 ### - meta
@@ -270,7 +280,7 @@ if `.` matches any character, how to match a literal `"."`?
 
 .left-column[
 .center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="60%">](http://stringr.tidyverse.org)]
-### - dot
+### - period
 ### - qualifier
 ### - escape
 ### - meta
@@ -354,6 +364,18 @@ class: inverse middle
 * .brown[`"[^nls]ia$"`] matches `ia` at the end of the country name, preceded by anything but one of the characters in the class given inside `[]`.
 
 ```{r gapminder-negate}
+```
+]
+
+---
+
+.left-column[
+## Gapminder
+]
+.right-column[
+* .brown[`"[:punct:]"`] matches country names that contain punctuation.
+
+```{r gapminder-punct}
 ```
 ]
 
@@ -548,6 +570,10 @@ background-size: contain
 ]
 ]
 
+???
+
+A lexicon is a bag of words that has been tagged with characteristics by some groups
+
 ---
 
 .left-column[
@@ -608,10 +634,12 @@ background-size: contain
 .right-column[
 ## sentiment lexicons
 .pull-left[
+* AFINN lexicon measures sentiment with a numeric score b/t -5 & 5.
 ```{r sentiments-l}
 ```
 ]
 .pull-right[
+* Other lexicons categorise words in a binary fashion, either positive or negative.
 ```{r sentiments-r}
 ```
 ]
@@ -691,6 +719,26 @@ why I use `inner_join()` here
 ]
 ]
 ]
+]
+
+---
+
+.left-column[
+.center[<img src="https://github.com/juliasilge/tidytext/raw/master/man/figures/tidytext.png">]
+### - import
+### - glimpse
+### - tokenise
+### - vis
+### - stop words
+### - count
+### - sentiments
+### - vis
+]
+.right-column[
+Would Animal Crossing be considered to be a delightful game?
+
+```{r count-sentiments}
+```
 ]
 
 ---

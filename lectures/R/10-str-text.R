@@ -84,6 +84,10 @@ gapminder %>%
 gapminder %>% 
   filter(str_detect(country, "[^nls]ia$"))
 
+## ---- gapminder-punct
+gapminder %>% 
+  filter(str_detect(country, "[:punct:]"))
+
 ## ---- text
 lyrics <- c("This will be an uncertain time for us my love",
             "I can hear the echo of your voice in my head",
@@ -195,3 +199,9 @@ user_reviews_sentiments %>%
   facet_wrap(~ sentiment, scales = "free") +
   labs(x = "", y = "",
     title = "Sentiments in user reviews")
+
+## ---- count-sentiments
+user_reviews_sentiments %>% 
+  group_by(sentiment) %>% 
+  summarise(n = sum(n)) %>% 
+  mutate(p = n / sum(n))

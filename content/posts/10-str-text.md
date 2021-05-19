@@ -6,6 +6,7 @@ obj: "objs/obj10"
 slides: "10-str-text.html"
 r: "10-str-text.R"
 rmd: "10-str-text.Rmd"
+pdf: "10-str-text.pdf"
 lab:
 sol:
 ---
