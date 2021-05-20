@@ -122,7 +122,7 @@ rating
 ### Question 5
 
 Create a tibble that contains these scraped films’ information ordered
-by their ranks: `Rank`, `Poster`, `Movie`, `Year`, `Rating`
+by their ranks. The column names are `Rank`, `Poster`, `Movie`, `Year`, `Rating`
 respectively.
 
 You should end up with a **tibble**, called `top50_horror`.
