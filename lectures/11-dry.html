@@ -191,7 +191,9 @@ class: middle
 
 class: inverse middle
 
-## Functional programming
+## The joy of functional programming (FP)
+
+.footnote[Hadley Wickham: The joy of functional programming [&lt;i class="fab fa-youtube"&gt;&lt;/i&gt;](https://www.youtube.com/watch?v=bzUmK0Y07ck)]
 
 ---
 
@@ -200,7 +202,7 @@ class: inverse middle
 ## comes to rescue
 ]
 .right-column[
-## Copy-and-pasting
+## copy &lt;i class="fas fa-copy"&gt;&lt;/i&gt; and paste &lt;i class="fas fa-paste"&gt;&lt;/i&gt;
 
 
 ```r
@@ -217,7 +219,7 @@ covid19_csv9 &lt;- read_covid19(urls[9])
 
 When it's gonna end? 😭
 &lt;hr&gt;
-Reducing duplication is **iteration**, which helps you when you need to do the same thing to multiple inputs.
+The goal of FP is to make it easy to express repeated actions using high-level verbs.
 ]
 
 ???
@@ -263,12 +265,25 @@ covid19_lst[[length(covid19_lst)]]
 ### - `map()`
 ]
 .right-column[
+A **functional** is a function that takes a function as an input and returns a vector as output.
+
+.center[![](https://d33wubrfki0l68.cloudfront.net/f0494d020aa517ae7b1011cea4c4a9f21702df8b/2577b/diagrams/functionals/map.png)]
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+### - `map()`
+]
+.right-column[
 `.f` takes a function, formula, or vector.
 * If a **function**, it is used as is.
 * If a **formula**, e.g. `~ .x + 2`, it is converted to a function. There are three ways to refer to the arguments:
   + For a single argument function, use `.`
   + For a two argument function, use `.x` and `.y`
   + For more arguments, use `..1`, `..2`, `..3` etc
+* If a **character** vector index by name and a **numeric** vector index by position.
 
 
 ```r
@@ -426,6 +441,18 @@ bind_rows(covid19_lst)
 .center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
 ### - `map()`
 ### - `map2()`
+]
+.right-column[
+&lt;br&gt;
+.center[&lt;img src="https://d33wubrfki0l68.cloudfront.net/f5cddf51ec9c243a7c13732b0ce46b0868bf8a31/501a8/diagrams/functionals/map2.png" width="90%"&gt;]
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+### - `map()`
+### - `map2()`
 ### - `map_dfr()`
 ]
 .right-column[
@@ -479,9 +506,10 @@ covid19_raw
 
 ---
 
-class: middle inverse
+background-image: url(https://github.com/allisonhorst/stats-illustrations/blob/master/rstats-blanks/across_blank.png?raw=true)
+background-size: 100% 100%
 
-## Apply a function .brown[`across()`] multiple columns
+class: inverse
 
 ---
 
@@ -546,7 +574,7 @@ Don't wanna type 😭, but I typed...
 
 ---
 
-## Make friends with `across()`
+## Apply a function .brown[`across()`] multiple columns
 
 .pull-left[
 
@@ -744,8 +772,8 @@ covid19_lstcol$data %&gt;%
 .center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
 ]
 .right-column[
-`safely()` apply functions over elements
-* returns a list of `result` and `error`
+If an error occured, `safely()` captures the error
+* returns a named list of `result` and `error`
 
 ```r
 safely_extract_slope &lt;- safely(extract_slope, 
@@ -3908,11 +3936,13 @@ covid19_lstcol %&gt;%
 ## Reading
 
 .pull-left[
-.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="520px"&gt;](https://r4ds.had.co.nz)]
-]
-.pull-right[
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="320px"&gt;](https://r4ds.had.co.nz)]
 * [Functions](https://r4ds.had.co.nz/functions.html)
 * [Iteration](https://r4ds.had.co.nz/iteration.html#the-map-functions)
+]
+.pull-right[
+.center[[&lt;img src="https://d33wubrfki0l68.cloudfront.net/565916198b0be51bf88b36f94b80c7ea67cafe7c/7f70b/cover.png" height="320px"&gt;](https://adv-r.hadley.nz)]
+* [Functionals](https://adv-r.hadley.nz/functionals.html)
 ]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
