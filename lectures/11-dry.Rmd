@@ -477,6 +477,61 @@ covid19_lstcol$data %>%
 
 ---
 
+class: middle
+
+## Side-effects
+
+Most functions are called for the value that they return. But some functions are called primarily for their side-effects, for example:
+
+* `print()` displays values/plots to the screen.
+* `write_csv()` writes values to the CSV file saved in the disk.
+
+No values/outputs to be captured.
+
+<hr>
+
+<i class="far fa-square"></i> We're going to save each region's data into separate CSV files to make it easier to import in the future.
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="60%">](https://dplyr.tidyverse.org)]
+]
+.right-column[
+## `group_split()` splits tibble into chunks
+```{r group-split}
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+]
+.right-column[
+## `walk()` with .brown[side-effects], if no outputs
+
+```{r walk2, eval = FALSE}
+```
+<hr>
+```{r dir-lst}
+fs::dir_ls("data/covid19")
+```
+]
+
+---
+
+.left-column[
+.center[[<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%">](https://purrr.tidyverse.org)]
+]
+.right-column[
+[{fs}](https://fs.r-lib.org) provides a cross-platform, uniform interface to file system operations.
+```{r map-dfr-disk}
+```
+]
+
+---
+
 ## Reading
 
 .pull-left[

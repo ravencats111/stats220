@@ -3933,6 +3933,346 @@ covid19_lstcol %&gt;%
 
 ---
 
+class: middle
+
+## Side-effects
+
+Most functions are called for the value that they return. But some functions are called primarily for their side-effects, for example:
+
+* `print()` displays values/plots to the screen.
+* `write_csv()` writes values to the CSV file saved in the disk.
+
+No values/outputs to be captured.
+
+&lt;hr&gt;
+
+&lt;i class="far fa-square"&gt;&lt;/i&gt; We're going to save each region's data into separate CSV files to make it easier to import in the future.
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="60%"&gt;](https://dplyr.tidyverse.org)]
+]
+.right-column[
+## `group_split()` splits tibble into chunks
+
+```r
+covid19_lst &lt;- covid19_byregion %&gt;% 
+  group_by(country_region) %&gt;% 
+  group_split()
+covid19_lst[[1]]
+```
+
+```
+#&gt; # A tibble: 306 x 8
+#&gt;   country_region date       confirmed deaths recovered
+#&gt;   &lt;chr&gt;          &lt;date&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 Afghanistan    2020-03-01         1      0         0
+#&gt; 2 Afghanistan    2020-03-02         1      0         0
+#&gt; 3 Afghanistan    2020-03-03         2      0         0
+#&gt; 4 Afghanistan    2020-03-04         4      0         0
+#&gt; 5 Afghanistan    2020-03-05         4      0         0
+#&gt; 6 Afghanistan    2020-03-06         4      0         0
+#&gt; # … with 300 more rows, and 3 more variables:
+#&gt; #   new_confirmed &lt;dbl&gt;, new_deaths &lt;dbl&gt;,
+#&gt; #   new_recovered &lt;dbl&gt;
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+]
+.right-column[
+## `walk()` with .brown[side-effects], if no outputs
+
+
+```r
+region_names &lt;- unique(covid19_byregion$country_region)
+file_name &lt;- glue::glue("data/covid19/{region_names}.csv")
+# fs::dir_create("data/covid19")
+walk2(covid19_lst, file_name, write_csv)
+```
+&lt;hr&gt;
+
+```r
+fs::dir_ls("data/covid19")
+```
+
+```
+#&gt; data/covid19/Afghanistan.csv
+#&gt; data/covid19/Albania.csv
+#&gt; data/covid19/Algeria.csv
+#&gt; data/covid19/Andorra.csv
+#&gt; data/covid19/Angola.csv
+#&gt; data/covid19/Antigua and Barbuda.csv
+#&gt; data/covid19/Argentina.csv
+#&gt; data/covid19/Armenia.csv
+#&gt; data/covid19/Aruba.csv
+#&gt; data/covid19/Australia.csv
+#&gt; data/covid19/Austria.csv
+#&gt; data/covid19/Azerbaijan.csv
+#&gt; data/covid19/Bahamas, The.csv
+#&gt; data/covid19/Bahamas.csv
+#&gt; data/covid19/Bahrain.csv
+#&gt; data/covid19/Bangladesh.csv
+#&gt; data/covid19/Barbados.csv
+#&gt; data/covid19/Belarus.csv
+#&gt; data/covid19/Belgium.csv
+#&gt; data/covid19/Belize.csv
+#&gt; data/covid19/Benin.csv
+#&gt; data/covid19/Bhutan.csv
+#&gt; data/covid19/Bolivia.csv
+#&gt; data/covid19/Bosnia and Herzegovina.csv
+#&gt; data/covid19/Botswana.csv
+#&gt; data/covid19/Brazil.csv
+#&gt; data/covid19/Brunei.csv
+#&gt; data/covid19/Bulgaria.csv
+#&gt; data/covid19/Burkina Faso.csv
+#&gt; data/covid19/Burma.csv
+#&gt; data/covid19/Burundi.csv
+#&gt; data/covid19/Cabo Verde.csv
+#&gt; data/covid19/Cambodia.csv
+#&gt; data/covid19/Cameroon.csv
+#&gt; data/covid19/Canada.csv
+#&gt; data/covid19/Cape Verde.csv
+#&gt; data/covid19/Cayman Islands.csv
+#&gt; data/covid19/Central African Republic.csv
+#&gt; data/covid19/Chad.csv
+#&gt; data/covid19/Channel Islands.csv
+#&gt; data/covid19/Chile.csv
+#&gt; data/covid19/China.csv
+#&gt; data/covid19/Colombia.csv
+#&gt; data/covid19/Comoros.csv
+#&gt; data/covid19/Congo (Brazzaville).csv
+#&gt; data/covid19/Congo (Kinshasa).csv
+#&gt; data/covid19/Costa Rica.csv
+#&gt; data/covid19/Cote d'Ivoire.csv
+#&gt; data/covid19/Croatia.csv
+#&gt; data/covid19/Cruise Ship.csv
+#&gt; data/covid19/Cuba.csv
+#&gt; data/covid19/Curacao.csv
+#&gt; data/covid19/Cyprus.csv
+#&gt; data/covid19/Czech Republic.csv
+#&gt; data/covid19/Czechia.csv
+#&gt; data/covid19/Denmark.csv
+#&gt; data/covid19/Diamond Princess.csv
+#&gt; data/covid19/Djibouti.csv
+#&gt; data/covid19/Dominica.csv
+#&gt; data/covid19/Dominican Republic.csv
+#&gt; data/covid19/East Timor.csv
+#&gt; data/covid19/Ecuador.csv
+#&gt; data/covid19/Egypt.csv
+#&gt; data/covid19/El Salvador.csv
+#&gt; data/covid19/Equatorial Guinea.csv
+#&gt; data/covid19/Eritrea.csv
+#&gt; data/covid19/Estonia.csv
+#&gt; data/covid19/Eswatini.csv
+#&gt; data/covid19/Ethiopia.csv
+#&gt; data/covid19/Faroe Islands.csv
+#&gt; data/covid19/Fiji.csv
+#&gt; data/covid19/Finland.csv
+#&gt; data/covid19/France.csv
+#&gt; data/covid19/French Guiana.csv
+#&gt; data/covid19/Gabon.csv
+#&gt; data/covid19/Gambia, The.csv
+#&gt; data/covid19/Gambia.csv
+#&gt; data/covid19/Georgia.csv
+#&gt; data/covid19/Germany.csv
+#&gt; data/covid19/Ghana.csv
+#&gt; data/covid19/Gibraltar.csv
+#&gt; data/covid19/Greece.csv
+#&gt; data/covid19/Greenland.csv
+#&gt; data/covid19/Grenada.csv
+#&gt; data/covid19/Guadeloupe.csv
+#&gt; data/covid19/Guam.csv
+#&gt; data/covid19/Guatemala.csv
+#&gt; data/covid19/Guernsey.csv
+#&gt; data/covid19/Guinea-Bissau.csv
+#&gt; data/covid19/Guinea.csv
+#&gt; data/covid19/Guyana.csv
+#&gt; data/covid19/Haiti.csv
+#&gt; data/covid19/Holy See.csv
+#&gt; data/covid19/Honduras.csv
+#&gt; data/covid19/Hong Kong SAR.csv
+#&gt; data/covid19/Hong Kong.csv
+#&gt; data/covid19/Hungary.csv
+#&gt; data/covid19/Iceland.csv
+#&gt; data/covid19/India.csv
+#&gt; data/covid19/Indonesia.csv
+#&gt; data/covid19/Iran (Islamic Republic of).csv
+#&gt; data/covid19/Iran.csv
+#&gt; data/covid19/Iraq.csv
+#&gt; data/covid19/Ireland.csv
+#&gt; data/covid19/Israel.csv
+#&gt; data/covid19/Italy.csv
+#&gt; data/covid19/Jamaica.csv
+#&gt; data/covid19/Japan.csv
+#&gt; data/covid19/Jersey.csv
+#&gt; data/covid19/Jordan.csv
+#&gt; data/covid19/Kazakhstan.csv
+#&gt; data/covid19/Kenya.csv
+#&gt; data/covid19/Kosovo.csv
+#&gt; data/covid19/Kuwait.csv
+#&gt; data/covid19/Kyrgyzstan.csv
+#&gt; data/covid19/Laos.csv
+#&gt; data/covid19/Latvia.csv
+#&gt; data/covid19/Lebanon.csv
+#&gt; data/covid19/Lesotho.csv
+#&gt; data/covid19/Liberia.csv
+#&gt; data/covid19/Libya.csv
+#&gt; data/covid19/Liechtenstein.csv
+#&gt; data/covid19/Lithuania.csv
+#&gt; data/covid19/Luxembourg.csv
+#&gt; data/covid19/MS Zaandam.csv
+#&gt; data/covid19/Macao SAR.csv
+#&gt; data/covid19/Macau.csv
+#&gt; data/covid19/Madagascar.csv
+#&gt; data/covid19/Malawi.csv
+#&gt; data/covid19/Malaysia.csv
+#&gt; data/covid19/Maldives.csv
+#&gt; data/covid19/Mali.csv
+#&gt; data/covid19/Malta.csv
+#&gt; data/covid19/Marshall Islands.csv
+#&gt; data/covid19/Martinique.csv
+#&gt; data/covid19/Mauritania.csv
+#&gt; data/covid19/Mauritius.csv
+#&gt; data/covid19/Mayotte.csv
+#&gt; data/covid19/Mexico.csv
+#&gt; data/covid19/Moldova.csv
+#&gt; data/covid19/Monaco.csv
+#&gt; data/covid19/Mongolia.csv
+#&gt; data/covid19/Montenegro.csv
+#&gt; data/covid19/Morocco.csv
+#&gt; data/covid19/Mozambique.csv
+#&gt; data/covid19/Namibia.csv
+#&gt; data/covid19/Nepal.csv
+#&gt; data/covid19/Netherlands.csv
+#&gt; data/covid19/New Zealand.csv
+#&gt; data/covid19/Nicaragua.csv
+#&gt; data/covid19/Niger.csv
+#&gt; data/covid19/Nigeria.csv
+#&gt; data/covid19/North Macedonia.csv
+#&gt; data/covid19/Norway.csv
+#&gt; data/covid19/Oman.csv
+#&gt; data/covid19/Others.csv
+#&gt; data/covid19/Pakistan.csv
+#&gt; data/covid19/Palestine.csv
+#&gt; data/covid19/Panama.csv
+#&gt; data/covid19/Papua New Guinea.csv
+#&gt; data/covid19/Paraguay.csv
+#&gt; data/covid19/Peru.csv
+#&gt; data/covid19/Philippines.csv
+#&gt; data/covid19/Poland.csv
+#&gt; data/covid19/Portugal.csv
+#&gt; data/covid19/Puerto Rico.csv
+#&gt; data/covid19/Qatar.csv
+#&gt; data/covid19/Republic of Ireland.csv
+#&gt; data/covid19/Republic of Korea.csv
+#&gt; data/covid19/Republic of Moldova.csv
+#&gt; data/covid19/Republic of the Congo.csv
+#&gt; data/covid19/Reunion.csv
+#&gt; data/covid19/Romania.csv
+#&gt; data/covid19/Russia.csv
+#&gt; data/covid19/Russian Federation.csv
+#&gt; data/covid19/Rwanda.csv
+#&gt; data/covid19/Saint Barthelemy.csv
+#&gt; data/covid19/Saint Kitts and Nevis.csv
+#&gt; data/covid19/Saint Lucia.csv
+#&gt; data/covid19/Saint Martin.csv
+#&gt; data/covid19/Saint Vincent and the Grenadines.csv
+#&gt; data/covid19/Samoa.csv
+#&gt; data/covid19/San Marino.csv
+#&gt; data/covid19/Sao Tome and Principe.csv
+#&gt; data/covid19/Saudi Arabia.csv
+#&gt; data/covid19/Senegal.csv
+#&gt; data/covid19/Serbia.csv
+#&gt; data/covid19/Seychelles.csv
+#&gt; data/covid19/Sierra Leone.csv
+#&gt; data/covid19/Singapore.csv
+#&gt; data/covid19/Slovakia.csv
+#&gt; data/covid19/Slovenia.csv
+#&gt; data/covid19/Solomon Islands.csv
+#&gt; data/covid19/Somalia.csv
+#&gt; data/covid19/South Africa.csv
+#&gt; data/covid19/South Korea.csv
+#&gt; data/covid19/South Sudan.csv
+#&gt; data/covid19/Spain.csv
+#&gt; data/covid19/Sri Lanka.csv
+#&gt; data/covid19/St. Martin.csv
+#&gt; data/covid19/Sudan.csv
+#&gt; data/covid19/Suriname.csv
+#&gt; data/covid19/Sweden.csv
+#&gt; data/covid19/Switzerland.csv
+#&gt; data/covid19/Syria.csv
+#&gt; data/covid19/Taipei and environs.csv
+#&gt; data/covid19/Taiwan*.csv
+#&gt; data/covid19/Taiwan.csv
+#&gt; data/covid19/Tajikistan.csv
+#&gt; data/covid19/Tanzania.csv
+#&gt; data/covid19/Thailand.csv
+#&gt; data/covid19/The Bahamas.csv
+#&gt; data/covid19/The Gambia.csv
+#&gt; data/covid19/Timor-Leste.csv
+#&gt; data/covid19/Togo.csv
+#&gt; data/covid19/Trinidad and Tobago.csv
+#&gt; data/covid19/Tunisia.csv
+#&gt; data/covid19/Turkey.csv
+#&gt; data/covid19/UK.csv
+#&gt; data/covid19/US.csv
+#&gt; data/covid19/Uganda.csv
+#&gt; data/covid19/Ukraine.csv
+#&gt; data/covid19/United Arab Emirates.csv
+#&gt; data/covid19/United Kingdom.csv
+#&gt; data/covid19/Uruguay.csv
+#&gt; data/covid19/Uzbekistan.csv
+#&gt; data/covid19/Vanuatu.csv
+#&gt; data/covid19/Vatican City.csv
+#&gt; data/covid19/Venezuela.csv
+#&gt; data/covid19/Viet Nam.csv
+#&gt; data/covid19/Vietnam.csv
+#&gt; data/covid19/West Bank and Gaza.csv
+#&gt; data/covid19/Yemen.csv
+#&gt; data/covid19/Zambia.csv
+#&gt; data/covid19/Zimbabwe.csv
+#&gt; data/covid19/occupied Palestinian territory.csv
+```
+]
+
+---
+
+.left-column[
+.center[[&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/purrr.png" width="60%"&gt;](https://purrr.tidyverse.org)]
+]
+.right-column[
+[{fs}](https://fs.r-lib.org) provides a cross-platform, uniform interface to file system operations.
+
+```r
+library(fs)
+covid19_local &lt;- map_dfr(
+  dir_ls("data/covid19", glob = "*.csv"), read_csv)
+covid19_local
+```
+
+```
+#&gt; # A tibble: 56,107 x 8
+#&gt;   country_region date       confirmed deaths recovered
+#&gt;   &lt;chr&gt;          &lt;date&gt;         &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+#&gt; 1 Afghanistan    2020-03-01         1      0         0
+#&gt; 2 Afghanistan    2020-03-02         1      0         0
+#&gt; 3 Afghanistan    2020-03-03         2      0         0
+#&gt; 4 Afghanistan    2020-03-04         4      0         0
+#&gt; 5 Afghanistan    2020-03-05         4      0         0
+#&gt; 6 Afghanistan    2020-03-06         4      0         0
+#&gt; # … with 56,101 more rows, and 3 more variables:
+#&gt; #   new_confirmed &lt;dbl&gt;, new_deaths &lt;dbl&gt;,
+#&gt; #   new_recovered &lt;dbl&gt;
+```
+]
+
+---
+
 ## Reading
 
 .pull-left[

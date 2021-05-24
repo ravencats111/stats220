@@ -171,3 +171,21 @@ covid19_lstcol %>%
   mutate(
     slopes = map(data, safely_extract_slope) %>% 
       map_dbl("result"))
+
+## ---- group-split
+covid19_lst <- covid19_byregion %>% 
+  group_by(country_region) %>% 
+  group_split()
+covid19_lst[[1]]
+
+## ---- walk2
+region_names <- unique(covid19_byregion$country_region)
+file_name <- glue::glue("data/covid19/{region_names}.csv")
+# fs::dir_create("data/covid19")
+walk2(covid19_lst, file_name, write_csv)
+
+## ---- map-dfr-disk
+library(fs)
+covid19_local <- map_dfr(
+  dir_ls("data/covid19", glob = "*.csv"), read_csv)
+covid19_local
