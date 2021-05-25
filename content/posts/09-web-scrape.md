@@ -8,5 +8,5 @@ r: "09-web-scrape.R"
 rmd: "09-web-scrape.Rmd"
 pdf: "09-web-scrape.pdf"
 lab: "labs/lab09"
-sol:
+sol: "labs/lab09-sol"
 ---
