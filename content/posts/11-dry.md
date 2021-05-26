@@ -5,6 +5,7 @@ img: "https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artw
 obj: "objs/obj11"
 slides: "11-dry.html"
 rmd: "11-dry.Rmd"
+pdf: "11-dry.pdf"
 lab:
 sol:
 ---
