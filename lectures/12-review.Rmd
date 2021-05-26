@@ -1,0 +1,43 @@
+---
+title: "STATS 220"
+subtitle: "Review`r emo::ji('tada')`"
+type: "lecture"
+date: ""
+output:
+  xaringan::moon_reader:
+    includes:
+      after_body: "assets/typed.js"
+    css: ["assets/remark.css", "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"]
+    lib_dir: libs
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+class: middle
+
+```{r initial, echo = FALSE, cache = FALSE, results = 'hide'}
+library(knitr)
+options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE, 
+  tibble.width = 60, tibble.print_min = 6)
+opts_chunk$set(
+  echo = TRUE, warning = FALSE, message = FALSE, comment = "#>",
+  fig.path = 'figure/', cache.path = 'cache/', cache = TRUE, fig.retina = 3,
+  fig.align = 'center', fig.width = 4.5, fig.height = 4, fig.show = 'hold',
+  dpi = 120
+)
+```
+
+```{r xaringan-panelset, echo = FALSE}
+xaringanExtra::use_panelset()
+```
+
+.message[]
+
+---
+
+class: inverse middle center
+
+# .animated.zoomOut.slower.delay-1s[.large[FIN]]
