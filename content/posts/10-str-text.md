@@ -8,5 +8,5 @@ r: "10-str-text.R"
 rmd: "10-str-text.Rmd"
 pdf: "10-str-text.pdf"
 lab: "labs/lab10"
-sol:
+sol: "labs/lab10-sol"
 ---
