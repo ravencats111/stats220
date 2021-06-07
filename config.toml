@@ -30,5 +30,5 @@ staticDir = ["static", "lectures"]
   disqus = ""
 
   [params.copyright]
-     name = "The University of Auckland"
-     link = "http://auckland.ac.nz"
+     name = "Earo Wang"
+     link = "https://earo.me"
